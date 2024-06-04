@@ -14,7 +14,5 @@ $c_id = $_GET["id"];
 
 // Exclusão do registro
 $c_sql = "delete from diagnosticos where id=$c_id";
-
 $result = $conection->query($c_sql);
-
 header('location: /smedweb/diagnosticos_lista.php');
