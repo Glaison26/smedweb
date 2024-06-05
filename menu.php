@@ -99,7 +99,7 @@ if (!isset($_SESSION['newsession'])) {
 								<a class="dropdown-item" href="\smedweb\profissionais_lista.php"><img src="\smedweb\images\equipemedica.png" alt="" width="20" height="20"> Profissionais...</a>
 								<a class="dropdown-item" href="\smedweb\convenios_lista.php"><img src="\smedweb\images\populacao.png" alt="" width="20" height="20"> Convênios...</a>
 								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
+								<a class="dropdown-item" href="\smedweb\procedimentos_lista.php"><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
 								<a class="dropdown-item" href="#"><img src="\smedweb\images\laudo2.png" alt="" width="20" height="20"> Itens para Exames...</a>
 								<a class="dropdown-item" href="#"><img src="\smedweb\images\remedio.png" alt="" width="20" height="20"> Medicamentos...</a>
 								<a class="dropdown-item" href="#"><img src="\smedweb\images\orientacao2.png" alt="" width="20" height="20"> Orientações...</a>
