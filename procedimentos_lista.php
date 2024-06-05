@@ -101,18 +101,24 @@ include("conexao.php");
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddgrupo', function(e) {
+        $(document).on('submit', '#frmaddprocedimentos', function(e) {
             e.preventDefault();
-            var c_grupo = $('#addgrupoField').val();
-            
-            if (c_grupo != '') {
+            var c_procedimento = $('#addprocedimentoField').val();
+            var c_especialidade = $('#addespecialidadeField').val();
+            var c_codigoamb = $('#addcodigoambField').val();
 
+
+            if (c_procedimento != '') {
+                alert(c_procedimento);
+                alert(c_especialidade);
+                alert(c_codigoamb);
                 $.ajax({
-                    url: "grupomedicamentos_novo.php",
+                    url: "procedimentos_novo.php",
                     type: "post",
                     data: {
-                        c_grupo: c_grupo
-                      
+                        c_procedimento: c_procedimento,
+                        c_especialidade: c_especialidade,
+                        c_codigoamb: c_codigoamb
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -121,7 +127,7 @@ include("conexao.php");
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novogrupoModal').modal('hide');
+                            $('#novoprocedimentoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -139,7 +145,7 @@ include("conexao.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-                
+
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -152,7 +158,7 @@ include("conexao.php");
 
                 $('#up_idField').val(data[0]);
                 $('#up_grupoField').val(data[1]);
-         
+
 
             });
         });
@@ -165,17 +171,17 @@ include("conexao.php");
             e.preventDefault();
             var c_id = $('#up_idField').val();
             var c_grupo = $('#up_grupoField').val();
-            
-            
+
+
             if (c_grupo != '') {
-                
+
                 $.ajax({
                     url: "grupomedicamentos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
                         c_grupo: c_grupo
-                        
+
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -188,7 +194,7 @@ include("conexao.php");
                         }
                     }
                 });
-                
+
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
@@ -206,7 +212,7 @@ include("conexao.php");
     <div class="container -my5">
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novogrupoModal"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoprocedimentoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
         <a class="btn btn-info btn-sm" href="/smedweb/procedimentos_custos.php"><span class="glyphicon glyphicon-usd"></span> Custos</a>
@@ -224,7 +230,7 @@ include("conexao.php");
             </thead>
             <tbody>
                 <?php
-                   
+
                 // faço a Leitura da tabela com sql
                 $c_sql = "SELECT procedimentos.id, procedimentos.descricao, procedimentos.codigoamb, especialidades.descricao AS especialidade FROM procedimentos
                 JOIN especialidades ON procedimentos.id_especialidade=especialidades.id";
@@ -235,14 +241,13 @@ include("conexao.php");
                 }
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                   
+
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
                     <td>$c_linha[especialidade]</td>
                     <td>$c_linha[codigoamb]</td>
-                    
                     <td>
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Procedimento'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
@@ -258,35 +263,59 @@ include("conexao.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novogrupoModal" tabindex="-1" role="dialog" aria-labelledby="novagrupoModal" aria-hidden="true">
+    <div class="modal fade" id="novoprocedimentoModal" tabindex="-1" role="dialog" aria-labelledby="novoprocedimentoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Grupo</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Procedimento</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddgrupo" action="">
+                    <form id="frmaddprocedimentos" action="">
                         <div class="mb-3 row">
-                            <label for="addgrupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="addprocedimentoField" class="col-md-3 form-label">Procedimento (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addgrupoField" name="addgrupoField">
+                                <input type="text" class="form-control" id="addprocedimentoField" name="addprocedimentoField">
                             </div>
                         </div>
+                        <div class="mb-3 row">
 
-                       
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                            <label class="col-md-3 form-label">Especialidade</label>
+                            <div class="col-sm-7">
+                                <select class="form-control form-control-lg" id="addespecialidadeField" name="addespecialidadeField">
+                                    <?php
+                                    $c_sql = "SELECT especialidades.id, especialidades.descricao FROM especialidades ORDER BY especialidades.descricao";
+                                    $result = $conection->query($c_sql);
+
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha = $result->fetch_assoc()) {
+                                        echo
+                                        "<option>$c_linha[descricao]</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
 
                         </div>
-                    </form>
+                        <div class="mb-3 row">
+                            <label for="addcodigoambField" class="col-md-3 form-label">Código AMB</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="addcodigoambField" name="addcodigoambField">
+                            </div>
+                        </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
 
+                </div>
+                </form>
             </div>
+
         </div>
+    </div>
     </div>
 
 
@@ -309,7 +338,7 @@ include("conexao.php");
                                 <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
                             </div>
                         </div>
-                       
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>

@@ -297,7 +297,6 @@ include("conexao.php");
                                     ?>
                                 </select>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
