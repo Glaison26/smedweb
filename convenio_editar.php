@@ -32,8 +32,6 @@ function carregadados()
     $c_obs = $_POST['obs'];
 }
 
-
-
 // rotina de post dos dados do formuário
 $c_id = "";
 $c_nome = "";
