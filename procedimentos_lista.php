@@ -106,12 +106,9 @@ include("conexao.php");
             var c_procedimento = $('#addprocedimentoField').val();
             var c_especialidade = $('#addespecialidadeField').val();
             var c_codigoamb = $('#addcodigoambField').val();
-
-
+            
             if (c_procedimento != '') {
-                alert(c_procedimento);
-                alert(c_especialidade);
-                alert(c_codigoamb);
+                               
                 $.ajax({
                     url: "procedimentos_novo.php",
                     type: "post",
@@ -119,11 +116,12 @@ include("conexao.php");
                         c_procedimento: c_procedimento,
                         c_especialidade: c_especialidade,
                         c_codigoamb: c_codigoamb
+                       
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
-
+                        
                         location.reload();
                         if (status == 'true') {
 
