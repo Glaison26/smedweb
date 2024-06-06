@@ -4,7 +4,6 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-
 if (!isset($_GET["id"])) {
     header('location: /smedweb/procedimentos_lista.php');
     exit;

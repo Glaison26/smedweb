@@ -219,7 +219,7 @@ include("conexao.php");
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoprocedimentoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
-        <a class="btn btn-info btn-sm" href="/smedweb/procedimentos_custos.php"><span class="glyphicon glyphicon-usd"></span> Custos</a>
+        <a class="btn btn-info btn-sm" href="/smedweb/procedimentos_custos.php"><span class="glyphicon glyphicon-usd"></span> Procedimento X Tabelas</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <hr>
         <table class="table display table-bordered tabprocedimentos">
