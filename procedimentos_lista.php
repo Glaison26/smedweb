@@ -106,9 +106,9 @@ include("conexao.php");
             var c_procedimento = $('#addprocedimentoField').val();
             var c_especialidade = $('#addespecialidadeField').val();
             var c_codigoamb = $('#addcodigoambField').val();
-            
+
             if (c_procedimento != '') {
-                               
+
                 $.ajax({
                     url: "procedimentos_novo.php",
                     type: "post",
@@ -116,12 +116,12 @@ include("conexao.php");
                         c_procedimento: c_procedimento,
                         c_especialidade: c_especialidade,
                         c_codigoamb: c_codigoamb
-                       
+
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
-                        
+
                         location.reload();
                         if (status == 'true') {
 
@@ -155,7 +155,9 @@ include("conexao.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_grupoField').val(data[1]);
+                $('#up_procedimentoField').val(data[1]);
+                $('#up_especialidadeField').val(data[2]);
+                $('#up_codigoambField').val(data[3]);
 
 
             });
@@ -165,20 +167,24 @@ include("conexao.php");
     <script type="text/javascript">
         ~
         // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmgrupo', function(e) {
+        $(document).on('submit', '#frmprocedimento', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_grupo = $('#up_grupoField').val();
+            var c_procedimento = $('#up_procedimentoField').val();
+            var c_especialidade = $('#up_especialidadeField').val();
+            var c_codigoamb = $('#up_codigoambField').val();
 
 
-            if (c_grupo != '') {
+            if (c_procedimento != '') {
 
                 $.ajax({
-                    url: "grupomedicamentos_editar.php",
+                    url: "procedimentos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_grupo: c_grupo
+                        c_procedimento: c_procedimento,
+                        c_especialidade: c_especialidade,
+                        c_codigoamb: c_codigoamb
 
                     },
                     success: function(data) {
@@ -328,12 +334,36 @@ include("conexao.php");
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmgrupo" method="POST" action="">
+                    <form id="frmprocedimento" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="up_procedimentoField" class="col-md-3 form-label">Procedimento (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
+                                <input type="text" class="form-control" id="up_procedimentoField" name="up_procedimentoField">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-3 form-label">Especialidade</label>
+                            <div class="col-sm-7">
+                                <select class="form-control form-control-lg" id="up_especialidadeField" name="up_especialidadeField">
+                                    <?php
+                                    $c_sql = "SELECT especialidades.id, especialidades.descricao FROM especialidades ORDER BY especialidades.descricao";
+                                    $result = $conection->query($c_sql);
+
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha = $result->fetch_assoc()) {
+                                        echo
+                                        "<option>$c_linha[descricao]</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="up_codigoambField" class="col-md-3 form-label">Código AMB</label>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="up_codigoambField" name="up_codigoambField">
                             </div>
                         </div>
 
