@@ -8,7 +8,7 @@
 //}
 include("conexao.php");
 
-// capturo o id do procedimento
+// pego o id do procedimento
 $c_id = $_GET["id"];
 ?>
 <!doctype html>
@@ -104,19 +104,21 @@ $c_id = $_GET["id"];
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddindice', function(e) {
+        $(document).on('submit', '#frmaddtabela', function(e) {
             e.preventDefault();
-            var c_indice = $('#addindiceField').val();
-            var c_valor = $('#addvalorField').val();
+            var c_tabela = $('#addtabelaField').val();
+            var c_custo = $('#addcustoField').val();
+            var c_id = $('#addidField').val();
 
-            if (c_indice != '' && c_valor != '') {
+            if (c_tabela != '' && c_custo != '') {
 
                 $.ajax({
-                    url: "indices_novo.php",
+                    url: "procedimentos_tabela_novo.php",
                     type: "post",
                     data: {
-                        c_indice: c_indice,
-                        c_valor: c_valor
+                        c_tabela: c_tabela,
+                        c_custo: c_custo,
+                        c_id : c_id
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -125,7 +127,7 @@ $c_id = $_GET["id"];
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novoindiceModal').modal('hide');
+                            $('#novotabelaModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -211,26 +213,26 @@ $c_id = $_GET["id"];
         <?php
         // faço a Leitura da tabela com sql
         $c_sql = "SELECT procedimentos.descricao AS procedimento, tabela.descricao, procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal 
-                           FROM procedimentos_tabelas
-                           JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
-                           JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id WHERE procedimentos_tabelas.id_procedimento='$c_id'";
+                  FROM procedimentos_tabelas
+                  JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
+                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id WHERE procedimentos_tabelas.id_procedimento='$c_id'";
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $c_linhaproc = $result->fetch_assoc();
+        
         ?>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoindiceModal"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novatabelaModal"><span class="glyphicon glyphicon-plus"></span>
             Incluir
         </button>
         <a class="btn btn-secondary btn-sm" href="/smedweb/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-        
-       
+
         <hr>
         <div class='alert alert-info' role='alert'>
-            <h5>Procedimento :<?php echo " ".$c_linhaproc['procedimento']?>  </h5>
+            <h5>Procedimento :<?php echo " " . $c_linhaproc['procedimento'] ?> </h5>
         </div>
         <table class="table display table-bordered tabproc_tabela">
             <thead class="thead">
@@ -272,28 +274,43 @@ $c_id = $_GET["id"];
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novoindiceModal" tabindex="-1" role="dialog" aria-labelledby="novaindiceModal" aria-hidden="true">
+    <div class="modal fade" id="novatabelaModal" tabindex="-1" role="dialog" aria-labelledby="novatabelaModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo indice</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Nova tabela por Procedimento</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddindice" action="">
+                    <form id="frmaddtabela" action="">
+                    <input type="hidden" id="addidField" name="addidField" value="$c_id">
                         <div class="mb-3 row">
-                            <label for="addindiceField" class="col-md-3 form-label">Indice(*)</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="addindiceField" name="addindiceField">
+
+                            <label class="col-md-3 form-label">Tabela (*)</label>
+                            <div class="col-sm-7">
+                                <select class="form-control form-control-lg" id="addtabelaField" name="addtabelaField">
+                                    <?php
+                                    $c_sql = "SELECT tabela.id, tabela.descricao FROM tabela
+                                     ORDER BY tabela.descricao";
+                                    $result = $conection->query($c_sql);
+
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha = $result->fetch_assoc()) {
+                                        echo
+                                        "<option>$c_linha[descricao]</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
+
                         </div>
 
                         <div class="mb-3 row">
-                            <label for="addvalorField" class="col-md-3 form-label">Valor (*)</label>
+                            <label for="addcustoField" class="col-md-3 form-label">Custo (*)</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" id="addvalorField" name="addvalorField">
+                                <input type="text" class="form-control" id="addcustoField" name="addcustoField">
                             </div>
                         </div>
                         <div class="modal-footer">
