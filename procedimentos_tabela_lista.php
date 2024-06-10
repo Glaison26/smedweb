@@ -9,7 +9,9 @@
 include("conexao.php");
 
 // pego o id do procedimento
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $c_id = $_GET["id"];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,8 +39,6 @@ $c_id = $_GET["id"];
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
-
-
     <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
@@ -63,10 +63,10 @@ $c_id = $_GET["id"];
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [4]
+                    'aTargets': [3]
                 }, {
                     'aTargets': [0],
-                    "visible": true
+                    "visible": false
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -100,108 +100,6 @@ $c_id = $_GET["id"];
         });
     </script>
 
-
-    <script type="text/javascript">
-        // Função javascript e ajax para inclusão dos dados
-
-        $(document).on('submit', '#frmaddtabela', function(e) {
-            e.preventDefault();
-            var c_tabela = $('#addtabelaField').val();
-            var c_custo = $('#addcustoField').val();
-            var c_id = $('#addidField').val();
-
-            if (c_tabela != '' && c_custo != '') {
-
-                $.ajax({
-                    url: "procedimentos_tabela_novo.php",
-                    type: "post",
-                    data: {
-                        c_tabela: c_tabela,
-                        c_custo: c_custo,
-                        c_id : c_id
-                    },
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        var status = json.status;
-
-                        location.reload();
-                        if (status == 'true') {
-
-                            $('#novotabelaModal').modal('hide');
-                            location.reload();
-                        } else {
-                            alert('falha ao incluir dados');
-                        }
-                    }
-                });
-            } else {
-                alert('Preencha todos os campos obrigatórios');
-            }
-        });
-    </script>
-
-    <!-- Coleta dados da tabela para edição do registro -->
-    <script>
-        $(document).ready(function() {
-
-            $('.editbtn').on('click', function() {
-
-                $('#editmodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#up_idField').val(data[0]);
-                $('#up_indiceField').val(data[1]);
-                $('#up_valorField').val(data[2]);
-
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        ~
-        // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmindice', function(e) {
-            e.preventDefault();
-            var c_id = $('#up_idField').val();
-            var c_indice = $('#up_indiceField').val();
-            var c_valor = $('#up_valorField').val();
-
-            if (c_indice != '') {
-
-                $.ajax({
-                    url: "indices_editar.php",
-                    type: "post",
-                    data: {
-                        c_id: c_id,
-                        c_indice: c_indice,
-                        c_valor: c_valor
-                    },
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        var status = json.status;
-                        if (status == 'true') {
-                            $('#editmodal').modal('hide');
-                            location.reload();
-                        } else {
-                            alert('falha ao incluir dados');
-                        }
-                    }
-                });
-
-            } else {
-                alert('Todos os campos devem ser preenchidos!!');
-            }
-        });
-    </script>
-
-
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -212,7 +110,7 @@ $c_id = $_GET["id"];
     <div class="container -my5">
         <?php
         // faço a Leitura da tabela com sql
-        $c_sql = "SELECT procedimentos.descricao AS procedimento, tabela.descricao, procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal 
+        $c_sql = "SELECT procedimentos.descricao AS procedimento, procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal 
                   FROM procedimentos_tabelas
                   JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
                   JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id WHERE procedimentos_tabelas.id_procedimento='$c_id'";
@@ -225,9 +123,7 @@ $c_id = $_GET["id"];
         
         ?>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novatabelaModal"><span class="glyphicon glyphicon-plus"></span>
-            Incluir
-        </button>
+        <a class="btn btn-success btn-sm" href="/smedweb/procedimentos_tabela_novo.php?id_tabela=$c_linha[id_tabela]"><span class="glyphicon glyphicon-plus"></span> Novo</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
@@ -260,8 +156,8 @@ $c_id = $_GET["id"];
                     <td>$c_linha[custo]</td>
                     <td>$n_valor</td>
                     <td>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Indice'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Indice' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Usuário' href='/smedweb/Usuarios_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-danger btn-sm' title='Excluir tabela X Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
