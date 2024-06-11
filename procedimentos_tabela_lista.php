@@ -1,5 +1,5 @@
 <?php // controle de acesso ao formulário
-//session_start();
+session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -9,9 +9,11 @@
 include("conexao.php");
 
 // pego o id do procedimento
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $c_id = $_GET["id"];
+if ($_SESSION["controle"]=='1') {
+    $_SESSION["controle"] = "2";
+    $_SESSION['codigo_proc'] = $_GET["id"]; 
 }
+$c_id = $_SESSION['codigo_proc'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -124,10 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $c_linhaproc = $result->fetch_assoc();
         global $c_id_proc;
         $c_id_proc=$c_linhaproc['id_procedimento'];
+        $c_idtabela = $c_linhaproc['id_tabela'];
 
         ?>
         <!-- Button trigger modal -->
-        <a class="btn btn-success btn-sm" href="/smedweb/procedimentos_tabela_novo.php?id_tabela=$c_linha[id_tabela]"><span class="glyphicon glyphicon-plus"></span> Novo</a>
+        <a class='btn btn-success btn-sm' href='/smedweb/procedimentos_tabela_novo.php?id='$c_idtabela><span class="glyphicon glyphicon-plus"></span> Novo</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>

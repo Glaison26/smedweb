@@ -1,6 +1,6 @@
 <?php
 // controle de acesso ao formulário
-//session_start();
+session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -9,12 +9,13 @@ include("conexao.php");
 include_once "lib_gop.php";
 
 $c_tabela = "";
-$c_custo = "";
+$c_custo = 0;
 $c_valor = "";
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
-$c_id_tabela = $_GET["id_tabela"];
+$c_id_tabela = $_GET["id"];
+$id_proc = $_SESSION['codigo_proc'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_tabela = $_POST['addtabelaField'];
@@ -39,13 +40,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $msg_erro = "Já tabela cadastrada para esse procedimento!!";
             break;
         }
-
+        // pego codigo da tabela selecionada
+        //select * from tabelas
         // grava dados no banco
 
         // faço a Leitura da tabela com sql
         $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
-            "Value ('$c_id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
-
+            "Value ('$id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
+echo $c_sql;
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
@@ -138,8 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input readonly type="text" class="form-control" id="addvalorField" name="addvalorField">
                 </div>
             </div>
-
-
             <?php
             if (!empty($msg_gravou)) {
                 echo "
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <div class="offset-sm-3 col-sm-3">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/procedimentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/procedimentos_tabela_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
