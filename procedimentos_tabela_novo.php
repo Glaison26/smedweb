@@ -10,7 +10,7 @@ include_once "lib_gop.php";
 
 $c_tabela = "";
 $c_custo = 0;
-$c_valor = "";
+$c_valor = 0;
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
@@ -20,15 +20,14 @@ $id_proc = $_SESSION['codigo_proc'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_tabela = $_POST['addtabelaField'];
     $c_custo = $_POST['addcustoField'];
-    $c_valor = $_POST['addvalorField'];
+    
     do {
         if (
-            empty($c_tabela)
+            empty($c_tabela)||empty($c_custo)
         ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
-
         // consistencia se tabela selecionada já existe no procedimento
         $c_sql = "SELECT procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id 
                   FROM procedimentos_tabelas
@@ -41,13 +40,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
         // pego codigo da tabela selecionada
-        //select * from tabelas
+        $c_sql = "select * from tabela where descricao='$c_tabela'";
+        $result = $conection->query($c_sql);
+        $registro = $result->fetch_assoc();
+        $c_id_tabela = $registro['id'];  // pego id da tabelaselecionada
+        $i_indice = $registro['id_indice']; // pego a id do incice utilizado
+        // sql para pegar o valor do indice
+        $c_sqlindice = "select * from indices where id='$i_indice'";
+        $resultindice = $conection->query($c_sqlindice);
+        $registroindice = $resultindice->fetch_assoc();
+        $c_valor = ($registroindice['valor']*$c_custo);
+        echo $registroindice['valor'];
+        echo $c_valor;
         // grava dados no banco
-
         // faço a Leitura da tabela com sql
         $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
             "Value ('$id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
-echo $c_sql;
+        echo $c_sql;
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
@@ -56,7 +65,7 @@ echo $c_sql;
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/procedimentos_lista.php');
+        header('location: /smedweb/procedimentos_tabela_lista.php');
     } while (false);
 }
 
@@ -69,9 +78,7 @@ echo $c_sql;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>SmartMed - Sistema Médico</title>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
@@ -83,8 +90,6 @@ echo $c_sql;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
     <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
-
-
 </head>
 <div class="panel panel-primary class">
     <div class="panel-heading text-center">
@@ -131,15 +136,10 @@ echo $c_sql;
             <div class="mb-3 row">
                 <label for="addcustoField" class="col-md-3 form-label">Custo (*)</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="addcustoField" name="addcustoField">
+                    <input type="number" class="form-control" id="addcustoField" name="addcustoField">
                 </div>
             </div>
-            <div class="mb-3 row">
-                <label for="addvalorField" class="col-md-3 form-label">Valor</label>
-                <div class="col-md-3">
-                    <input readonly type="text" class="form-control" id="addvalorField" name="addvalorField">
-                </div>
-            </div>
+           
             <?php
             if (!empty($msg_gravou)) {
                 echo "
