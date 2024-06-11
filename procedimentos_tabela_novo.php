@@ -130,9 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         ?>
                     </select>
                 </div>
-
             </div>
-
             <div class="mb-3 row">
                 <label for="addcustoField" class="col-md-3 form-label">Custo (*)</label>
                 <div class="col-md-3">

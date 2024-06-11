@@ -65,7 +65,7 @@ $c_id = $_SESSION['codigo_proc'];
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [3]
+                    'aTargets': [4]
                 }, {
                     'aTargets': [0],
                     "visible": false
@@ -114,10 +114,12 @@ $c_id = $_SESSION['codigo_proc'];
         // faço a Leitura da tabela com sql
         $c_sql = "SELECT procedimentos.descricao AS procedimento, procedimentos_tabelas.id_procedimento,
                   procedimentos_tabelas.id_tabela, tabela.descricao,
-                  procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal 
+                  procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal, indices.descricao as indice 
                   FROM procedimentos_tabelas
                   JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
-                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id WHERE procedimentos_tabelas.id_procedimento='$c_id'";
+                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
+                  JOIN indices ON tabela.id_indice=indices.id 
+                  WHERE procedimentos_tabelas.id_procedimento='$c_id'";
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
@@ -142,6 +144,7 @@ $c_id = $_SESSION['codigo_proc'];
                 <tr class="info">
                     <th scope="col" width="5%">No.</th>
                     <th scope="col" width="20%">Tabela</th>
+                    <th scope="col" width="10%">Indice</th>
                     <th scope="col" width="10%">Custo</th>
                     <th scope="col" width="10%">Valor em R$</th>
                     <th scope="col" width="10%">Ações</th>
@@ -160,6 +163,7 @@ $c_id = $_SESSION['codigo_proc'];
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
+                    <td>$c_linha[indice]</td>
                     <td>$c_linha[custo]</td>
                     <td>$n_valor</td>
                     <td>
