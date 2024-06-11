@@ -126,7 +126,6 @@ $c_id = $_SESSION['codigo_proc'];
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $c_linhaproc = $result->fetch_assoc();
-        global $c_id_proc;
         $c_id_proc=$c_linhaproc['id_procedimento'];
         $c_idtabela = $c_linhaproc['id_tabela'];
 
@@ -167,7 +166,7 @@ $c_id = $_SESSION['codigo_proc'];
                     <td>$c_linha[custo]</td>
                     <td>$n_valor</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Usuário' href='/smedweb/Usuarios_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Tabela X Procedimento' href='/smedweb/procedimentos_tabela_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir tabela X Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
