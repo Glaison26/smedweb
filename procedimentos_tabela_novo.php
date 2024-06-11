@@ -5,18 +5,8 @@
 //    die('Acesso não autorizado!!!');
 //}
 
-// funções 
-
-function carregadados()
-{
-    $c_tabela = $_POST['tabela'];
-    $c_custo = $_POST['custo'];
-    $c_valor = $_POST['valor'];
-}
-
 include("conexao.php");
 include_once "lib_gop.php";
-
 
 $c_tabela = "";
 $c_custo = "";
@@ -27,9 +17,9 @@ $msg_erro = "";
 $c_id_tabela = $_GET["id_tabela"];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $c_tabela = $_POST['tabela'];
-    $c_custo = $_POST['custo'];
-    $c_valor = $_POST['valor'];
+    $c_tabela = $_POST['addtabelaField'];
+    $c_custo = $_POST['addcustoField'];
+    $c_valor = $_POST['addvalorField'];
     do {
         if (
             empty($c_tabela)
@@ -39,19 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // consistencia se tabela selecionada já existe no procedimento
-        // $c_sql = "select usuario.login from usuario where login='$c_login'";
-        // $result = $conection->query($c_sql);
-        // $registro = $result->fetch_assoc();
-        // if ($registro) {
-        //     $msg_erro = "Já existe este login cadastrado!!";
-        //     break;
-        // }
+        $c_sql = "SELECT procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id 
+                  FROM procedimentos_tabelas
+                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
+                  WHERE tabela.descricao='$c_tabela' and procedimentos_tabelas.id_procedimento='$id_proc'";
+        $result = $conection->query($c_sql);
+        $registro = $result->fetch_assoc();
+        if ($registro) {
+            $msg_erro = "Já tabela cadastrada para esse procedimento!!";
+            break;
+        }
 
         // grava dados no banco
 
         // faço a Leitura da tabela com sql
         $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
-            "Value ('$c_id', '$c_id_tabela', '$c_custo', '$c_valor' )";
+            "Value ('$c_id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -61,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/procedimentos_lista.php');
     } while (false);
 }
 
@@ -139,6 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class="form-control" id="addcustoField" name="addcustoField">
                 </div>
             </div>
+            <div class="mb-3 row">
+                <label for="addvalorField" class="col-md-3 form-label">Valor</label>
+                <div class="col-md-3">
+                    <input readonly type="text" class="form-control" id="addvalorField" name="addvalorField">
+                </div>
+            </div>
 
 
             <?php
@@ -159,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <div class="offset-sm-3 col-sm-3">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/procedimentos_tabela_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/procedimentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>

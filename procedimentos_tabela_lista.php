@@ -10,7 +10,7 @@ include("conexao.php");
 
 // pego o id do procedimento
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-$c_id = $_GET["id"];
+    $c_id = $_GET["id"];
 }
 ?>
 <!doctype html>
@@ -110,7 +110,9 @@ $c_id = $_GET["id"];
     <div class="container -my5">
         <?php
         // faço a Leitura da tabela com sql
-        $c_sql = "SELECT procedimentos.descricao AS procedimento, procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal 
+        $c_sql = "SELECT procedimentos.descricao AS procedimento, procedimentos_tabelas.id_procedimento,
+                  procedimentos_tabelas.id_tabela, tabela.descricao,
+                  procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal 
                   FROM procedimentos_tabelas
                   JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
                   JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id WHERE procedimentos_tabelas.id_procedimento='$c_id'";
@@ -120,7 +122,9 @@ $c_id = $_GET["id"];
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $c_linhaproc = $result->fetch_assoc();
-        
+        global $c_id_proc;
+        $c_id_proc=$c_linhaproc['id_procedimento'];
+
         ?>
         <!-- Button trigger modal -->
         <a class="btn btn-success btn-sm" href="/smedweb/procedimentos_tabela_novo.php?id_tabela=$c_linha[id_tabela]"><span class="glyphicon glyphicon-plus"></span> Novo</a>
@@ -181,7 +185,7 @@ $c_id = $_GET["id"];
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
                     <form id="frmaddtabela" action="">
-                    <input type="hidden" id="addidField" name="addidField" value="$c_id">
+                        <input type="hidden" id="addidField" name="addidField" value="$c_id">
                         <div class="mb-3 row">
 
                             <label class="col-md-3 form-label">Tabela (*)</label>
