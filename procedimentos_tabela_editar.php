@@ -18,6 +18,7 @@ $c_id = "";
 $c_tabela = "";
 $c_custo = "";
 $c_valor = "";
+$id_proc = $_SESSION['codigo_proc'];
 
 
 // variaveis para mensagens de erro e suscessso da gravação
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
              JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
              JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
              JOIN indices ON tabela.id_indice=indices.id  where procedimentos_tabelas.id=$c_id";
+             
     $result = $conection->query($c_sql);
     $registro = $result->fetch_assoc();
 
@@ -55,75 +57,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 } else {
     // metodo post para atualizar dados
     $c_id = $_POST["id"];
-    $c_nome = $_POST['nome'];
-    $c_login = $_POST['login'];
-    $c_senha = $_POST['senha'];
-    $c_senha2 = $_POST['senha2'];
-    $c_tipo = $_POST['tipo'];
-    $c_email = $_POST['email'];
-    $c_telefone = $_POST['telefone'];
-    if (!isset($_POST['chkativo'])) {
-        $c_ativo = 'N';
-    } else {
-        $c_ativo = 'S';
-    }
-    if ($c_tipo == 'Administrador') {
-        $c_tipo = '1';
-    }
-    if ($c_tipo == 'Operador') {
-        $c_tipo = '2';
-    }
+    $c_tabela = $_POST['uptabelaField'];
+    $c_custo = $_POST['upcustoField'];
+    $c_tabela_anterior = $c_tabela;
+
 
     do {
         if (
-            empty($c_nome) || empty($c_login) || empty($c_senha) || empty($c_tipo)
-            || empty($c_senha2) || empty($c_email) || empty($c_telefone)
+            empty($c_tabela) || empty($c_custo)
         ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
-        // consiste email
-        if (!validaEmail($c_email)) {
-            $msg_erro = " E-mail informado inválido!!";
-            break;
-        }
 
-        // consiste se senha igual a confirmação
-        if ($c_senha != $c_senha2) {
-            $msg_erro = "Senha digitada diferente da senha de confirmação!!";
-            break;
-        }
-        $i_tamsenha = strlen($c_senha);
-        if (($i_tamsenha < 8) || ($i_tamsenha > 30)) {
-            $msg_erro = "Campo Senha deve ter no mínimo 8 caracteres e no máximo 30 caracteres";
-            carregadados();
-            break;
-        }
-        // consistencia se já existe login cadastrado
-        $c_sql = "select * from usuario where login='$c_login' and id<>$c_id";
+        // consistencia se já existe tabela cadastrado
+        // consistencia se tabela selecionada já existe no procedimento
+        $c_sql = "SELECT procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id 
+                  FROM procedimentos_tabelas
+                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
+                  WHERE tabela.descricao='$c_tabela' and procedimentos_tabelas.id_procedimento='$id_proc'
+                   and procedimentos_tabelas.id<>'$c_id'";
         $result = $conection->query($c_sql);
         $registro = $result->fetch_assoc();
         if ($registro) {
-            $msg_erro = "Já existe este login cadastrado!!";
+            $msg_erro = "Já tabela cadastrada para esse procedimento!!";
             break;
         }
-        // grava dados no banco
-        // criptografo senha
-        $c_senha = base64_encode($c_senha);
-
-        // faço a alteração do registro
-        $c_sql = "Update Usuario" .
-            " SET nome = '$c_nome', login ='$c_login',  email = '$c_email', telefone = '$c_telefone', senha ='$c_senha', ativo='$c_ativo', tipo='$c_tipo'" .
-            " where id=$c_id";
-
+        // pego codigo da tabela selecionada
+        $c_sql = "select * from tabela where descricao='$c_tabela'";
         $result = $conection->query($c_sql);
-
+        $registro = $result->fetch_assoc();
+        $c_id_tabela = $registro['id'];  // pego id da tabelaselecionada
+        $i_indice = $registro['id_indice']; // pego a id do incice utilizado
+        // sql para pegar o valor do indice
+        $c_sqlindice = "select * from indices where id='$i_indice'";
+        $resultindice = $conection->query($c_sqlindice);
+        $registroindice = $resultindice->fetch_assoc();
+        $c_valor = ($registroindice['valor'] * $c_custo);
+        // faço a alteração do registro
+        $c_sql = "Update procedimentos_tabelas" .
+            " SET id_tabela = '$c_id_tabela', custo ='$c_custo',  valorreal = '$c_valor' where id=$c_id";
+        $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/usuarios_lista.php');
+        header('location: /smedweb/procedimentos_tabela_lista.php');
     } while (false);
 }
 ?>
@@ -178,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <div class="mb-3 row">
                 <label class="col-md-3 form-label">Tabela (*)</label>
                 <div class="col-sm-3">
-                    <select class="form-control form-control-lg" id="addtabelaField" name="addtabelaField">
+                    <select class="form-control form-control-lg" id="uptabelaField" name="uptabelaField">
                         <?php
                         $c_sql = "SELECT tabela.id, tabela.descricao FROM tabela ORDER BY tabela.descricao";
                         $result = $conection->query($c_sql);
@@ -197,15 +177,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="addcustoField" class="col-md-3 form-label">Custo (*)</label>
+                <label for="upcustoField" class="col-md-3 form-label">Custo (*)</label>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="addcustoField" name="addcustoField" value="<?php echo $c_custo; ?>">
+                    <input type="number" class="form-control" id="addcustoField" name="upcustoField" value="<?php echo $c_custo; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="addvalorField" class="col-md-3 form-label">Valor em R$</label>
+                <label for="upvalorField" class="col-md-3 form-label">Valor em R$</label>
                 <div class="col-md-3">
-                    <input type="text" readonly class="form-control" id="addvalorField" name="addvalorField" value="<?php echo $c_valor; ?>">
+                    <input type="text" readonly class="form-control" id="upvalorField" name="upvalorField" value="<?php echo $c_valor; ?>">
                 </div>
             </div>
             <?php

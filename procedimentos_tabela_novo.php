@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // faço a Leitura da tabela com sql
         $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
             "Value ('$id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
-        echo $c_sql;
+        
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
