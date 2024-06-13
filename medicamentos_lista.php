@@ -247,7 +247,7 @@ include("conexao.php");
                     <td>$c_linha[grupo]</td>
                     
                     <td>
-                    <a class='btn btn-secondary btn-sm' title='Apresentações do Medicamento' href='/smedweb/apresentacao_lista.php'><span class='glyphicon glyphicon-tags'></span></a>
+                    <a class='btn btn-secondary btn-sm' title='Apresentações do Medicamento' href='/smedweb/apresentacao_medicamentos_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-tags'></span></a>
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Medicamento'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Medicamento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>

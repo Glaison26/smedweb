@@ -9,11 +9,11 @@ session_start();
 include("conexao.php");
 
 // pego o id do procedimento
-if ($_SESSION["controle"]=='1') {
+if ($_SESSION["controle"] == '1') {
     $_SESSION["controle"] = "2";
-    $_SESSION['codigo_proc'] = $_GET["id"]; 
+    $_SESSION['c_id_medicamento'] = $_GET["id"];
 }
-$c_id = $_SESSION['codigo_proc'];
+$c_id = $_SESSION['c_id_medicamento'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,7 +45,7 @@ $c_id = $_SESSION['codigo_proc'];
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/procedimento_tabela_excluir.php?id=" + id;
+                window.location.href = "/smedweb/apresentacao_medicamentos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -59,13 +59,13 @@ $c_id = $_SESSION['codigo_proc'];
 
     <script>
         $(document).ready(function() {
-            $('.tabproc_tabela').DataTable({
+            $('.tabapresentacao').DataTable({
                 // 
                 "iDisplayLength": 6,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [4]
+                    'aTargets': [5]
                 }, {
                     'aTargets': [0],
                     "visible": false
@@ -105,38 +105,31 @@ $c_id = $_SESSION['codigo_proc'];
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Tabelas por Procedimento do Sistema<h5>
+            <h5>Lista Apresentações do Medicamento<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
         <?php
         // faço a Leitura da tabela com sql
-        $c_sql = "SELECT procedimentos.descricao AS procedimento, procedimentos_tabelas.id_procedimento,
-                  procedimentos_tabelas.id_tabela, tabela.descricao,
-                  procedimentos_tabelas.id, procedimentos_tabelas.custo, procedimentos_tabelas.valorreal, indices.descricao as indice 
-                  FROM procedimentos_tabelas
-                  JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
-                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
-                  JOIN indices ON tabela.id_indice=indices.id 
-                  WHERE procedimentos_tabelas.id_procedimento='$c_id'";
+        $c_sql =    "SELECT medicamentos.descricao, medicamento_apresentacao.apresentacao, medicamento_apresentacao.volume, medicamento_apresentacao.quantidade, medicamento_apresentacao.embalagem,
+                    medicamento_apresentacao.uso, medicamento_apresentacao.termo FROM medicamento_apresentacao
+                    JOIN medicamentos ON medicamento_apresentacao.id_medicamento=medicamentos.id 
+                    WHERE medicamento_apresentacao.id_medicamento='$c_id'";
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
-        $c_linhaproc = $result->fetch_assoc();
-        $c_id_proc=$c_linhaproc['id_procedimento'];
-        $c_idtabela = $c_linhaproc['id_tabela'];
-
+       
         ?>
         <!-- Button trigger modal -->
-        <a class='btn btn-success btn-sm' href='/smedweb/procedimentos_tabela_novo.php?id='$c_idtabela><span class="glyphicon glyphicon-plus"></span> Novo</a>
+        <a class='btn btn-success btn-sm' href='/smedweb/procedimentos_tabela_novo.php?id=' $c_idtabela><span class="glyphicon glyphicon-plus"></span> Novo</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
         <div class='alert alert-info' role='alert'>
-            <h5>Procedimento :<?php echo " " . $c_linhaproc['procedimento'] ?> </h5>
+            <h5>Medicamento :<?php echo " " . $c_linhaproc['procedimento'] ?> </h5>
         </div>
         <table class="table display table-bordered tabproc_tabela">
             <thead class="thead">
@@ -151,7 +144,7 @@ $c_id = $_SESSION['codigo_proc'];
             </thead>
             <tbody>
                 <?php
-                $fmt = new NumberFormatter('de_DE', NumberFormatter::CURRENCY);
+              
                 $result = $conection->query($c_sql);
 
                 // insiro os registro do banco de dados na tabela 
