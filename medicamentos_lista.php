@@ -101,18 +101,20 @@ include("conexao.php");
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddgrupo', function(e) {
+        $(document).on('submit', '#frmaddmedicamento', function(e) {
             e.preventDefault();
+            var c_nome = $('#addnomeField').val();
             var c_grupo = $('#addgrupoField').val();
-            
-            if (c_grupo != '') {
+
+            if (c_nome != '') {
 
                 $.ajax({
-                    url: "grupomedicamentos_novo.php",
+                    url: "medicamentos_novo.php",
                     type: "post",
                     data: {
+                        c_nome: c_nome,
                         c_grupo: c_grupo
-                      
+
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -121,7 +123,7 @@ include("conexao.php");
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novogrupoModal').modal('hide');
+                            $('#novomedicamentoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -139,7 +141,7 @@ include("conexao.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-                
+
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -151,8 +153,8 @@ include("conexao.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_grupoField').val(data[1]);
-         
+                $('#up_nomeField').val(data[1]);
+                $('#up_grupoField').val(data[2]);
 
             });
         });
@@ -161,21 +163,23 @@ include("conexao.php");
     <script type="text/javascript">
         ~
         // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmgrupo', function(e) {
+        $(document).on('submit', '#frmmedicamento', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
+            var c_nome = $('#up_nomeField').val();
             var c_grupo = $('#up_grupoField').val();
-            
-            
-            if (c_grupo != '') {
-                
+
+
+            if (c_nome != '') {
+
                 $.ajax({
-                    url: "grupomedicamentos_editar.php",
+                    url: "medicamentos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
+                        c_nome:c_nome,
                         c_grupo: c_grupo
-                        
+
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -188,13 +192,12 @@ include("conexao.php");
                         }
                     }
                 });
-                
+
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
         });
     </script>
-
 
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -217,14 +220,16 @@ include("conexao.php");
                 <tr class="info">
                     <th scope="col">No.</th>
                     <th scope="col">Descrição do Medicamento</th>
+                    <th dcope="col">Grupo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT medicamentos.id, medicamentos.descricao" .
-                    " FROM medicamentos" .
+                $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo" .
+                    " FROM medicamentos
+                    JOIN grupos_medicamentos ON medicamentos.id_grupo=grupos_medicamentos.id" .
                     " ORDER BY medicamentos.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
@@ -234,13 +239,15 @@ include("conexao.php");
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                   
+
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
+                    <td>$c_linha[grupo]</td>
                     
                     <td>
+                    <a class='btn btn-secondary btn-sm' title='Apresentações do Medicamento' href='/smedweb/apresentacao_lista.php'><span class='glyphicon glyphicon-tags'></span></a>
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Medicamento'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Medicamento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
@@ -255,25 +262,40 @@ include("conexao.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novogrupoModal" tabindex="-1" role="dialog" aria-labelledby="novagrupoModal" aria-hidden="true">
+    <div class="modal fade" id="novomedicamentoModal" tabindex="-1" role="dialog" aria-labelledby="novomedicamentoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Grupo</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados do Medicamento</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddgrupo" action="">
+                    <form id="frmaddmedicamento" action="">
                         <div class="mb-3 row">
-                            <label for="addgrupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="addnomeField" class="col-md-3 form-label">Medicamento (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addgrupoField" name="addgrupoField">
+                                <input type="text" class="form-control" id="addnomeField" name="addnomeField">
                             </div>
                         </div>
+                        <div class="mb-3 row">
+                            <label class="col-md-3 form-label">Grupo (*)</label>
+                            <div class="col-sm-7">
+                                <select class="form-control form-control-lg" id="addgrupoField" name="addgrupoField">
+                                    <?php
+                                    $c_sql = "SELECT grupos_medicamentos.id, grupos_medicamentos.descricao FROM grupos_medicamentos ORDER BY grupos_medicamentos.descricao";
+                                    $result = $conection->query($c_sql);
 
-                       
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha = $result->fetch_assoc()) {
+                                        echo "
+                                        <option>$c_linha[descricao]</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -292,21 +314,42 @@ include("conexao.php");
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Grupo</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Medicamento</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmgrupo" method="POST" action="">
+                    <form id="frmmedicamento" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="up_nomeField" class="col-md-3 form-label">Medicamento (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
+                                <input type="text" class="form-control" id="up_nomeField" name="up_nomeField">
                             </div>
                         </div>
-                       
+                        <div class="mb-3 row">
+                            <label class="col-md-3 form-label">Grupo (*)</label>
+                            <div class="col-sm-7">
+                                <select class="form-control form-control-lg" id="up_grupoField" name="up_grupoField">
+                                    <?php
+                                    $c_sql = "SELECT grupos_medicamentos.id, grupos_medicamentos.descricao FROM grupos_medicamentos ORDER BY grupos_medicamentos.descricao";
+                                    $result = $conection->query($c_sql);
+
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha = $result->fetch_assoc()) {
+                                        $op="";
+                                        if ($c_linha['descricao']==$c_grupo){
+                                            $op="selected";
+                                        }
+                                        echo "
+                                        <option $op>$c_linha[descricao]</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -318,4 +361,5 @@ include("conexao.php");
         </div>
     </div>
 </body>
+
 </html>
