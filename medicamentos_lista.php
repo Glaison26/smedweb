@@ -39,7 +39,7 @@ include("conexao.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/atestados_padroes_excluir.php?id=" + id;
+                window.location.href = "/smedweb/medicamentos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -53,13 +53,13 @@ include("conexao.php");
 
     <script>
         $(document).ready(function() {
-            $('.tabatestados').DataTable({
+            $('.tabmedicamentos').DataTable({
                 // 
                 "iDisplayLength": 6,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [3]
+                    'aTargets': [2]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -101,22 +101,19 @@ include("conexao.php");
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddatestado', function(e) {
+        $(document).on('submit', '#frmaddgrupo', function(e) {
             e.preventDefault();
-            var c_atestado = $('#addatestadoField').val();
-            var c_texto = $('#addtextoField').val();
-
-            if (c_atestado != '') {
+            var c_grupo = $('#addgrupoField').val();
+            
+            if (c_grupo != '') {
 
                 $.ajax({
-                    url: "atestados_padroes_novo.php",
+                    url: "grupomedicamentos_novo.php",
                     type: "post",
                     data: {
-                        c_atestado: c_atestado,
-                        c_texto: c_texto 
-
+                        c_grupo: c_grupo
+                      
                     },
-                    
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
@@ -124,7 +121,7 @@ include("conexao.php");
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novoatestadoModal').modal('hide');
+                            $('#novogrupoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -142,7 +139,7 @@ include("conexao.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-
+                
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -154,33 +151,31 @@ include("conexao.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_atestadoField').val(data[1]);
-                $('#up_textoField').val(data[2]);
-
+                $('#up_grupoField').val(data[1]);
+         
 
             });
         });
     </script>
 
-    <!-- Função javascript e ajax para Alteração dos dados -->
     <script type="text/javascript">
-    
-    $(document).on('submit', '#frmatestado', function(e) {
+        ~
+        // Função javascript e ajax para Alteração dos dados
+        $(document).on('submit', '#frmgrupo', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_atestado = $('#up_atestadoField').val();
-            var c_texto = $('#up_textoField').val();
+            var c_grupo = $('#up_grupoField').val();
             
-            if (c_atestado != '') {
-
+            
+            if (c_grupo != '') {
+                
                 $.ajax({
-                    url: "atestados_padroes_editar.php",
+                    url: "grupomedicamentos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_atestado: c_atestado,
-                        c_texto : c_texto
-
+                        c_grupo: c_grupo
+                        
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -193,7 +188,7 @@ include("conexao.php");
                         }
                     }
                 });
-
+                
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
@@ -204,48 +199,50 @@ include("conexao.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Atestados Padrões<h5>
+            <h5>Lista de Medicamentos<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoatestadoModal"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novomedicamentoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
-        <table class="table display table-bordered tabatestados">
+        <table class="table display table-bordered tabmedicamentos">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
-                    <th scope="col">Atestado</th>
-                    <th scope="col">Texto</th>
+                    <th scope="col">Descrição do Medicamento</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
+                $c_sql = "SELECT medicamentos.id, medicamentos.descricao" .
+                    " FROM medicamentos" .
+                    " ORDER BY medicamentos.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
                 if (!$result) {
                     die("Erro ao Executar Sql!!" . $conection->connect_error);
                 }
+
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-
+                   
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    <td>$c_linha[texto]</td>
+                    
                     <td>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Atestado'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Atestado' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Medicamento'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir Medicamento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
@@ -258,30 +255,25 @@ include("conexao.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novoatestadoModal" tabindex="-1" role="dialog" data-target=".bd-example-modal-lg" aria-labelledby="novoatestadoModal" aria-hidden="true">
+    <div class="modal fade" id="novogrupoModal" tabindex="-1" role="dialog" aria-labelledby="novagrupoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Atestado Padrão</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Grupo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddatestado" action="">
+                    <form id="frmaddgrupo" action="">
                         <div class="mb-3 row">
-                            <label for="addatestadoField" class="col-md-3 form-label">Atestado (*)</label>
+                            <label for="addgrupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addatestadoField" name="addatestadoField">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="addtextoField" class="col-md-3 form-label">Texto do Atestado</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="addtextoField" name="addtextoField" rows="5"></textarea>
+                                <input type="text" class="form-control" id="addgrupoField" name="addgrupoField">
                             </div>
                         </div>
 
+                       
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -300,27 +292,21 @@ include("conexao.php");
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Atestado Padrão</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Grupo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmatestado" method="POST" action="">
+                    <form id="frmgrupo" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_atestadoField" class="col-md-3 form-label">Atestado (*)</label>
+                            <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_atestadoField" name="up_atestadoField">
+                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="up_textoField" class="col-md-3 form-label">Texto do Atestado</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="up_textoField" name="up_textoField" rows="5"></textarea>
-                            </div>
-                        </div>
-
+                       
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -331,11 +317,5 @@ include("conexao.php");
             </div>
         </div>
     </div>
-
-
-
 </body>
-
-
-
 </html>
