@@ -9,7 +9,6 @@ include("conexao.php");
 $c_atestado = rtrim($_POST['c_atestado']);
 $c_texto = $_POST['c_texto'];
 $c_sql = "Insert into atestados (descricao,texto) Value ('$c_atestado', '$c_texto')";
-
 $result = $conection->query($c_sql);
 
 if($result ==true)
