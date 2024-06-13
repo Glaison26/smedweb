@@ -59,7 +59,7 @@ include("conexao.php");
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [2]
+                    'aTargets': [3]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -107,7 +107,7 @@ include("conexao.php");
             var c_texto = $('#addtextoField').val();
 
             if (c_atestado != '') {
-                alert(status);
+
                 $.ajax({
                     url: "atestados_padroes_novo.php",
                     type: "post",
@@ -154,30 +154,33 @@ include("conexao.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_grupoField').val(data[1]);
+                $('#up_atestadoField').val(data[1]);
+                $('#up_textoField').val(data[2]);
 
 
             });
         });
     </script>
 
+    <!-- Função javascript e ajax para Alteração dos dados -->
     <script type="text/javascript">
-        ~
-        // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmgrupo', function(e) {
+    
+    $(document).on('submit', '#frmatestado', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_grupo = $('#up_grupoField').val();
+            var c_atestado = $('#up_atestadoField').val();
+            var c_texto = $('#up_textoField').val();
 
 
-            if (c_grupo != '') {
+            if (c_atestado != '') {
 
                 $.ajax({
-                    url: "grupolaudos_editar.php",
+                    url: "atestados_padroes_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_grupo: c_grupo
+                        c_atestado: c_atestado,
+                        c_texto : c_texto
 
                     },
                     success: function(data) {
@@ -220,6 +223,7 @@ include("conexao.php");
                 <tr class="info">
                     <th scope="col">No.</th>
                     <th scope="col">Atestado</th>
+                    <th scope="col">Texto</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -227,7 +231,7 @@ include("conexao.php");
                 <?php
 
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT atestados.id, atestados.descricao FROM atestados ORDER BY atestados.descricao";
+                $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
                 if (!$result) {
@@ -241,7 +245,7 @@ include("conexao.php");
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    
+                    <td>$c_linha[texto]</td>
                     <td>
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Atestado'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Atestado' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
@@ -275,7 +279,7 @@ include("conexao.php");
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="addtextoField" class="col-md-3 form-label">Atestado (*)</label>
+                            <label for="addtextoField" class="col-md-3 form-label">Texto do Atestado</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" id="addtextoField" name="addtextoField" rows="5"></textarea>
                             </div>
@@ -299,18 +303,24 @@ include("conexao.php");
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Grupo</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Atestado Padrão</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmgrupo" method="POST" action="">
+                    <form id="frmatestado" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="up_atestadoField" class="col-md-3 form-label">Atestado (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
+                                <input type="text" class="form-control" id="up_atestadoField" name="up_atestadoField">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="up_textoField" class="col-md-3 form-label">Texto do Atestado</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" id="up_textoField" name="up_textoField" rows="5"></textarea>
                             </div>
                         </div>
 
