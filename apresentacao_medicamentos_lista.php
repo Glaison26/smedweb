@@ -9,11 +9,15 @@ session_start();
 include("conexao.php");
 
 // pego o id do procedimento
+
 if ($_SESSION["controle"] == '1') {
     $_SESSION["controle"] = "2";
-    $_SESSION['c_id_medicamento'] = $_GET["id"];
+    $_SESSION["id_medic"]=$_GET['id'];
+    
 }
-$c_id = $_SESSION['c_id_medicamento'];
+$c_id=$_SESSION["id_medic"];
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,7 +37,6 @@ $c_id = $_SESSION['c_id_medicamento'];
 
 <body>
     <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-
     <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -111,53 +114,61 @@ $c_id = $_SESSION['c_id_medicamento'];
     <br>
     <div class="container -my5">
         <?php
+        // pego nome do medimecamento
+        $c_sql =    "SELECT * FROM medicamentos WHERE medicamentos.id='$c_id'";
+        $result = $conection->query($c_sql);
+        $registro = $result->fetch_assoc();
+        $c_medicamento = $registro["descricao"];
+
         // faço a Leitura da tabela com sql
-        $c_sql =    "SELECT medicamentos.descricao, medicamento_apresentacao.apresentacao, medicamento_apresentacao.volume, medicamento_apresentacao.quantidade, medicamento_apresentacao.embalagem,
-                    medicamento_apresentacao.uso, medicamento_apresentacao.termo FROM medicamento_apresentacao
+        $c_sql =    "SELECT medicamento_apresentacao.id, medicamentos.descricao as medicamento, medicamento_apresentacao.apresentacao, medicamento_apresentacao.volume, medicamento_apresentacao.quantidade, medicamento_apresentacao.embalagem,
+                    medicamento_apresentacao.uso, medicamento_apresentacao.termo, medicamento_apresentacao.veiculo, medicamento_apresentacao.id_medicamento FROM medicamento_apresentacao
                     JOIN medicamentos ON medicamento_apresentacao.id_medicamento=medicamentos.id 
                     WHERE medicamento_apresentacao.id_medicamento='$c_id'";
         $result = $conection->query($c_sql);
+
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
-       
+
         ?>
         <!-- Button trigger modal -->
-        <a class='btn btn-success btn-sm' href='/smedweb/procedimentos_tabela_novo.php?id=' $c_idtabela><span class="glyphicon glyphicon-plus"></span> Novo</a>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class='btn btn-success btn-sm' href='/smedweb/apresentacao_medicamentos_novo.php?id=$c_linha[id_medicamento]'><span class="glyphicon glyphicon-plus"></span> Novo</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/medicamentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
         <div class='alert alert-info' role='alert'>
-            <h5>Medicamento :<?php echo " " . $c_linhaproc['procedimento'] ?> </h5>
+            <h5>Medicamento :<?php echo " " . $c_medicamento ?> </h5>
         </div>
-        <table class="table display table-bordered tabproc_tabela">
+        <table class="table display table-bordered tabapresentacao">
             <thead class="thead">
                 <tr class="info">
-                    <th scope="col" width="5%">No.</th>
-                    <th scope="col" width="20%">Tabela</th>
-                    <th scope="col" width="10%">Indice</th>
-                    <th scope="col" width="10%">Custo</th>
-                    <th scope="col" width="10%">Valor em R$</th>
-                    <th scope="col" width="10%">Ações</th>
+                    <th scope="col">No.</th>
+                    <th scope="col">Apresentação</th>
+                    <th scope="col">Veículo</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Embalagem</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-              
+
                 $result = $conection->query($c_sql);
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                    $n_valor = 'R$ ' . $fmt->formatCurrency($c_linha['valorreal'], "   ") . "\n";
-                    //$n_valor=$c_linha['valor'];
+                   
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
-                    <td>$c_linha[descricao]</td>
-                    <td>$c_linha[indice]</td>
-                    <td>$c_linha[custo]</td>
-                    <td>$n_valor</td>
+                    <td>$c_linha[apresentacao]</td>
+                    <td>$c_linha[veiculo]</td>
+                    <td>$c_linha[volume]</td>
+                    <td>$c_linha[quantidade]</td>
+                    <td>$c_linha[embalagem]</td>
                     <td>
                     <a class='btn btn-info btn-sm' title='Editar Tabela X Procedimento' href='/smedweb/procedimentos_tabela_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir tabela X Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>

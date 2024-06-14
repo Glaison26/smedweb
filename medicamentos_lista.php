@@ -1,5 +1,5 @@
 <?php // controle de acesso ao formulário
-//session_start();
+session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -7,6 +7,8 @@
 //    header('location: /raxx/voltamenunegado.php');
 //}
 include("conexao.php");
+$_SESSION["controle"] = "1";
+$_SESSION["id_medic"] = "";
 ?>
 <!doctype html>
 <html lang="en">

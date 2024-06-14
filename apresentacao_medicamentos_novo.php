@@ -1,0 +1,198 @@
+<?php
+// controle de acesso ao formulário
+session_start();
+//if (!isset($_SESSION['newsession'])) {
+//    die('Acesso não autorizado!!!');
+//}
+
+include("conexao.php");
+include_once "lib_gop.php";
+
+$c_tabela = "";
+$c_custo = 0;
+$c_valor = 0;
+// variaveis para mensagens de erro e suscessso da gravação
+$msg_gravou = "";
+$msg_erro = "";
+$c_id = $_GET["id"];
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $c_tabela = $_POST['addtabelaField'];
+    $c_custo = $_POST['addcustoField'];
+
+    do {
+        if (
+            empty($c_tabela) || empty($c_custo)
+        ) {
+            $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
+            break;
+        }
+        // consistencia se tabela selecionada já existe no procedimento
+        $c_sql = "SELECT procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id 
+                  FROM procedimentos_tabelas
+                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
+                  WHERE tabela.descricao='$c_tabela' and procedimentos_tabelas.id_procedimento='$id_proc'";
+        $result = $conection->query($c_sql);
+        $registro = $result->fetch_assoc();
+        if ($registro) {
+            $msg_erro = "Já tabela cadastrada para esse procedimento!!";
+            break;
+        }
+        // pego codigo da tabela selecionada
+        $c_sql = "select * from tabela where descricao='$c_tabela'";
+        $result = $conection->query($c_sql);
+        $registro = $result->fetch_assoc();
+        $c_id_tabela = $registro['id'];  // pego id da tabelaselecionada
+        $i_indice = $registro['id_indice']; // pego a id do incice utilizado
+        // sql para pegar o valor do indice
+        $c_sqlindice = "select * from indices where id='$i_indice'";
+        $resultindice = $conection->query($c_sqlindice);
+        $registroindice = $resultindice->fetch_assoc();
+        $c_valor = ($registroindice['valor'] * $c_custo);
+        echo $registroindice['valor'];
+        echo $c_valor;
+        // grava dados no banco
+        // faço a Leitura da tabela com sql
+        $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
+            "Value ('$id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
+
+        $result = $conection->query($c_sql);
+        // verifico se a query foi correto
+        if (!$result) {
+            die("Erro ao Executar Sql!!" . $conection->connect_error);
+        }
+
+        $msg_gravou = "Dados Gravados com Sucesso!!";
+
+        header('location: /smedweb/procedimentos_tabela_lista.php');
+    } while (false);
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartMed - Sistema Médico</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
+    <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
+</head>
+<div class="panel panel-primary class">
+    <div class="panel-heading text-center">
+        <h4>SmartMed - Sistema Médico</h4>
+        <h5>Nova Apresentação de Medicamento<h5>
+    </div>
+</div>
+<br>
+<div class="container -my5">
+
+    <body>
+        <?php
+        if (!empty($msg_erro)) {
+            echo "
+            <div class='alert alert-danger' role='alert'>
+                <h4>$msg_erro</h4>
+            </div>
+                ";
+        }
+        ?>
+        <div class='alert alert-warning' role='alert'>
+            <h5>Campos com (*) são obrigatórios</h5>
+        </div>
+        <form method="post">
+            <div class="mb-3 row">
+
+                <label for="addcustoField" class="col-md-3 form-label">Apresentação (*)</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addapresentacaoField" name="addapresentacaoField">
+                </div>
+
+            </div>
+            <div class="mb-3 row">
+                <label for="addveiculoField" class="col-md-3 form-label">Veículo</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addveiculoField" name="addveiculoField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="addvolumeField" class="col-md-3 form-label">Volume</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addvolumeField" name="addvolumeField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="addquantidadeField" class="col-md-3 form-label">Quantidade</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addquantidadeField" name="addquantidadeField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="addembalagemField" class="col-md-3 form-label">Embalagem</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addembalagemField" name="addembalagemField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="addusoField" class="col-md-3 form-label">Uso</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addusoField" name="addusoField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="addtermoField" class="col-md-3 form-label">Termo de Utilização</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="addtermoField" name="addtermoField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="addobsField" class="col-md-3 form-label">Observações</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="obs" name="addobsField" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                    <a class='btn btn-danger' href='/smedweb/apresentacao_medicamentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                </div>
+
+            </div>
+            <?php
+            if (!empty($msg_gravou)) {
+                echo "
+                    <div class='row mb-3'>
+                        <div class='offset-sm-3 col-sm-6'>
+                             <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                                <strong>$msg_gravou</strong>
+
+                             </div>
+                        </div>     
+                    </div>    
+                ";
+            }
+            ?>
+            <br>
+
+
+</div>
+
+</form>
+
+
+</body>
+
+</html>
