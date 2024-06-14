@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `atestados` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.atestados: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.atestados: ~3 rows (aproximadamente)
 REPLACE INTO `atestados` (`id`, `descricao`, `texto`) VALUES
 	(2, 'SEROSA', _binary 0x546578746f20646520617465737461646f207365726f7361),
 	(8, 'RDPP', _binary 0x746573746520646520746573746f20706172612052445050),
@@ -229,12 +229,14 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   PRIMARY KEY (`id`),
   KEY `FK_medicamentos_grupos_medicamentos` (`id_grupo`),
   CONSTRAINT `FK_medicamentos_grupos_medicamentos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_medicamentos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.medicamentos: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.medicamentos: ~4 rows (aproximadamente)
 REPLACE INTO `medicamentos` (`id`, `id_grupo`, `descricao`) VALUES
 	(1, 2, 'VITANOL-A'),
-	(2, 1, 'TYLENOL');
+	(2, 1, 'TYLENOL'),
+	(3, 1, 'PSOREX'),
+	(4, 2, 'POVIDINE');
 
 -- Copiando estrutura para tabela smed.medicamento_apresentacao
 CREATE TABLE IF NOT EXISTS `medicamento_apresentacao` (
@@ -246,11 +248,16 @@ CREATE TABLE IF NOT EXISTS `medicamento_apresentacao` (
   `embalagem` varchar(50) DEFAULT NULL,
   `uso` varchar(50) DEFAULT NULL,
   `termo` varchar(50) DEFAULT NULL,
+  `veiculo` varchar(50) DEFAULT NULL,
   `observacao` blob,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  KEY `FK_medicamento_apresentacao_medicamentos` (`id_medicamento`),
+  CONSTRAINT `FK_medicamento_apresentacao_medicamentos` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamentos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.medicamento_apresentacao: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.medicamento_apresentacao: ~1 rows (aproximadamente)
+REPLACE INTO `medicamento_apresentacao` (`id`, `id_medicamento`, `apresentacao`, `volume`, `quantidade`, `embalagem`, `uso`, `termo`, `veiculo`, `observacao`) VALUES
+	(1, 3, 'Pastilha', '30 ml', '12', 'Caixa', 'Oral', 'remedio', 'Oral', _binary 0x7465737465);
 
 -- Copiando estrutura para tabela smed.pacientes
 CREATE TABLE IF NOT EXISTS `pacientes` (
