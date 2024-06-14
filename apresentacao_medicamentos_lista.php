@@ -71,7 +71,7 @@ $c_id=$_SESSION["id_medic"];
                     'aTargets': [5]
                 }, {
                     'aTargets': [0],
-                    "visible": false
+                    "visible": true
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -160,7 +160,7 @@ $c_id=$_SESSION["id_medic"];
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                   
+                  
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
@@ -170,8 +170,8 @@ $c_id=$_SESSION["id_medic"];
                     <td>$c_linha[quantidade]</td>
                     <td>$c_linha[embalagem]</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Tabela X Procedimento' href='/smedweb/procedimentos_tabela_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
-                    <a class='btn btn-danger btn-sm' title='Excluir tabela X Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Apresentação de Medicamento' href='/smedweb/apresentacao_medicamentos_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-danger btn-sm' title='Excluir Apresentação de Medicamento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>

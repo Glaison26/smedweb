@@ -8,54 +8,40 @@ session_start();
 include("conexao.php");
 include_once "lib_gop.php";
 
-$c_tabela = "";
-$c_custo = 0;
-$c_valor = 0;
+$c_apresentacao = "";
+$c_volume = "";
+$c_quantidade = "";
+$c_embalagem = "";
+$c_uso = "";
+$c_termo = "";
+$c_veiculo = "";
+$c_observacao = "";
+$c_id =$_SESSION["id_medic"];
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
-$c_id = $_GET["id"];
-
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $c_tabela = $_POST['addtabelaField'];
-    $c_custo = $_POST['addcustoField'];
+    $c_apresentacao = $_POST['addapresentacaoField'];
+    $c_volume = $_POST['addvolumeField'];
+    $c_quantidade = $_POST['addquantidadeField'];
+    $c_embalagem = $_POST['addembalagemField'];
+    $c_uso = $_POST['addusoField'];
+    $c_termo = $_POST['addtermoField'];
+    $c_veiculo = $_POST['addveiculoField'];
+    $c_observacao = $_POST['addobsField'];
 
     do {
         if (
-            empty($c_tabela) || empty($c_custo)
-        ) {
+            empty($c_apresentacao)) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
-        // consistencia se tabela selecionada já existe no procedimento
-        $c_sql = "SELECT procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id 
-                  FROM procedimentos_tabelas
-                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
-                  WHERE tabela.descricao='$c_tabela' and procedimentos_tabelas.id_procedimento='$id_proc'";
-        $result = $conection->query($c_sql);
-        $registro = $result->fetch_assoc();
-        if ($registro) {
-            $msg_erro = "Já tabela cadastrada para esse procedimento!!";
-            break;
-        }
-        // pego codigo da tabela selecionada
-        $c_sql = "select * from tabela where descricao='$c_tabela'";
-        $result = $conection->query($c_sql);
-        $registro = $result->fetch_assoc();
-        $c_id_tabela = $registro['id'];  // pego id da tabelaselecionada
-        $i_indice = $registro['id_indice']; // pego a id do incice utilizado
-        // sql para pegar o valor do indice
-        $c_sqlindice = "select * from indices where id='$i_indice'";
-        $resultindice = $conection->query($c_sqlindice);
-        $registroindice = $resultindice->fetch_assoc();
-        $c_valor = ($registroindice['valor'] * $c_custo);
-        echo $registroindice['valor'];
-        echo $c_valor;
+        
         // grava dados no banco
         // faço a Leitura da tabela com sql
-        $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
-            "Value ('$id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
+        $c_sql = "Insert into medicamento_apresentacao (id_medicamento, apresentacao, volume, quantidade, embalagem, uso, termo, veiculo, observacao)" .
+            "Value ('$c_id','$c_apresentacao','$c_volume','$c_quantidade','$c_embalagem','$c_uso','$c_termo','$c_veiculo','$c_observacao')";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -65,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/apresentacao_medicamentos_lista.php');
     } while (false);
 }
 
