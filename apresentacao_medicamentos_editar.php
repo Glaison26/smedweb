@@ -52,9 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_termo = $registro['termo'];
     $c_veiculo = $registro['veiculo'];
     $c_observacao = $registro['observacao'];
+    echo $c_observacao;
 } else {
     // metodo post para atualizar dados
-    $c_id = $_POST["id"];
+    //$c_id = $_POST["id"];
     $c_apresentacao = $_POST['addapresentacaoField'];
     $c_volume = $_POST['addvolumeField'];
     $c_quantidade = $_POST['addquantidadeField'];
@@ -62,50 +63,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_uso = $_POST['addusoField'];
     $c_termo = $_POST['addtermoField'];
     $c_veiculo = $_POST['addveiculoField'];
-    $c_observacao = $_POST['addobservacaoField'];
+    $c_observacao = $_POST['addobsField'];
 
     do {
         if (
-            empty($c_tabela) || empty($c_custo)
-        ) {
+            empty($c_apresentacao)) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
 
-        // consistencia se já existe tabela cadastrado
-        // consistencia se tabela selecionada já existe no procedimento
-        $c_sql = "SELECT procedimentos_tabelas.id_tabela, tabela.descricao, procedimentos_tabelas.id 
-                  FROM procedimentos_tabelas
-                  JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
-                  WHERE tabela.descricao='$c_tabela' and procedimentos_tabelas.id_procedimento='$id_proc'
-                   and procedimentos_tabelas.id<>'$c_id'";
-        $result = $conection->query($c_sql);
-        $registro = $result->fetch_assoc();
-        if ($registro) {
-            $msg_erro = "Já tabela cadastrada para esse procedimento!!";
-            break;
-        }
-        // pego codigo da tabela selecionada
-        $c_sql = "select * from tabela where descricao='$c_tabela'";
-        $result = $conection->query($c_sql);
-        $registro = $result->fetch_assoc();
-        $c_id_tabela = $registro['id'];  // pego id da tabelaselecionada
-        $i_indice = $registro['id_indice']; // pego a id do incice utilizado
-        // sql para pegar o valor do indice
-        $c_sqlindice = "select * from indices where id='$i_indice'";
-        $resultindice = $conection->query($c_sqlindice);
-        $registroindice = $resultindice->fetch_assoc();
-        $c_valor = ($registroindice['valor'] * $c_custo);
         // faço a alteração do registro
-        $c_sql = "Update procedimentos_tabelas" .
-            " SET id_tabela = '$c_id_tabela', custo ='$c_custo',  valorreal = '$c_valor' where id=$c_id";
+        $c_sql = "Update medicamento_apresentacao" .
+            " SET apresentacao ='$c_apresentacao',  volume = '$c_volume', quantidade = '$c_quantidade'
+            , embalagem = '$c_embalagem', uso = '$c_uso' , termo = '$c_termo',
+            veiculo = '$c_veiculo', observacao = '$c_observacao' where id=$c_id";
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/apresentacao_medicamentos_lista.php');
     } while (false);
 }
 ?>
@@ -203,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <div class="mb-3 row">
                 <label for="addobsField" class="col-md-3 form-label">Observações</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="obs" name="addobsField" rows="5" value="<?php echo $c_observacao; ?>"></textarea>
+                    <textarea class="form-control" id="addobsField" name="addobsField" rows="5"><?php echo $c_observacao; ?></textarea>
                 </div>
             </div>
 

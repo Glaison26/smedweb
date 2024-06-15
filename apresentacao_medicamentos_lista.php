@@ -71,7 +71,7 @@ $c_id=$_SESSION["id_medic"];
                     'aTargets': [5]
                 }, {
                     'aTargets': [0],
-                    "visible": true
+                    "visible": false
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
