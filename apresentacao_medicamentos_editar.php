@@ -43,7 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         header('location: /smedweb/apresentacao_medicamentos_lista.php');
         exit;
     }
-
     $c_apresentacao = $registro['apresentacao'];
     $c_volume = $registro['volume'];
     $c_quantidade = $registro['quantidade'];
@@ -52,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_termo = $registro['termo'];
     $c_veiculo = $registro['veiculo'];
     $c_observacao = $registro['observacao'];
-    echo $c_observacao;
+    
 } else {
     // metodo post para atualizar dados
     //$c_id = $_POST["id"];
