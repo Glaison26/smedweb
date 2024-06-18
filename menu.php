@@ -108,6 +108,10 @@ if (!isset($_SESSION['newsession'])) {
 								<a class="dropdown-item" href="#">__________________________________</a>
 								<a class="dropdown-item" href="\smedweb\grupoMedicamentos_lista.php"><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
 								<a class="dropdown-item" href="\smedweb\grupolaudos_lista.php"><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
+								<a class="dropdown-item" href="#">__________________________________</a>
+								<a class="dropdown-item" href="\smedweb\componentes_lista.php"><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
+								<a class="dropdown-item" href="\smedweb\grupocomponentes_lista.php"><img src="\smedweb\images\grupocomponentes.png" alt="20" height="20"> Grupos de Componentes...</a>
+								<a class="dropdown-item" href="#">__________________________________</a>
 								<a class="dropdown-item" href="\smedweb\especialidades_lista.php"><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
 								<a class="dropdown-item" href="#"><img src="\smedweb\images\parametros.png" alt="" width="20" height="20"> Parâmetros para Eventos...</a>
 								<a class="dropdown-item" href="\smedweb\diagnosticos_lista.php"><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>

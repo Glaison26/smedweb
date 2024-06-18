@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `atestados` (
 
 -- Copiando dados para a tabela smed.atestados: ~3 rows (aproximadamente)
 REPLACE INTO `atestados` (`id`, `descricao`, `texto`) VALUES
-	(2, 'SEROSA', _binary 0x546578746f20646520617465737461646f207365726f7361),
+	(2, 'Dieta para diabetes', _binary 0x436f6d6572206d656e6f732061c3a775636172),
 	(8, 'RDPP', _binary 0x746573746520646520746573746f20706172612052445050),
 	(10, 'AREOLAR', _binary 0x746578746f204152454f4c4152);
 
@@ -149,6 +149,16 @@ REPLACE INTO `especialidades` (`id`, `descricao`) VALUES
 	(2, 'Oftalmologia'),
 	(4, 'Geriatria 1');
 
+-- Copiando estrutura para tabela smed.formulas_pre
+CREATE TABLE IF NOT EXISTS `formulas_pre` (
+  `id` int NOT NULL,
+  `descricao` varchar(150) DEFAULT NULL,
+  `formula` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.formulas_pre: ~0 rows (aproximadamente)
+
 -- Copiando estrutura para tabela smed.grupos_exames
 CREATE TABLE IF NOT EXISTS `grupos_exames` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -157,6 +167,15 @@ CREATE TABLE IF NOT EXISTS `grupos_exames` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.grupos_exames: ~0 rows (aproximadamente)
+
+-- Copiando estrutura para tabela smed.grupos_formulas
+CREATE TABLE IF NOT EXISTS `grupos_formulas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(150) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.grupos_formulas: ~0 rows (aproximadamente)
 
 -- Copiando estrutura para tabela smed.grupos_laudos
 CREATE TABLE IF NOT EXISTS `grupos_laudos` (
@@ -187,12 +206,16 @@ REPLACE INTO `grupos_medicamentos` (`id`, `descricao`) VALUES
 
 -- Copiando estrutura para tabela smed.grupo_componentes
 CREATE TABLE IF NOT EXISTS `grupo_componentes` (
-  `id` int NOT NULL,
-  `descricao` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupo_componentes: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.grupo_componentes: ~2 rows (aproximadamente)
+REPLACE INTO `grupo_componentes` (`id`, `descricao`) VALUES
+	(1, 'Exames Acidos'),
+	(2, 'Exames de sangue'),
+	(3, 'Exames de Feses');
 
 -- Copiando estrutura para tabela smed.historia
 CREATE TABLE IF NOT EXISTS `historia` (
@@ -231,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   CONSTRAINT `FK_medicamentos_grupos_medicamentos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_medicamentos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.medicamentos: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela smed.medicamentos: ~5 rows (aproximadamente)
 REPLACE INTO `medicamentos` (`id`, `id_grupo`, `descricao`) VALUES
 	(1, 2, 'VITANOL-A'),
 	(2, 1, 'TYLENOL'),
@@ -253,11 +276,26 @@ CREATE TABLE IF NOT EXISTS `medicamento_apresentacao` (
   PRIMARY KEY (`id`),
   KEY `FK_medicamento_apresentacao_medicamentos` (`id_medicamento`),
   CONSTRAINT `FK_medicamento_apresentacao_medicamentos` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamentos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.medicamento_apresentacao: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela smed.medicamento_apresentacao: ~3 rows (aproximadamente)
 REPLACE INTO `medicamento_apresentacao` (`id`, `id_medicamento`, `apresentacao`, `volume`, `quantidade`, `embalagem`, `uso`, `termo`, `veiculo`, `observacao`) VALUES
-	(1, 3, 'Pastilha', '30 ml', '12', 'Caixa', 'Oral', 'remedio', 'Oral', _binary 0x7465737465);
+	(1, 3, 'Pastilha', '30 ml', '12', 'Caixa', 'Oral', 'remedio', 'Oral', _binary 0x7465737465),
+	(2, 3, 'Ampola', '15 ml', '20', 'Caixa', 'Injetável', 'Intra Muscular', 'Oral', _binary 0x7465737465),
+	(3, 3, 'Ampola', '120 ml', '1 dose', 'frasco', 'diário', 'continuo', 'Injetavel', _binary '');
+
+-- Copiando estrutura para tabela smed.orientacoes_padrao
+CREATE TABLE IF NOT EXISTS `orientacoes_padrao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(150) DEFAULT NULL,
+  `texto` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.orientacoes_padrao: ~2 rows (aproximadamente)
+REPLACE INTO `orientacoes_padrao` (`id`, `descricao`, `texto`) VALUES
+	(1, 'Dieta para hipertensão', _binary 0x436f72726572203130206b6d0d0a50756c617220436f7264610d0a436f7274617220616c696d656e746f7320476f726475726f736f73),
+	(2, 'Dieta para diabetes', _binary 0x436f6d6572206d656e6f732061c3a7756361722e0a0a5072617469636172206578657263c3ad63696f732046c3ad7369636f732e);
 
 -- Copiando estrutura para tabela smed.pacientes
 CREATE TABLE IF NOT EXISTS `pacientes` (

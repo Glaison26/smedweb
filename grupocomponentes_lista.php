@@ -1,5 +1,5 @@
 <?php // controle de acesso ao formulário
-session_start();
+//session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -7,7 +7,6 @@ session_start();
 //    header('location: /raxx/voltamenunegado.php');
 //}
 include("conexao.php");
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -40,7 +39,7 @@ include("conexao.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/orientacoes_padrao_excluir.php?id=" + id;
+                window.location.href = "/smedweb/grupocomponentes_excluir.php?id=" + id;
             }
         }
     </script>
@@ -54,7 +53,7 @@ include("conexao.php");
 
     <script>
         $(document).ready(function() {
-            $('.taborientacoes').DataTable({
+            $('.tabgruposcomponente').DataTable({
                 // 
                 "iDisplayLength": 6,
                 "order": [1, 'asc'],
@@ -102,21 +101,18 @@ include("conexao.php");
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddorientacao', function(e) {
+        $(document).on('submit', '#frmaddgrupo', function(e) {
             e.preventDefault();
-            var c_descricao = $('#add_descricaoField').val();
-            var c_texto = $('#add_textoField').val();
-
-
-            if (c_descricao != '') {
+            var c_grupo = $('#addgrupoField').val();
+            
+            if (c_grupo != '') {
 
                 $.ajax({
-                    url: "orientacoes_padrao_novo.php",
+                    url: "grupocomponentes_novo.php",
                     type: "post",
                     data: {
-                        c_descricao: c_descricao,
-                        c_texto:c_texto
-
+                        c_grupo: c_grupo
+                      
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -125,7 +121,7 @@ include("conexao.php");
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novoorientacaoModal').modal('hide');
+                            $('#novogrupoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -143,7 +139,7 @@ include("conexao.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-
+                
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -155,8 +151,8 @@ include("conexao.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_descricaoField').val(data[1]);
-                $('#up_textoField').val(data[2]);
+                $('#up_grupoField').val(data[1]);
+         
 
             });
         });
@@ -165,23 +161,21 @@ include("conexao.php");
     <script type="text/javascript">
         ~
         // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmuporientacao', function(e) {
+        $(document).on('submit', '#frmgrupo', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_descricao = $('#up_descricaoField').val();
-            var c_texto = $('#up_textoField').val();
-
-
-            if (c_descricao != '') {
-
+            var c_grupo = $('#up_grupoField').val();
+            
+            
+            if (c_grupo != '') {
+                
                 $.ajax({
-                    url: "orientacoes_padrao_editar.php",
+                    url: "grupocomponentes_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_descricao: c_descricao,
-                        c_texto: c_texto
-
+                        c_grupo: c_grupo
+                        
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -194,61 +188,63 @@ include("conexao.php");
                         }
                     }
                 });
-
+                
             } else {
-                alert('Todos ----os campos devem ser preenchidos!!');
+                alert('Todos os campos devem ser preenchidos!!');
             }
         });
     </script>
 
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Orientações Médicas Padrões<h5>
+            <h5>Lista de Grupos de Componentes de Fórmulas<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoorientacaoModal"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novogrupoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
-        <table class="table display table-bordered taborientacoes">
+        <table class="table display table-bordered tabgruposcomponente">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
-                    <th scope="col">Orientação</th>
-                    <th scope="col">Texto</th>
+                    <th scope="col">Descrição do Grupo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+                $fmt = new NumberFormatter('de_DE', NumberFormatter::CURRENCY);
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT * FROM orientacoes_padrao ORDER BY orientacoes_padrao.descricao";
+                $c_sql = "SELECT grupo_componentes.id, grupo_componentes.descricao" .
+                    " FROM grupo_componentes" .
+                    " ORDER BY grupo_componentes.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
                 if (!$result) {
                     die("Erro ao Executar Sql!!" . $conection->connect_error);
+                    
                 }
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-
+                   
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    <td>$c_linha[texto]</td>
-                                 
+                    
                     <td>
-                 
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Orientações'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Orientação Padrão' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Grupo'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir grupo' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
@@ -261,29 +257,25 @@ include("conexao.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" class="modal-dialog modal-lg" id="novoorientacaoModal" tabindex="-1" role="dialog" aria-labelledby="novoorientacaoModal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" id="novogrupoModal" tabindex="-1" role="dialog" aria-labelledby="novagrupoModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados da Orientação Médica</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Grupo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddorientacao" action="">
+                    <form id="frmaddgrupo" action="">
                         <div class="mb-3 row">
-                            <label for="add_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
+                            <label for="addgrupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="add_descricaoField" name="add_dscricaoField">
+                                <input type="text" class="form-control" id="addgrupoField" name="addgrupoField">
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="add_textoField" class="col-md-3 form-label">Texto da Orientação</label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" id="add_textoField" name="add_textoField" rows="5"></textarea>
-                            </div>
-                        </div>
+
+                       
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -302,27 +294,21 @@ include("conexao.php");
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Medicamento</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Grupo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmuporientacao" method="POST" action="">
+                    <form id="frmgrupo" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
+                            <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_descricaoField" name="up_dscricaoField">
+                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="up_textoField" class="col-md-3 form-label">Texto da Orientação</label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" id="up_textoField" name="up_textoField" rows="5"></textarea>
-                            </div>
-                        </div>
-                        
+                       
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -333,6 +319,11 @@ include("conexao.php");
             </div>
         </div>
     </div>
+
+
+
 </body>
+
+
 
 </html>
