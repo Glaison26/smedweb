@@ -82,13 +82,16 @@ CREATE TABLE IF NOT EXISTS `componentes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_grupo_componente` int NOT NULL DEFAULT '0',
   `descricao` varchar(100) NOT NULL,
-  `unidade` varchar(5) NOT NULL DEFAULT '0',
+  `unidade` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_componentes_grupo_componentes` (`id_grupo_componente`),
   CONSTRAINT `FK_componentes_grupo_componentes` FOREIGN KEY (`id_grupo_componente`) REFERENCES `grupo_componentes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.componentes: ~0 rows (aproximadamente)
+REPLACE INTO `componentes` (`id`, `id_grupo_componente`, `descricao`, `unidade`) VALUES
+	(19, 1, 'Fenoratica', '0'),
+	(20, 1, 'teste', 'un');
 
 -- Copiando estrutura para tabela smed.convenios
 CREATE TABLE IF NOT EXISTS `convenios` (
@@ -131,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `diagnosticos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.diagnosticos: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela smed.diagnosticos: ~2 rows (aproximadamente)
 REPLACE INTO `diagnosticos` (`id`, `cid`, `descricao`) VALUES
 	(1, 'A00', 'Cólera'),
 	(6, 'G00', 'Meningite Bacteriana Não Classificada em Outra Parte');
@@ -211,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `grupo_componentes` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupo_componentes: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.grupo_componentes: ~4 rows (aproximadamente)
 REPLACE INTO `grupo_componentes` (`id`, `descricao`) VALUES
 	(1, 'Exames Acidos'),
 	(2, 'Exames de sangue'),
