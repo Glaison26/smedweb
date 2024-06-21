@@ -86,12 +86,14 @@ CREATE TABLE IF NOT EXISTS `componentes` (
   PRIMARY KEY (`id`),
   KEY `FK_componentes_grupo_componentes` (`id_grupo_componente`),
   CONSTRAINT `FK_componentes_grupo_componentes` FOREIGN KEY (`id_grupo_componente`) REFERENCES `grupo_componentes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.componentes: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.componentes: ~4 rows (aproximadamente)
 REPLACE INTO `componentes` (`id`, `id_grupo_componente`, `descricao`, `unidade`) VALUES
-	(19, 1, 'Fenoratica', '0'),
-	(20, 1, 'teste', 'un');
+	(19, 1, 'Fenoratica', 'un'),
+	(20, 1, ' Ácido bórico', 'un'),
+	(21, 2, 'Amônia', 'un'),
+	(22, 3, 'Fosfato', 'un');
 
 -- Copiando estrutura para tabela smed.convenios
 CREATE TABLE IF NOT EXISTS `convenios` (
@@ -134,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `diagnosticos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.diagnosticos: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.diagnosticos: ~3 rows (aproximadamente)
 REPLACE INTO `diagnosticos` (`id`, `cid`, `descricao`) VALUES
 	(1, 'A00', 'Cólera'),
 	(6, 'G00', 'Meningite Bacteriana Não Classificada em Outra Parte');
@@ -154,13 +156,15 @@ REPLACE INTO `especialidades` (`id`, `descricao`) VALUES
 
 -- Copiando estrutura para tabela smed.formulas_pre
 CREATE TABLE IF NOT EXISTS `formulas_pre` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(150) DEFAULT NULL,
-  `formula` double DEFAULT NULL,
+  `formula` blob,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.formulas_pre: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.formulas_pre: ~1 rows (aproximadamente)
+REPLACE INTO `formulas_pre` (`id`, `descricao`, `formula`) VALUES
+	(1, 'Formula Fixa', _binary 0x546578746f206465207072696d6569726120666f726d756c61);
 
 -- Copiando estrutura para tabela smed.grupos_exames
 CREATE TABLE IF NOT EXISTS `grupos_exames` (

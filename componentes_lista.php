@@ -106,7 +106,7 @@ include("conexao.php");
             var c_descricao = $('#adddescricaoField').val();
             var c_grupo = $('#addgrupoField').val();
             var c_unidade = $('#addunidadeField').val();
-            
+
             if (c_descricao != '') {
 
                 $.ajax({
@@ -125,7 +125,7 @@ include("conexao.php");
 
                         location.reload();
                         if (status == 'true') {
-a
+                            a
                             $('#novocomponenteModal').modal('hide');
                             location.reload();
                         } else {
@@ -167,21 +167,22 @@ a
 
     <!-- Função javascript e ajax para Alteração dos dados -->
     <script type="text/javascript">
-        $(document).on('submit', '#frmatestado', function(e) {
+        $(document).on('submit', '#frmcomponente', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_atestado = $('#up_atestadoField').val();
-            var c_texto = $('#up_textoField').val();
-
-            if (c_atestado != '') {
+            var c_descricao = $('#up_descricaoField').val();
+            var c_grupo = $('#up_grupoField').val();
+            var c_unidade = $('#up_unidadeField').val();
+            if (c_descricao != '') {
 
                 $.ajax({
-                    url: "atestados_padroes_editar.php",
+                    url: "componentes_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_atestado: c_atestado,
-                        c_texto: c_texto
+                        c_descricao: c_descricao,
+                        c_grupo: c_grupo,
+                        c_unidade: c_unidade
 
                     },
                     success: function(data) {
@@ -304,7 +305,7 @@ a
                                 <input type="text" class="form-control" id="addunidadeField" name="addunidadeField">
                             </div>
                         </div>
-                 
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -332,32 +333,37 @@ a
                     <form id="frmcomponente" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="adddescricoaField" class="col-md-3 form-label">Componente (*)</label>
+                            <label for="up_descricoaField" class="col-md-3 form-label">Componente (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="adddescricaoField" name="adddescricaoField">
+                                <input type="text" class="form-control" id="up_descricaoField" name="up_descricaoField">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-3 form-label">Grupo (*)</label>
                             <div class="col-sm-7">
-                                <select class="form-control form-control-lg" id="addgrupoField" name="addgrupoField">
+                                <select class="form-control form-control-lg" id="up_grupoField" name="up_grupoField">
                                     <?php
                                     $c_sql = "SELECT grupo_Componentes.id, grupo_Componentes.descricao FROM grupo_Componentes ORDER BY grupo_Componentes.descricao";
                                     $result = $conection->query($c_sql);
 
                                     // insiro os registro do banco de dados na tabela 
                                     while ($c_linha = $result->fetch_assoc()) {
+                                        $op = "";
+                                        if ($c_linha['descricao'] == $c_grupo) {
+                                            $op = "selected";
+                                        }
+
                                         echo "
-                                        <option>$c_linha[descricao]</option>";
+                                        <option $op>$c_linha[descricao]</option>";
                                     }
                                     ?>
                                 </select>
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="addunidadeField" class="col-md-3 form-label">Unidade</label>
+                            <label for="up_unidadeField" class="col-md-3 form-label">Unidade</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" id="addunidadeField" name="addunidadeField">
+                                <input type="text" class="form-control" id="up_unidadeField" name="up_unidadeField">
                             </div>
                         </div>
 

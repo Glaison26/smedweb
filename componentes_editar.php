@@ -13,17 +13,17 @@ $c_descricao = rtrim($_POST['c_descricao']);
 $c_grupo = rtrim($_POST['c_grupo']);
 $c_unidade = rtrim($_POST['c_unidade']);
 // sql para pegar id do indice coletado
-$c_sql_grupo = "select id from grupos_medicamentos where descricao = '$c_grupo'";
+$c_sql_grupo = "select id from grupo_componentes where descricao = '$c_grupo'";
 $result_grupo = $conection->query($c_sql_grupo);
 $registro = $result_grupo->fetch_assoc();
 $i_id_grupo= $registro["id"];
-$c_sql = "Update medicamentos" .
-" SET descricao = '$c_descricao', id_grupo = '$i_id_grupo', unidade='$c_unidade' where id=$c_id";
+$c_sql = "Update componentes" .
+" SET descricao = '$c_descricao', id_grupo_componente = '$i_id_grupo', unidade='$c_unidade' where id=$c_id";
 $result = $conection->query($c_sql);
 
 if($result ==true)
 {
-   
+ 
     $data = array(
         'status'=>'true',
        
@@ -40,7 +40,5 @@ else
 
     echo json_encode($data);
 } 
-
-        
 
 ?>
