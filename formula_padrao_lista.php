@@ -100,7 +100,7 @@ include("conexao.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Formulas Padrões Padrões<h5>
+            <h5>Lista de Formulas Padrões do Sistema<h5>
         </div>
     </div>
     <br>
