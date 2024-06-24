@@ -11,14 +11,14 @@ include_once "lib_gop.php";
 $c_descricao = "";
 $c_formula = "";
 
+
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     $c_descricao = $_POST['add_descricaoField'];
     $c_formula = $_POST['add_formulaField'];
-
 
     do {
         if (
@@ -43,8 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         header('location: /smedweb/formula_padrao_lista.php');
     } while (false);
+} else {  // insiro cmponente na formula
+    if (isset($_POST["btn_componente"])) {
+        // pego unidade do componente selecionado
+        $c_componente=$_POST["Sel_componente"];
+        $c_sql = "SELECT Componentes.unidade FROM Componentes where componentes.descricao='$c_componente'";
+        //
+        $result = $conection->query($c_sql);
+        $c_linha = $result->fetch_assoc();
+        $c_formula = $_POST["add_formulaField"] .$_POST["Sel_componente"]."      ".$c_linha['unidade'] ."\r\n";
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
     <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
 </head>
+
+
+
 <div class="panel panel-primary class">
     <div class="panel-heading text-center">
         <h4>SmartMed - Sistema Médico</h4>
@@ -77,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container -my5">
 
     <body>
+
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -92,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="post">
             <div class="mb-3 row">
 
-                <label for="addcustoField" class="col-md-3 form-label">Descrição (*)</label>
+                <label for="add_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
                 <div class="col-md-6">
                     <input type="text" class="form-control" id="add_descricaoField" name="add_descricaoField">
                 </div>
@@ -109,25 +122,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         // insiro os registro do banco de dados na tabela 
                         while ($c_linha = $result->fetch_assoc()) {
-                            echo "
-                                        <option>$c_linha[descricao]</option>";
+                            echo "<option>$c_linha[descricao]</option>";
                         }
                         ?>
                     </select>
-                    
+
                 </div>
-                <button class='btn btn-info editbtn'  title='Adicionar Componente a Fórmula'><span class='glyphicon glyphicon-plus'></span></button>
+                <button class='btn btn-info' type="submit" id='btn_componente' name='btn_componente' title='Adicionar Componente a Fórmula'><span class='glyphicon glyphicon-plus'></span></button>
             </div>
             <div class="mb-3 row">
-                <label for="addobsField" class="col-md-3 form-label">Texto da Fórmula</label>
+                <label for="add_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="add_formulaField" name="add_formulaField" rows="15"></textarea>
+                    <textarea class="form-control" id="add_formulaField" name="add_formulaField" rows="15"><?php echo $c_formula ?></textarea>
                 </div>
             </div>
-            
             <div class="row mb-3">
                 <div class="col-sm-3">
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                    <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                     <a class='btn btn-danger' href='/smedweb/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
