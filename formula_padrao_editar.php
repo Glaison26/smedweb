@@ -1,58 +1,77 @@
-<?php
-// controle de acesso ao formulário
+<?php // controle de acesso ao formulário
 session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
 
 include("conexao.php");
 include_once "lib_gop.php";
 
+// rotina de post dos dados do formuário
 $c_descricao = "";
 $c_formula = "";
 
+$c_id = $_GET["id"];
 
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
 
-if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
-    $c_descricao = $_POST['add_descricaoField'];
-    $c_formula = $_POST['add_formulaField'];
 
-    do {
-        if (
-            empty($c_descricao) || empty($c_formula)
-        ) {
-            $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
-            break;
-        }
-        // grava dados no banco
-        // faço a Leitura da tabela com sql
-        $c_sql = "Insert into formulas_pre  (descricao, formula)" .
-            " Value ('$c_descricao','$c_formula')";
-            
-        $result = $conection->query($c_sql);
-        
-        // verifico se a query foi correto
-        if (!$result) {
-            die("Erro ao Executar Sql!!" . $conection->connect_error);
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
-        $msg_gravou = "Dados Gravados com Sucesso!!";
-
+    if (!isset($_GET["id"])) {
         header('location: /smedweb/formula_padrao_lista.php');
-    } while (false);
-} else {  // insiro cmponente na formula
+        exit;
+    }
+
+    $c_sql = "SELECT formulas_pre.id, formulas_pre.descricao, formulas_pre.formula FROM formulas_pre where formulas_pre.id='$c_id'";
+    $result = $conection->query($c_sql);
+
+    $registro = $result->fetch_assoc();
+
+    if (!$registro) {
+        header('location: /smedweb/formula_padrao_lista.php');
+        exit;
+    }
+    $c_descricao = $registro['descricao'];
+    $c_formula = $registro['formula'];
+} else {
+    if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
+        // metodo post para atualizar dados
+        $c_id = $_POST["id"];
+        $c_descricao = $_POST['up_descricaoField'];
+        $c_formula = $_POST['up_formulaField'];
+
+        do {
+            if (
+                empty($c_descricao)
+            ) {
+                $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
+                break;
+            }
+
+            // faço a alteração do registro
+            $c_sql = "Update formulas_pre" .
+                " SET descricao ='$c_descricao',  formula = '$c_formula' where id=$c_id";
+            $result = $conection->query($c_sql);
+            // verifico se a query foi correto
+            if (!$result) {
+                die("Erro ao Executar Sql!!" . $conection->connect_error);
+            }
+            $msg_gravou = "Dados Gravados com Sucesso!!";
+            header('location: /smedweb/formula_padrao_lista.php');
+        } while (false);
+    } else
     if (isset($_POST["btn_componente"])) {
         // pego unidade do componente selecionado
-        $c_componente=$_POST["Sel_componente"];
+        $c_componente = $_POST["Sel_componente"];
         $c_sql = "SELECT Componentes.unidade FROM Componentes where componentes.descricao='$c_componente'";
         //
         $result = $conection->query($c_sql);
         $c_linha = $result->fetch_assoc();
-        $c_formula = $_POST["add_formulaField"] .$_POST["Sel_componente"]."      ".$c_linha['unidade'] ."\r\n";
-        $c_descricao = $_POST["add_descricaoField"];
+        $c_formula = $_POST["up_formulaField"] . $_POST["Sel_componente"] . "      " . $c_linha['unidade'] . "\r\n";
+        $c_descricao = $_POST["up_descricaoField"]; 
     }
 }
 ?>
@@ -64,7 +83,8 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartMed - Sistema Médico</title>
+
+    <title>SmartWeb - Sistema Médico</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
@@ -78,24 +98,22 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
 </head>
 
-
-
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Nova Fórmula Padrão do Sistema<h5>
+<body>
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Novo Usuário do Sistema<h5>
+        </div>
     </div>
-</div>
-<br>
-<div class="container -my5">
+    <br>
+    <div class="container -my5">
 
-    <body>
 
         <?php
         if (!empty($msg_erro)) {
             echo "
             <div class='alert alert-danger' role='alert'>
-                <h4>$msg_erro</h4>
+                <h5>$msg_erro</h5>
             </div>
                 ";
         }
@@ -104,11 +122,12 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <h5>Campos com (*) são obrigatórios</h5>
         </div>
         <form method="post">
+            <input type="hidden" name="id" value="<?php echo $c_id; ?>">
             <div class="mb-3 row">
 
-                <label for="add_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
+                <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="add_descricaoField" name="add_descricaoField">
+                    <input type="text" class="form-control" id="up_descricaoField" name="up_descricaoField" value="<?php echo $c_descricao; ?>">
                 </div>
 
             </div>
@@ -120,7 +139,6 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <?php
                         $c_sql = "SELECT componentes.id, Componentes.descricao FROM Componentes ORDER BY Componentes.descricao";
                         $result = $conection->query($c_sql);
-
                         // insiro os registro do banco de dados na tabela 
                         while ($c_linha = $result->fetch_assoc()) {
                             echo "<option>$c_linha[descricao]</option>";
@@ -132,11 +150,12 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 <button class='btn btn-info' type="submit" id='btn_componente' name='btn_componente' title='Adicionar Componente a Fórmula'><span class='glyphicon glyphicon-plus'></span></button>
             </div>
             <div class="mb-3 row">
-                <label for="add_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
+                <label for="up_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="add_formulaField" name="add_formulaField" rows="15"><?php echo $c_formula ?></textarea>
+                    <textarea class="form-control" id="up_formulaField" name="up_formulaField" rows="15"><?php echo $c_formula ?></textarea>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
@@ -161,10 +180,8 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <br>
 
 
-</div>
-
-</form>
-
+        </form>
+    </div>
 
 </body>
 

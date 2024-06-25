@@ -31,10 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         exit;
     }
     
-    $c_sql = "SELECT medicamento_apresentacao.id, medicamentos.descricao as medicamento, medicamento_apresentacao.apresentacao, medicamento_apresentacao.volume, medicamento_apresentacao.quantidade, medicamento_apresentacao.embalagem,
-                    medicamento_apresentacao.uso, medicamento_apresentacao.termo, medicamento_apresentacao.observacao, medicamento_apresentacao.veiculo, medicamento_apresentacao.id_medicamento FROM medicamento_apresentacao
-                    JOIN medicamentos ON medicamento_apresentacao.id_medicamento=medicamentos.id 
-                    WHERE medicamento_apresentacao.id='$c_id'";
+    $c_sql = "SELECT medicamento_apresentacao.id, medicamentos.descricao as medicamento, medicamento_apresentacao.apresentacao,
+             medicamento_apresentacao.volume, medicamento_apresentacao.quantidade, medicamento_apresentacao.embalagem,
+             medicamento_apresentacao.uso, medicamento_apresentacao.termo, medicamento_apresentacao.observacao,
+             medicamento_apresentacao.veiculo, medicamento_apresentacao.id_medicamento FROM medicamento_apresentacao
+             JOIN medicamentos ON medicamento_apresentacao.id_medicamento=medicamentos.id 
+             WHERE medicamento_apresentacao.id='$c_id'";
 
     $result = $conection->query($c_sql);
     $registro = $result->fetch_assoc();
