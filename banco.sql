@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `componentes` (
 -- Copiando dados para a tabela smed.componentes: ~4 rows (aproximadamente)
 REPLACE INTO `componentes` (`id`, `id_grupo_componente`, `descricao`, `unidade`) VALUES
 	(19, 1, 'Fenoratica', 'un'),
-	(20, 1, ' Ácido bórico', 'un'),
+	(20, 1, 'Ácido bórico', 'un'),
 	(21, 2, 'Amônia', 'un'),
 	(22, 3, 'Fosfato', 'un');
 
@@ -154,17 +154,33 @@ REPLACE INTO `especialidades` (`id`, `descricao`) VALUES
 	(2, 'Oftalmologia'),
 	(4, 'Geriatria 1');
 
+-- Copiando estrutura para tabela smed.exames
+CREATE TABLE IF NOT EXISTS `exames` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_grupo` int DEFAULT NULL,
+  `descricao` varchar(200) DEFAULT NULL,
+  `material` varchar(150) DEFAULT NULL,
+  `metodo` varchar(150) DEFAULT NULL,
+  `velref` blob,
+  PRIMARY KEY (`id`),
+  KEY `FK_exames_grupos_laudos` (`id_grupo`),
+  CONSTRAINT `FK_exames_grupos_laudos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_laudos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.exames: ~0 rows (aproximadamente)
+
 -- Copiando estrutura para tabela smed.formulas_pre
 CREATE TABLE IF NOT EXISTS `formulas_pre` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(150) DEFAULT NULL,
   `formula` blob,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.formulas_pre: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela smed.formulas_pre: ~0 rows (aproximadamente)
 REPLACE INTO `formulas_pre` (`id`, `descricao`, `formula`) VALUES
-	(1, 'Formula Fixa', _binary 0x546578746f206465207072696d6569726120666f726d756c61);
+	(1, 'Formula Fixa', _binary 0x546578746f206465207072696d6569726120666f726d756c610d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0a466f736661746f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0a0d0a416dc3b46e6961202020202020756e0d0a),
+	(2, 'Formula Padrão', _binary 0xc3816369646f2062c3b37269636f2031322020202020756e0d0a466f736661746f2020313520202020756e0d0a);
 
 -- Copiando estrutura para tabela smed.grupos_exames
 CREATE TABLE IF NOT EXISTS `grupos_exames` (
@@ -191,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `grupos_laudos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupos_laudos: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela smed.grupos_laudos: ~5 rows (aproximadamente)
 REPLACE INTO `grupos_laudos` (`id`, `descricao`) VALUES
 	(1, 'Exames Físicos'),
 	(2, 'Antecedentes Cirúrgicos'),
