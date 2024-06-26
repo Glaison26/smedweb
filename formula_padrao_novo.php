@@ -22,13 +22,16 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
     do {
         if (
-            empty($c_descricao) || empty($c_formula)
+            empty($c_descricao)
         ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
         // grava dados no banco
         // faço a Leitura da tabela com sql
+        $c_sql = "Insert into formulas_pre (descricao, formula)" .
+            " Value ('$c_descricao','$c_formula')";
+
         $c_sql = "Insert into formulas_pre  (descricao, formula)" .
             " Value ('$c_descricao','$c_formula')";
             
@@ -51,6 +54,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         //
         $result = $conection->query($c_sql);
         $c_linha = $result->fetch_assoc();
+        $c_formula = $_POST["add_formulaField"] .$_POST["Sel_componente"]."           ".$c_linha['unidade'] ."\r\n";
         $c_formula = $_POST["add_formulaField"] .$_POST["Sel_componente"]."      ".$c_linha['unidade'] ."\r\n";
         $c_descricao = $_POST["add_descricaoField"];
     }
