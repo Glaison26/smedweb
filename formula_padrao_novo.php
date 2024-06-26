@@ -29,8 +29,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         }
         // grava dados no banco
         // faço a Leitura da tabela com sql
-        $c_sql = "Insert into formulas_pre (descricao, formula)" .
-            " Value ('$c_descricao','$c_formula')";
+       
 
         $c_sql = "Insert into formulas_pre  (descricao, formula)" .
             " Value ('$c_descricao','$c_formula')";
