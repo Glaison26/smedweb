@@ -161,13 +161,17 @@ CREATE TABLE IF NOT EXISTS `exames` (
   `descricao` varchar(200) DEFAULT NULL,
   `material` varchar(150) DEFAULT NULL,
   `metodo` varchar(150) DEFAULT NULL,
-  `velref` blob,
+  `valref` blob,
   PRIMARY KEY (`id`),
   KEY `FK_exames_grupos_laudos` (`id_grupo`),
   CONSTRAINT `FK_exames_grupos_laudos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_laudos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.exames: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.exames: ~2 rows (aproximadamente)
+REPLACE INTO `exames` (`id`, `id_grupo`, `descricao`, `material`, `metodo`, `valref`) VALUES
+	(1, 1, 'Paciente em bom estado geral, saudável', 'Sangue, Urina e Fezes', 'Analise de laboratorial', _binary 0x666673646666617364),
+	(3, 2, 'RISCO CIRURGICO DISCRETO', 'Sangue e Urina', 'Laboratorial', _binary 0x524953434f2043495255524749434f20444953435245544f2028415341204949204f5520474f4c444d414e20494929),
+	(4, 4, 'RTU DE PRÓSTATA', 'Não se aplica', 'Toque', _binary 0x53656e736962696c696461646522);
 
 -- Copiando estrutura para tabela smed.formulas_pre
 CREATE TABLE IF NOT EXISTS `formulas_pre` (

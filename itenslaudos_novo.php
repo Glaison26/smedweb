@@ -9,16 +9,22 @@ include("conexao.php");
 include_once "lib_gop.php";
 
 $c_descricao = "";
-$c_formula = "";
+$c_grupo = "";
+$c_metodo = "";
+$c_material = "";
+$c_valref = "";
 
 
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
 
-if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_descricao = $_POST['add_descricaoField'];
-    $c_formula = $_POST['add_formulaField'];
+    $c_grupo = $_POST['add_grupoField'];
+    $c_metodo = $_POST['add_metodoField'];
+    $c_material = $_POST['add_materialField'];
+    $c_valor_ref = $_POST['add_valrefField'];
 
     do {
         if (
@@ -27,15 +33,22 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
-        // grava dados no banco
-        // faço a Leitura da tabela com sql
-       
+        // pego a id do grupo seleciona no combo 
 
-        $c_sql = "Insert into formulas_pre  (descricao, formula)" .
-            " Value ('$c_descricao','$c_formula')";
-            
+        $c_sqlgrupo = "select id from grupos_laudos where grupos_laudos.descricao='$c_grupo'";
+        $result = $conection->query($c_sqlgrupo);
+        $c_linha = $result->fetch_assoc();
+        $c_id_grupo = $c_linha['id'];
+        // verifico se a query foi correto
+        if (!$result) {
+            die("Erro ao Executar Sql!!" . $conection->connect_error);
+        }
+        // grava dados no banco
+        $c_sql = "Insert into exames  (descricao, id_grupo, metodo, material, valref)" .
+            " Value ('$c_descricao','$c_id_grupo', '$c_metodo', '$c_material', '$c_valor_ref')";
+
         $result = $conection->query($c_sql);
-        
+
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
@@ -43,19 +56,8 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/formula_padrao_lista.php');
+        header('location: /smedweb/itenslaudos_lista.php');
     } while (false);
-} else {  // insiro cmponente na formula
-    if (isset($_POST["btn_componente"])) {
-        // pego unidade do componente selecionado
-        $c_componente=$_POST["Sel_componente"];
-        $c_sql = "SELECT Componentes.unidade FROM Componentes where componentes.descricao='$c_componente'";
-        //
-        $result = $conection->query($c_sql);
-        $c_linha = $result->fetch_assoc();
-        $c_formula = $_POST["add_formulaField"] .$_POST["Sel_componente"]."           ".$c_linha['unidade'] ."\r\n";
-        $c_descricao = $_POST["add_descricaoField"];
-    }
 }
 ?>
 
@@ -80,12 +82,10 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
 </head>
 
-
-
 <div class="panel panel-primary class">
     <div class="panel-heading text-center">
         <h4>SmartMed - Sistema Médico</h4>
-        <h5>Nova Fórmula Padrão do Sistema<h5>
+        <h5>Novo Exame para Laudo do Sistema<h5>
     </div>
 </div>
 <br>
@@ -116,11 +116,11 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             </div>
             <hr>
             <div class="mb-3 row">
-                <label class="col-md-3 form-label">Componentes para Fórmula</label>
+                <label class="col-md-3 form-label">Grupo do Exame</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-lg" id="Sel_componente" name="Sel_componente">
+                    <select class="form-control form-control-lg" id="add_grupoField" name="add_grupoField">
                         <?php
-                        $c_sql = "SELECT componentes.id, Componentes.descricao FROM Componentes ORDER BY Componentes.descricao";
+                        $c_sql = "select grupos_laudos.id, grupos_laudos.descricao from grupos_laudos ORDER BY grupos_laudos.descricao";
                         $result = $conection->query($c_sql);
 
                         // insiro os registro do banco de dados na tabela 
@@ -131,12 +131,24 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     </select>
 
                 </div>
-                <button class='btn btn-info' type="submit" id='btn_componente' name='btn_componente' title='Adicionar Componente a Fórmula'><span class='glyphicon glyphicon-plus'></span></button>
+
             </div>
             <div class="mb-3 row">
-                <label for="add_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
+                <label for="add_materialField" class="col-md-3 form-label">Material</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="add_formulaField" name="add_formulaField" rows="15"><?php echo $c_formula ?></textarea>
+                    <input type="text" class="form-control" id="add_materialField" name="add_materialField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="add_metodoField" class="col-md-3 form-label">Metodo</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="add_metodoField" name="add_metodoField">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="add_valref" class="col-md-3 form-label">Valor de Referência</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" id="add_valrefField" name="add_valrefField" rows="10"></textarea>
                 </div>
             </div>
             <div class="row mb-3">
