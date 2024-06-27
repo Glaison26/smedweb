@@ -73,9 +73,24 @@ CREATE TABLE IF NOT EXISTS `atributos_parametros_eventos` (
   PRIMARY KEY (`id`),
   KEY `FK_atributos_parametros_eventos_parametros_eventos` (`id_parametro`),
   CONSTRAINT `FK_atributos_parametros_eventos_parametros_eventos` FOREIGN KEY (`id_parametro`) REFERENCES `parametros_eventos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.atributos_parametros_eventos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.atributos_parametros_eventos: ~1 rows (aproximadamente)
+REPLACE INTO `atributos_parametros_eventos` (`id`, `id_parametro`, `descricao`, `formato`) VALUES
+	(1, 1, 'Atributo 1', '999');
+
+-- Copiando estrutura para tabela smed.bateria
+CREATE TABLE IF NOT EXISTS `bateria` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(200) NOT NULL DEFAULT '',
+  `exames` blob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.bateria: ~3 rows (aproximadamente)
+REPLACE INTO `bateria` (`id`, `descricao`, `exames`) VALUES
+	(1, 'PADRÃO', _binary 0x312e20416e7465636564656e74657320436972fa726769636f733a0d0a0d0a0d0a0d0a322e20416e7465636564656e74657320436c696e69636f733a0d0a0d0a0d0a0d0a332e20456e6665726d696461646520417475616c203a0d0a0d0a0d0a342e204d6564696361e7e36f20656d20557375616c3a0d0a0d0a0d0a352e20486970657273656e736962696c6964616465204d65646963616d656e746f7361203a0d0a0d0a0d0a362e2048e16269746f730d0a0d0a0d0a372e204578616d652046ed7369636f203a0d0a0d0a0d0a502e413a20202020202020202020202020202020202020462e433a202020202020202020202020202020205065736f3a0d0a0d0a0d0a382e204578616d657320436f6d706c656d656e7461726573203a0d0a0d0a0d0a392e20436f6e636c7573e36f203a0d0a0d0a),
+	(2, 'Exame de Rotina', _binary 0x0d0a312e2050616369656e746520656d20626f6d2065737461646f20676572616c2c2073617564c3a176656c0d0a322e20525455204445205052c39353544154410d0a);
 
 -- Copiando estrutura para tabela smed.componentes
 CREATE TABLE IF NOT EXISTS `componentes` (
@@ -167,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `exames` (
   CONSTRAINT `FK_exames_grupos_laudos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_laudos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.exames: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.exames: ~3 rows (aproximadamente)
 REPLACE INTO `exames` (`id`, `id_grupo`, `descricao`, `material`, `metodo`, `valref`) VALUES
 	(1, 1, 'Paciente em bom estado geral, saudável', 'Sangue, Urina e Fezes', 'Analise de laboratorial', _binary 0x666673646666617364),
 	(3, 2, 'RISCO CIRURGICO DISCRETO', 'Sangue e Urina', 'Laboratorial', _binary 0x524953434f2043495255524749434f20444953435245544f2028415341204949204f5520474f4c444d414e20494929),
@@ -181,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `formulas_pre` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.formulas_pre: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.formulas_pre: ~3 rows (aproximadamente)
 REPLACE INTO `formulas_pre` (`id`, `descricao`, `formula`) VALUES
 	(1, 'Formula Fixa', _binary 0x546578746f206465207072696d6569726120666f726d756c610d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0a466f736661746f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0a0d0a416dc3b46e6961202020202020756e0d0a),
 	(2, 'Formula Padrão', _binary 0xc3816369646f2062c3b37269636f2031322020202020756e0d0a466f736661746f2020313520202020756e0d0a);
@@ -211,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `grupos_laudos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupos_laudos: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela smed.grupos_laudos: ~4 rows (aproximadamente)
 REPLACE INTO `grupos_laudos` (`id`, `descricao`) VALUES
 	(1, 'Exames Físicos'),
 	(2, 'Antecedentes Cirúrgicos'),
@@ -366,9 +381,12 @@ CREATE TABLE IF NOT EXISTS `parametros_eventos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.parametros_eventos: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.parametros_eventos: ~2 rows (aproximadamente)
+REPLACE INTO `parametros_eventos` (`id`, `descricao`) VALUES
+	(1, 'Parametro de Testes'),
+	(2, 'Segundo Parâmetro');
 
 -- Copiando estrutura para tabela smed.procedimentos
 CREATE TABLE IF NOT EXISTS `procedimentos` (
@@ -435,8 +453,8 @@ CREATE TABLE IF NOT EXISTS `profissionais` (
 
 -- Copiando dados para a tabela smed.profissionais: ~2 rows (aproximadamente)
 REPLACE INTO `profissionais` (`id`, `id_especialidade`, `nome`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `identidade`, `cpf`, `datanasc`, `sexo`, `gera_agenda`, `observacao`, `crm`) VALUES
-	(1, 2, 'Glaison Queiroz', '', '', '', '', 'MG', '(48) 2759-4679', '(31) 2121-2223', 'suporte@sabara.mg.gov.br', NULL, '4565465', '69551022653', '2009-07-13', 'M', 'S', _binary 0x7465737465206465206f627365727661c3a7c3a36f, '565465'),
-	(2, 1, 'Maria de Souza Crus', 'Beco da Chica,100', 'Campeche', 'Belo Horizonte', '3450480', 'MG', '(31) 589-6369', '(31) 6995-5555', 'dasilva@gmail.com', NULL, '', '07415768051', '1997-11-04', 'M', 'S', _binary '', 'crm/mg 456456');
+	(1, 2, 'Dr. Glaison Queiroz', '', '', '', '', 'MG', '(48) 2759-4679', '(31) 2121-2223', 'suporte@sabara.mg.gov.br', NULL, '4565465', '69551022653', '2009-07-13', 'M', 'S', _binary 0x7465737465206465206f627365727661c3a7c3a36f, '565465'),
+	(2, 1, 'Dr. Maria de Souza Crus', 'Beco da Chica,100', 'Campeche', 'Belo Horizonte', '3450480', 'MG', '(31) 589-6369', '(31) 6995-5555', 'dasilva@gmail.com', NULL, '', '07415768051', '1997-11-04', 'M', 'S', _binary '', 'crm/mg 456456');
 
 -- Copiando estrutura para tabela smed.tabela
 CREATE TABLE IF NOT EXISTS `tabela` (
