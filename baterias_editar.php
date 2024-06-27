@@ -21,27 +21,27 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/formula_padrao_lista.php');
+        header('location: /smedweb/baterias_lista.php');
         exit;
     }
 
-    $c_sql = "SELECT formulas_pre.id, formulas_pre.descricao, formulas_pre.formula FROM formulas_pre where formulas_pre.id='$c_id'";
+    $c_sql = "SELECT bateria.id, bateria.descricao, bateria.exames FROM bateria where bateria.id='$c_id'";
     $result = $conection->query($c_sql);
 
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/formula_padrao_lista.php');
+        header('location: /smedweb/baterias_lista.php');
         exit;
     }
     $c_descricao = $registro['descricao'];
-    $c_formula = $registro['formula'];
+    $c_bateria = $registro['exames'];
 } else {
     if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         // metodo post para atualizar dados
         $c_id = $_POST["id"];
         $c_descricao = $_POST['up_descricaoField'];
-        $c_formula = $_POST['up_formulaField'];
+        $c_bateria = $_POST['up_bateriaField'];
 
         do {
             if (
@@ -52,25 +52,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             }
 
             // faço a alteração do registro
-            $c_sql = "Update formulas_pre" .
-                " SET descricao ='$c_descricao',  formula = '$c_formula' where id=$c_id";
+            $c_sql = "Update bateria" .
+                " SET descricao ='$c_descricao',  exames = '$c_bateria' where id=$c_id";
             $result = $conection->query($c_sql);
             // verifico se a query foi correto
             if (!$result) {
                 die("Erro ao Executar Sql!!" . $conection->connect_error);
             }
             $msg_gravou = "Dados Gravados com Sucesso!!";
-            header('location: /smedweb/formula_padrao_lista.php');
+            header('location: /smedweb/baterias_lista.php');
         } while (false);
     } else
-    if (isset($_POST["btn_componente"])) {
+    if (isset($_POST["btn_bateria"])) {
         // pego unidade do componente selecionado
-        $c_componente = $_POST["Sel_componente"];
-        $c_sql = "SELECT Componentes.unidade FROM Componentes where componentes.descricao='$c_componente'";
-        //
-        $result = $conection->query($c_sql);
-        $c_linha = $result->fetch_assoc();
-        $c_formula = $_POST["up_formulaField"] . $_POST["Sel_componente"] . "      " . $c_linha['unidade'] . "\r\n";
+
+        $c_bateria = $_POST["up_bateriaField"] . $_POST["Sel_exame"] . "\r\n";
         $c_descricao = $_POST["up_descricaoField"];
     }
 }
@@ -102,13 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Editar Fórmula Padrão do Sistema<h5>
+            <h5>Editar Bateria de Exame do Sistema<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
-
-
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -122,25 +116,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <h5>Campos com (*) são obrigatórios</h5>
         </div>
         <form method="post">
-            <input type="hidden" name="id" value="<?php echo $c_id; ?>">
             <div class="mb-3 row">
-                <label class="col-md-3 form-label">Componentes para Fórmula</label>
+                <label class="col-md-3 form-label">Exame para Inserir</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-lg" id="Sel_componente" name="Sel_componente">
+                    <select class="form-control form-control-lg" id="Sel_exame" name="Sel_exame">
                         <?php
-                        $c_sql = "SELECT componentes.id, Componentes.descricao FROM Componentes ORDER BY Componentes.descricao";
+                        $c_sql = "SELECT exames.id, exames.descricao FROM exames ORDER BY exames.descricao";
                         $result = $conection->query($c_sql);
+
                         // insiro os registro do banco de dados na tabela 
                         while ($c_linha = $result->fetch_assoc()) {
+
                             echo "<option>$c_linha[descricao]</option>";
                         }
                         ?>
                     </select>
 
                 </div>
-                <button class='btn btn-info' type="submit" id='btn_componente' name='btn_componente' title='Adicionar Componente a Fórmula'><span class='glyphicon glyphicon-plus'></span></button>
+                <button class='btn btn-info' type="submit" id='btn_bateria' name='btn_bateria' title='Adicionar Exame a bateria'><span class='glyphicon glyphicon-plus'></span></button>
             </div>
             <hr>
+            <input type="hidden" name="id" value="<?php echo $c_id; ?>">
             <div class="mb-3 row">
 
                 <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
@@ -149,19 +145,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 </div>
 
             </div>
-           
 
             <div class="mb-3 row">
-                <label for="up_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
+                <label for="up_bateriaField" class="col-md-3 form-label">Texto da Fórmula</label>
                 <div class="col-sm-6">
-                    <textarea class="form-control" id="up_formulaField" name="up_formulaField" rows="15"><?php echo $c_formula ?></textarea>
+                    <textarea class="form-control" id="up_bateriaField" name="up_bateriaField" rows="15"><?php echo $c_bateria ?></textarea>
                 </div>
             </div>
 
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/baterias_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
@@ -180,8 +175,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             }
             ?>
             <br>
-
-
         </form>
     </div>
 

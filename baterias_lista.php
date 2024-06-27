@@ -33,13 +33,11 @@ include("conexao.php");
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
-
-
     <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/itenslaudos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/baterias_excluir.php?id=" + id;
             }
         }
     </script>
@@ -59,7 +57,7 @@ include("conexao.php");
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [5]
+                    'aTargets': [2]
                 }, {
                     'aTargets': [0],
                     "visible": false
@@ -100,34 +98,27 @@ include("conexao.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Exmaes para Laudus<h5>
+            <h5>Lista de baterias de Exames para Laudos<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
-
         <!-- Button trigger modal -->
-        <a class="btn btn-success btn-sm" href="/smedweb/itenslaudos_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
-        <a class="btn btn-info btn-sm" href="/smedweb/baterias_lista.php"><span class="glyphicon glyphicon-list-alt"></span> Baterias de Exames</a>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
+        <a class="btn btn-success btn-sm" href="/smedweb/baterias_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/itenslaudos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <hr>
         <table class="table display table-bordered tabexames">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
                     <th scope="col">Descricao</th>
-                    <th scope="col">Grupo</th>
-                    <th scope="col">Material</th>
-                    <th scope="col">Método</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT exames.id, exames.descricao, exames.material, exames.metodo, grupos_laudos.descricao AS grupo FROM exames
-                JOIN grupos_laudos ON exames.id_grupo=grupos_laudos.id";
+                $c_sql = "SELECT bateria.id, bateria.descricao FROM bateria ORDER BY bateria.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
                 if (!$result) {
@@ -140,11 +131,8 @@ include("conexao.php");
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    <td>$c_linha[grupo]</td>
-                    <td>$c_linha[material]</td>
-                    <td>$c_linha[metodo]</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Exame ' href='/smedweb/itenslaudos_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Exame ' href='/smedweb/baterias_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Exame' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
