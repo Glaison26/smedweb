@@ -207,7 +207,7 @@ $c_id = $_GET["id"];
     <div class="container -my5">
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoparametroModal"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoatributoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
        
@@ -259,7 +259,7 @@ $c_id = $_GET["id"];
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novoparametroModal" tabindex="-1" role="dialog" aria-labelledby="novoparametroModal" aria-hidden="true">
+    <div class="modal fade" id="novoatributoModal" tabindex="-1" role="dialog" aria-labelledby="novoatributoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
