@@ -7,6 +7,7 @@
 //    header('location: /raxx/voltamenunegado.php');
 //}
 include("conexao.php");
+$c_id = $_GET["id"];
 ?>
 <!doctype html>
 <html lang="en">
@@ -39,7 +40,7 @@ include("conexao.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/parametros_excluir.php?id=" + id;
+                window.location.href = "/smedweb/atributo_excluir.php?id=" + id;
             }
         }
     </script>
@@ -53,7 +54,7 @@ include("conexao.php");
 
     <script>
         $(document).ready(function() {
-            $('.tabparametros').DataTable({
+            $('.tabatributo').DataTable({
                 // 
                 "iDisplayLength": 6,
                 "order": [1, 'asc'],
@@ -199,7 +200,7 @@ include("conexao.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Parâmetros de Eventos<h5>
+            <h5>Lista de Atributos de Parâmetros de Eventos<h5>
         </div>
     </div>
     <br>
@@ -210,14 +211,14 @@ include("conexao.php");
             Novo
         </button>
        
-        <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/parametros_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
-        <table class="table display table-bordered tabparametros">
+        <table class="table display table-bordered tabatributo">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
-                    <th scope="col">Descrição do Parâmetro</th>
+                    <th scope="col">Atributo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -225,9 +226,9 @@ include("conexao.php");
                 <?php
                
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT parametros_eventos.id, parametros_eventos.descricao" .
-                    " FROM parametros_eventos" .
-                    " ORDER BY parametros_eventos.descricao";
+                $c_sql = "SELECT atributos_parametros_eventos.id, atributos_parametros_eventos.descricao, atributos_parametros_eventos.formato" .
+                    " FROM atributos_parametros_eventos where atributos_parametros_eventos.id_parametro='$c_id' " .
+                    " ORDER BY atributos_parametros_eventos.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
                 if (!$result) {
@@ -243,7 +244,7 @@ include("conexao.php");
                     <td>$c_linha[descricao]</td>
                     
                     <td>
-                    <a class='btn btn-info btn-sm' title='Atributos do Parâmetro' href='/smedweb/atributo_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-th-list'></span></a>
+                    
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Parâmetro'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Parâmetro' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
