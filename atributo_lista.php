@@ -11,8 +11,13 @@ if (isset($_GET["id"])) {
     $c_id = $_GET["id"];
     $_SESSION["id_parametro"] = $c_id;
 } else {
-    $c_id=$_SESSION["id_parametro"];
+    $c_id = $_SESSION["id_parametro"];
 }
+// pego nome do parâmetro selecionado
+$c_sql = "SELECT parametros_eventos.descricao FROM parametros_eventos WHERE parametros_eventos.id='$c_id'";
+$result = $conection->query($c_sql);
+$c_linha = $result->fetch_assoc();
+$c_nomeparametro = $c_linha['descricao'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -55,7 +60,6 @@ if (isset($_GET["id"])) {
             alert(msg);
         }
     </script>
-
 
     <script>
         $(document).ready(function() {
@@ -213,14 +217,18 @@ if (isset($_GET["id"])) {
     </div>
     <br>
     <div class="container -my5">
-
-        <!-- Button trigger modal -->
+           <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoatributoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
         <a class="btn btn-secondary btn-sm" href="/smedweb/parametros_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        
+        
         <hr>
         <table class="table display table-bordered tabatributo">
+        <div class='alert alert-secondary' role='alert'>
+            <h5>Parâmetro :<?php echo $c_nomeparametro ?> </h5>
+        </div>
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
