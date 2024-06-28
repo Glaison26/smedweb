@@ -303,7 +303,7 @@ include("conexao.php");
                     <form id="frmparametro" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_parametroField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="up_parametroField" class="col-md-3 form-label">Descrição do Parâmetro (*)</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="up_parametroField" name="up_parametroField">
                             </div>

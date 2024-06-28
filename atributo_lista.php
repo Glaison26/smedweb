@@ -1,5 +1,5 @@
 <?php // controle de acesso ao formulário
-//session_start();
+session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -7,7 +7,12 @@
 //    header('location: /raxx/voltamenunegado.php');
 //}
 include("conexao.php");
-$c_id = $_GET["id"];
+if (isset($_GET["id"])) {
+    $c_id = $_GET["id"];
+    $_SESSION["id_parametro"] = $c_id;
+} else {
+    $c_id=$_SESSION["id_parametro"];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -102,18 +107,19 @@ $c_id = $_GET["id"];
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddparametro', function(e) {
+        $(document).on('submit', '#frmaddatributo', function(e) {
             e.preventDefault();
-            var c_parametro = $('#addparametroField').val();
-            
-            if (c_parametro != '') {
+            var c_atributo = $('#addatributoField').val();
+            var c_formato = $('#addformatoField').val();
+
+            if (c_atributo != '') {
 
                 $.ajax({
-                    url: "parametros_novo.php",
+                    url: "atributos_novo.php",
                     type: "post",
                     data: {
-                        c_parametro: c_parametro
-                      
+                        c_atributo: c_atributo,
+                        c_formato: c_formato
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -122,7 +128,7 @@ $c_id = $_GET["id"];
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novoparametroModal').modal('hide');
+                            $('#novoatributoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -140,7 +146,7 @@ $c_id = $_GET["id"];
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-                
+
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -152,8 +158,9 @@ $c_id = $_GET["id"];
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_parametroField').val(data[1]);
-         
+                $('#up_atributoField').val(data[1]);
+                $('#up_formatoField').val(data[2]);
+
 
             });
         });
@@ -162,21 +169,22 @@ $c_id = $_GET["id"];
     <script type="text/javascript">
         ~
         // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmparametro', function(e) {
+        $(document).on('submit', '#frmatributo', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_parametro = $('#up_parametroField').val();
-            
-            
-            if (c_parametro != '') {
-                
+            var c_atributo = $('#up_atributoField').val();
+            var c_formato = $('#up_formatoField').val();
+
+
+            if (c_atributo != '') {
+
                 $.ajax({
-                    url: "parametros_editar.php",
+                    url: "atributos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_parametro: c_parametro
-                        
+                        c_atributo: c_atributo,
+                        c_formato: c_formato
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -189,7 +197,7 @@ $c_id = $_GET["id"];
                         }
                     }
                 });
-                
+
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
@@ -210,21 +218,20 @@ $c_id = $_GET["id"];
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoatributoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
-       
         <a class="btn btn-secondary btn-sm" href="/smedweb/parametros_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
         <hr>
         <table class="table display table-bordered tabatributo">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
                     <th scope="col">Atributo</th>
+                    <th scope="col">Formato</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-               
+
                 // faço a Leitura da tabela com sql
                 $c_sql = "SELECT atributos_parametros_eventos.id, atributos_parametros_eventos.descricao, atributos_parametros_eventos.formato" .
                     " FROM atributos_parametros_eventos where atributos_parametros_eventos.id_parametro='$c_id' " .
@@ -234,19 +241,17 @@ $c_id = $_GET["id"];
                 if (!$result) {
                     die("Erro ao Executar Sql!!" . $conection->connect_error);
                 }
-
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                   
+
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    
+                    <td>$c_linha[formato]</td>
                     <td>
-                    
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Parâmetro'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Parâmetro' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Atributo'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir Atributo' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
@@ -263,20 +268,26 @@ $c_id = $_GET["id"];
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Parâmetro</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Atributo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddparametro" action="">
+                    <form id="frmaddatributo" action="">
                         <div class="mb-3 row">
-                            <label for="addparametroField" class="col-md-3 form-label">Descrição do parâmetro (*)</label>
+                            <label for="addatributoField" class="col-md-3 form-label">Descrição do Atributo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addparametroField" name="addparametroField">
+                                <input type="text" class="form-control" id="addatributoField" name="addatributoField">
                             </div>
                         </div>
-                     
+                        <div class="mb-3 row">
+                            <label for="addformatoField" class="col-md-3 form-label">Formato de Entrada de Dados</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="addformatoField" name="addformatoField" MAXLENGTH=12>
+                            </div>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -295,21 +306,27 @@ $c_id = $_GET["id"];
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Parâmetro</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Atributo (*)</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmparametro" method="POST" action="">
+                    <form id="frmatributo" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_parametroField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
+                            <label for="up_atributoField" class="col-md-3 form-label">Descrição do Atributo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_parametroField" name="up_parametroField">
+                                <input type="text" class="form-control" id="up_atributoField" name="up_atributoField">
                             </div>
                         </div>
-                       
+                        <div class="mb-3 row">
+                            <label for="up_formatoField" class="col-md-3 form-label">Formato de Entrada de Dados</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="up_formatoField" name="up_formatoField">
+                            </div>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
