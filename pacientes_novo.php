@@ -304,25 +304,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                         <label class="col-sm-1 col-form-label">1a. Consulta</label>
                         <div class="col-sm-2">
-                            <input type="date" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)"  class="form-control" name="dataprimeira" >
+                            <input type="date" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" name="dataprimeira">
                         </div>
                     </div>
                     <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Cep</label>
-                            <div class="col-sm-2">
-                                <input type="text" placeholder="Somente números" maxlength="11" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
-                            </div>
-                            <label class="col-sm-1 col-form-label">Estado Civil </label>
-                            <div class="col-sm-2">
-                                <select class="form-control form-control-lg" id="estadocivil" name="Estadocivil">
-                                    <option>Solteiro</option>
-                                    <option>Casado</option>
-                                    <option>Viúvo</option>
-                                    <option>Amaziado</option>
-                                   
-                                </select>
-                            </div>
+                        <label class="col-sm-3 col-form-label">Cep</label>
+                        <div class="col-sm-2">
+                            <input type="text" placeholder="Somente números" maxlength="11" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
                         </div>
+                        <label class="col-sm-1 col-form-label">Estado Civil </label>
+                        <div class="col-sm-2">
+                            <select class="form-control form-control-lg" id="estadocivil" name="Estadocivil">
+                                <option>Solteiro</option>
+                                <option>Casado</option>
+                                <option>Viúvo</option>
+                                <option>Divorciado</option>
+
+                            </select>
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Nome do Pai</label>
                         <div class="col-sm-5">
