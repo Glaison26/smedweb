@@ -60,7 +60,7 @@ if (!isset($_SESSION['newsession'])) {
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown01">
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\paciente.png" alt="" width="20" height="20"> Ficha Clinica...</a>
+								<a class="dropdown-item" href="\smedweb\pacientes_lista.php"><img src="\smedweb\images\paciente.png" alt="" width="20" height="20"> Ficha Clinica...</a>
 								<a class="dropdown-item" href="#"><img src="\smedweb\images\estatisticas.png" alt="" width="20" height="20"> Estatíscas...</a>
 							</div>
 						</li>
