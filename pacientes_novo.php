@@ -34,7 +34,7 @@ function carregadados()
     $c_pai = $_POST['pai'];
     $c_mae = $_POST['mae'];
     $c_convenio = $_POST['convenio'];
-    $c_profissional = $_POST['profissional'];
+    
     $c_estadocivil = $_POST['estadocivil'];
     $c_indicacao = $_POST['indicacao'];
 }
@@ -77,8 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     carregadados();
     //
     do {
+        echo "teste do "$c_telefone1;
         if (
-            empty($c_nome) || empty($c_telefone1) || empty($c_cpf) || empty($c_especialidade)
+            empty($c_nome) || empty($c_telefone1)  
         ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
@@ -89,31 +90,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
 
-        if (!validaCPF($c_cpf)) {
+        if (!validaCPF($c_cpf)&& !empty($c_cpf)) {
             $msg_erro = "CPF informado inválido!!";
             break;
         }
-        //verifica se cnpj já foi cadastrado
-        $c_sql = "select profissionais.cpf from profissionais where cpf='$c_cpf'";
-        $result = $conection->query($c_sql);
-        $registro = $result->fetch_assoc();
-        if ($registro) {
-            $msg_erro = "Já existe este CPF deste profissional cadastrado!!";
-            break;
-        }
+       
+       
         // rotina para pegar id da especialidade selecionada
-        $c_especialidade = $_POST['especialidade'];
-        $c_sqlespecialidade = "SELECT especialidades.id, especialidades.descricao FROM especialidades where especialidades.descricao='$c_especialidade'";
+        $c_convenio  = $_POST['convenio'];
+        $c_sql_convenio = "SELECT convenios.id, convenios.nome FROM convenios where convenios.nome='$c_convenio'";
         $result = $conection->query($c_sqlespecialidade);
         $c_linha = $result->fetch_assoc();
-        $c_id_especialidade = $c_linha['id'];
+        $c_id_convenio = $c_linha['id'];
         // grava dados no banco
         // faço a Leitura da tabela com sql
 
-        $c_sql = "Insert into profissionais (nome, endereco, bairro, cidade, cep, uf, email,
-         fone1, fone2, observacao, id_especialidade, cpf, identidade, sexo, datanasc, gera_agenda, crm)" .
+        $c_sql = "Insert into pacientes (nome, endereco, bairro, cidade, cep, uf, email,
+         fone1, fone2, observacao, cpf, identidade, sexo, datanasc, indicacao, profissao, 
+         pai, mae, estadocivil, cor, naturalidade, procedencia, matricula, classificacao, id_convenio)" .
             "Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
-             '$c_obs', '$c_id_especialidade', '$c_cpf', '$c_idendidade', '$c_sexo', '$d_datanasc', '$c_gera_agenda', '$c_crm')";
+             '$c_obs', '$c_cpf', '$c_idendidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
+             , '$c_estadocivil', '$c_cor', , '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$c_id_convenio')";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -123,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/profissionais_lista.php');
+        header('location: /smedweb/pacientes_lista.php');
     } while (false);
 }
 
@@ -236,13 +233,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Endereço </label>
                             <div class="col-sm-5">
                                 <input type="text" maxlength="150" class="form-control" name="endereco" value="<?php echo $c_endereco; ?>">
                             </div>
-
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Bairro</label>
@@ -298,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label">Data Nascimento (*)</label>
+                        <label class="col-sm-3 col-form-label">Data Nascimento</label>
                         <div class="col-sm-2">
                             <input type="date" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" name="datanasc" id="datanasc" onkeypress="mascaraData(this)" value="<?php echo $d_datanasc; ?>">
                         </div>
@@ -308,18 +303,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label">Cep</label>
-                        <div class="col-sm-2">
-                            <input type="text" placeholder="Somente números" maxlength="11" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
-                        </div>
-                        <label class="col-sm-1 col-form-label">Estado Civil </label>
-                        <div class="col-sm-2">
-                            <select class="form-control form-control-lg" id="estadocivil" name="Estadocivil">
+                        <label class="col-sm-3 col-form-label">Estado Civil </label>
+                        <div class="col-sm-3">
+                            <select class="form-control form-control-lg" id="estadocivil" name="estadocivil">
                                 <option>Solteiro</option>
                                 <option>Casado</option>
                                 <option>Viúvo</option>
                                 <option>Divorciado</option>
-
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Cor </label>
+                        <div class="col-sm-3">
+                            <select class="form-control form-control-lg" id="cor" name="cor">
+                                <option>Leuco</option>
+                                <option>Faio</option>
+                                <option>Melano</option>
+                                
                             </select>
                         </div>
                     </div>
@@ -356,7 +357,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Classificação</label>
                         <div class="col-sm-5">
-                            <input type="text" maxlength="100" class="form-control" name="mae" value="<?php echo $c_classificacao; ?>">
+                            <input type="text" maxlength="100" class="form-control" name="classificacao" value="<?php echo $c_classificacao; ?>">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label">Indicação</label>
+                        <div class="col-sm-5">
+                            <input type="text" maxlength="100" class="form-control" name="indicacao" value="<?php echo $c_indicacao; ?>">
                         </div>
                     </div>
                 </div>
@@ -365,7 +372,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div style="padding-top:20px;">
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Convênio </label>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <select class="form-control form-control-lg" id="convenio" name="convenio">
                                     <?php
                                     $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
@@ -390,7 +397,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Fone 1 (*) </label>
                             <div class="col-sm-2">
-                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" name="telefone1" value="<?php echo $c_telefone1; ?>">
+                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control"  id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
                             </div>
                             <label class="col-sm-1 col-form-label">Fone 2</label>
                             <div class="col-sm-2">
@@ -398,18 +405,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">E-mail (*)</label>
+                            <label class="col-sm-3 col-form-label">E-mail</label>
                             <div class="col-sm-5">
                                 <input type="text" maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
                             </div>
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label class="col-sm-3 col-form-label">CPF (*)</label>
+                            <label class="col-sm-3 col-form-label">CPF</label>
                             <div class="col-sm-2">
                                 <input type="text" maxlength="11" placeholder="apenas numeros" class="form-control" name="cpf" value="<?php echo $c_cpf; ?>">
                             </div>
-                            <label class="col-sm-1 col-form-label">CI. (*)</label>
+                            <label class="col-sm-1 col-form-label">CI. </label>
                             <div class="col-sm-2">
                                 <input type="text" maxlength="20" class="form-control" name="identidade" value="<?php echo $c_identidade; ?>">
                             </div>
@@ -417,6 +424,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     </div>
                 </div>
+                <!-- pagina Observações -->
                 <div role="tabpanel" class="tab-pane" id="dados_obs">
                     <div style="padding-top:20px;">
                         <div class="form-group">
@@ -431,7 +439,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <div class="offset-sm-0 col-sm-3">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/profissionais_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
                 </div>
             </div>

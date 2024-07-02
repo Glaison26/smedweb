@@ -346,25 +346,25 @@ REPLACE INTO `orientacoes_padrao` (`id`, `descricao`, `texto`) VALUES
 CREATE TABLE IF NOT EXISTS `pacientes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_convenio` int NOT NULL,
-  `id_profissional` int NOT NULL,
+  `id_profissional` int DEFAULT NULL,
   `nome` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `sexo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `cor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `datanasc` date NOT NULL,
-  `estadocivil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `sexo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `cor` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `datanasc` date DEFAULT NULL,
+  `estadocivil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `mae` varchar(150) DEFAULT NULL,
   `pae` varchar(150) DEFAULT NULL,
-  `endereco` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `bairro` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `cidade` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `cep` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `uf` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `endereco` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `bairro` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `cidade` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `cep` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `uf` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `fone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `fone2` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `profissao` varchar(100) DEFAULT NULL,
   `indicacao` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `dataprimeira` date NOT NULL,
+  `dataprimeira` date DEFAULT NULL,
   `obs` blob,
   `classificacao` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `naturalidade` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -379,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   CONSTRAINT `FK_pacientes_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.pacientes: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.pacientes: ~1 rows (aproximadamente)
 REPLACE INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pae`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
 	(1, 1, 2, 'Glaison Queiroz', 'M', 'Pardo', '1968-10-26', 'Solteiro', 'Emilia ', 'Valdir Queiroz', 'Ruada Intendência, 316', 'Centro', 'Sabará', '34505480', 'MG', 'glaison26.queiroz@gmail.com', '(31)36722550', '(31)984262508', 'Programador', 'Clinia', '2024-07-01', _binary 0x7465737465, 'Clinica', 'Brasileiro', 'Sabará', '88845665', NULL, NULL);
 
