@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_cor = $registro['cor'];
     $c_naturalidade = $registro['naturalidade'];
     $c_procedencia = $registro['procedencia'];
+    $c_profissao = $registro['profissao'];
     $c_pai = $registro['pai'];
     $c_mae = $registro['mae'];
     $c_convenio = $registro['id_convenio'];
@@ -86,6 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     //
     $c_estadocivil = $registro['estadocivil'];
     $c_indicacao = $registro['indicacao'];
+    // definindo sexo do radio button
+    $op_sexo_masc = "";
+    $op_sexo_fem = "";
+    if ($c_sexo == "M") {
+        $op_sexo_masc = "checked";
+    } else {
+        $op_sexo_fem = "checked";
+    }
     // datas
     $c_datanasc =  DateTime::createFromFormat('Y-m-d', $registro["datanasc"]);
     $c_datanasc = $c_datanasc->format('d/m/Y');
@@ -122,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_mae = $_POST['mae'];
     $c_convenio = $_POST['convenio'];
     $c_identidade = $_POST['identidade'];
-
+    $c_profissao = $_POST['profissao'];
     $c_estadocivil = $_POST['estadocivil'];
     $c_indicacao = $_POST['indicacao'];
 
@@ -165,19 +174,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         $c_linha = $result->fetch_assoc();
         $i_convenio = $c_linha['id'];
 
-        //$c_sql = "Insert into pacientes (nome, endereco, bairro, cidade, cep, uf, email,
-        // fone, fone2, obs, cpf, identidade, sexo, datanasc, indicacao, profissao, 
-        // pai, mae, estadocivil, cor, naturalidade, procedencia, matricula, classificacao, dataprimeira, id_convenio)" .
-        //    " Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
-        //     '$c_obs', '$c_cpf', '$c_identidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
-        //     , '$c_estadocivil', '$c_cor',  '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$d_dataprimeira', $c_id_convenio')";
-
         // faço a alteração do registro
         $c_sql = "Update pacientes" .
-            " SET nome='$c_nome',sexo='$c_sexo',endereco='$c_endereco',bairro='$c_bairro',cidade='$c_cidade',cep='$c_cep',uf='$c_uf'" .
-            ",cpf='$c_cpf',identidade='$c_identidade',datanasc='$c_datanasc',fone1='$c_fone1',fone2='$c_fone2',email='$c_email'," .
-            "observacao='$c_obs', gera_agenda='$c_gera_agenda', crm= '$c_crm', id_especialidade='$i_especialidade'" .
-            " where id=$c_id";
+            " SET nome='$c_nome', endereco='$c_endereco', bairro='$c_bairro', cidade='$c_cidade', cep='$c_cep', uf='$c_uf', email='$c_email',
+         fone='$c_telefone1', fone2='$c_telefone2', obs='$c_obs', cpf='$c_cpf', identidade='$c_identidade', sexo='$c_sexo', datanasc='$c_datanasc',
+         indicacao='$c_indicacao', profissao='$c_profissao', pai='$c_pai', mae='$c_mae', estadocivil='$c_estadocivil', cor='$c_cor',
+         naturalidade='$c_naturalidade', procedencia='$c_procedencia', matricula='$c_matricula', classificacao='$c_classificacao', dataprimeira='$c_dataprimeira',
+         id_convenio='$c_id_convenio'" .
+            "where id=$c_id";
         echo $c_sql;
 
         $result = $conection->query($c_sql);
@@ -187,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/profissionais_lista.php');
+        header('location: /smedweb/pacientes_lista.php');
     } while (false);
 }
 
@@ -279,239 +283,243 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 
             <form method="post" class="form-horizontal">
                 <div class="tab-content">
-                   
-                        <div role="tabpanel" class="tab-pane active" id="dados_apresentacao">
-                            <div style="padding-top:20px;">
 
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-form-label"><span>Selecione Genero</span></label>
-                                    <div class="form-check">
-                                        <label for="masculino">
-                                            <input type="radio" name="genero" id="masculino" value="M" checked>
-                                            <span>Masculino</span>
-                                        </label>
-                                        <label for="feminino">
-                                            <input type="radio" name="genero" id="feminino" value="F">
-                                            <span>Feminino</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Nome (*)</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Endereço </label>
-                                    <div class="col-sm-5">
-                                        <input type="text" maxlength="150" class="form-control" name="endereco" value="<?php echo $c_endereco; ?>">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Bairro</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" maxlength="100" class="form-control" name="bairro" value="<?php echo $c_bairro; ?>">
-                                    </div>
+                    <div role="tabpanel" class="tab-pane active" id="dados_apresentacao">
+                        <div style="padding-top:20px;">
 
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Cidade</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" maxlength="100" class="form-control" name="cidade" value="<?php echo $c_cidade; ?>">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Cep</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" placeholder="Somente números" maxlength="11" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
-                                    </div>
-                                    <label class="col-sm-1 col-form-label">Estado </label>
-                                    <div class="col-sm-2">
-                                        <select class="form-control form-control-lg" id="uf" name="uf">
-                                            <option>AC</option>
-                                            <option>AL</option>
-                                            <option>AP</option>
-                                            <option>AM</option>
-                                            <option>BA</option>
-                                            <option>CE</option>
-                                            <option>DF</option>
-                                            <option>ES</option>
-                                            <option>GO</option>
-                                            <option>MA</option>
-                                            <option>MT</option>
-                                            <option>MS</option>
-                                            <option selected>MG</option>
-                                            <option>PA</option>
-                                            <option>PB</option>
-                                            <option>PE</option>
-                                            <option>PR</option>
-                                            <option>PI</option>
-                                            <option>RJ</option>
-                                            <option>RN</option>
-                                            <option>RS</option>
-                                            <option>RO</option>
-                                            <option>RR</option>
-                                            <option>SC</option>
-                                            <option>SE</option>
-                                            <option>SP</option>
-                                            <option>TO</option>
-                                        </select>
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label"><span>Selecione Genero</span></label>
+                                <div class="form-check">
+                                    <label for="masculino">
+                                        <input type="radio" name="genero" id="masculino" value="M" <?php echo $op_sexo_masc; ?>>
+                                        <span>Masculino</span>
+                                    </label>
+                                    <label for="feminino">
+                                        <input type="radio" name="genero" id="feminino" value="F" <?php echo $op_sexo_fem; ?>>
+                                        <span>Feminino</span>
+                                    </label>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Data Nascimento (*)</label>
+                                <label class="col-sm-3 col-form-label">Nome (*)</label>
+                                <div class="col-sm-5">
+                                    <input type="text" maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Endereço </label>
+                                <div class="col-sm-5">
+                                    <input type="text" maxlength="150" class="form-control" name="endereco" value="<?php echo $c_endereco; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Bairro</label>
+                                <div class="col-sm-5">
+                                    <input type="text" maxlength="100" class="form-control" name="bairro" value="<?php echo $c_bairro; ?>">
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Cidade</label>
+                                <div class="col-sm-5">
+                                    <input type="text" maxlength="100" class="form-control" name="cidade" value="<?php echo $c_cidade; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Cep</label>
                                 <div class="col-sm-2">
-                                    <input type="date" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" name="datanasc" id="datanasc" onkeypress="mascaraData(this)" value="<?php echo $d_datanasc; ?>">
+                                    <input type="text" placeholder="Somente números" maxlength="11" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
                                 </div>
-                                <label class="col-sm-1 col-form-label">1a. Consulta (*)</label>
+                                <label class="col-sm-1 col-form-label">Estado </label>
                                 <div class="col-sm-2">
-                                    <input type="date" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" id="dataprimeira" name="dataprimeira">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Estado Civil </label>
-                                <div class="col-sm-3">
-                                    <select class="form-control form-control-lg" id="estadocivil" name="estadocivil">
-                                        <option>Solteiro</option>
-                                        <option>Casado</option>
-                                        <option>Viúvo</option>
-                                        <option>Divorciado</option>
+                                    <select class="form-control form-control-lg" id="uf" name="uf">
+                                        <option value="AC" <?= ($c_uf == 'AC') ? 'selected' : '' ?>>AC</option>
+                                        <option value="AL" <?= ($c_uf == 'AL') ? 'selected' : '' ?>>AL</option>
+                                        <option value="AP" <?= ($c_uf == 'AP') ? 'selected' : '' ?>>AP</option>
+                                        <option value="AM" <?= ($c_uf == 'AM') ? 'selected' : '' ?>>AM</option>
+                                        <option value="BA" <?= ($c_uf == 'BA') ? 'selected' : '' ?>>BA</option>
+                                        <option value="CE" <?= ($c_uf == 'CE') ? 'selected' : '' ?>>CE</option>
+                                        <option value="DF" <?= ($c_uf == 'DF') ? 'selected' : '' ?>>DF</option>
+                                        <option value="ES" <?= ($c_uf == 'ES') ? 'selected' : '' ?>>ES</option>
+                                        <option value="GO" <?= ($c_uf == 'GO') ? 'selected' : '' ?>>GO</option>
+                                        <option value="MA" <?= ($c_uf == 'MA') ? 'selected' : '' ?>>MA</option>
+                                        <option value="MT" <?= ($c_uf == 'MT') ? 'selected' : '' ?>>MT</option>
+                                        <option value="MS" <?= ($c_uf == 'MS') ? 'selected' : '' ?>>MS</option>
+                                        <option value="MG" <?= ($c_uf == 'MG') ? 'selected' : '' ?>>MG</option>
+                                        <option value="PA" <?= ($c_uf == 'PA') ? 'selected' : '' ?>>PA</option>
+                                        <option value="PB" <?= ($c_uf == 'PB') ? 'selected' : '' ?>>PB</option>
+                                        <option value="PR" <?= ($c_uf == 'PR') ? 'selected' : '' ?>>PR</option>
+                                        <option value="PE" <?= ($c_uf == 'PE') ? 'selected' : '' ?>>PE</option>
+                                        <option value="PI" <?= ($c_uf == 'PI') ? 'selected' : '' ?>>PI</option>
+                                        <option value="RJ" <?= ($c_uf == 'RJ') ? 'selected' : '' ?>>RJ</option>
+                                        <option value="RN" <?= ($c_uf == 'RN') ? 'selected' : '' ?>>RN</option>
+                                        <option value="RS" <?= ($c_uf == 'RS') ? 'selected' : '' ?>>RS</option>
+                                        <option value="RO" <?= ($c_uf == 'RO') ? 'selected' : '' ?>>RO</option>
+                                        <option value="RR" <?= ($c_uf == 'RR') ? 'selected' : '' ?>>RR</option>
+                                        <option value="SC" <?= ($c_uf == 'SC') ? 'selected' : '' ?>>SC</option>
+                                        <option value="SP" <?= ($c_uf == 'SP') ? 'selected' : '' ?>>SP</option>
+                                        <option value="SE" <?= ($c_uf == 'SE') ? 'selected' : '' ?>>SE</option>
+                                        <option value="TO" <?= ($c_uf == 'TO') ? 'selected' : '' ?>>TO</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Cor </label>
-                                <div class="col-sm-3">
-                                    <select class="form-control form-control-lg" id="cor" name="cor">
-                                        <option>Leuco</option>
-                                        <option>Faio</option>
-                                        <option>Melano</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nome do Pai</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="150" class="form-control" name="pai" value="<?php echo $c_pai; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nome da Mãe</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="150" class="form-control" name="mae" value="<?php echo $c_mae; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Naturalidade</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="100" class="form-control" name="naturalidade" value="<?php echo $c_naturalidade; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Profissão</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="100" class="form-control" name="profissao" value="<?php echo $c_profissao; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Procedência</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="100" class="form-control" name="procedencia" value="<?php echo $c_procedencia; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Classificação</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="100" class="form-control" name="classificacao" value="<?php echo $c_classificacao; ?>">
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Indicação</label>
-                                <div class="col-sm-5">
-                                    <input type="text" maxlength="100" class="form-control" name="indicacao" value="<?php echo $c_indicacao; ?>">
-                                </div>
-                            </div>
-                        </div>
-                        <!--  Aba de contatos -->
-                        <div role="tabpanel" class="tab-pane" id="dados_contatos">
-                            <div style="padding-top:20px;">
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Convênio </label>
-                                    <div class="col-sm-3">
-                                        <select class="form-control form-control-lg" id="convenio" name="convenio">
-                                            <?php
-                                            $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
-                                            $result = $conection->query($c_sql);
-                                            // insiro os registro do banco de dados na tabela 
-                                            while ($c_linha = $result->fetch_assoc()) {
-                                                echo "
-                                        <option>$c_linha[nome]</option>";
-                                            }
-                                            ?>
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Matricula</label>
-                                    <div class="col-sm-3">
-                                        <input type="text" maxlength="50" class="form-control" name="matricula" value="<?php echo $c_matricula; ?>">
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">Fone 1 (*) </label>
-                                    <div class="col-sm-2">
-                                        <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
-                                    </div>
-                                    <label class="col-sm-1 col-form-label">Fone 2</label>
-                                    <div class="col-sm-2">
-                                        <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class="form-control" id="telefone2" name="telefone2" value="<?php echo $c_telefone2; ?>">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-3 col-form-label">E-mail</label>
-                                    <div class="col-sm-5">
-                                        <input type="text" maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">CPF</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" maxlength="11" placeholder="apenas numeros" class="form-control" name="cpf" value="<?php echo $c_cpf; ?>">
-                                    </div>
-                                    <label class="col-sm-1 col-form-label">CI. </label>
-                                    <div class="col-sm-2">
-                                        <input type="text" maxlength="20" class="form-control" name="identidade" value="<?php echo $c_identidade; ?>">
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- pagina Observações -->
-                        <div role="tabpanel" class="tab-pane" id="dados_obs">
-                            <div style="padding-top:20px;">
-                                <div class="form-group">
-                                    <label class="col-sm-1 col-form-label">Observação</label>
-                                    <div class="col-sm-7">
-                                        <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_obs; ?></textarea>
-                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <div class="offset-sm-0 col-sm-3">
-                                <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                                <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                            <label class="col-sm-3 col-form-label">Data Nascimento (*)</label>
+                            <div class="col-sm-2">
+                                <input type="text" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" name="datanasc" id="datanasc" onkeypress="mascaraData(this)" value="<?php echo $c_datanasc; ?>">
+                            </div>
+                            <label class="col-sm-1 col-form-label">1a. Consulta (*)</label>
+                            <div class="col-sm-2">
+                                <input type="text" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" id="dataprimeira" name="dataprimeira" value="<?php echo $c_dataprimeira; ?>">
                             </div>
                         </div>
-                  
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Estado Civil </label>
+                            <div class="col-sm-3">
+                                <select class="form-control form-control-lg" id="estadocivil" name="estadocivil">
+                                    <option value="Solteiro" <?= ($c_estadocivil == 'Solteiro') ? 'selected' : '' ?>>Solteiro</option>
+                                    <option value="Casado" <?= ($c_estadocivil == 'Casado') ? 'selected' : '' ?>>Casado</option>
+                                    <option value="Viúvo" <?= ($c_estadocivil == 'Viúvo') ? 'selected' : '' ?>>Viúvo</option>
+                                    <option value="Divorciado" <?= ($c_estadocivil == 'Divorciado') ? 'selected' : '' ?>>Divorciado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Cor </label>
+                            <div class="col-sm-3">
+                                <select class="form-control form-control-lg" id="cor" name="cor">
+                                    <option value="Leuco" <?= ($c_cor == 'Leuco') ? 'selected' : '' ?>>Leuco</option>
+                                    <option value="Faio" <?= ($c_cor == 'Faio') ? 'selected' : '' ?>>Faio</option>
+                                    <option value="Melano" <?= ($c_cor == 'Melano') ? 'selected' : '' ?>>Melano</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Nome do Pai</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="150" class="form-control" name="pai" value="<?php echo $c_pai; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Nome da Mãe</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="150" class="form-control" name="mae" value="<?php echo $c_mae; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Naturalidade</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="naturalidade" value="<?php echo $c_naturalidade; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Profissão</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="profissao" value="<?php echo $c_profissao; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Procedência</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="procedencia" value="<?php echo $c_procedencia; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Classificação</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="classificacao" value="<?php echo $c_classificacao; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Indicação</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="indicacao" value="<?php echo $c_indicacao; ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <!--  Aba de contatos -->
+                    <div role="tabpanel" class="tab-pane" id="dados_contatos">
+                        <div style="padding-top:20px;">
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Convênio </label>
+                                <div class="col-sm-3">
+                                    <select class="form-control form-control-lg" id="convenio" name="convenio">
+                                        <?php
+                                        $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
+                                        $result = $conection->query($c_sql);
+                                        // insiro os registro do banco de dados na tabela 
+                                        while ($c_linha = $result->fetch_assoc()) {
+                                            $c_op = "";
+                                            if ($c_linha['id'] == $c_convenio) {
+                                                $c_op = "selected";
+                                            }
+                                            echo "
+                                        <option $c_op>$c_linha[nome]</option>";
+                                        }
+                                        ?>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Matricula</label>
+                                <div class="col-sm-3">
+                                    <input type="text" maxlength="50" class="form-control" name="matricula" value="<?php echo $c_matricula; ?>">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Fone 1 (*) </label>
+                                <div class="col-sm-2">
+                                    <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
+                                </div>
+                                <label class="col-sm-1 col-form-label">Fone 2</label>
+                                <div class="col-sm-2">
+                                    <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class="form-control" id="telefone2" name="telefone2" value="<?php echo $c_telefone2; ?>">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">E-mail</label>
+                                <div class="col-sm-5">
+                                    <input type="text" maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-form-label">CPF</label>
+                                <div class="col-sm-2">
+                                    <input type="text" maxlength="11" placeholder="apenas numeros" class="form-control" name="cpf" value="<?php echo $c_cpf; ?>">
+                                </div>
+                                <label class="col-sm-1 col-form-label">CI. </label>
+                                <div class="col-sm-2">
+                                    <input type="text" maxlength="20" class="form-control" name="identidade" value="<?php echo $c_identidade; ?>">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- pagina Observações -->
+                    <div role="tabpanel" class="tab-pane" id="dados_obs">
+                        <div style="padding-top:20px;">
+                            <div class="form-group">
+                                <label class="col-sm-1 col-form-label">Observação</label>
+                                <div class="col-sm-7">
+                                    <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_obs; ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="offset-sm-0 col-sm-3">
+                            <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                            <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        </div>
+                    </div>
+
             </form>
         </body>
     </div>

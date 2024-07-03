@@ -114,8 +114,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          pai, mae, estadocivil, cor, naturalidade, procedencia, matricula, classificacao, dataprimeira, id_convenio)" .
             " Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
              '$c_obs', '$c_cpf', '$c_identidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
-             , '$c_estadocivil', '$c_cor',  '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$d_dataprimeira', $c_id_convenio')";
-            
+             , '$c_estadocivil', '$c_cor',  '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$d_dataprimeira', '$c_id_convenio')";
+         echo $c_sql;   
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {

@@ -113,6 +113,7 @@ include("conexao.php");
                 <tr class="info">
                     <th scope="col">id</th>
                     <th scope="col">Nome do Paciênte</th>
+                    <th scope="col">Sexo</th>
                     <th scope="col">Telefone 1</th>
                     <th scope="col">Telefone 2</th>
                     <th scope="col">Convênio</th>
@@ -124,7 +125,7 @@ include("conexao.php");
                 <?php
 
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
+                $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
                         FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id
                         ORDER BY pacientes.nome";
                 $result = $conection->query($c_sql);
@@ -136,10 +137,16 @@ include("conexao.php");
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
                     // Coloco string sim ou não ao invés de s ou n
+                    if ($c_linha['sexo']=='M'){
+                        $c_sexo = "Masculino";                            
+                    }else {
+                        $c_sexo = "Feminino";
+                    }
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[nome]</td>
+                    <td>$c_sexo</td>
                     <td>$c_linha[fone]</td>
                     <td>$c_linha[fone2]</td>
                     <td>$c_linha[convenio]</td>
