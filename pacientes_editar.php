@@ -8,35 +8,7 @@ include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 
 // rotina de post dos dados do formuário
-$c_nome = "";
-$c_endereco = "";
-$c_bairro = "";
-$c_cep = "";
-$c_cidade = "";
-$c_uf = "";
-$c_email = "";
-$c_telefone1 = "";
-$c_telefone2 = "";
-$c_obs = "";
-$c_sexo = "";
-$c_identidade = "";
-$c_cpf = "";
-$c_datanasc = "";
-$c_dataprimeira = "";
-$c_matricula = "";
-$c_cor = "";
-$c_classificacao = "";
-$c_cor = "";
-$c_naturalidade = "";
-$c_procedencia = "";
-$c_pai = "";
-$c_mae = "";
-$c_convenio = "";
-$c_profissional = "";
-$c_estadocivil = "";
-$c_indicacao = "";
-$c_profissao = "";
-$c_identidade = "";
+
 $c_id = $_GET["id"];
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
