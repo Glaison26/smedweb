@@ -60,7 +60,7 @@ include("conexao.php");
                     'aTargets': [5]
                 }, {
                     'aTargets': [0],
-                    "visible": false
+                    "visible": true
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -111,7 +111,7 @@ include("conexao.php");
         <table class="table display table-bordered tabpacientes">
             <thead class="thead">
                 <tr class="info">
-                    <th scope="col">id</th>
+                    <th scope="col">Número</th>
                     <th scope="col">Nome do Paciênte</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Telefone 1</th>
@@ -153,7 +153,7 @@ include("conexao.php");
                     <td>$c_linha[matricula]</td>
                     
                     <td>
-                    <a class='btn btn-primary btn-sm' title='História Clinica' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'></span></a>
+                    <a class='btn btn-primary btn-sm' title='História Clinica' href='/smedweb/historia.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'></span></a>
                     <a class='btn btn-success btn-sm' title='Eventos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-book'></span></a>
                     <a class='btn btn-secondary btn-sm' title='Imagens' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-picture'></span></a>
                     <a class='btn btn-info btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
