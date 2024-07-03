@@ -11,32 +11,7 @@ include_once "lib_gop.php";
 
 function carregadados()
 {
-    $c_nome = $_POST['nome'];
-    $c_endereco = $_POST['endereco'];
-    $c_bairro = $_POST['bairro'];
-    $c_cep = $_POST['cep'];
-    $c_cidade = $_POST['cidade'];
-    $c_uf = $_POST['uf'];
-    $c_email = $_POST['email'];
-    $c_telefone1 = $_POST['telefone1'];
-    $c_telefone2 = $_POST['telefone2'];
-    $c_obs = $_POST['obs'];
-    $c_sexo = $_POST['genero'];
-    $c_identidade = $_POST['identidade'];
-    $c_cpf = $_POST['cpf'];
-    $d_datanasc = $_POST['datanasc'];
-    $c_matricula = $_POST['matricula'];
-    $c_cor = $_POST['cor'];
-    $c_classificacao = $_POST['classificacao'];
-    $c_cor = $_POST['cor'];
-    $c_naturalidade = $_POST['naturalidade'];
-    $c_procedencia = $_POST['procedencia'];
-    $c_pai = $_POST['pai'];
-    $c_mae = $_POST['mae'];
-    $c_convenio = $_POST['convenio'];
     
-    $c_estadocivil = $_POST['estadocivil'];
-    $c_indicacao = $_POST['indicacao'];
 }
 
 
@@ -54,6 +29,7 @@ $c_sexo = "";
 $c_identidade = "";
 $c_cpf = "";
 $d_datanasc = "";
+$d_dataprimeira = "";
 $c_matricula = "";
 $c_cor = "";
 $c_classificacao = "";
@@ -67,6 +43,7 @@ $c_profissional = "";
 $c_estadocivil = "";
 $c_indicacao = "";
 $c_profissao = "";
+$c_identidade = "";
 
 
 // variaveis para mensagens de erro e suscessso da gravação
@@ -74,12 +51,39 @@ $msg_gravou = "";
 $msg_erro = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    carregadados();
+    $c_nome = $_POST['nome'];
+    $c_endereco = $_POST['endereco'];
+    $c_bairro = $_POST['bairro'];
+    $c_cep = $_POST['cep'];
+    $c_cidade = $_POST['cidade'];
+    $c_uf = $_POST['uf'];
+    $c_email = $_POST['email'];
+    $c_telefone1 = $_POST['telefone1'];
+    $c_telefone2 = $_POST['telefone2'];
+    $c_obs = $_POST['obs'];
+    $c_sexo = $_POST['genero'];
+    $c_identidade = $_POST['identidade'];
+    $c_cpf = $_POST['cpf'];
+    $d_datanasc = $_POST['datanasc'];
+    $d_dataprimeira = $_POST['dataprimeira'];
+    $c_matricula = $_POST['matricula'];
+    $c_cor = $_POST['cor'];
+    $c_classificacao = $_POST['classificacao'];
+    $c_cor = $_POST['cor'];
+    $c_naturalidade = $_POST['naturalidade'];
+    $c_procedencia = $_POST['procedencia'];
+    $c_pai = $_POST['pai'];
+    $c_mae = $_POST['mae'];
+    $c_convenio = $_POST['convenio'];
+    $c_identidade = $_POST['identidade'];
+    
+    $c_estadocivil = $_POST['estadocivil'];
+    $c_indicacao = $_POST['indicacao'];
     //
     do {
-        echo "teste do "$c_telefone1;
+        
         if (
-            empty($c_nome) || empty($c_telefone1)  
+            empty($c_nome) || empty($c_telefone1) || empty($d_datanasc) || empty($d_dataprimeira)  
         ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
@@ -99,19 +103,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // rotina para pegar id da especialidade selecionada
         $c_convenio  = $_POST['convenio'];
         $c_sql_convenio = "SELECT convenios.id, convenios.nome FROM convenios where convenios.nome='$c_convenio'";
-        $result = $conection->query($c_sqlespecialidade);
+        $result = $conection->query($c_sql_convenio);
         $c_linha = $result->fetch_assoc();
         $c_id_convenio = $c_linha['id'];
         // grava dados no banco
         // faço a Leitura da tabela com sql
 
         $c_sql = "Insert into pacientes (nome, endereco, bairro, cidade, cep, uf, email,
-         fone1, fone2, observacao, cpf, identidade, sexo, datanasc, indicacao, profissao, 
-         pai, mae, estadocivil, cor, naturalidade, procedencia, matricula, classificacao, id_convenio)" .
-            "Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
-             '$c_obs', '$c_cpf', '$c_idendidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
-             , '$c_estadocivil', '$c_cor', , '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$c_id_convenio')";
-
+         fone, fone2, obs, cpf, identidade, sexo, datanasc, indicacao, profissao, 
+         pai, mae, estadocivil, cor, naturalidade, procedencia, matricula, classificacao, dataprimeira, id_convenio)" .
+            " Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
+             '$c_obs', '$c_cpf', '$c_identidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
+             , '$c_estadocivil', '$c_cor',  '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$d_dataprimeira', $c_id_convenio')";
+             echo $c_sql;
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
@@ -293,13 +297,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
 
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label">Data Nascimento</label>
+                        <label class="col-sm-3 col-form-label">Data Nascimento (*)</label>
                         <div class="col-sm-2">
                             <input type="date" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" name="datanasc" id="datanasc" onkeypress="mascaraData(this)" value="<?php echo $d_datanasc; ?>">
                         </div>
-                        <label class="col-sm-1 col-form-label">1a. Consulta</label>
+                        <label class="col-sm-1 col-form-label">1a. Consulta (*)</label>
                         <div class="col-sm-2">
-                            <input type="date" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" name="dataprimeira">
+                            <input type="date" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" id="dataprimeira" name="dataprimeira">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -401,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <label class="col-sm-1 col-form-label">Fone 2</label>
                             <div class="col-sm-2">
-                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class="form-control" name="telefone2" value="<?php echo $c_telefone2; ?>">
+                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class="form-control" id="telefone2" name="telefone2" value="<?php echo $c_telefone2; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
