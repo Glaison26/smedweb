@@ -47,12 +47,20 @@ $c_linha = $result->fetch_assoc();
         </div>
     </div>
     <div class="container -my5">
+        <div style="padding-bottom:20px;">
+            <div class="row mb-3">
+                <div class="offset-sm-0 col-sm-3">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                    <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Voltar</a>
+                </div>
+            </div>
+        </div>
         <div class="panel panel-success">
             <div class="panel-heading">Identificação do Paciente:<?php echo '' . $c_linha['nome']; ?></div>
             <div class="panel-body">
-            <a class="btn btn-secondary" href="/smedweb/pacientes_lista.php"> Voltar</a>
+
                 <div style="padding-top:20px;">
-                    
+
                     <div class="form-group">
                         <label class="col-sm-5 col-form-label">História Clinica</label>
                         <div class="col-sm-12">
