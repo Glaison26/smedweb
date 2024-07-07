@@ -113,11 +113,11 @@ include("conexao.php");
                 <tr class="info">
                     <th scope="col">Número</th>
                     <th scope="col">Nome do Paciênte</th>
+                    <th scope="col">Convênio</th>
+                    <th scope="col">Matrícula</th>
                     <th scope="col">Sexo</th>
                     <th scope="col">Telefone 1</th>
                     <th scope="col">Telefone 2</th>
-                    <th scope="col">Convênio</th>
-                    <th scope="col">Matrícula</th>
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
@@ -146,17 +146,17 @@ include("conexao.php");
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[nome]</td>
+                    <td>$c_linha[convenio]</td>
+                    <td>$c_linha[matricula]</td>
                     <td>$c_sexo</td>
                     <td>$c_linha[fone]</td>
                     <td>$c_linha[fone2]</td>
-                    <td>$c_linha[convenio]</td>
-                    <td>$c_linha[matricula]</td>
-                    
+                                     
                     <td>
+                    <a class='btn btn-info btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-primary btn-sm' title='História Clinica' href='/smedweb/historia.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'></span></a>
                     <a class='btn btn-success btn-sm' title='Eventos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-book'></span></a>
                     <a class='btn btn-secondary btn-sm' title='Imagens' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-picture'></span></a>
-                    <a class='btn btn-info btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
