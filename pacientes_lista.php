@@ -156,7 +156,7 @@ include("conexao.php");
                     <a class='btn btn-info btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-primary btn-sm' title='História Clinica' href='/smedweb/historia.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'></span></a>
                     <a class='btn btn-success btn-sm' title='Eventos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-book'></span></a>
-                    <a class='btn btn-secondary btn-sm' title='Imagens' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-picture'></span></a>
+                    <a class='btn btn-secondary btn-sm' title='Imagens' href='/smedweb/imagens.php?id=$c_linha[id]'><span class='glyphicon glyphicon-picture'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
