@@ -17,9 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smed - Sistema Médico</title>
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smed - Sistema Médico</title>
@@ -55,7 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <div class="panel-body">
                     <div class="row mb-3">
                         <div class="offset-sm-0 col-sm-3">
-                            <button type="submit" class="btn btn-Light"></span> <img src="\smedweb\images\salvar.png" alt="" width="15" height="15"> Salvar</button>
+                            <label>Nova Imagem: </label>
+                            <input type="file" name="arquivo" accept="image/*"><br><br>
+                            <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\enviafoto.png" alt="" width="20" height="20"> Enviar Foto</button>
                             <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                         </div>
                     </div>
