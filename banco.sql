@@ -271,9 +271,28 @@ CREATE TABLE IF NOT EXISTS `historia` (
   PRIMARY KEY (`id`),
   KEY `FK_historia_pacientes` (`id_paciente`),
   CONSTRAINT `FK_historia_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.historia: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.historia: ~2 rows (aproximadamente)
+REPLACE INTO `historia` (`id`, `id_paciente`, `historia`, `data`) VALUES
+	(1, 1, _binary 0x48697374c3b372696120436cc3ad6e69636120646f2050616369656e7465, NULL),
+	(2, 3, _binary '', NULL);
+
+-- Copiando estrutura para tabela smed.imagens_pacientes
+CREATE TABLE IF NOT EXISTS `imagens_pacientes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_paciente` int NOT NULL,
+  `pasta_imagem` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+  `data` date NOT NULL,
+  `descricao` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_imagens_pacientes_pacientes` (`id_paciente`),
+  CONSTRAINT `FK_imagens_pacientes_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.imagens_pacientes: ~1 rows (aproximadamente)
+REPLACE INTO `imagens_pacientes` (`id`, `id_paciente`, `pasta_imagem`, `data`, `descricao`) VALUES
+	(1, 1, '\\fotos\\teste.jpg', '2024-07-08', 'Teste da primeira imagem');
 
 -- Copiando estrutura para tabela smed.indices
 CREATE TABLE IF NOT EXISTS `indices` (
@@ -353,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   `datanasc` date DEFAULT NULL,
   `estadocivil` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `mae` varchar(150) DEFAULT NULL,
-  `pae` varchar(150) DEFAULT NULL,
+  `pai` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `endereco` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `bairro` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `cidade` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -377,11 +396,12 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   KEY `FK_pacientes_profissionais` (`id_profissional`),
   CONSTRAINT `FK_pacientes_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_pacientes_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.pacientes: ~1 rows (aproximadamente)
-REPLACE INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pae`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
-	(1, 1, 2, 'Glaison Queiroz', 'M', 'Pardo', '1968-10-26', 'Solteiro', 'Emilia ', 'Valdir Queiroz', 'Ruada Intendência, 316', 'Centro', 'Sabará', '34505480', 'MG', 'glaison26.queiroz@gmail.com', '(31)36722550', '(31)984262508', 'Programador', 'Clinia', '2024-07-01', _binary 0x7465737465, 'Clinica', 'Brasileiro', 'Sabará', '88845665', NULL, NULL);
+REPLACE INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pai`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
+	(1, 1, 2, 'Glaison Queiroz ', 'M', 'Faio', '1968-10-26', 'Casado', 'Emilia ', 'Valdir Queiroz', 'Ruada Intendência, 316', 'Centro', 'Sabará', '34505480', 'SP', 'glaison26.queiroz@gmail.com', '(31)36722550', '(31)984262508', 'Programador', 'não se aplica', '2024-07-01', _binary 0x7465737465, 'Clinica', 'Brasileiro', 'Sabará', '88845665', '69551022653', 'm4662097'),
+	(3, 2, NULL, 'Lucinho', 'M', 'Leuco', '1985-11-26', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 6995-5666', '', '', '', '2024-07-03', _binary '', '', '', '', '45646546', '', '');
 
 -- Copiando estrutura para tabela smed.parametros_eventos
 CREATE TABLE IF NOT EXISTS `parametros_eventos` (
