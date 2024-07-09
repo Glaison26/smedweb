@@ -1,6 +1,7 @@
 <?php
 include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
+date_default_timezone_set('America/Sao_Paulo');
 session_start();
 if (isset($_GET["id"])) { // pego a id do paciente
     $c_id = $_GET["id"];
@@ -8,7 +9,24 @@ if (isset($_GET["id"])) { // pego a id do paciente
 } else {
     $c_id = $_SESSION["id_paciente"];
 }
-//if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+if (isset($_POST["btnfoto"])) {  // botão para incluir imagem
+    $dir = "img/";
+    $arquivo = $_FILES['arquivo'];
+    $_SESSION['c_nomefoto'] = $_FILES['arquivo']['name'];
+
+    $c_nomefoto = $arquivo["name"];
+    move_uploaded_file($arquivo["tmp_name"], "$dir/" . $arquivo["name"]);
+    //echo $c_nomefoto;
+    // incluir registro da imagem no banco de dados
+    $c_pasta = $dir . $c_nomefoto;
+    
+    $d_data = date('Y-m-d');
+    $c_sql = "insert into imagens_pacientes (id_paciente, pasta_imagem, data) value ('$c_id', '$c_pasta', '$d_data')";
+    $result = $conection->query($c_sql);
+}
+
+
 
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
@@ -17,7 +35,7 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
-//}
+//
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +46,6 @@ $c_linha = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smed - Sistema Médico</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
@@ -100,26 +117,28 @@ $c_linha = $result->fetch_assoc();
         </div>
     </div>
     <div class="container -my5">
-        <form method="post" class="form-horizontal">
+        <form method="post" enctype="multipart/form-data">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+                    <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome'] ?></h4>
                 </div>
                 <div class="panel-body">
                     <div class="row mb-7">
                         <div class="offset-sm-0 col-sm-4">
-                            <label for="arquivo" class="btn">Selecione nova Imagem</label>
-                            <button class="btn btn-info" onclick="document.getElementById('arquivo').click()"><img src="\smedweb\images\camera.png" alt="" width="20" height="20"> Nova Imagem</button>
+                            <label for="arquivo">Selecione nova Imagem</label>
+                            <!-- <button class="btn btn-info" onclick="document.getElementById('arquivo').click()"><img src="\smedweb\images\camera.png" alt="" width="20" height="20"> Nova Imagem</button> -->
                             <hr>
-                            <input type="file" name="arquivo" id="arquivo" accept="image/*" style="display:none"><br>
+                            <input type="file" name="arquivo" id="arquivo" accept="image/*"><br>
                             <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Enviar imagem</button>
                             <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-info">
-                    
-                    <div class="panel-heading text-center">Tabela de Imagens</div>
+
+                    <div class="panel-heading text-center">
+                        <h5>Tabela de Imagens</h5>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div style="padding-top:5px;">
@@ -166,7 +185,6 @@ $c_linha = $result->fetch_assoc();
                                 ?>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
