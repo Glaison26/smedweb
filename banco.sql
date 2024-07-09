@@ -288,11 +288,16 @@ CREATE TABLE IF NOT EXISTS `imagens_pacientes` (
   PRIMARY KEY (`id`),
   KEY `FK_imagens_pacientes_pacientes` (`id_paciente`),
   CONSTRAINT `FK_imagens_pacientes_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.imagens_pacientes: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela smed.imagens_pacientes: ~6 rows (aproximadamente)
 REPLACE INTO `imagens_pacientes` (`id`, `id_paciente`, `pasta_imagem`, `data`, `descricao`) VALUES
-	(1, 1, '\\fotos\\teste.jpg', '2024-07-08', 'Teste da primeira imagem');
+	(2, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
+	(3, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
+	(4, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
+	(5, 3, 'img/imagem1.jpeg', '2024-07-09', NULL),
+	(6, 3, 'img/imagem2.jpeg', '2024-07-09', NULL),
+	(7, 3, 'img/imagem3.jpeg', '2024-07-09', NULL);
 
 -- Copiando estrutura para tabela smed.indices
 CREATE TABLE IF NOT EXISTS `indices` (

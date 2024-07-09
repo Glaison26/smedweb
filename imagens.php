@@ -10,7 +10,7 @@ if (isset($_GET["id"])) { // pego a id do paciente
     $c_id = $_SESSION["id_paciente"];
 }
 
-if (isset($_POST["btnfoto"])) {  // botão para incluir imagem
+if  ((isset($_POST["btnfoto"]))&&($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para incluir imagem
     $dir = "img/";
     $arquivo = $_FILES['arquivo'];
     $_SESSION['c_nomefoto'] = $_FILES['arquivo']['name'];
@@ -20,7 +20,7 @@ if (isset($_POST["btnfoto"])) {  // botão para incluir imagem
     //echo $c_nomefoto;
     // incluir registro da imagem no banco de dados
     $c_pasta = $dir . $c_nomefoto;
-    
+
     $d_data = date('Y-m-d');
     $c_sql = "insert into imagens_pacientes (id_paciente, pasta_imagem, data) value ('$c_id', '$c_pasta', '$d_data')";
     $result = $conection->query($c_sql);
@@ -75,7 +75,7 @@ $c_linha = $result->fetch_assoc();
                     'aTargets': [4]
                 }, {
                     'aTargets': [0],
-                    "visible": true
+                    "visible": false
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -110,6 +110,10 @@ $c_linha = $result->fetch_assoc();
         });
     </script>
 
+
+
+
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -122,24 +126,19 @@ $c_linha = $result->fetch_assoc();
                 <div class="panel-heading">
                     <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome'] ?></h4>
                 </div>
-                <div class="panel-body">
-                    <div class="row mb-7">
-                        <div class="offset-sm-0 col-sm-4">
-                            <label for="arquivo">Selecione nova Imagem</label>
-                            <!-- <button class="btn btn-info" onclick="document.getElementById('arquivo').click()"><img src="\smedweb\images\camera.png" alt="" width="20" height="20"> Nova Imagem</button> -->
-                            <hr>
-                            <input type="file" name="arquivo" id="arquivo" accept="image/*"><br>
-                            <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Enviar imagem</button>
-                            <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-info">
+                <div class="panel panel-Light">
 
-                    <div class="panel-heading text-center">
-                        <h5>Tabela de Imagens</h5>
+
+                    <!-- <button class="btn btn-info" onclick="document.getElementById('arquivo').click()"><img src="\smedweb\images\camera.png" alt="" width="20" height="20"> Nova Imagem</button> -->
+                    <br>
+                    <div style="padding-left:7px;">
+                        <input type="file" name="arquivo" id="arquivo" accept="image/*"><br>
+                        <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Enviar imagem</button>
+                        <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                     </div>
+
                 </div>
+
                 <div class="panel-body">
                     <div style="padding-top:5px;">
                         <table class="table display table-bordered tabimagens">
@@ -173,7 +172,7 @@ $c_linha = $result->fetch_assoc();
                                             <td>$c_linha[descricao]</td>
                                             <td>$c_linha[pasta_imagem]</td>
                                             <td>
-                                            <a class='btn btn-info btn-sm' title='Visualizar' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-eye-open'></span> Visualizar</a>
+                                            <a class='btn btn-info btn-sm' title='Visualizar ' href='/smedweb/imagens_visualizar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-eye-open'> Visualizar</span></a>
                                             <a class='btn btn-primary btn-sm' title='Lista de Imagens' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-list-alt'></span> Listar</a>
                                             <a class='btn btn-danger btn-sm' title='Excluir' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span> Excluir</a>
                                             
@@ -191,6 +190,13 @@ $c_linha = $result->fetch_assoc();
         </form>
     </div>
 
+    </div>
+
+
 </body>
+
+
+
+
 
 </html>
