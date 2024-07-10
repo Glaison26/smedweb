@@ -35,6 +35,9 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
+$_SESSION["paciente_nome"] = $c_linha['nome'];
+$c_caminho = '/smedweb/imagens_lista.php?id='.$c_id;
+
 //
 ?>
 
@@ -122,19 +125,20 @@ $c_linha = $result->fetch_assoc();
     </div>
     <div class="container -my5">
         <form method="post" enctype="multipart/form-data">
-            <div class="panel panel-success">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome'] ?></h4>
                 </div>
                 <div class="panel panel-Light">
-
-
                     <!-- <button class="btn btn-info" onclick="document.getElementById('arquivo').click()"><img src="\smedweb\images\camera.png" alt="" width="20" height="20"> Nova Imagem</button> -->
                     <br>
                     <div style="padding-left:7px;">
-                        <input type="file" name="arquivo" id="arquivo" accept="image/*"><br>
-                        <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Enviar imagem</button>
+                        
+                        <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Carregar imagem</button>
+                        <a class='btn btn-Light btn-sm' title='Lista de Imagens' href="<?php echo $c_caminho;?>"><span class='glyphicon glyphicon-list-alt'></span> Listar Imagens</a>
                         <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+                        <hr>
+                        <input type="file" name="arquivo" id="arquivo" accept="image/*">
                     </div>
 
                 </div>
@@ -154,7 +158,7 @@ $c_linha = $result->fetch_assoc();
                             <tbody>
                                 <?php
                                 // faço a Leitura da tabela com imagens
-                                $c_sql = "SELECT * FROM imagens_pacientes where imagens_pacientes.id_paciente='$c_id' ORDER BY imagens_pacientes.`data`";
+                                $c_sql = "SELECT * FROM imagens_pacientes where imagens_pacientes.id_paciente='$c_id' ORDER BY imagens_pacientes.`data` desc";
                                 $result = $conection->query($c_sql);
                                 // verifico se a query foi correto
                                 if (!$result) {
@@ -173,7 +177,6 @@ $c_linha = $result->fetch_assoc();
                                             <td>$c_linha[pasta_imagem]</td>
                                             <td>
                                             <a class='btn btn-info btn-sm' title='Visualizar ' href='/smedweb/imagens_visualizar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-eye-open'> Visualizar</span></a>
-                                            <a class='btn btn-primary btn-sm' title='Lista de Imagens' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-list-alt'></span> Listar</a>
                                             <a class='btn btn-danger btn-sm' title='Excluir' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span> Excluir</a>
                                             
                                             </td>

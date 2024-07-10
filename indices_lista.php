@@ -239,8 +239,7 @@ include("conexao.php");
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                    //$n_valor = 'R$ '.$fmt->formatCurrency($c_linha['valor'], "   ") . "\n";
-                    //$n_valor=$c_linha['valor'];
+                    
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>

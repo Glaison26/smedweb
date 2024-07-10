@@ -16,7 +16,7 @@ $c_id = $_GET["id"];
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
-
+//
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         header('location: /smedweb/imagens.php');
         exit;
     }
+
 
     $c_sql = "SELECT * FROM imagens_pacientes where imagens_pacientes.id='$c_id'";
     $result = $conection->query($c_sql);
@@ -109,7 +110,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         ?>
 
         <form method="post">
-
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4>Identificação do Paciente:<?php echo ' ' . $_SESSION["paciente_nome"] ?></h4>
+                </div>
+            </div>
             <hr>
             <input type="hidden" name="id" value="<?php echo $c_id; ?>">
             <div class="row mb-3">
@@ -138,9 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <label class="col-md-3 form-label">Imagem</label>
                 <div class="panel panel-success">
                     <div class="panel-body">
-
                         <img class="rounded mx-auto d-block" class="img-responsive" src="\smedweb\img\<?php echo $c_pasta; ?>" class="img-fluid" style="height :500px" style="width:500px">
-
                     </div>
                 </div>
             </div>
