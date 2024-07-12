@@ -4,7 +4,6 @@ include("conexao.php"); // conexão de banco de dados
 $c_id = $_GET["id"]; // pego a id do paciente
 $c_historia = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
     // sql para pegar dados do paciente selecionado
     $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
     $result = $conection->query($c_sql);
@@ -35,6 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('location: /smedweb/pacientes_lista.php');
 }
 // sair da historia
+<<<<<<< HEAD
+=======
+
+>>>>>>> bc242400986ca83201917ee65b0d529f7f9da1cf
 ?>
 
 <!DOCTYPE html>
@@ -70,20 +73,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="container -my5">
         <form method="post" class="form-horizontal">
-            <div style="padding-bottom:20px;">
-
-                <div class="row mb-3">
-                    <div class="offset-sm-0 col-sm-3">
-                        <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Voltar</a>
+           
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row mb-3">
+                        <div class="offset-sm-0 col-sm-3">
+                            <button type="submit" class="btn btn-Light"></span> <img src="\smedweb\images\salvar.png" alt="" width="15" height="15"> Salvar</button>
+                            <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-success">
-                <div class="panel-heading"><h4>Identificação do Paciente:<?php echo '' . $c_linha['nome']; ?></h4></div>
                 <div class="panel-body">
 
-                    <div style="padding-top:20px;">
+                    <div style="padding-top:5px;">
 
                         <div class="form-group">
                             <label class="col-sm-5 col-form-label">História Clinica</label>
