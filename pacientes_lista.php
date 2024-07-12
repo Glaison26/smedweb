@@ -136,7 +136,7 @@ include("conexao.php");
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                    // Coloco string sim ou não ao invés de s ou n
+                    // Coloco string masculino ou feminino ao invés de m ou f
                     if ($c_linha['sexo']=='M'){
                         $c_sexo = "Masculino";                            
                     }else {
