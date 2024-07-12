@@ -10,7 +10,7 @@ if (isset($_GET["id"])) { // pego a id do paciente
     $c_id = $_SESSION["id_paciente"];
 }
 
-if  ((isset($_POST["btnfoto"]))&&($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para incluir imagem
+if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para incluir imagem
     $dir = "img/";
     $arquivo = $_FILES['arquivo'];
     $_SESSION['c_nomefoto'] = $_FILES['arquivo']['name'];
@@ -36,7 +36,7 @@ if (!$result) {
 }
 $c_linha = $result->fetch_assoc();
 $_SESSION["paciente_nome"] = $c_linha['nome'];
-$c_caminho = '/smedweb/imagens_lista.php?id='.$c_id;
+$c_caminho = '/smedweb/imagens_lista.php?id=' . $c_id;
 
 //
 ?>
@@ -113,9 +113,14 @@ $c_caminho = '/smedweb/imagens_lista.php?id='.$c_id;
         });
     </script>
 
-
-
-
+    <script language="Javascript">
+        function confirmacao(id) {
+            var resposta = confirm("Deseja remover esse registro?");
+            if (resposta == true) {
+                window.location.href = "/smedweb/imagens_excluir.php?id=" + id;
+            }
+        }
+    </script>
 
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -133,9 +138,9 @@ $c_caminho = '/smedweb/imagens_lista.php?id='.$c_id;
                     <!-- <button class="btn btn-info" onclick="document.getElementById('arquivo').click()"><img src="\smedweb\images\camera.png" alt="" width="20" height="20"> Nova Imagem</button> -->
                     <br>
                     <div style="padding-left:7px;">
-                        
+
                         <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Carregar imagem</button>
-                        <a class='btn btn-Light btn-sm' title='Lista de Imagens' href="<?php echo $c_caminho;?>"><span class='glyphicon glyphicon-list-alt'></span> Listar Imagens</a>
+                        <a class='btn btn-Light btn-sm' title='Lista de Imagens' href="<?php echo $c_caminho; ?>"><span class='glyphicon glyphicon-list-alt'></span> Listar Imagens</a>
                         <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                         <hr>
                         <input type="file" name="arquivo" id="arquivo" accept="image/*">
