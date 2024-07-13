@@ -34,10 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('location: /smedweb/pacientes_lista.php');
 }
 // sair da historia
-<<<<<<< HEAD
-=======
-
->>>>>>> bc242400986ca83201917ee65b0d529f7f9da1cf
 ?>
 
 <!DOCTYPE html>
