@@ -39,13 +39,7 @@ if (!isset($_SESSION['newsession'])) {
 <body class="sb-nav-fixed">
 	<main>
 
-		<div>
-			<div class="panel-heading text-center">
-				<h1><strong>SmartMed</strong></h1>
-				<h2><strong>Menu Inicial do Sistema</strong></h2>
-				<br>
-			</div>
-		</div>
+		
 
 		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 			<div class="container -my5">
@@ -147,7 +141,7 @@ if (!isset($_SESSION['newsession'])) {
 			}
 			?>
 			<div style="padding-left:20px;">
-				<h6><strong> Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></strong></h6>
+				<h5><strong> Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></strong></h5>
 			</div>
 		</div>
 		<!-- END nav -->
