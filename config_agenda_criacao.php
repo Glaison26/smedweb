@@ -147,8 +147,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <td>$c_linha[fim3]</td>
                             <td>$c_linha[duracao3]</td>
               
-            </tr>
-            ";
+                            </tr>
+                                ";
                 }
                 ?>
             </tbody>
