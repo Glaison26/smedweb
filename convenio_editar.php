@@ -454,7 +454,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         </div>
                     </div>
                 </div>
-
+  
                 <hr>
                 <div class="row mb-3">
                     <div class="offset-sm-0 col-sm-3">
