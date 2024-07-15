@@ -63,7 +63,7 @@ if (!isset($_SESSION['newsession'])) {
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
 								<a class="dropdown-item" href="#"><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
 								<a class="dropdown-item" href="#">____________________________________________</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\config_agenda.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
+								<a class="dropdown-item" href="\smedweb\config_agenda.php"><img src="\smedweb\images\config_agenda.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown">

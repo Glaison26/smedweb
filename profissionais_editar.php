@@ -250,7 +250,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <li role="presentation" class="active"><a href="#dados_profissional" aria-controls="home" role="tab" data-toggle="tab">Dados do Profissional</a></li>
                 <li role="presentation"><a href="#dados_contatos" aria-controls="dados_contatos" role="tab" data-toggle="tab">Contatos/Identificação</a></li>
                 <li role="presentation"><a href="#dados_obs" aria-controls="dados_obs" role="tab" data-toggle="tab">Observações</a></li>
-                <li role="presentation"><a href="#agenda" aria-controls="agenda" role="tab" data-toggle="tab">Configuração da Agenda</a></li>
             </ul>
 
             <form method="post" class="form-horizontal">
@@ -438,16 +437,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             </div>
                         </div>
                     </div>
-                    <!-- configuração de agenda do profissional -->
-
-                    <div role="tabpanel" class="tab-pane" id="agenda">
-                        <div style="padding-top:20px;">
-                            <div class="form-group">
-                                <p>configuração da agenda</p>
-                            </div>
-                        </div>
-                    </div>
-
+         
                     <hr>
                     <div class="row mb-3">
                         <div class="offset-sm-0 col-sm-3">
