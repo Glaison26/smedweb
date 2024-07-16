@@ -186,15 +186,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <tr class="info">
                     <th scope="col" style="display:none">id</th>
                     <th scope="col">Dia</th>
-                    <th class="bg-info" scope="col">Inicio Manhã</th>
-                    <th class="bg-info" scope="col">Fim Manhã</th>
-                    <th class="bg-info" scope="col">Duração</th>
-                    <th class="bg-info" scope="col">Inicio Tarde</th>
-                    <th class="bg-info" scope="col">Fim Tarde</th>
-                    <th class="bg-info" scope="col">Duração</th>
-                    <th class="bg-info" scope="col">Inicio Noite</th>
-                    <th class="bg-info" scope="col">Fim Noite</th>
-                    <th class="bg-info" scope="col">Duração</th>
+                    <th scope="col">Inicio Manhã</th>
+                    <th scope="col">Fim Manhã</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Inicio Tarde</th>
+                    <th scope="col">Fim Tarde</th>
+                    <th scope="col">Duração</th>
+                    <th scope="col">Inicio Noite</th>
+                    <th scope="col">Fim Noite</th>
+                    <th scope="col">Duração</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
