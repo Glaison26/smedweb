@@ -47,29 +47,101 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartMed - Sistema Médico</title>
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smed - Sistema Médico</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.css" rel="stylesheet">
     <link href="DataTables/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
 </head>
 
 <body>
     <!-- funções e chamadas em javascript -->
     <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="DataTables/datatables.min.js"></script>
-
+    <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
+    <!-- Coleta dados da tabela para edição do registro -->
+    <script>
+        $(document).ready(function() {
+
+            $('.editbtn').on('click', function() {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#up_idField').val(data[0]);
+                $('#up_dia').val(data[1]);
+                // manhã
+                $('#up_inicio1').val(data[2]);
+                $('#up_fim1').val(data[3]);
+                $('#up_duracao1').val(data[4]);
+                // tarde
+                $('#up_inicio2').val(data[5]);
+                $('#up_fim2').val(data[6]);
+                $('#up_duracao2').val(data[7]);
+                // noite
+                $('#up_inicio3').val(data[8]);
+                $('#up_fim3').val(data[9]);
+                $('#up_duracao3').val(data[10]);
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        // Função javascript e ajax para Alteração dos dados
+        $(document).on('submit', '#frmhorario', function(e) {
+            e.preventDefault();
+            var c_id = $('#up_idField').val();
+            var c_dia = $('#up_dia').val();
+            var c_inicio1 = $()
+
+
+            if (c_dia != '') {
+
+                $.ajax({
+                    url: "especialidade_editar.php",
+                    type: "post",
+                    data: {
+                        c_id: c_id,
+                        c_descricao: c_descricao
+
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+
+                        if (status == 'true') {
+                            $('#editmodal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('falha ao incluir dados');
+                        }
+                    }
+                });
+
+            } else {
+                alert('Todos os campos devem ser preenchidos!!');
+            }
+        });
+    </script>
+
 
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -79,29 +151,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     </div>
 
     <div class="container -my5">
-        <a class='btn btn-Light' href='/smedweb/config_agenda.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+
         <hr>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4>Identificação do Paciente:<?php echo ' ' . $c_linha_medico['nome']; ?></h4>
             </div>
         </div>
-      
+
         <hr>
         <table class="table display table-bordered tabconfig">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col" style="display:none">id</th>
                     <th scope="col">Dia</th>
-                    <th class="bg-info" scope="col">Inicio</th>
-                    <th class="bg-info" scope="col">Fim</th>
+                    <th class="bg-info" scope="col">Inicio Manhã</th>
+                    <th class="bg-info" scope="col">Fim Manhã</th>
                     <th class="bg-info" scope="col">Duração</th>
-                    <th class="bg-success" scope="col">Inicio</th>
-                    <th class="bg-success" scope="col">Fim</th>
+                    <th class="bg-success" scope="col">Inicio Tarde</th>
+                    <th class="bg-success" scope="col">Fim Tarde</th>
                     <th class="bg-success" scope="col">Duração</th>
-                    <th class="bg-primary" scope="col">Inicio</th>
-                    <th class="bg-primary" scope="col">Fim</th>
+                    <th class="bg-primary" scope="col">Inicio Noite</th>
+                    <th class="bg-primary" scope="col">Fim Noite</th>
                     <th class="bg-primary" scope="col">Duração</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -126,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             $c_dia = 'Sexta-Feira';
                             break;
                         case "6":
-                            $c_dia = 'Sábado-Feira';
+                            $c_dia = 'Sábado';
                             break;
                         case "7":
                             $c_dia = 'Domingo';
@@ -146,13 +219,113 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <td>$c_linha[inicio3]</td>
                             <td>$c_linha[fim3]</td>
                             <td>$c_linha[duracao3]</td>
-              
+                            <td><button class='btn btn-info editbtn' data-toggle=modal' title='Editar Horários'><span class='glyphicon glyphicon-pencil'> Configurar
+                            </span></button></td>
                             </tr>
                                 ";
                 }
                 ?>
             </tbody>
         </table>
+        <hr>
+        <a class='btn btn-info' href='/smedweb/config_agenda.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+    </div>
+
+
+    <!-- janela modal para edição dos dados dos horários -->
+
+    <!-- Modal para edição dos dados -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Configurar horário</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <form id="frmhorario" method="POST" action="">
+                        <input type="hidden" id="up_idField" name="up_idField">
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Dia da Semana</label>
+                            <div class="col-sm-7">
+                                <input type="text" readonly class="form-control" name="up_dia" id="up_dia">
+                            </div>
+                        </div>
+                        <!-- horários da manhã -->
+                        <label>
+                            <h4><b>Manhã</b></h4>
+                        </label>
+                        <div class="row mb-9">
+                            <label class="col-sm-4 col-form-label">Inicio</label>
+                            <div class="col-sm-3">
+                                <input type="time"  class="form-control" name="up_inicio1" id="up_inicio1">
+                            </div>
+                            <label class="col-sm-1 col-form-label">Fim</label>
+                            <div class="col-sm-3">
+                                <input type="time"  class="form-control" name="up_fim1" id="up_fim1">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Duração (em minutos)</label>
+                            <div class="col-sm-3">
+                                <input type="number"  class="form-control" name="up_duracao1" id="up_duracao1">
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- horários da tarde -->
+                        <label>
+                            <h4><b>Tarde</b></h4>
+                        </label>
+                        <div class="row mb-9">
+                            <label class="col-sm-4 col-form-label">Inicio</label>
+                            <div class="col-sm-3">
+                                <input type="time"  class="form-control" name="up_inicio2" id="up_inicio2">
+                            </div>
+                            <label class="col-sm-1 col-form-label">Fim</label>
+                            <div class="col-sm-3">
+                                <input type="time"  class="form-control" name="up_fim2" id="up_fim2">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Duração (em minutos)</label>
+                            <div class="col-sm-3">
+                                <input type="number"  class="form-control" name="up_duracao2" id="up_duracao2">
+                            </div>
+                        </div> 
+                        <hr>
+                        <!-- horários da noite -->
+                        <label>
+                            <h4><b>Noite</b></h4>
+                        </label>
+                        <div class="row mb-9">
+                            <label class="col-sm-4 col-form-label">Inicio</label>
+                            <div class="col-sm-3">
+                                <input type="time"  class="form-control" name="up_inicio3" id="up_inicio3">
+                            </div>
+                            <label class="col-sm-1 col-form-label">Fim</label>
+                            <div class="col-sm-3">
+                                <input type="time"  class="form-control" name="up_fim3" id="up_fim3">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mb-3">
+                            <label class="col-sm-4 col-form-label">Duração (em minutos)</label>
+                            <div class="col-sm-3">
+                                <input type="number"  class="form-control" name="up_duracao3" id="up_duracao3">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
     </div>
 
 

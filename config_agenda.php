@@ -135,7 +135,8 @@ include("conexao.php");
                     <td>$c_linha[especialidade]</td>
                             
                     <td>
-                    <a class='btn btn-primary btn-sm' title='História Clinica' href='/smedweb/config_agenda_criacao.php?id=$c_linha[id]'><span class='glyphicon glyphicon-calendar'></span> Criar Agenda</a>
+                    <a class='btn btn-primary' title='História Clinica' href='/smedweb/config_agenda_criacao.php?id=$c_linha[id]'>
+                    <span class='glyphicon glyphicon-calendar'></span> Configurar Agenda</a>
                     </td>
 
                     </td>

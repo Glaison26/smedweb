@@ -26,8 +26,6 @@ include("conexao.php");
 
 <body>
     <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    
-    
     <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -218,10 +216,10 @@ include("conexao.php");
         <table class="table display table-bordered tabindices">
             <thead class="thead">
                 <tr class="info">
-                    <th scope="col" width="5%">No.</th>
-                    <th scope="col" width="20%">Descrição</th>
-                    <th scope="col" width="10%">Valor em R$</th>
-                    <th scope="col" width="10%">Ações</th>
+                    <th>No.</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Valor em R$</th>
+                    <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
