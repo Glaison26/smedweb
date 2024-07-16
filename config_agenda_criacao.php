@@ -110,19 +110,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             e.preventDefault();
             var c_id = $('#up_idField').val();
             var c_dia = $('#up_dia').val();
-            var c_inicio1 = $()
+            var c_inicio1 = $('#up_inicio1').val();
+            var c_fim1 = $('#up_fim1').val();
+            var c_duracao1 = $('#up_duracao1').val();
+            //    
+            var c_inicio2 = $('#up_inicio2').val();
+            var c_fim2 = $('#up_fim2').val();
+            var c_duracao2 = $('#up_duracao2').val();
 
-
+            var c_inicio3 = $('#up_inicio3').val();
+            var c_fim3 = $('#up_fim3').val();
+            var c_duracao3 = $('#up_duracao3').val();
+            //
             if (c_dia != '') {
-
+                
                 $.ajax({
-                    url: "especialidade_editar.php",
+                    url: "config_agenda_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_descricao: c_descricao
+                        c_dia: c_dia,
+                        c_inicio1: c_inicio1,
+                        c_fim1: c_fim1,
+                        c_duracao1: c_duracao1,
+                        //    
+                        c_inicio2: c_inicio2,
+                        c_fim2: c_fim2,
+                        c_duracao2: c_duracao2,
+                        //
+                        c_inicio3: c_inicio3,
+                        c_fim3: c_fim3,
+                        c_duracao3: c_duracao3
 
                     },
+                    
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
@@ -168,12 +189,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                     <th class="bg-info" scope="col">Inicio Manhã</th>
                     <th class="bg-info" scope="col">Fim Manhã</th>
                     <th class="bg-info" scope="col">Duração</th>
-                    <th class="bg-success" scope="col">Inicio Tarde</th>
-                    <th class="bg-success" scope="col">Fim Tarde</th>
-                    <th class="bg-success" scope="col">Duração</th>
-                    <th class="bg-primary" scope="col">Inicio Noite</th>
-                    <th class="bg-primary" scope="col">Fim Noite</th>
-                    <th class="bg-primary" scope="col">Duração</th>
+                    <th class="bg-info" scope="col">Inicio Tarde</th>
+                    <th class="bg-info" scope="col">Fim Tarde</th>
+                    <th class="bg-info" scope="col">Duração</th>
+                    <th class="bg-info" scope="col">Inicio Noite</th>
+                    <th class="bg-info" scope="col">Fim Noite</th>
+                    <th class="bg-info" scope="col">Duração</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -242,9 +263,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                     <h4 class="modal-title" id="exampleModalLabel">Configurar horário</h4>
                 </div>
                 <div class="modal-body">
-                    
+
                     <form id="frmhorario" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
+                        
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Dia da Semana</label>
                             <div class="col-sm-7">
@@ -258,18 +280,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-9">
                             <label class="col-sm-4 col-form-label">Inicio</label>
                             <div class="col-sm-3">
-                                <input type="time"  class="form-control" name="up_inicio1" id="up_inicio1">
+                                <input type="time" class="form-control" name="up_inicio1" id="up_inicio1">
                             </div>
                             <label class="col-sm-1 col-form-label">Fim</label>
                             <div class="col-sm-3">
-                                <input type="time"  class="form-control" name="up_fim1" id="up_fim1">
+                                <input type="time" class="form-control" name="up_fim1" id="up_fim1">
                             </div>
                         </div>
                         <br>
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Duração (em minutos)</label>
                             <div class="col-sm-3">
-                                <input type="number"  class="form-control" name="up_duracao1" id="up_duracao1">
+                                <input type="number" class="form-control" name="up_duracao1" id="up_duracao1">
                             </div>
                         </div>
                         <hr>
@@ -280,20 +302,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-9">
                             <label class="col-sm-4 col-form-label">Inicio</label>
                             <div class="col-sm-3">
-                                <input type="time"  class="form-control" name="up_inicio2" id="up_inicio2">
+                                <input type="time" class="form-control" name="up_inicio2" id="up_inicio2">
                             </div>
                             <label class="col-sm-1 col-form-label">Fim</label>
                             <div class="col-sm-3">
-                                <input type="time"  class="form-control" name="up_fim2" id="up_fim2">
+                                <input type="time" class="form-control" name="up_fim2" id="up_fim2">
                             </div>
                         </div>
                         <br>
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Duração (em minutos)</label>
                             <div class="col-sm-3">
-                                <input type="number"  class="form-control" name="up_duracao2" id="up_duracao2">
+                                <input type="number" class="form-control" name="up_duracao2" id="up_duracao2">
                             </div>
-                        </div> 
+                        </div>
                         <hr>
                         <!-- horários da noite -->
                         <label>
@@ -302,18 +324,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-9">
                             <label class="col-sm-4 col-form-label">Inicio</label>
                             <div class="col-sm-3">
-                                <input type="time"  class="form-control" name="up_inicio3" id="up_inicio3">
+                                <input type="time" class="form-control" name="up_inicio3" id="up_inicio3">
                             </div>
                             <label class="col-sm-1 col-form-label">Fim</label>
                             <div class="col-sm-3">
-                                <input type="time"  class="form-control" name="up_fim3" id="up_fim3">
+                                <input type="time" class="form-control" name="up_fim3" id="up_fim3">
                             </div>
                         </div>
                         <br>
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Duração (em minutos)</label>
                             <div class="col-sm-3">
-                                <input type="number"  class="form-control" name="up_duracao3" id="up_duracao3">
+                                <input type="number" class="form-control" name="up_duracao3" id="up_duracao3">
                             </div>
                         </div>
 
