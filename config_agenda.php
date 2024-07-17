@@ -34,7 +34,7 @@ include("conexao.php");
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.js"></script>
 
-    
+
     <script language="Javascript">
         function mensagem(msg) {
             alert(msg);
@@ -87,6 +87,7 @@ include("conexao.php");
 
         });
     </script>
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -95,13 +96,13 @@ include("conexao.php");
     </div>
     <br>
     <div class="container -my5">
-      
+
         <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
-        <a class='btn btn-warning' title="Suprimir datas para não serem geradas" href='#'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
+        <a class='btn btn-warning' title="Suprimir datas para não serem geradas" href='datas_suprimidas_lista.php'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
         <hr>
         <table class="table display table-bordered tabprofissionais">
             <thead class="thead">
-                <tr  class="info">
+                <tr class="info">
                     <th scope="col">id</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Especialidade</th>
@@ -110,11 +111,11 @@ include("conexao.php");
             </thead>
             <tbody>
                 <?php
-                      
+
                 // faço a Leitura da tabela com sql
                 $c_sql = "SELECT profissionais.id, profissionais.nome, profissionais.fone1, profissionais.fone2, 
-                especialidades.descricao  AS especialidade".
-                " FROM profissionais JOIN especialidades ON profissionais.id_especialidade=especialidades.id
+                especialidades.descricao  AS especialidade" .
+                    " FROM profissionais JOIN especialidades ON profissionais.id_especialidade=especialidades.id
                 where profissionais.gera_agenda='S'
                  order by profissionais.nome";
                 $result = $conection->query($c_sql);

@@ -98,8 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $msg_erro = "CPF informado inválido!!";
             break;
         }
-       
-       
+             
         // rotina para pegar id da especialidade selecionada
         $c_convenio  = $_POST['convenio'];
         $c_sql_convenio = "SELECT convenios.id, convenios.nome FROM convenios where convenios.nome='$c_convenio'";
