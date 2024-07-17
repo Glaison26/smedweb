@@ -95,10 +95,9 @@ include("conexao.php");
     </div>
     <br>
     <div class="container -my5">
-
-        <a class="btn btn-success btn-sm" href="/smedweb/profissionais_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
+      
+        <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+        <a class='btn btn-warning' title="Suprimir datas para não serem geradas" href='#'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
         <hr>
         <table class="table display table-bordered tabprofissionais">
             <thead class="thead">
@@ -106,7 +105,6 @@ include("conexao.php");
                     <th scope="col">id</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Especialidade</th>
-                  
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
@@ -135,8 +133,11 @@ include("conexao.php");
                     <td>$c_linha[especialidade]</td>
                             
                     <td>
-                    <a class='btn btn-primary' title='História Clinica' href='/smedweb/config_agenda_criacao.php?id=$c_linha[id]'>
+                    <a class='btn btn-primary' title='Configuração da agenda do profissional' href='/smedweb/config_agenda_criacao.php?id=$c_linha[id]'>
                     <span class='glyphicon glyphicon-calendar'></span> Configurar Agenda</a>
+                    <a class='btn btn-success' title='Gerar Agenda do Profissional' href='#'>
+                    <img src='\smedweb\images\gerar_agenda2.png' alt='' width='20' height='20'> Gerar Agenda</a>
+                    
                     </td>
 
                     </td>

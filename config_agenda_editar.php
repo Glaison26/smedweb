@@ -19,9 +19,11 @@ $c_duracao2 = $_POST['c_duracao2'];
 $c_inicio3 = $_POST['c_inicio3'];
 $c_fim3 = $_POST['c_fim3'];
 $c_duracao3 = $_POST['c_duracao3'];
-
+// sql para alterar horários editados
 $c_sql = "Update  agendaconfig" .
-" SET inicio1 = '$c_inicio1', inicio2 = '$c_inicio2', inicio3 = '$c_inicio3' where id=$c_id";
+" SET inicio1 = '$c_inicio1', inicio2 = '$c_inicio2', inicio3 = '$c_inicio3'
+, fim1='$c_fim1', fim2='$c_fim2', fim3='$c_fim3', duracao1='$c_duracao1', duracao2='$c_duracao2', duracao3='$c_duracao3'
+ where id=$c_id";
 
 $result = $conection->query($c_sql);
 

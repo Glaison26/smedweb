@@ -27,7 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         $i_contador = 1;
         while ($i_contador < 8) {
             $c_contador = strval($i_contador);
-            $c_sql_insere = "Insert into agendaconfig (id_profissional, dia) value ('$c_id', '$c_contador')";
+            $c_sql_insere = "Insert into agendaconfig (id_profissional, dia, inicio1, inicio2, inicio3
+            , fim1, fim2, fim3, duracao1, duracao2, duracao3) 
+            value ('$c_id', '$c_contador', '00:00', '00:00', '00:00'
+            , '00:00', '00:00', '00:00', '0', '0', '0')";
             $result = $conection->query($c_sql_insere);
             $i_contador++;
             $c_sql = "select * from agendaconfig where id_profissional='$c_id'";
@@ -176,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         <hr>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <h4>Identificação do Paciente:<?php echo ' ' . $c_linha_medico['nome']; ?></h4>
+                <h4>Identificação do Profissional:<?php echo ' ' . $c_linha_medico['nome']; ?></h4>
             </div>
         </div>
 
@@ -230,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                     echo "
                             <tr>
                             <td style='display:none'>$c_linha[id]</td>
-                            <td>$c_dia</td>
+                            <td class='info'>$c_dia</td>
                             <td>$c_linha[inicio1]</td>
                             <td>$c_linha[fim1]</td>
                             <td>$c_linha[duracao1]</td>
