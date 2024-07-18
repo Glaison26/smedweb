@@ -168,7 +168,7 @@ include("conexao.php");
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novaModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <hr>
         <table class="table display table-bordered tabsuprimidas">
             <thead class="thead">
