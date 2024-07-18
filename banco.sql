@@ -19,12 +19,22 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_profissional` int NOT NULL,
   `data` date NOT NULL,
+  `dia` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `FK_agenda_profissionais` (`id_profissional`),
   CONSTRAINT `FK_agenda_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agenda: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.agenda: ~8 rows (aproximadamente)
+REPLACE INTO `agenda` (`id`, `id_profissional`, `data`, `dia`) VALUES
+	(1, 1, '2024-07-18', ''),
+	(2, 1, '2024-07-19', ''),
+	(3, 1, '2024-07-20', ''),
+	(4, 1, '2024-07-21', ''),
+	(5, 1, '2024-07-22', ''),
+	(6, 1, '2024-07-23', ''),
+	(7, 1, '2024-07-24', ''),
+	(8, 1, '2024-07-25', '');
 
 -- Copiando estrutura para tabela smed.agendaconfig
 CREATE TABLE IF NOT EXISTS `agendaconfig` (
@@ -40,21 +50,28 @@ CREATE TABLE IF NOT EXISTS `agendaconfig` (
   `inicio3` time DEFAULT NULL,
   `fim3` time DEFAULT NULL,
   `duracao3` int DEFAULT NULL,
-  `Habilitado` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `Habilitado` char(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_agendaconfig_profissionais` (`id_profissional`),
   CONSTRAINT `FK_agendaconfig_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agendaconfig: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.agendaconfig: ~14 rows (aproximadamente)
 REPLACE INTO `agendaconfig` (`id`, `id_profissional`, `dia`, `inicio1`, `fim1`, `duracao1`, `inicio2`, `fim2`, `duracao2`, `inicio3`, `fim3`, `duracao3`, `Habilitado`) VALUES
-	(7, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(8, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, 1, 1, '08:40:00', '12:00:00', 30, '13:00:00', '17:00:00', 30, '18:00:00', '20:00:00', 30, NULL),
+	(8, 1, 2, '08:00:00', NULL, NULL, '12:00:00', NULL, NULL, '00:00:00', NULL, NULL, NULL),
 	(9, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(10, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(11, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(11, 1, 5, '08:00:00', NULL, NULL, '00:00:00', NULL, NULL, '00:00:00', NULL, NULL, NULL),
 	(12, 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(13, 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	(13, 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(14, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(15, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(16, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(17, 2, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(18, 2, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(19, 2, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(20, 2, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.atestados
 CREATE TABLE IF NOT EXISTS `atestados` (
@@ -151,6 +168,20 @@ CREATE TABLE IF NOT EXISTS `convenios` (
 REPLACE INTO `convenios` (`id`, `id_tabela`, `nome`, `razaosocial`, `cnpj`, `inscestad`, `inscmunicipal`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `diaenvio`, `diapagamento`, `percentch`, `contato`, `obs`) VALUES
 	(1, 2, 'Unimed', 'Unimed SA', '75515874000180', '411432', '41234123', 'teste', 'tste', 'Belo Horizonte', '34505480', 'MG', '(31) 589-6369', '(31) 6958-5544', 'unimed@unimed.com.br', 'teste', '', '', '100', 'Joelson', _binary ''),
 	(2, 1, 'Casu', 'Casu SA', '00172442000115', '', '', '', '', '', '', 'AC', '(48) 2759-4679', '(31) 6995-5555', 'suporte@sabara.mg.gov.br', '', '', '', '', 'Glaison', _binary '');
+
+-- Copiando estrutura para tabela smed.datas_suprimidas
+CREATE TABLE IF NOT EXISTS `datas_suprimidas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data_inicio` date NOT NULL,
+  `data_fim` date NOT NULL,
+  `motivo` varchar(120) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.datas_suprimidas: ~0 rows (aproximadamente)
+REPLACE INTO `datas_suprimidas` (`id`, `data_inicio`, `data_fim`, `motivo`) VALUES
+	(1, '2024-12-23', '2024-12-31', 'Férias de Fim de Ano'),
+	(2, '2024-10-01', '2024-10-04', 'Seminário de Dermatologia');
 
 -- Copiando estrutura para tabela smed.diagnosticos
 CREATE TABLE IF NOT EXISTS `diagnosticos` (
@@ -491,8 +522,8 @@ CREATE TABLE IF NOT EXISTS `profissionais` (
 
 -- Copiando dados para a tabela smed.profissionais: ~2 rows (aproximadamente)
 REPLACE INTO `profissionais` (`id`, `id_especialidade`, `nome`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `identidade`, `cpf`, `datanasc`, `sexo`, `gera_agenda`, `observacao`, `crm`) VALUES
-	(1, 2, 'Dr. Glaison Queiroz', '', '', '', '', 'MG', '(48) 2759-4679', '(31) 2121-2223', 'suporte@sabara.mg.gov.br', NULL, '4565465', '69551022653', '2009-07-13', 'M', 'S', _binary 0x7465737465206465206f627365727661c3a7c3a36f, '565465'),
-	(2, 1, 'Dr. Maria de Souza Crus', 'Beco da Chica,100', 'Campeche', 'Belo Horizonte', '3450480', 'MG', '(31) 589-6369', '(31) 6995-5555', 'dasilva@gmail.com', NULL, '', '07415768051', '1997-11-04', 'M', 'S', _binary '', 'crm/mg 456456');
+	(1, 2, 'Dr. Arthur Queiroz', '', '', '', '', 'MG', '(48) 2759-4679', '(31) 2121-2223', 'suporte@sabara.mg.gov.br', NULL, '4565465', '69551022653', '2009-07-13', 'M', 'S', _binary 0x7465737465206465206f627365727661c3a7c3a36f, '565465'),
+	(2, 1, 'Dra. Maria de Souza Cruz', 'Beco da Chica,100', 'Campeche', 'Belo Horizonte', '3450480', 'MG', '(31) 589-6369', '(31) 6995-5555', 'dasilva@gmail.com', NULL, '', '07415768051', '1997-11-04', 'M', 'S', _binary '', 'crm/mg 456456');
 
 -- Copiando estrutura para tabela smed.tabela
 CREATE TABLE IF NOT EXISTS `tabela` (
