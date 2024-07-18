@@ -7,9 +7,25 @@ if (!isset($_SESSION['newsession'])) {
 include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 $c_id = $_GET["id"];
+// sql para pegar nome do medico
 $c_sql_medico = "SELECT profissionais.nome FROM profissionais where id=$c_id";
 $result_medico = $conection->query($c_sql_medico);
 $c_linha_medico = $result_medico->fetch_assoc();
+// inicio de rotina para geração da agenda
+if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
+    $d_datainicio = $_POST['data1'];
+    $d_datafim = $_POST['data2'];
+    echo $d_datainicio."\n";
+    echo $d_datafim;
+    while (strtotime($d_datainicio) <= strtotime($d_datafim)) {
+        
+        // inserir na tabela de agenda
+        $c_sql = "insert into agenda (id_profissional, data) value ('$c_id', '$d_datainicio')";
+        $result = $conection->query($c_sql);
+        $d_datainicio = date('y-m-d', strtotime("+1 days", strtotime($d_datainicio)));
+    }
+}
+// 
 
 ?>
 <!-- front end html -->
@@ -39,7 +55,7 @@ $c_linha_medico = $result_medico->fetch_assoc();
     </div>
     <div class="container -my5">
 
-    <hr>
+        <hr>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h4>Identificação do Profissional:<?php echo ' ' . $c_linha_medico['nome']; ?></h4>
@@ -55,13 +71,13 @@ $c_linha_medico = $result_medico->fetch_assoc();
                     <div class="form-group">
                         <label class="col-md-1 form-label">De</label>
                         <div class="col-sm-2">
-                            <input type="Date" maxlength="10" class="form-control" name="pesquisa" id="pesquisa" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
+                            <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
                         </div>
                         <label class="col-md-1 form-label">até</label>
                         <div class="col-sm-2">
-                            <input type="Date" maxlength="10" class="form-control" name="pesquisa2" id="pesquisa2" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
+                            <input type="Date" maxlength="10" class="form-control" name="data2" id="data2" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
                         </div>
-                        <button type="submit" class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
+                        <button type="submit" name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
                         <a class="btn btn-secondary" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
                     </div>
                 </div>
