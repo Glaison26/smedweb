@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
 
 </head>
 <div class="clearfix" style="display:none"></div>
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <div class="container" style="width: 400px">
 
         <form method="post" class="row g-3">
-            </br></br></br></br></br></br></br></br>
+            </br></br></br></br></br></br>
             <div class="panel panel-primary class">
                 <div class="panel-heading text-center">
                     <h5>Dados para acesso</h5>

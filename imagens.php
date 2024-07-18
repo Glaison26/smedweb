@@ -55,7 +55,7 @@ $c_caminho = '/smedweb/imagens_lista.php?id=' . $c_id;
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.css" rel="stylesheet">
     <link href="DataTables/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
-
+    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
 </head>
 
 <body>
