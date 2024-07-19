@@ -18,23 +18,74 @@
 CREATE TABLE IF NOT EXISTS `agenda` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_profissional` int NOT NULL,
+  `id_convenio` int DEFAULT NULL,
   `data` date NOT NULL,
-  `dia` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '',
+  `dia` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `horario` time DEFAULT NULL,
+  `Nome` varchar(120) DEFAULT NULL,
+  `telefone` varchar(40) DEFAULT NULL,
+  `email` varchar(120) DEFAULT NULL,
+  `observacao` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_agenda_profissionais` (`id_profissional`),
+  KEY `FK_agenda_convenios` (`id_convenio`),
+  CONSTRAINT `FK_agenda_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_agenda_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28659 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agenda: ~8 rows (aproximadamente)
-REPLACE INTO `agenda` (`id`, `id_profissional`, `data`, `dia`) VALUES
-	(1, 1, '2024-07-18', ''),
-	(2, 1, '2024-07-19', ''),
-	(3, 1, '2024-07-20', ''),
-	(4, 1, '2024-07-21', ''),
-	(5, 1, '2024-07-22', ''),
-	(6, 1, '2024-07-23', ''),
-	(7, 1, '2024-07-24', ''),
-	(8, 1, '2024-07-25', '');
+-- Copiando dados para a tabela smed.agenda: ~51 rows (aproximadamente)
+REPLACE INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `horario`, `Nome`, `telefone`, `email`, `observacao`) VALUES
+	(28608, 1, NULL, '2024-07-19', '5', '08:00:00', NULL, NULL, NULL, NULL),
+	(28609, 1, NULL, '2024-07-19', '5', '08:30:00', NULL, NULL, NULL, NULL),
+	(28610, 1, NULL, '2024-07-19', '5', '09:00:00', NULL, NULL, NULL, NULL),
+	(28611, 1, NULL, '2024-07-19', '5', '09:30:00', NULL, NULL, NULL, NULL),
+	(28612, 1, NULL, '2024-07-19', '5', '10:00:00', NULL, NULL, NULL, NULL),
+	(28613, 1, NULL, '2024-07-19', '5', '10:30:00', NULL, NULL, NULL, NULL),
+	(28614, 1, NULL, '2024-07-19', '5', '11:00:00', NULL, NULL, NULL, NULL),
+	(28615, 1, NULL, '2024-07-19', '5', '11:30:00', NULL, NULL, NULL, NULL),
+	(28616, 1, NULL, '2024-07-19', '5', '12:00:00', NULL, NULL, NULL, NULL),
+	(28617, 1, NULL, '2024-07-19', '5', '13:00:00', NULL, NULL, NULL, NULL),
+	(28618, 1, NULL, '2024-07-19', '5', '13:30:00', NULL, NULL, NULL, NULL),
+	(28619, 1, NULL, '2024-07-19', '5', '14:00:00', NULL, NULL, NULL, NULL),
+	(28620, 1, NULL, '2024-07-19', '5', '14:30:00', NULL, NULL, NULL, NULL),
+	(28621, 1, NULL, '2024-07-19', '5', '15:00:00', NULL, NULL, NULL, NULL),
+	(28622, 1, NULL, '2024-07-19', '5', '15:30:00', NULL, NULL, NULL, NULL),
+	(28623, 1, NULL, '2024-07-19', '5', '16:00:00', NULL, NULL, NULL, NULL),
+	(28624, 1, NULL, '2024-07-19', '5', '16:30:00', NULL, NULL, NULL, NULL),
+	(28625, 1, NULL, '2024-07-19', '5', '17:00:00', NULL, NULL, NULL, NULL),
+	(28626, 1, NULL, '2024-07-19', '5', '13:00:00', NULL, NULL, NULL, NULL),
+	(28627, 1, NULL, '2024-07-19', '5', '13:15:00', NULL, NULL, NULL, NULL),
+	(28628, 1, NULL, '2024-07-19', '5', '13:30:00', NULL, NULL, NULL, NULL),
+	(28629, 1, NULL, '2024-07-19', '5', '13:45:00', NULL, NULL, NULL, NULL),
+	(28630, 1, NULL, '2024-07-19', '5', '14:00:00', NULL, NULL, NULL, NULL),
+	(28631, 1, NULL, '2024-07-19', '5', '14:15:00', NULL, NULL, NULL, NULL),
+	(28632, 1, NULL, '2024-07-19', '5', '14:30:00', NULL, NULL, NULL, NULL),
+	(28633, 1, NULL, '2024-07-19', '5', '14:45:00', NULL, NULL, NULL, NULL),
+	(28634, 1, NULL, '2024-07-19', '5', '15:00:00', NULL, NULL, NULL, NULL),
+	(28635, 1, NULL, '2024-07-19', '5', '15:15:00', NULL, NULL, NULL, NULL),
+	(28636, 1, NULL, '2024-07-19', '5', '15:30:00', NULL, NULL, NULL, NULL),
+	(28637, 1, NULL, '2024-07-19', '5', '15:45:00', NULL, NULL, NULL, NULL),
+	(28638, 1, NULL, '2024-07-19', '5', '16:00:00', NULL, NULL, NULL, NULL),
+	(28639, 1, NULL, '2024-07-19', '5', '16:15:00', NULL, NULL, NULL, NULL),
+	(28640, 1, NULL, '2024-07-19', '5', '16:30:00', NULL, NULL, NULL, NULL),
+	(28641, 1, NULL, '2024-07-19', '5', '16:45:00', NULL, NULL, NULL, NULL),
+	(28642, 1, NULL, '2024-07-19', '5', '17:00:00', NULL, NULL, NULL, NULL),
+	(28643, 1, NULL, '2024-07-19', '5', '17:15:00', NULL, NULL, NULL, NULL),
+	(28644, 1, NULL, '2024-07-19', '5', '17:30:00', NULL, NULL, NULL, NULL),
+	(28645, 1, NULL, '2024-07-19', '5', '17:45:00', NULL, NULL, NULL, NULL),
+	(28646, 1, NULL, '2024-07-19', '5', '18:00:00', NULL, NULL, NULL, NULL),
+	(28647, 1, NULL, '2024-07-19', '5', '18:15:00', NULL, NULL, NULL, NULL),
+	(28648, 1, NULL, '2024-07-19', '5', '18:30:00', NULL, NULL, NULL, NULL),
+	(28649, 1, NULL, '2024-07-19', '5', '18:45:00', NULL, NULL, NULL, NULL),
+	(28650, 1, NULL, '2024-07-19', '5', '19:00:00', NULL, NULL, NULL, NULL),
+	(28651, 1, NULL, '2024-07-19', '5', '19:15:00', NULL, NULL, NULL, NULL),
+	(28652, 1, NULL, '2024-07-19', '5', '19:30:00', NULL, NULL, NULL, NULL),
+	(28653, 1, NULL, '2024-07-19', '5', '19:45:00', NULL, NULL, NULL, NULL),
+	(28654, 1, NULL, '2024-07-19', '5', '20:00:00', NULL, NULL, NULL, NULL),
+	(28655, 1, NULL, '2024-07-19', '5', '20:15:00', NULL, NULL, NULL, NULL),
+	(28656, 1, NULL, '2024-07-19', '5', '20:30:00', NULL, NULL, NULL, NULL),
+	(28657, 1, NULL, '2024-07-19', '5', '20:45:00', NULL, NULL, NULL, NULL),
+	(28658, 1, NULL, '2024-07-19', '5', '21:00:00', NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.agendaconfig
 CREATE TABLE IF NOT EXISTS `agendaconfig` (
@@ -54,24 +105,17 @@ CREATE TABLE IF NOT EXISTS `agendaconfig` (
   PRIMARY KEY (`id`),
   KEY `FK_agendaconfig_profissionais` (`id_profissional`),
   CONSTRAINT `FK_agendaconfig_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.agendaconfig: ~14 rows (aproximadamente)
 REPLACE INTO `agendaconfig` (`id`, `id_profissional`, `dia`, `inicio1`, `fim1`, `duracao1`, `inicio2`, `fim2`, `duracao2`, `inicio3`, `fim3`, `duracao3`, `Habilitado`) VALUES
-	(7, 1, 1, '08:40:00', '12:00:00', 30, '13:00:00', '17:00:00', 30, '18:00:00', '20:00:00', 30, NULL),
-	(8, 1, 2, '08:00:00', NULL, NULL, '12:00:00', NULL, NULL, '00:00:00', NULL, NULL, NULL),
-	(9, 1, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(10, 1, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(11, 1, 5, '08:00:00', NULL, NULL, '00:00:00', NULL, NULL, '00:00:00', NULL, NULL, NULL),
-	(12, 1, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(13, 1, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(14, 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(15, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(16, 2, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(17, 2, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(18, 2, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(19, 2, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(20, 2, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	(21, 1, 1, '09:00:00', '11:00:00', 30, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, NULL),
+	(22, 1, 2, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, NULL),
+	(23, 1, 3, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, NULL),
+	(24, 1, 4, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, NULL),
+	(25, 1, 5, '08:00:00', '12:00:00', 30, '13:00:00', '17:00:00', 30, '19:00:00', '21:00:00', 15, NULL),
+	(26, 1, 6, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, NULL),
+	(27, 1, 7, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, NULL);
 
 -- Copiando estrutura para tabela smed.atestados
 CREATE TABLE IF NOT EXISTS `atestados` (
@@ -178,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `datas_suprimidas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.datas_suprimidas: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.datas_suprimidas: ~2 rows (aproximadamente)
 REPLACE INTO `datas_suprimidas` (`id`, `data_inicio`, `data_fim`, `motivo`) VALUES
 	(1, '2024-12-23', '2024-12-31', 'Férias de Fim de Ano'),
 	(2, '2024-10-01', '2024-10-04', 'Seminário de Dermatologia');

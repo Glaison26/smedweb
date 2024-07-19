@@ -15,22 +15,60 @@ $c_linha_medico = $result_medico->fetch_assoc();
 if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     $d_datainicio = $_POST['data1'];
     $d_datafim = $_POST['data2'];
-  
+
     while (strtotime($d_datainicio) <= strtotime($d_datafim)) {
-        
+
         // loop para inserir os horários configurados na data
         // pego dia da semana via sql
-        $dia_semana = 
+        $dia_semana = date('w', strtotime($d_datainicio));  // pego dia da semana 0=domi 1=seg 2=ter 3=qua 4=qui 5=sex 6=sab
+        $dia_semana = $dia_semana;
         $c_sql_horario = "select * from agendaconfig where id_profissional='$c_id' and dia='$dia_semana'";
-        //while (){
-        
-        // inserir dados na tabela de agenda
-
-        $c_sql = "insert into agenda (id_profissional, data) value ('$c_id', '$d_datainicio')";
-        $result = $conection->query($c_sql);
-        $d_datainicio = date('y-m-d', strtotime("+1 days", strtotime($d_datainicio)));
-    //}
-}
+       
+        $result = $conection->query($c_sql_horario);
+        $result_dias = $result->fetch_assoc();
+        // loop para periodo da manhã
+        $inicio_manha = $result_dias['inicio1'];
+        $inicio_tarde = $result_dias['inicio2'];
+        $inicio_noite = $result_dias['inicio2'];
+        $fim_manha = $result_dias['fim1'];
+        $fim_tarde = $result_dias['fim2'];
+        $fim_noite = $result_dias['fim3'];
+        $duracao_manha = $result_dias['duracao1'];
+        $duracao_tarde = $result_dias['duracao2'];
+        $duracao_noite = $result_dias['duracao3'];
+        $minuto_soma = "00:".$duracao_manha;
+        // geração do turno da manhã
+        while (strtotime($inicio_manha) <= strtotime($fim_manha)) {  // loop de icremento de hora do turno da manhã
+            // inserir dados na tabela de agenda
+            $c_sql = "insert into agenda (id_profissional, data, horario, dia) value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana')";
+            $result = $conection->query($c_sql);
+            $inicio_manha = gmdate('H:i:s', strtotime($inicio_manha) + strtotime($minuto_soma) );
+        }
+        // geração do turno da tarde
+        $minuto_soma = "00:".$duracao_tarde;
+        while (strtotime($inicio_tarde) <= strtotime($fim_tarde)) {  // loop de icremento de hora do turno da manhã
+            // inserir dados na tabela de agenda
+            $c_sql = "insert into agenda (id_profissional, data, horario,  dia) value ('$c_id', '$d_datainicio', '$inicio_tarde','$dia_semana')";
+            $result = $conection->query($c_sql);
+            $inicio_tarde = gmdate('H:i:s', strtotime($inicio_tarde) + strtotime($minuto_soma) );
+        }
+         // geração do turno da noite
+         $minuto_soma = "00:".$duracao_noite;
+         while (strtotime($inicio_noite) <= strtotime($fim_noite)) {  // loop de icremento de hora do turno da manhã
+            // inserir dados na tabela de agenda
+            $c_sql = "insert into agenda (id_profissional, data, horario,  dia) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana')";
+            $result = $conection->query($c_sql);
+            $inicio_noite = gmdate('H:i:s', strtotime($inicio_noite) + strtotime($minuto_soma) );
+        }
+        // incremento data 
+        $d_datainicio = date('y-m-d', strtotime("+1 days", strtotime($d_datainicio))); // incremento 1 dia a data do loop
+     
+    }
+    echo "
+        <script>
+          alert('Geração da agenda realizada com sucesso!!!')
+        </script>
+    ";
 }
 // 
 
