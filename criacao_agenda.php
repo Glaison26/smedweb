@@ -15,15 +15,22 @@ $c_linha_medico = $result_medico->fetch_assoc();
 if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     $d_datainicio = $_POST['data1'];
     $d_datafim = $_POST['data2'];
-    echo $d_datainicio."\n";
-    echo $d_datafim;
+  
     while (strtotime($d_datainicio) <= strtotime($d_datafim)) {
         
-        // inserir na tabela de agenda
+        // loop para inserir os horários configurados na data
+        // pego dia da semana via sql
+        $dia_semana = 
+        $c_sql_horario = "select * from agendaconfig where id_profissional='$c_id' and dia='$dia_semana'";
+        //while (){
+        
+        // inserir dados na tabela de agenda
+
         $c_sql = "insert into agenda (id_profissional, data) value ('$c_id', '$d_datainicio')";
         $result = $conection->query($c_sql);
         $d_datainicio = date('y-m-d', strtotime("+1 days", strtotime($d_datainicio)));
-    }
+    //}
+}
 }
 // 
 
