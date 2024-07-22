@@ -69,7 +69,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 // geração do turno da manhã
                 while (strtotime($inicio_manha) <= strtotime($fim_manha)) {  // loop de icremento de hora do turno da manhã
                     // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario, dia) value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana')";
+                    $c_sql = "insert into agenda (id_profissional, data, horario, dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana', 3)";
                     $result = $conection->query($c_sql);
                     $inicio_manha = gmdate('H:i:s', strtotime($inicio_manha) + strtotime($minuto_soma));
                 }
@@ -79,7 +79,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             if ($inicio_tarde != '00:00:00' && $fim_tarde != '00:00:00' && $duracao_tarde != '0') {
                 while (strtotime($inicio_tarde) <= strtotime($fim_tarde)) {  // loop de icremento de hora do turno da manhã
                     // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia) value ('$c_id', '$d_datainicio', '$inicio_tarde','$dia_semana')";
+                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_tarde','$dia_semana', 3)";
                     $result = $conection->query($c_sql);
                     $inicio_tarde = gmdate('H:i:s', strtotime($inicio_tarde) + strtotime($minuto_soma));
                 }
@@ -89,7 +89,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             if ($inicio_noite != '00:00:00' && $fim_noite != '00:00:00' && $duracao_noite != '0') {
                 while (strtotime($inicio_noite) <= strtotime($fim_noite)) {  // loop de icremento de hora do turno da manhã
                     // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana')";
+                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana', 3')";
                     $result = $conection->query($c_sql);
                     $inicio_noite = gmdate('H:i:s', strtotime($inicio_noite) + strtotime($minuto_soma));
                 }

@@ -6,6 +6,49 @@ if (!isset($_SESSION['newsession'])) {
 
 include("conexao.php");
 include_once "lib_gop.php";
+$c_sql2 = "";
+$c_dia_semana = "-";
+if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa na agenda
+    // pego a id do profissional selecionado
+    $c_profissional = $_POST['profissional'];
+    $c_sql_prof = "select profissionais.id from profissionais where nome = '$c_profissional'";
+    $result = $conection->query($c_sql_prof);
+    $c_linha = $result->fetch_assoc();
+    $i_id_profissional = $c_linha['id'];
+    $d_data = $_POST['data1'];
+    $d_data = date("Y-m-d", strtotime(str_replace('/', '-', $d_data)));
+    
+    $c_dia_semana = date('w', strtotime($d_data));
+    switch ($c_dia_semana) {
+        case "1":
+            $c_dia_semana = 'Segunda-Feira';
+            break;
+        case "2":
+            $c_dia_semana = 'Terça-Feira';
+            break;
+        case "3":
+            $c_dia_semana = 'Quarta-Feira';
+            break;
+        case "4":
+            $c_dia_semana = 'Quinta-Feira';
+            break;
+        case "5":
+            $c_dia_semana = 'Sexta-Feira';
+            break;
+        case "6":
+            $c_dia_semana = 'Sábado';
+            break;
+        case "7":
+            $c_dia_semana = 'Domingo';
+            break;
+    }
+    $c_sql2 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
+    agenda.`data`, agenda.dia, agenda.horario,
+    agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao FROM agenda 
+    JOIN convenios ON agenda.id_convenio=convenios.id
+    WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
+    $result2 = $conection->query($c_sql2);
+}
 ?>
 
 <!-- front end da agenda -->
@@ -23,16 +66,15 @@ include_once "lib_gop.php";
     <link rel="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
     <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
-    <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
+
     <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
 </head>
 
 <body>
@@ -44,7 +86,7 @@ include_once "lib_gop.php";
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [9]
+                    'aTargets': [2]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -82,62 +124,54 @@ include_once "lib_gop.php";
         });
     </script>
 
+
+
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
             <h5>Agenda Médica dos Sistema<h5>
         </div>
     </div>
-
     <div class="container -my5">
-        <a class="btn btn-info" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-        <hr>
-        <div class="panel panel-Linght">
-            <div class="panel-heading">
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">Profissional</label>
-                    <div class="col-sm-6">
-                        <select class="form-control form-control-lg" id="profissional" name="profissional">
-                            <?php
-                            $c_sql = "SELECT profissionais.id, profissionais.nome FROM profissionais
-                            ORDER BY profissionais.nome";
-                            $result = $conection->query($c_sql);
-                            // insiro os registro do banco de dados na tabela 
-                            while ($c_linha = $result->fetch_assoc()) {
-                                echo "
-                                     <option>$c_linha[nome]</option>";
-                            }
-                            ?>
-                        </select>
 
-                    </div>
-                </div>
-
-            </div>
-        </div>
         <!-- Formulário com as datas -->
         <form method="post">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="text-center">Intervalo de datas para Consulta da Agenda</h5>
-                </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <label class="col-md-1 form-label">De</label>
-                        <div class="col-sm-2">
-                            <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
-                        </div>
-                        <label class="col-md-1 form-label">até</label>
-                        <div class="col-sm-2">
-                            <input type="Date" maxlength="10" class="form-control" name="data2" id="data2" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
-                        </div>
-                        <button type="submit" name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>
+            <label class="col-md-2 form-label">Data da agenda</label>
+            <div class="col-sm-2">
+                <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
+            </div>
 
+            <button type="submit" name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar Agenda</button>
+            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Sair da Agenda</a>
+
+            <br>
+
+            <div class="panel panel-Linght">
+                <div class="panel-heading">
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Profissional</label>
+                        <div class="col-sm-6">
+                            <select class="form-control form-control-lg" id="profissional" name="profissional">
+                                <?php
+                                $c_sql = "SELECT profissionais.id, profissionais.nome FROM profissionais
+                            ORDER BY profissionais.nome";
+                                $result = $conection->query($c_sql);
+                                // insiro os registro do banco de dados na tabela 
+                                while ($c_linha = $result->fetch_assoc()) {
+                                    echo "
+                                     <option>$c_linha[nome]</option>";
+                                }
+                                ?>
+                            </select>
+
+                        </div>
                     </div>
+
                 </div>
             </div>
         </form>
-        <br>
+
         <!-- abas de agenda e cadstro de pacientes -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
@@ -148,14 +182,18 @@ include_once "lib_gop.php";
         <div class="tab-content">
 
             <div role="tabpanel" class="tab-pane active" id="agenda">
-                <div style="padding-top:20px;">
+                <div style="padding-top:5px;">
+                    <div class="panel panel-primary class">
+                        <div class="panel-heading text-left">
+                            <h4>Agenda de <?php echo $c_dia_semana; ?> na data de  <?php echo ' '. date("d-m-y", strtotime(str_replace('/', '-', $_POST['data1'])))?><h4>
+                        </div>
+                    </div>
+
                     <!-- montagem da tabela de agenda -->
-                    <table class="table display table-bordered tabagenda">
+                    <table class="table display  tabagenda">
                         <thead class="thead">
                             <tr class="info">
                                 <th scope="col">No.</th>
-                                <th scope="col">Data</th>
-                                <th scope="col">Dia</th>
                                 <th scope="col">Horário</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Convênio</th>
@@ -166,25 +204,30 @@ include_once "lib_gop.php";
                         </thead>
                         <tbody>
                             <?php
+
                             // loop para dados da agenda
-                            while ($c_linha = $result->fetch_assoc()) {
+                            if (!empty($c_sql2)) {
 
-                                echo "
+                                while ($c_linha2 = $result2->fetch_assoc()) {
+
+                                    echo "
                                     <tr>
-                                    <td>$c_linha[id]</td>
-                                    <td>$c_linha[data]</td>
-                                    <td>$dia_semana</td>
-                                    <td>$c_linha[horario]</td>
-                                    <td>$c_linha[nome]</td>
-                                    <td>$c_linha</td>
-
+                                    <td >$c_linha2[id]</td>
+                                    <td>$c_linha2[horario]</td>
+                                    <td>$c_linha2[nome]</td>
+                                    <td>$c_linha2[convenio]</td>
+                                    <td>$c_linha2[telefone]</td>
+                                    <td>$c_linha2[email]</td>
                                     <td>
                                     
-                                    <a class='btn btn-info btn-sm' title='Marcação de Horários' href='/smedweb/agenda_marcar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-calendar'></span></a>
+                                    <a class='btn btn-info btn-sm' title='Marcação de Horários'
+                                     href='/smedweb/agenda_marcar.php?id=$c_linha2[id]'>
+                                     <span class='glyphicon glyphicon-calendar'></span> Marcação</a>
                                     </td>
 
                                     </tr>
                                     ";
+                                }
                             }
                             ?>
                         </tbody>
@@ -194,11 +237,25 @@ include_once "lib_gop.php";
             </div>
             <div role="tabpanel" class="tab-pane" id="cadastro">
                 <div style="padding-top:20px;">
-                    <p>cadastro</p>
+                    <form id="frmpaciente" method="POST" action="">
+                        <div class="mb-5 row">
+                            <hr>
+                            <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
+
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

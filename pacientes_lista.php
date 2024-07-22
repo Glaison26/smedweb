@@ -1,5 +1,5 @@
 <?php // controle de acesso ao formulário
-//session_start();
+session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -18,8 +18,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         $c_sql = $c_sql . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
     }
     $c_sql = $c_sql . " order by pacientes.nome";
-
-    //ORDER BY pacientes.nome";
+  
     $result = $conection->query($c_sql);
     // verifico se a query foi correto
     if (!$result) {
