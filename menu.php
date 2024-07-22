@@ -10,7 +10,7 @@ if (!isset($_SESSION['newsession'])) {
 <html lang="en">
 
 <head>
-	<title>SmartMed</title>
+	<title>SmartMed - Sistema Medico</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -61,7 +61,7 @@ if (!isset($_SESSION['newsession'])) {
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agenda</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
+								<a class="dropdown-item" href="\smedweb\agenda.php"><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
 								<a class="dropdown-item" href="#">____________________________________________</a>
 								<a class="dropdown-item" href="\smedweb\config_agenda.php"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
 							</div>
