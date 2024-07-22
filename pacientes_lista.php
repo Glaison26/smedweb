@@ -7,6 +7,26 @@
 //    header('location: /raxx/voltamenunegado.php');
 //}
 include("conexao.php");
+// primeira entrada
+$c_sql = "";
+// faço a Leitura da tabela com sql
+if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
+    $c_pesquisa = $_POST['pesquisa'];
+    $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
+    FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id";
+    if ($c_pesquisa != ' ') {
+        $c_sql = $c_sql . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
+    }
+    $c_sql = $c_sql . " order by pacientes.nome";
+
+    //ORDER BY pacientes.nome";
+    $result = $conection->query($c_sql);
+    // verifico se a query foi correto
+    if (!$result) {
+        die("Erro ao Executar Sql!!" . $conection->connect_error);
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -94,7 +114,7 @@ include("conexao.php");
 
         });
     </script>
-    
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -106,8 +126,21 @@ include("conexao.php");
 
         <a class="btn btn-success btn-sm" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <form id="frmpaciente" method="POST" action="">
+            <div class="mb-5 row">
+                <hr>
+                <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
 
-        <hr>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+                </div>
+            </div>
+        </form>
+
         <table class="table display table-bordered tabpacientes">
             <thead class="thead">
                 <tr class="info">
@@ -123,26 +156,16 @@ include("conexao.php");
             </thead>
             <tbody>
                 <?php
-
-                // faço a Leitura da tabela com sql
-                $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
-                        FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id
-                        ORDER BY pacientes.nome";
-                $result = $conection->query($c_sql);
-                // verifico se a query foi correto
-                if (!$result) {
-                    die("Erro ao Executar Sql!!" . $conection->connect_error);
-                }
-
-                // insiro os registro do banco de dados na tabela 
-                while ($c_linha = $result->fetch_assoc()) {
-                    // Coloco string masculino ou feminino ao invés de m ou f
-                    if ($c_linha['sexo']=='M'){
-                        $c_sexo = "Masculino";                            
-                    }else {
-                        $c_sexo = "Feminino";
-                    }
-                    echo "
+                if (!empty($c_sql)) {
+                    // insiro os registro do banco de dados na tabela 
+                    while ($c_linha = $result->fetch_assoc()) {
+                        // Coloco string masculino ou feminino ao invés de m ou f
+                        if ($c_linha['sexo'] == 'M') {
+                            $c_sexo = "Masculino";
+                        } else {
+                            $c_sexo = "Feminino";
+                        }
+                        echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[nome]</td>
@@ -164,6 +187,7 @@ include("conexao.php");
 
                     </tr>
                     ";
+                    }
                 }
                 ?>
             </tbody>
