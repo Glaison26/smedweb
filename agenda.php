@@ -6,7 +6,7 @@ if (!isset($_SESSION['newsession'])) {
 
 include("conexao.php");
 include_once "lib_gop.php";
-
+$_SESSION['teste']="";
 //  rotina para sql de pacientes no post
 $c_sql_pac = "";
 // faço a Leitura da tabela de pacientes com sql
@@ -185,33 +185,37 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 $('#up_telefoneField').val(data[4]);
                 $('#up_emailField').val(data[5]);
                 $('#up_obsField').val(data[6]);
-                
-
-
-
             });
         });
     </script>
 
     <script type="text/javascript">
-        ~
+        
         // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmatributo', function(e) {
+        $(document).on('submit', '#frmadd', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_atributo = $('#up_atributoField').val();
-            var c_formato = $('#up_formatoField').val();
-
-
-            if (c_atributo != '') {
-
+            var c_horario = $('#up_horarioField').val();
+            var c_nome = $('#up_nomeField').val();
+            var c_convenio = $('#up_convenioField').val();
+            var c_telefone = $('#up_telefoneField').val()
+            var c_email = $('#up_emailField').val();
+            var c_obs = $('#up_obsField').val();
+            
+            if (c_nome != '') {
+                
                 $.ajax({
-                    url: "atributos_editar.php",
+                    url: "agenda_marcacao.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_atributo: c_atributo,
-                        c_formato: c_formato
+                        c_horario: c_horario,
+                        c_nome: c_nome,
+                        c_convenio: c_convenio,
+                        c_telefone: c_telefone,
+                        c_email: c_email,
+                        c_obs: c_obs
+                        
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -228,6 +232,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
+            
         });
     </script>
 
@@ -304,9 +309,9 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                         <div class="panel-heading text-left">
                             <?php
                             if (isset($d_data)) {
-
+                                
                                 echo "
-                            <h4>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata<h4>
+                            <h4>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata <h4>
                             ";
                             }
                             ?>
@@ -442,7 +447,10 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmadd" action="">
+                    <form id="frmadd" method="POST" action="">
+                        <input type="hidden" id="up_idField" name="up_idField">
+                       
+                        
                         <div class="mb-3 row">
                             <label for="up_horarioField" class="col-md-3 form-label">Horário</label>
                             <div class="col-md-4">
@@ -450,7 +458,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="up_nomeField" class="col-md-3 form-label">Nome </label>
+                            <label for="up_nomeField" class="col-md-3 form-label">Nome (*) </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="up_nomeField" name="up_nomeField">
                             </div>
@@ -485,13 +493,13 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">E-mail</label>
                             <div class="col-sm-9">
-                                <input type="text" maxlength="225" class="form-control" name="up_emailField">
+                                <input type="text" maxlength="225" class="form-control" id="up_emailField" name="up_emailField">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Observações</label>
                             <div class="col-sm-9">
-                                <input type="text" maxlength="100" class="form-control" name="up_obsField">
+                                <input type="text" maxlength="100" class="form-control" id="up_obsField" name="up_obsField">
                             </div>
                         </div>
 
