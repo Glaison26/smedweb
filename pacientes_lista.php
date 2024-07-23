@@ -9,7 +9,7 @@ session_start();
 include("conexao.php");
 // primeira entrada
 $c_sql = "";
-// faço a Leitura da tabela com sql
+// faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];
     $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 

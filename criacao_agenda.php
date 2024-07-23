@@ -38,7 +38,9 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     $d_datafim = $_POST['data2'];
 
     // verifica se data ja foi gerada
-    $c_sql_checa = "SELECT COUNT(*) AS total FROM agenda WHERE agenda.data= '$d_datainicio' OR agenda.data= '$d_datafim'";
+    $c_sql_checa = "SELECT COUNT(*) AS total FROM agenda WHERE (agenda.data= '$d_datainicio' OR agenda.data= '$d_datafim')
+     and id_profissional='$c_id'";
+    
     $result_checa = $conection->query($c_sql_checa);
     $linha_total = $result_checa->fetch_assoc();
     //echo $linha_total['total'];
@@ -100,7 +102,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         }
         $msg_gerou = 'Agenda Médica foi Gerada com sucesso!!!';
     } else {
-        $msg_gerou = 'Erro!!! Data informada já foi gerada anteriormente!!!'.$c_sql_checa;
+        $msg_gerou = 'Erro!!! Data informada já foi gerada anteriormente!!!';
     }
 }
 // 

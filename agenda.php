@@ -6,10 +6,32 @@ if (!isset($_SESSION['newsession'])) {
 
 include("conexao.php");
 include_once "lib_gop.php";
+
+//  rotina para sql de pacientes no post
+$c_sql_pac = "";
+// faço a Leitura da tabela de pacientes com sql
+if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
+    $c_pesquisa = $_POST['pesquisa'];
+    $c_sql_pac = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
+    FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id";
+    if ($c_pesquisa != ' ') {
+        $c_sql_pac = $c_sql_pac . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
+    }
+    $c_sql_pac = $c_sql_pac . " order by pacientes.nome";
+  
+    $result_pac = $conection->query($c_sql_pac);
+    // verifico se a query foi correto
+    if (!$result_pac) {
+        die("Erro ao Executar Sql!!" . $conection->connect_error);
+    }
+}
 $c_sql2 = "";
 $c_dia_semana = "-";
+$c_mostradata = date("Y-m-d");
+
 if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa na agenda
     // pego a id do profissional selecionado
+    $c_mostradata = date("Y-m-d");
     $c_profissional = $_POST['profissional'];
     $c_sql_prof = "select profissionais.id from profissionais where nome = '$c_profissional'";
     $result = $conection->query($c_sql_prof);
@@ -17,7 +39,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     $i_id_profissional = $c_linha['id'];
     $d_data = $_POST['data1'];
     $d_data = date("Y-m-d", strtotime(str_replace('/', '-', $d_data)));
-    
+
     $c_dia_semana = date('w', strtotime($d_data));
     switch ($c_dia_semana) {
         case "1":
@@ -130,19 +152,24 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Agenda Médica dos Sistema<h5>
+            <h5>Agenda Médica do Sistema<h5>
         </div>
     </div>
+    <?php
+    if (isset($d_data)) {
+        $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
+    }
+    ?>
     <div class="container -my5">
 
         <!-- Formulário com as datas -->
         <form method="post">
             <label class="col-md-2 form-label">Data da agenda</label>
             <div class="col-sm-2">
-                <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
+                <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
             </div>
 
-            <button type="submit" name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar Agenda</button>
+            <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar Agenda</button>
             <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Sair da Agenda</a>
 
             <br>
@@ -159,8 +186,12 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                 $result = $conection->query($c_sql);
                                 // insiro os registro do banco de dados na tabela 
                                 while ($c_linha = $result->fetch_assoc()) {
+                                    $c_op = "";
+                                    if ($c_linha['nome'] == $c_profissional) {
+                                        $c_op = "selected";
+                                    }
                                     echo "
-                                     <option>$c_linha[nome]</option>";
+                                     <option $c_op>$c_linha[nome]</option>";
                                 }
                                 ?>
                             </select>
@@ -185,7 +216,14 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 <div style="padding-top:5px;">
                     <div class="panel panel-primary class">
                         <div class="panel-heading text-left">
-                            <h4>Agenda de <?php echo $c_dia_semana; ?> na data de  <?php echo ' '. date("d-m-y", strtotime(str_replace('/', '-', $_POST['data1'])))?><h4>
+                            <?php
+                            if (isset($d_data)) {
+
+                                echo "
+                            <h4>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata<h4>
+                            ";
+                            }
+                            ?>
                         </div>
                     </div>
 
@@ -235,6 +273,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
                 </div>
             </div>
+            <!-- aba com o cadastro de pacientes -->
             <div role="tabpanel" class="tab-pane" id="cadastro">
                 <div style="padding-top:20px;">
                     <form id="frmpaciente" method="POST" action="">
@@ -251,6 +290,56 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             </div>
                         </div>
                     </form>
+                    <!-- tabela de pacientes -->
+                    <table class="table display table-bordered tabpacientes">
+                        <thead class="thead">
+                            <tr class="info">
+                                <th scope="col">Número</th>
+                                <th scope="col">Nome do Paciênte</th>
+                                <th scope="col">Convênio</th>
+                                <th scope="col">Matrícula</th>
+                                <th scope="col">Sexo</th>
+                                <th scope="col">Telefone 1</th>
+                                <th scope="col">Telefone 2</th>
+                                <th scope="col">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($c_sql_pac)) {
+                                // insiro os registro do banco de dados na tabela 
+                                while ($c_linha_pac = $result_pac->fetch_assoc()) {
+                                    // Coloco string masculino ou feminino ao invés de m ou f
+                                    if ($c_linha_pac['sexo'] == 'M') {
+                                        $c_sexo = "Masculino";
+                                    } else {
+                                        $c_sexo = "Feminino";
+                                    }
+                                    echo "
+                    <tr>
+                    <td>$c_linha_pac[id]</td>
+                    <td>$c_linha_pac[nome]</td>
+                    <td>$c_linha_pac[convenio]</td>
+                    <td>$c_linha_pac[matricula]</td>
+                    <td>$c_sexo</td>
+                    <td>$c_linha_pac[fone]</td>
+                    <td>$c_linha_pac[fone2]</td>
+                                     
+                    <td>
+                                                  
+                        <a class='btn btn-primary btn-sm' title='Copiar Dados'
+                        href='/smedweb/copia_paciente.php?id=$c_linha_pac[id]'>
+                        <span class='glyphicon glyphicon-transfer'></span> Copiar</a>
+                    </td>
+
+                    </tr>
+                    ";
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
