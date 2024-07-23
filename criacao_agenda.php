@@ -91,7 +91,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             if ($inicio_noite != '00:00:00' && $fim_noite != '00:00:00' && $duracao_noite != '0') {
                 while (strtotime($inicio_noite) <= strtotime($fim_noite)) {  // loop de icremento de hora do turno da manhã
                     // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana', 3')";
+                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana', 3)";
                     $result = $conection->query($c_sql);
                     $inicio_noite = gmdate('H:i:s', strtotime($inicio_noite) + strtotime($minuto_soma));
                 }

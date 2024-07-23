@@ -18,7 +18,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         $c_sql_pac = $c_sql_pac . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
     }
     $c_sql_pac = $c_sql_pac . " order by pacientes.nome";
-  
+
     $result_pac = $conection->query($c_sql_pac);
     // verifico se a query foi correto
     if (!$result_pac) {
@@ -97,6 +97,22 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
+
+    <script>
+        const handlePhone = (event) => {
+            let input = event.target
+            input.value = phoneMask(input.value)
+        }
+
+        const phoneMask = (value) => {
+            if (!value) return ""
+            value = value.replace(/\D/g, '')
+            value = value.replace(/(\d{2})(\d)/, "($1) $2")
+            value = value.replace(/(\d)(\d{4})$/, "$1-$2")
+            return value
+        }
+    </script>
+
 </head>
 
 <body>
@@ -145,6 +161,76 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
         });
     </script>
+
+    <!-- Coleta dados da tabela para edição do registro -->
+    <script>
+        $(document).ready(function() {
+
+            $('.editbtn').on('click', function() {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#up_idField').val(data[0]);
+                $('#up_horarioField').val(data[1]);
+                $('#up_nomeField').val(data[2]);
+                $('#up_convenioField').val(data[3]);
+                $('#up_telefoneField').val(data[4]);
+                $('#up_emailField').val(data[5]);
+                $('#up_obsField').val(data[6]);
+                
+
+
+
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        ~
+        // Função javascript e ajax para Alteração dos dados
+        $(document).on('submit', '#frmatributo', function(e) {
+            e.preventDefault();
+            var c_id = $('#up_idField').val();
+            var c_atributo = $('#up_atributoField').val();
+            var c_formato = $('#up_formatoField').val();
+
+
+            if (c_atributo != '') {
+
+                $.ajax({
+                    url: "atributos_editar.php",
+                    type: "post",
+                    data: {
+                        c_id: c_id,
+                        c_atributo: c_atributo,
+                        c_formato: c_formato
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+                        if (status == 'true') {
+                            $('#editmodal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('falha ao alterar dados');
+                        }
+                    }
+                });
+
+            } else {
+                alert('Todos os campos devem ser preenchidos!!');
+            }
+        });
+    </script>
+
 
 
 
@@ -237,6 +323,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                 <th scope="col">Convênio</th>
                                 <th scope="col">Telefone</th>
                                 <th scope="col">e-mail</th>
+                                <th scope="col">Observação</th>
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
@@ -256,11 +343,10 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td>$c_linha2[convenio]</td>
                                     <td>$c_linha2[telefone]</td>
                                     <td>$c_linha2[email]</td>
+                                     <td>$c_linha2[observacao]</td>
                                     <td>
                                     
-                                    <a class='btn btn-info btn-sm' title='Marcação de Horários'
-                                     href='/smedweb/agenda_marcar.php?id=$c_linha2[id]'>
-                                     <span class='glyphicon glyphicon-calendar'></span> Marcação</a>
+                                   <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
                                     </td>
 
                                     </tr>
@@ -343,6 +429,81 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- janela Modal para inclusão de registro -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Agênda Médica</h4>
+                </div>
+                <div class="modal-body">
+                    <div class='alert alert-warning' role='alert'>
+                        <h5>Campos com (*) são obrigatórios</h5>
+                    </div>
+                    <form id="frmadd" action="">
+                        <div class="mb-3 row">
+                            <label for="up_horarioField" class="col-md-3 form-label">Horário</label>
+                            <div class="col-md-4">
+                                <input type="time" readonly class="form-control" id="up_horarioField" name="up_horarioField">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="up_nomeField" class="col-md-3 form-label">Nome </label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="up_nomeField" name="up_nomeField">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Convênio </label>
+                            <div class="col-sm-6">
+                                <select class="form-control form-control-lg" id="up_convenioField" name="up_convenioField">
+                                    <?php
+                                    $c_sql3 = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
+                                    $result3 = $conection->query($c_sql3);
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha3 = $result3->fetch_assoc()) {
+                                        //$c_op = "";
+                                        //if ($c_linha3['id'] == $c_convenio) {
+                                        //    $c_op = "selected";
+                                        // }
+                                        echo "
+                                        <option $c_op>$c_linha3[nome]</option>";
+                                    }
+                                    ?>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Telefone </label>
+                            <div class="col-sm-4">
+                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="up_telefoneField" name="up_telefoneField">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">E-mail</label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="225" class="form-control" name="up_emailField">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Observações</label>
+                            <div class="col-sm-9">
+                                <input type="text" maxlength="100" class="form-control" name="up_obsField">
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
     </div>
 
 </body>
