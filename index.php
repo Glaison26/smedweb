@@ -4,6 +4,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $l_erro = '';
 } else {
     session_start();
+    // seções para agenda
+    $_SESSION['nomepac'] = "";
+    $_SESSION['conveniopac'] = "";
+    $_SESSION['telefonepac'] = "";
+    $_SESSION['emailpac'] = "";
+    //
     $c_login = $_POST['login'];
     $c_sql = "SELECT count(*) as achou FROM usuario where usuario.login='$c_login'";
     $result = $conection->query($c_sql);

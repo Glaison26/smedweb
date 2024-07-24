@@ -6,7 +6,11 @@ if (!isset($_SESSION['newsession'])) {
 
 include("conexao.php");
 include_once "lib_gop.php";
-$_SESSION['teste']="";
+$_SESSION['teste'] = "";
+// rotina para colar dados copiados do paciente na agenda
+if ((isset($_POST["btncola"]))){
+    
+}
 //  rotina para sql de pacientes no post
 $c_sql_pac = "";
 // faço a Leitura da tabela de pacientes com sql
@@ -190,7 +194,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     </script>
 
     <script type="text/javascript">
-        
         // Função javascript e ajax para Alteração dos dados
         $(document).on('submit', '#frmadd', function(e) {
             e.preventDefault();
@@ -201,9 +204,9 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             var c_telefone = $('#up_telefoneField').val()
             var c_email = $('#up_emailField').val();
             var c_obs = $('#up_obsField').val();
-            
+
             if (c_nome != '') {
-                
+
                 $.ajax({
                     url: "agenda_marcacao.php",
                     type: "post",
@@ -215,7 +218,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                         c_telefone: c_telefone,
                         c_email: c_email,
                         c_obs: c_obs
-                        
+
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -232,7 +235,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
-            
+
         });
     </script>
 
@@ -260,8 +263,8 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
             </div>
 
-            <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar Agenda</button>
-            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Sair da Agenda</a>
+            <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>
+            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Volar ao Menu</a>
 
             <br>
 
@@ -305,11 +308,11 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
             <div role="tabpanel" class="tab-pane active" id="agenda">
                 <div style="padding-top:5px;">
-                    <div class="panel panel-primary class">
+                    <div class="panel panel-info">
                         <div class="panel-heading text-left">
                             <?php
                             if (isset($d_data)) {
-                                
+
                                 echo "
                             <h4>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata <h4>
                             ";
@@ -348,11 +351,12 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td>$c_linha2[convenio]</td>
                                     <td>$c_linha2[telefone]</td>
                                     <td>$c_linha2[email]</td>
-                                     <td>$c_linha2[observacao]</td>
+                                    <td>$c_linha2[observacao]</td>
                                     <td>
                                     
-                                   <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
-                                    </td>
+                                   <button class='btn btn-Secondary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
+                                   <button type='submit' return false name='btncola' id='btncola' class='btn btn-Secondary'><span class='glyphicon glyphicon-transfer'></span> Colar dados</button>
+                                   </td>
 
                                     </tr>
                                     ";
@@ -385,7 +389,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                     <table class="table display table-bordered tabpacientes">
                         <thead class="thead">
                             <tr class="info">
-                                <th scope="col">Número</th>
+                                <th scope="col" style="display:none">Número</th>
                                 <th scope="col">Nome do Paciênte</th>
                                 <th scope="col">Convênio</th>
                                 <th scope="col">Matrícula</th>
@@ -408,7 +412,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     }
                                     echo "
                     <tr>
-                    <td>$c_linha_pac[id]</td>
+                    <td style='display:none'>$c_linha_pac[id] </td>
                     <td>$c_linha_pac[nome]</td>
                     <td>$c_linha_pac[convenio]</td>
                     <td>$c_linha_pac[matricula]</td>
@@ -418,9 +422,8 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                      
                     <td>
                                                   
-                        <a class='btn btn-primary btn-sm' title='Copiar Dados'
-                        href='/smedweb/copia_paciente.php?id=$c_linha_pac[id]'>
-                        <span class='glyphicon glyphicon-transfer'></span> Copiar</a>
+                        <a class='btn btn-secondary' title='Copiar Dados'
+                        href='/smedweb/agenda_copia.php?id=$c_linha_pac[id]'><img src='\smedweb\images\copiar.png'alt='' width='15' height='15'> Copiar</a>
                     </td>
 
                     </tr>
@@ -449,8 +452,8 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                     </div>
                     <form id="frmadd" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
-                       
-                        
+
+
                         <div class="mb-3 row">
                             <label for="up_horarioField" class="col-md-3 form-label">Horário</label>
                             <div class="col-md-4">
