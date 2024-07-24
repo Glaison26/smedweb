@@ -55,7 +55,7 @@ include("conexao.php");
         $(document).ready(function() {
             $('.tabdiagnosticos').DataTable({
                 // 
-                "iDisplayLength": 6,
+                "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,

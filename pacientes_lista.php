@@ -72,7 +72,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         $(document).ready(function() {
             $('.tabpacientes').DataTable({
                 // 
-                "iDisplayLength": 6,
+                "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,

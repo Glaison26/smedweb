@@ -61,7 +61,7 @@ $c_id = $_SESSION['codigo_proc'];
         $(document).ready(function() {
             $('.tabproc_tabela').DataTable({
                 // 
-                "iDisplayLength": 6,
+                "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,

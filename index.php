@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['conveniopac'] = "";
     $_SESSION['telefonepac'] = "";
     $_SESSION['emailpac'] = "";
+    $_SESSION['matriculapac']="";
     //
     $c_login = $_POST['login'];
     $c_sql = "SELECT count(*) as achou FROM usuario where usuario.login='$c_login'";

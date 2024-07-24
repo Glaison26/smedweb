@@ -54,7 +54,7 @@ include("conexao.php");
         $(document).ready(function() {
             $('.tabprofissionais').DataTable({
                 // 
-                "iDisplayLength": 6,
+                "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,

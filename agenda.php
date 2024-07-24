@@ -6,11 +6,7 @@ if (!isset($_SESSION['newsession'])) {
 
 include("conexao.php");
 include_once "lib_gop.php";
-$_SESSION['teste'] = "";
-// rotina para colar dados copiados do paciente na agenda
-if ((isset($_POST["btncola"]))){
-    
-}
+
 //  rotina para sql de pacientes no post
 $c_sql_pac = "";
 // faço a Leitura da tabela de pacientes com sql
@@ -70,7 +66,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     }
     $c_sql2 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
-    agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao FROM agenda 
+    agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula FROM agenda 
     JOIN convenios ON agenda.id_convenio=convenios.id
     WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
     $result2 = $conection->query($c_sql2);
@@ -121,10 +117,21 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
 <body>
     <script>
+        function colar() {
+              
+            document.getElementById('up_nomeField').value = "<?php echo $_SESSION['nomepac'] ?>";
+            document.getElementById('up_convenioField').value = "<?php echo $_SESSION['conveniopac'] ?>";
+            document.getElementById('up_telefoneField').value = "<?php echo $_SESSION['telefonepac'] ?>";
+            document.getElementById('up_emailField').value = "<?php echo $_SESSION['emailpac'] ?>";
+            document.getElementById('up_matriculaField').value = "<?php echo $_SESSION['matriculapac'] ?>";
+        }
+    </script>
+
+    <script>
         $(document).ready(function() {
             $('.tabagenda').DataTable({
                 // 
-                "iDisplayLength": 6,
+                "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
@@ -185,10 +192,11 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 $('#up_idField').val(data[0]);
                 $('#up_horarioField').val(data[1]);
                 $('#up_nomeField').val(data[2]);
-                $('#up_convenioField').val(data[3]);
-                $('#up_telefoneField').val(data[4]);
-                $('#up_emailField').val(data[5]);
-                $('#up_obsField').val(data[6]);
+                $('#up_matriculaField').val(data[3]);
+                $('#up_convenioField').val(data[4]);
+                $('#up_telefoneField').val(data[5]);
+                $('#up_emailField').val(data[6]);
+                $('#up_obsField').val(data[7]);
             });
         });
     </script>
@@ -200,6 +208,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             var c_id = $('#up_idField').val();
             var c_horario = $('#up_horarioField').val();
             var c_nome = $('#up_nomeField').val();
+            var c_matricula = $('#up_matriculaField').val();
             var c_convenio = $('#up_convenioField').val();
             var c_telefone = $('#up_telefoneField').val()
             var c_email = $('#up_emailField').val();
@@ -214,6 +223,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                         c_id: c_id,
                         c_horario: c_horario,
                         c_nome: c_nome,
+                        c_matricula:c_matricula,
                         c_convenio: c_convenio,
                         c_telefone: c_telefone,
                         c_email: c_email,
@@ -233,7 +243,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 });
 
             } else {
-                alert('Todos os campos devem ser preenchidos!!');
+                alert('Todos os campos com (*) devem ser preenchidos!!');
             }
 
         });
@@ -252,9 +262,10 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <?php
     if (isset($d_data)) {
         $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
+        
     }
     ?>
-    <div class="container -my5">
+    <div class="container-fluid">
 
         <!-- Formulário com as datas -->
         <form method="post">
@@ -314,7 +325,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             if (isset($d_data)) {
 
                                 echo "
-                            <h4>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata <h4>
+                            <h5>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata <h5>
                             ";
                             }
                             ?>
@@ -328,6 +339,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                 <th scope="col">No.</th>
                                 <th scope="col">Horário</th>
                                 <th scope="col">Nome</th>
+                                <th scope="col">Matricula</th>
                                 <th scope="col">Convênio</th>
                                 <th scope="col">Telefone</th>
                                 <th scope="col">e-mail</th>
@@ -348,14 +360,16 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td >$c_linha2[id]</td>
                                     <td>$c_linha2[horario]</td>
                                     <td>$c_linha2[nome]</td>
+                                    <td>$c_linha2[matricula]</td>
                                     <td>$c_linha2[convenio]</td>
                                     <td>$c_linha2[telefone]</td>
                                     <td>$c_linha2[email]</td>
                                     <td>$c_linha2[observacao]</td>
                                     <td>
                                     
-                                   <button class='btn btn-Secondary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
-                                   <button type='submit' return false name='btncola' id='btncola' class='btn btn-Secondary'><span class='glyphicon glyphicon-transfer'></span> Colar dados</button>
+                                   <button class='btn btn-secondary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
+                                   <a class='btn btn-warning btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
+                                   <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
                                    </td>
 
                                     </tr>
@@ -439,7 +453,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         </div>
     </div>
 
-    <!-- janela Modal para inclusão de registro -->
+    <!-- janela Modal para marcação de consulta -->
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -464,6 +478,12 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             <label for="up_nomeField" class="col-md-3 form-label">Nome (*) </label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="up_nomeField" name="up_nomeField">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="up_matriculaField" class="col-md-3 form-label">Matricula  </label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" id="up_matriculaField" name="up_matriculaField">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -509,6 +529,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
+                    <button name='btncola' onclick='colar()' id='btncola' class='btn btn-success'><span class='glyphicon glyphicon-transfer'></span> Colar dados</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                 </div>
                 </form>

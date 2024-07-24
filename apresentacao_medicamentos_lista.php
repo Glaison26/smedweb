@@ -64,7 +64,7 @@ $c_id=$_SESSION["id_medic"];
         $(document).ready(function() {
             $('.tabapresentacao').DataTable({
                 // 
-                "iDisplayLength": 6,
+                "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
