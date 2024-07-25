@@ -126,13 +126,14 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     </script>
 
     <script>
-        function colar() {
-              
-            document.getElementById('up_nomeField').value = "<?php echo $_SESSION['nomepac'] ?>";
-            document.getElementById('up_convenioField').value = "<?php echo $_SESSION['conveniopac'] ?>";
-            document.getElementById('up_telefoneField').value = "<?php echo $_SESSION['telefonepac'] ?>";
-            document.getElementById('up_emailField').value = "<?php echo $_SESSION['emailpac'] ?>";
-            document.getElementById('up_matriculaField').value = "<?php echo $_SESSION['matriculapac'] ?>";
+        function colar(id) {
+            window.location.href = "/smedweb/agenda_colar.php?id=" + id;
+        }
+    </script>
+
+<script>
+        function cortar(id) {
+            window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
         }
     </script>
 
@@ -376,8 +377,11 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td>$c_linha2[observacao]</td>
                                     <td>
                                     
-                                   <button class='btn btn-secondary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
-                                   <a class='btn btn-warning btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
+                                   <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
+                                   <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-primary'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
+                                   <button name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-primary'><span class='glyphicon glyphicon-scissors'></span> Cortar</button>
+                                   <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-primary'><span class='glyphicon glyphicon-duplicate'></span> Colar</button>
+                                   <a class='btn btn-danger btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
                                    </td>
 
@@ -538,7 +542,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
-                    <button name='btncola' onclick='colar()' id='btncola' class='btn btn-success'><span class='glyphicon glyphicon-transfer'></span> Colar dados</button>
+
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                 </div>
                 </form>
