@@ -116,6 +116,15 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 </head>
 
 <body>
+<script language="Javascript">
+        function desmarca(id) {
+            var resposta = confirm("Deseja desmarcar essa marcação?");
+            if (resposta == true) {
+                window.location.href = "/smedweb/agenda_desmarcar.php?id=" + id;
+            }
+        }
+    </script>
+
     <script>
         function colar() {
               
@@ -325,7 +334,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             if (isset($d_data)) {
 
                                 echo "
-                            <h5>Agenda de Agenda de $c_profissional | $c_dia_semana  $c_mostradata <h5>
+                            <h5>Agenda de  $c_profissional | $c_dia_semana  $c_mostradata <h5>
                             ";
                             }
                             ?>

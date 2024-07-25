@@ -19,8 +19,9 @@ $registro = $result_grupo->fetch_assoc();
 $i_id_grupo= $registro["id"];
 $c_sql = "Update componentes" .
 " SET descricao = '$c_descricao', id_grupo_componente = '$i_id_grupo', unidade='$c_unidade' where id=$c_id";
-$result = $conection->query($c_sql);
 
+$result = $conection->query($c_sql);
+echo var_dump($c_sql);
 if($result ==true)
 {
  
