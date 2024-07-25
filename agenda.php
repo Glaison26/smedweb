@@ -9,6 +9,8 @@ include_once "lib_gop.php";
 
 //  rotina para sql de pacientes no post
 $c_sql_pac = "";
+$_SESSION['dataextra'] = "";
+$_SESSION['id_profextra'] = "";
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];
@@ -39,6 +41,8 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     $i_id_profissional = $c_linha['id'];
     $d_data = $_POST['data1'];
     $d_data = date("Y-m-d", strtotime(str_replace('/', '-', $d_data)));
+    $_SESSION['dataextra'] = $d_data;
+    $_SESSION['id_profextra'] = $i_id_profissional;
 
     $c_dia_semana = date('w', strtotime($d_data));
     switch ($c_dia_semana) {
@@ -116,7 +120,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 </head>
 
 <body>
-<script language="Javascript">
+    <script language="Javascript">
         function desmarca(id) {
             var resposta = confirm("Deseja desmarcar essa marcação?");
             if (resposta == true) {
@@ -131,7 +135,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         }
     </script>
 
-<script>
+    <script>
         function cortar(id) {
             window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
         }
@@ -183,6 +187,47 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         });
     </script>
 
+    <script type="text/javascript">
+        // Função javascript e ajax para inclusão de horário extra
+
+        $(document).on('submit', '#frmextra', function(e) {
+            e.preventDefault();
+            var c_horario = $('#add_horarioField').val();
+            var c_profissional = $('#up_idprofissionalField').val();
+            var c_data = $('#up_dataField').val();
+            var teste = 'S';
+            if (teste != '') {
+                alert('teste');
+                $.ajax({
+                    url: "agenda_extra.php",
+                    type: "post",
+                    data: {
+                        c_horario: c_horario,
+                        c_profissional: c_profissional,
+                        c_data:c_data
+                    },
+                    
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+
+                        location.reload();
+                        if (status == 'true') {
+
+                            $('#editextra').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('falha ao incluir dados');
+                        }
+                    }
+                });
+            } else {
+                alert('Preencha todos os campos obrigatórios');
+            }
+        });
+    </script>
+
+
     <!-- Coleta dados da tabela para edição do registro -->
     <script>
         $(document).ready(function() {
@@ -233,7 +278,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                         c_id: c_id,
                         c_horario: c_horario,
                         c_nome: c_nome,
-                        c_matricula:c_matricula,
+                        c_matricula: c_matricula,
                         c_convenio: c_convenio,
                         c_telefone: c_telefone,
                         c_email: c_email,
@@ -272,7 +317,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <?php
     if (isset($d_data)) {
         $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
-        
     }
     ?>
     <div class="container-fluid">
@@ -286,9 +330,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
             <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>
             <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Volar ao Menu</a>
-
             <br>
-
             <div class="panel panel-Linght">
                 <div class="panel-heading">
                     <div class="row mb-3">
@@ -341,7 +383,8 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             ?>
                         </div>
                     </div>
-
+                    <button class='btn btn-success btnextra' id = "btnextra" data-target="#editextra" data-toggle=modal title='Inclusão de Horário Extra'><img src='\smedweb\images\horarios_extra.png' alt='' width='15' height='15'> Horário Extra</button>
+                    <hr>
                     <!-- montagem da tabela de agenda -->
                     <table class="table display  tabagenda">
                         <thead class="thead">
@@ -377,7 +420,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td>$c_linha2[observacao]</td>
                                     <td>
                                     
-                                   <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
+                                   <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
                                    <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-primary'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-primary'><span class='glyphicon glyphicon-scissors'></span> Cortar</button>
                                    <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-primary'><span class='glyphicon glyphicon-duplicate'></span> Colar</button>
@@ -494,7 +537,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="up_matriculaField" class="col-md-3 form-label">Matricula  </label>
+                            <label for="up_matriculaField" class="col-md-3 form-label">Matricula </label>
                             <div class="col-md-5">
                                 <input type="text" class="form-control" id="up_matriculaField" name="up_matriculaField">
                             </div>
@@ -549,6 +592,50 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             </div>
         </div>
     </div>
+
+
+    <!-- janela Modal para incluir hora extra na agenda -->
+    <div class="modal fade" id="editextra" tabindex="-1" role="dialog" aria-labelledby="editextra" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Horário Extra na Agenda</h4>
+                </div>
+                <div class="modal-body">
+                    <div class='alert alert-warning' role='alert'>
+                        <h5>Campos com (*) são obrigatórios</h5>
+                    </div>
+                    <form id="frmextra" method="POST" action="">
+                        <input type="hidden" id="up_idprofissionalField" name="up_idprofissionalField" value="<?php echo $i_id_profissional ?>">
+                        <div class="mb-3 row">
+                            <label for="up_dataField" class="col-md-3 form-label">Data</label>
+                            <div class="col-md-4">
+                                <input readonly type="text" class="form-control" id="up_dataField" name="up_dataField" value="<?php echo $c_mostradata; ?>">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="up_diaField" class="col-md-3 form-label">Dia da Semana</label>
+                            <div class="col-md-4">
+                                <input readonly type="text" class="form-control" id="up_diaField" name="up_diaField" value="<?php echo $c_dia_semana; ?>">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="add_horarioField" class="col-md-3 form-label">Horário (*)</label>
+                            <div class="col-md-4">
+                                <input type="time" class="form-control" id="add_horarioField" name="add_horarioField">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
 
 </body>
