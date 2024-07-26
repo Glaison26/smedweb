@@ -123,11 +123,11 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 <body>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
-        function incluir(){
+        function incluir(id) {
             var resposta = confirm("Deseja confirmar essa inclusão?");
             if (resposta == true) {
-                window.location.href = "/smedweb/pacientes_novo.php";
-            } 
+                window.location.href = "/smedweb/paciente_agenda.php?id=" + id;
+            }
         }
     </script>
 
@@ -394,7 +394,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td>
                                     
                                    <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
-                                   <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-primary'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
+                                   <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-info'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-primary'><span class='glyphicon glyphicon-scissors'></span> Cortar</button>
                                    <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-primary'><span class='glyphicon glyphicon-duplicate'></span> Colar</button>
                                    <a class='btn btn-danger btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
