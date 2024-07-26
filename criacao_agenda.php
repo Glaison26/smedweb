@@ -136,6 +136,44 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
+    <script>
+        function minhaFuncao() {
+                  
+            var c_horario = $('#add_horarioField').val();
+            var c_data = $('#up_dataField').val();
+            var c_profissional = $('#up_idprofissionalField').val();
+            
+            if (c_horario != ''|| c_data!='') {
+
+                $.ajax({
+                    url: "agenda_extra.php",
+                    type: "post",
+                    data: {
+                        c_horario: c_horario,
+                        c_data:c_data,
+                        c_profissional:c_profissional
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+
+                        location.reload();
+                        if (status == 'true') {
+
+                            $('#extramodal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('falha ao incluir dados');
+                        }
+                    }
+                });
+            } else {
+                alert('Preencha todos os campos obrigatórios');
+            }
+        
+        }
+    </script>
+
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
         $(document).on('submit', '#frmextra', function(e) {
@@ -145,7 +183,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             var c_horario = $('#add_horarioField').val();
             var c_data = $('#up_dataField').val();
             var c_profissional = $('#up_idprofissionalField').val();
-            
+
             if (c_horario != '') {
 
                 $.ajax({
@@ -263,8 +301,8 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     </form>
                 </div>
                 <div class="modal-footer">
-                
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
+
+                    <button type="submit" onclick="minhaFuncao()" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                 </div>
             </div>

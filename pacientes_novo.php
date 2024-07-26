@@ -1,6 +1,6 @@
 <?php
 // controle de acesso ao formulário
-//session_start();
+session_start();
 //if (!isset($_SESSION['newsession'])) {
 //    die('Acesso não autorizado!!!');
 //}
@@ -44,8 +44,16 @@ $c_estadocivil = "";
 $c_indicacao = "";
 $c_profissao = "";
 $c_identidade = "";
-
-
+// se a inclusão do paciente veio da agenda preencho com os dados do agendamento
+if ($_SESSION['incagenda']==true){
+    // seções para agenda
+    $c_nome=$_SESSION['nomepac'];
+    $c_convenio=$_SESSION['conveniopac'];
+    $c_telefone1=$_SESSION['telefonepac'];
+    $c_email=$_SESSION['emailpac'];
+    $c_matricula=$_SESSION['matriculapac'];
+  
+}
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";

@@ -9,6 +9,7 @@ session_start();
 include("conexao.php");
 // primeira entrada
 $c_sql = "";
+$_SESSION['incagenda']=false;
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];

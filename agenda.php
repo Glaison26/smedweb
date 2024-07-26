@@ -11,6 +11,7 @@ include_once "lib_gop.php";
 $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
+$_SESSION['incagenda'] = true;
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];
@@ -120,6 +121,17 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 </head>
 
 <body>
+    <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
+    <script>
+        function incluir(){
+            var resposta = confirm("Deseja confirmar essa inclusão?");
+            if (resposta == true) {
+                window.location.href = "/smedweb/pacientes_novo.php";
+            } 
+        }
+    </script>
+
+    <!-- funcao para chamar rotina para desmacar marcação de agenda -->
     <script language="Javascript">
         function desmarca(id) {
             var resposta = confirm("Deseja desmarcar essa marcação?");
