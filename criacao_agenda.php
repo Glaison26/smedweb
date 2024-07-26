@@ -40,7 +40,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     // verifica se data ja foi gerada
     $c_sql_checa = "SELECT COUNT(*) AS total FROM agenda WHERE (agenda.data= '$d_datainicio' OR agenda.data= '$d_datafim')
      and id_profissional='$c_id'";
-    
+
     $result_checa = $conection->query($c_sql_checa);
     $linha_total = $result_checa->fetch_assoc();
     //echo $linha_total['total'];
@@ -114,8 +114,8 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Smed - Sistema Médico</title>
     <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -124,9 +124,58 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.css" rel="stylesheet">
     <link href="DataTables/datatables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+
 </head>
 
 <body>
+    <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
+    <script type="text/javascript">
+        // Função javascript e ajax para inclusão dos dados
+        $(document).on('submit', '#frmextra', function(e) {
+            alert(c_horario);
+
+            e.preventDefault();
+            var c_horario = $('#add_horarioField').val();
+            var c_data = $('#up_dataField').val();
+            var c_profissional = $('#up_idprofissionalField').val();
+            
+            if (c_horario != '') {
+
+                $.ajax({
+                    url: "especialidade_novo.php",
+                    type: "post",
+                    data: {
+                        c_descricao: c_descricao
+
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+
+                        location.reload();
+                        if (status == 'true') {
+
+                            $('#extramodal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('falha ao incluir dados');
+                        }
+                    }
+                });
+            } else {
+                alert('Preencha todos os campos obrigatórios');
+            }
+        });
+    </script>
+
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -135,7 +184,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     </div>
 
     <div class="container -my5">
-        <a class="btn btn-info" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+
         <hr>
         <?php
         if (!empty($msg_gerou)) {
@@ -168,7 +217,11 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                             <input type="Date" maxlength="10" class="form-control" name="data2" id="data2" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
                         </div>
                         <button type="submit" name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
-
+                        <!-- Botão  modal horário extra -->
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#extramodal"><img src='\smedweb\images\horarios_extra.png' alt='' width='15' height='15'>
+                            Horário Extra
+                        </button>
+                        <a class="btn btn-info" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
                     </div>
                 </div>
             </div>
@@ -177,11 +230,46 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <div class="panel-heading text-left">
                 <h4>Primeira data criada: <?php echo $c_primeiro; ?></h4>
                 <h4>Última data criada: <?php echo $c_ultimo; ?></h4>
-
             </div>
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="extramodal" tabindex="-1" role="dialog" aria-labelledby="extramodalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Geração de Horário Extra</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="frmextra" method="POST" action="">
+                        <input type="hidden" id="up_idprofissionalField" name="up_idprofissionalField" value="<?php echo $c_id ?>">
+                        <div class="mb-3 row">
+                            <label for="up_dataField" class="col-md-3 form-label">Data</label>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="up_dataField" name="up_dataField">
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label for="add_horarioField" class="col-md-3 form-label">Horário (*)</label>
+                            <div class="col-md-4">
+                                <input type="time" class="form-control" id="add_horarioField" name="add_horarioField">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

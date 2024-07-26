@@ -187,45 +187,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         });
     </script>
 
-    <script type="text/javascript">
-        // Função javascript e ajax para inclusão de horário extra
-
-        $(document).on('submit', '#frmextra', function(e) {
-            e.preventDefault();
-            var c_horario = $('#add_horarioField').val();
-            var c_profissional = $('#up_idprofissionalField').val();
-            var c_data = $('#up_dataField').val();
-            var teste = 'S';
-            if (teste != '') {
-                alert('teste');
-                $.ajax({
-                    url: "agenda_extra.php",
-                    type: "post",
-                    data: {
-                        c_horario: c_horario,
-                        c_profissional: c_profissional,
-                        c_data:c_data
-                    },
-                    
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        var status = json.status;
-
-                        location.reload();
-                        if (status == 'true') {
-
-                            $('#editextra').modal('hide');
-                            location.reload();
-                        } else {
-                            alert('falha ao incluir dados');
-                        }
-                    }
-                });
-            } else {
-                alert('Preencha todos os campos obrigatórios');
-            }
-        });
-    </script>
 
 
     <!-- Coleta dados da tabela para edição do registro -->
@@ -383,7 +344,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             ?>
                         </div>
                     </div>
-                    <button class='btn btn-success btnextra' id = "btnextra" data-target="#editextra" data-toggle=modal title='Inclusão de Horário Extra'><img src='\smedweb\images\horarios_extra.png' alt='' width='15' height='15'> Horário Extra</button>
+
                     <hr>
                     <!-- montagem da tabela de agenda -->
                     <table class="table display  tabagenda">
@@ -522,8 +483,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                     </div>
                     <form id="frmadd" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
-
-
                         <div class="mb-3 row">
                             <label for="up_horarioField" class="col-md-3 form-label">Horário</label>
                             <div class="col-md-4">
@@ -551,10 +510,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     $result3 = $conection->query($c_sql3);
                                     // insiro os registro do banco de dados na tabela 
                                     while ($c_linha3 = $result3->fetch_assoc()) {
-                                        //$c_op = "";
-                                        //if ($c_linha3['id'] == $c_convenio) {
-                                        //    $c_op = "selected";
-                                        // }
+
                                         echo "
                                         <option $c_op>$c_linha3[nome]</option>";
                                     }
@@ -585,7 +541,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
-
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                 </div>
                 </form>
@@ -594,49 +549,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     </div>
 
 
-    <!-- janela Modal para incluir hora extra na agenda -->
-    <div class="modal fade" id="editextra" tabindex="-1" role="dialog" aria-labelledby="editextra" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Horário Extra na Agenda</h4>
-                </div>
-                <div class="modal-body">
-                    <div class='alert alert-warning' role='alert'>
-                        <h5>Campos com (*) são obrigatórios</h5>
-                    </div>
-                    <form id="frmextra" method="POST" action="">
-                        <input type="hidden" id="up_idprofissionalField" name="up_idprofissionalField" value="<?php echo $i_id_profissional ?>">
-                        <div class="mb-3 row">
-                            <label for="up_dataField" class="col-md-3 form-label">Data</label>
-                            <div class="col-md-4">
-                                <input readonly type="text" class="form-control" id="up_dataField" name="up_dataField" value="<?php echo $c_mostradata; ?>">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="up_diaField" class="col-md-3 form-label">Dia da Semana</label>
-                            <div class="col-md-4">
-                                <input readonly type="text" class="form-control" id="up_diaField" name="up_diaField" value="<?php echo $c_dia_semana; ?>">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="add_horarioField" class="col-md-3 form-label">Horário (*)</label>
-                            <div class="col-md-4">
-                                <input type="time" class="form-control" id="add_horarioField" name="add_horarioField">
-                            </div>
-                        </div>
 
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 </body>
 
