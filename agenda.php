@@ -102,7 +102,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
-
+    <!-- script para mascara de telefone -->
     <script>
         const handlePhone = (event) => {
             let input = event.target
@@ -140,13 +140,13 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             }
         }
     </script>
-
+    <!-- funcao para chamar rotina para colar marcação de agenda -->
     <script>
         function colar(id) {
             window.location.href = "/smedweb/agenda_colar.php?id=" + id;
         }
     </script>
-
+    <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
     <script>
         function cortar(id) {
             window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
