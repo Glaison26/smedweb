@@ -47,55 +47,65 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     if ($linha_total['total'] == 0) {
         // inicio do loop de data
         while (strtotime($d_datainicio) <= strtotime($d_datafim)) {
+            // verifico se data a ser gerada está dentro das datas a serem suprimidas
+            
+           
+            $c_sql_suprimidos = "select COUNT(*) as contador from datas_suprimidas where data_inicio>='$d_datainicio' and data_fim<='$d_datainicio'";
+            
+            $result_suprimidos = $conection->query($c_sql_suprimidos);
+            $linha_suprimidos = $result_suprimidos->fetch_assoc();
+            // verificos se data não está dentro das datas suprimidas contador = 0 - se não faço a geração da agenda naquela data
+            if ($linha_suprimidos['contador'] == 0) {
+                // loop para inserir os horários configurados na data
+                // pego dia da semana via sql
+                $dia_semana = date('w', strtotime($d_datainicio));  // pego dia da semana 0=domi 1=seg 2=ter 3=qua 4=qui 5=sex 6=sab
+                $dia_semana = $dia_semana;
+                $c_sql_horario = "select * from agendaconfig where id_profissional='$c_id' and dia='$dia_semana'";
 
-            // loop para inserir os horários configurados na data
-            // pego dia da semana via sql
-            $dia_semana = date('w', strtotime($d_datainicio));  // pego dia da semana 0=domi 1=seg 2=ter 3=qua 4=qui 5=sex 6=sab
-            $dia_semana = $dia_semana;
-            $c_sql_horario = "select * from agendaconfig where id_profissional='$c_id' and dia='$dia_semana'";
-
-            $result = $conection->query($c_sql_horario);
-            $result_dias = $result->fetch_assoc();
-            // loop para periodo da manhã
-            $inicio_manha = $result_dias['inicio1'];
-            $inicio_tarde = $result_dias['inicio2'];
-            $inicio_noite = $result_dias['inicio2'];
-            $fim_manha = $result_dias['fim1'];
-            $fim_tarde = $result_dias['fim2'];
-            $fim_noite = $result_dias['fim3'];
-            $duracao_manha = $result_dias['duracao1'];
-            $duracao_tarde = $result_dias['duracao2'];
-            $duracao_noite = $result_dias['duracao3'];
-            $minuto_soma = "00:" . $duracao_manha;
-            if ($inicio_manha != '00:00:00' && $fim_manha != '00:00:00' && $duracao_manha != '0') {
-                // geração do turno da manhã
-                while (strtotime($inicio_manha) <= strtotime($fim_manha)) {  // loop de icremento de hora do turno da manhã
-                    // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario, dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana', 3)";
-                    $result = $conection->query($c_sql);
-                    $inicio_manha = gmdate('H:i:s', strtotime($inicio_manha) + strtotime($minuto_soma));
+                $result = $conection->query($c_sql_horario);
+                $result_dias = $result->fetch_assoc();
+                // loop para periodo da manhã
+            
+                $inicio_manha = $result_dias['inicio1'];
+                $inicio_tarde = $result_dias['inicio2'];
+                $inicio_noite = $result_dias['inicio3'];
+                $fim_manha = $result_dias['fim1'];
+                $fim_tarde = $result_dias['fim2'];
+                $fim_noite = $result_dias['fim3'];
+                $duracao_manha = $result_dias['duracao1'];
+                $duracao_tarde = $result_dias['duracao2'];
+                $duracao_noite = $result_dias['duracao3'];
+                $minuto_soma = "00:" . $duracao_manha;
+                if ($inicio_manha != '00:00:00' && $fim_manha != '00:00:00' && $duracao_manha != '0') {
+                    // geração do turno da manhã
+                    while (strtotime($inicio_manha) <= strtotime($fim_manha)) {  // loop de icremento de hora do turno da manhã
+                        // inserir dados na tabela de agenda
+                        $c_sql = "insert into agenda (id_profissional, data, horario, dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana', 3)";
+                        $result = $conection->query($c_sql);
+                        $inicio_manha = gmdate('H:i:s', strtotime($inicio_manha) + strtotime($minuto_soma));
+                    }
                 }
-            }
-            // geração do turno da tarde
-            $minuto_soma = "00:" . $duracao_tarde;
-            if ($inicio_tarde != '00:00:00' && $fim_tarde != '00:00:00' && $duracao_tarde != '0') {
-                while (strtotime($inicio_tarde) <= strtotime($fim_tarde)) {  // loop de icremento de hora do turno da manhã
-                    // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_tarde','$dia_semana', 3)";
-                    $result = $conection->query($c_sql);
-                    $inicio_tarde = gmdate('H:i:s', strtotime($inicio_tarde) + strtotime($minuto_soma));
+                // geração do turno da tarde
+                $minuto_soma = "00:" . $duracao_tarde;
+                if ($inicio_tarde != '00:00:00' && $fim_tarde != '00:00:00' && $duracao_tarde != '0') {
+                    while (strtotime($inicio_tarde) <= strtotime($fim_tarde)) {  // loop de icremento de hora do turno da manhã
+                        // inserir dados na tabela de agenda
+                        $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_tarde','$dia_semana', 3)";
+                        $result = $conection->query($c_sql);
+                        $inicio_tarde = gmdate('H:i:s', strtotime($inicio_tarde) + strtotime($minuto_soma));
+                    }
                 }
-            }
-            // geração do turno da noite
-            $minuto_soma = "00:" . $duracao_noite;
-            if ($inicio_noite != '00:00:00' && $fim_noite != '00:00:00' && $duracao_noite != '0') {
-                while (strtotime($inicio_noite) <= strtotime($fim_noite)) {  // loop de icremento de hora do turno da manhã
-                    // inserir dados na tabela de agenda
-                    $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana', 3)";
-                    $result = $conection->query($c_sql);
-                    $inicio_noite = gmdate('H:i:s', strtotime($inicio_noite) + strtotime($minuto_soma));
+                // geração do turno da noite
+                $minuto_soma = "00:" . $duracao_noite;
+                if ($inicio_noite != '00:00:00' && $fim_noite != '00:00:00' && $duracao_noite != '0') {
+                    while (strtotime($inicio_noite) <= strtotime($fim_noite)) {  // loop de icremento de hora do turno da manhã
+                        // inserir dados na tabela de agenda
+                        $c_sql = "insert into agenda (id_profissional, data, horario,  dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_noite','$dia_semana', 3)";
+                        $result = $conection->query($c_sql);
+                        $inicio_noite = gmdate('H:i:s', strtotime($inicio_noite) + strtotime($minuto_soma));
+                    }
                 }
-            }
+            } // -> suprimidos
             // incremento data 
             $d_datainicio = date('y-m-d', strtotime("+1 days", strtotime($d_datainicio))); // incremento 1 dia a data do loop
 
@@ -138,20 +148,20 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
     <script>
         function minhaFuncao() {
-                  
+
             var c_horario = $('#add_horarioField').val();
             var c_data = $('#up_dataField').val();
             var c_profissional = $('#up_idprofissionalField').val();
-            
-            if (c_horario != ''|| c_data!='') {
+
+            if (c_horario != '' || c_data != '') { // não passa horário ou data em branco
 
                 $.ajax({
                     url: "agenda_extra.php",
                     type: "post",
                     data: {
                         c_horario: c_horario,
-                        c_data:c_data,
-                        c_profissional:c_profissional
+                        c_data: c_data,
+                        c_profissional: c_profissional
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -170,47 +180,8 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             } else {
                 alert('Preencha todos os campos obrigatórios');
             }
-        
+
         }
-    </script>
-
-    <script type="text/javascript">
-        // Função javascript e ajax para inclusão dos dados
-        $(document).on('submit', '#frmextra', function(e) {
-            alert(c_horario);
-
-            e.preventDefault();
-            var c_horario = $('#add_horarioField').val();
-            var c_data = $('#up_dataField').val();
-            var c_profissional = $('#up_idprofissionalField').val();
-
-            if (c_horario != '') {
-
-                $.ajax({
-                    url: "especialidade_novo.php",
-                    type: "post",
-                    data: {
-                        c_descricao: c_descricao
-
-                    },
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        var status = json.status;
-
-                        location.reload();
-                        if (status == 'true') {
-
-                            $('#extramodal').modal('hide');
-                            location.reload();
-                        } else {
-                            alert('falha ao incluir dados');
-                        }
-                    }
-                });
-            } else {
-                alert('Preencha todos os campos obrigatórios');
-            }
-        });
     </script>
 
 
