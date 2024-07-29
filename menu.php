@@ -69,12 +69,8 @@ if (!isset($_SESSION['newsession'])) {
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prescrições</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\atestado.png" alt="" width="20" height="20"> Atestados...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\laudo.png" alt="" width="20" height="20"> Exames...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\medicamento.png" alt="" width="20" height="20"> Medicamentos...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\formula.png" alt="" width="20" height="20"> Fórmulas...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\orientacoes.png" alt="" width="20" height="20"> Orientações...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\relatorio.png" alt="" width="20" height="20"> Relatórios...</a>
+								<a class="dropdown-item" href="\smedweb\prescricao.php"><img src="\smedweb\images\atestado.png" alt="" width="20" height="20">Emitir Prescrição...</a>
+								<a class="dropdown-item" href="#"><img src="\smedweb\images\config.png" alt="" width="20" height="20">Configurações...</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown">

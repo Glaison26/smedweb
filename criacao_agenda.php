@@ -48,10 +48,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         // inicio do loop de data
         while (strtotime($d_datainicio) <= strtotime($d_datafim)) {
             // verifico se data a ser gerada está dentro das datas a serem suprimidas
-            
-           
             $c_sql_suprimidos = "select COUNT(*) as contador from datas_suprimidas where data_inicio>='$d_datainicio' and data_fim<='$d_datainicio'";
-            
             $result_suprimidos = $conection->query($c_sql_suprimidos);
             $linha_suprimidos = $result_suprimidos->fetch_assoc();
             // verificos se data não está dentro das datas suprimidas contador = 0 - se não faço a geração da agenda naquela data
@@ -59,13 +56,14 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 // loop para inserir os horários configurados na data
                 // pego dia da semana via sql
                 $dia_semana = date('w', strtotime($d_datainicio));  // pego dia da semana 0=domi 1=seg 2=ter 3=qua 4=qui 5=sex 6=sab
-                $dia_semana = $dia_semana;
-                $c_sql_horario = "select * from agendaconfig where id_profissional='$c_id' and dia='$dia_semana'";
+                if ($dia_semana == '0') {
+                    $dia_semana = '7';
+                }
 
+                $c_sql_horario = "select * from agendaconfig where id_profissional='$c_id' and dia='$dia_semana'";
                 $result = $conection->query($c_sql_horario);
                 $result_dias = $result->fetch_assoc();
                 // loop para periodo da manhã
-            
                 $inicio_manha = $result_dias['inicio1'];
                 $inicio_tarde = $result_dias['inicio2'];
                 $inicio_noite = $result_dias['inicio3'];
