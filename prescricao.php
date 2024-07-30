@@ -59,7 +59,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [3]
+                    'aTargets': [2]
                 }, {
                     'aTargets': [0],
                     "visible": false
@@ -106,29 +106,24 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     </div>
     <br>
     <div class="container -my5">
-        <a class="btn btn-info" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-        <hr>
         <form id="frmpaciente" method="POST" action="">
-            <div class="mb-5 row">
-                <hr>
-                <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
-
-                <div class="col-md-7">
-                    <input type="text" class="form-control" id="pesquisa" name="pesquisa">
-
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-                </div>
+            <hr>
+            <label for="up_parametroField" class="col-md-2 form-label">Nome para pesquisar</label>
+            <div class="col-sm-7">
+                 <input type="text" class="form-control" id="pesquisa" name="pesquisa">
             </div>
+            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-light"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+            <a class="btn btn-light" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
+        <br>
         <table class="table display table-bordered tabpacientes">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">Número</th>
                     <th scope="col">Nome do Paciênte</th>
                     <th scope="col">Sexo</th>
-                    <th scope="col">Ação</th>
+                    <th scope="col">Matrícula</th>
+                    <th scope="col">Opções de Prescrições</th>
                 </tr>
             </thead>
             <tbody>
@@ -147,20 +142,19 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                     <td>$c_linha[id]</td>
                     <td>$c_linha[nome]</td>
                     <td>$c_sexo</td>
+                    <td>$c_linha[matricula]</td>
+          
                                                        
                     <td>
-                    <a class='btn btn-success btn-sm' title='Atestatos' href='/smedweb/atestados.php?id=$c_linha[id]'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
+                    <a class='btn btn-success btn-sm' title='Atestatos' href='/smedweb/atestado.php?id=$c_linha[id]'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
                     <a class='btn btn-success btn-sm' title='Formulas' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
-                    <a class='btn btn-success btn-sm' title='Laudos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'> Laudos</a>
-                    <a class='btn btn-success btn-sm' title='Medicamentos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'> Medicamentos</a>
-                    
-                    <a class='btn btn-success btn-sm' title='Orientações' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'> Orientações</a>
-                    <a class='btn btn-success btn-sm' title='Relatórios' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'> Relatórios</a>
+                    <a class='btn btn-success btn-sm' title='Laudos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
+                    <a class='btn btn-success btn-sm' title='Medicamentos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\dio.png' width='20' height='20'> Medicamentos</a>
+                    <a class='btn btn-success btn-sm' title='Orientações' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\orientacoes.png' width='20' height='20'> Orientações</a>
+                    <a class='btn btn-success btn-sm' title='Relatórios' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\oto.png' width='20' height='20'> Relatórios</a>
 
                     </td>
-
-                    </td>
-
+                        
                     </tr>
                     ";
                     }

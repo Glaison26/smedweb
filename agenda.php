@@ -277,10 +277,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         });
     </script>
 
-
-
-
-
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -289,7 +285,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     </div>
     <?php
     if (isset($d_data)) {
-        $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
+      $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
     }
     ?>
     <div class="container-fluid">
@@ -300,7 +296,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             <div class="col-sm-2">
                 <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
             </div>
-
             <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>
             <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Volar ao Menu</a>
             <br>

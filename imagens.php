@@ -143,7 +143,7 @@ $c_caminho = '/smedweb/imagens_lista.php?id=' . $c_id;
                         <a class='btn btn-Light btn-sm' title='Lista de Imagens' href="<?php echo $c_caminho; ?>"><span class='glyphicon glyphicon-list-alt'></span> Listar Imagens</a>
                         <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                         <hr>
-                        <input type="file" name="arquivo" id="arquivo" accept="image/*">
+                        <input type="file" name="arquivo" class="form-control-file" id="arquivo" accept="image/*">
                     </div>
 
                 </div>
