@@ -6,7 +6,12 @@ if (!isset($_SESSION['newsession'])) {
 
 include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
-$c_id = $_GET["id"]; // pego a id do paciente
+if (isset($_GET["id"])) {
+    $c_id = $_GET["id"]; // pego a id do paciente
+    $_SESSION['refid'] = $c_id;
+} else {
+    $c_id = $_SESSION['refid'];
+}
 // sql para pegar dados do paciente selecionado
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
@@ -15,6 +20,18 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $c_atestado = "";
+}
+if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na agenda
+    $c_id_atestado = $c_linha['id'];
+    echo $c_id_atestado;
+    // procuro o texto no cadastro de atestado para colocar no texto
+    $c_sql_atestado = "SELECT atestados.texto FROM atestados WHERE atestados.id='$c_id_atestado'";
+    $result_atestado = $conection->query($c_sql_atestado);
+    $c_linha_atestado = $result_atestado->fetch_assoc();
+    //$c_atestado = $c_linha_atestado['texto'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +41,6 @@ $c_linha = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smartmed - sistema Médico</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smed - Sistema Médico</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
@@ -46,7 +60,7 @@ $c_linha = $result->fetch_assoc();
 
     <script>
         $(document).ready(function() {
-            $('.tabpacientes').DataTable({
+            $('.tabatestado').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
@@ -108,7 +122,7 @@ $c_linha = $result->fetch_assoc();
         </div>
         <!-- Formulário com os profissionais para seleção -->
         <form method="post">
-
+            <input type="hidden" name="id_atestado">
             <div class="panel panel-Linght">
                 <div class="panel-heading">
                     <div class="row mb-3">
@@ -117,7 +131,7 @@ $c_linha = $result->fetch_assoc();
                             <select class="form-control form-control-lg" id="profissional" name="profissional">
                                 <?php
                                 $c_sql = "SELECT profissionais.id, profissionais.nome FROM profissionais
-                            ORDER BY profissionais.nome";
+                                        ORDER BY profissionais.nome";
                                 $result = $conection->query($c_sql);
                                 // insiro os registro do banco de dados na tabela 
                                 while ($c_linha = $result->fetch_assoc()) {
@@ -141,24 +155,64 @@ $c_linha = $result->fetch_assoc();
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Atestado</a></li>
             <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Atestados</a></li>
-
         </ul>
         <!-- paginas de edição e modelos de atestados -->
         <div class="tab-content">
             <!-- aba de edição do atestado -->
             <div role="tabpanel" class="tab-pane active" id="atestado">
                 <div style="padding-top:5px;">
-                    <p>
-                        teste 1
-                    </p>
+                    <div style="padding-top:20px;">
+                        <div class="form-group">
+                            <label class="col-sm-1 col-form-label">Texto do Atestado</label>
+                            <div class="col-sm-7">
+                                <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- aba de modelos de atestados -->
             <div role="tabpanel" class="tab-pane" id="modelos">
                 <div style="padding-top:5px;">
-                    <p>
-                        teste 2
-                    </p>
+                    <div class="table-responsive=lg">
+                        <table class="table display table-bordered tabatestados">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th style='display:none' scope="col">No.</th>
+                                    <th scope="col">Atestado</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // faço a Leitura da tabela com sql
+                                $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
+                                $result = $conection->query($c_sql);
+                                // verifico se a query foi correto
+                                if (!$result) {
+                                    die("Erro ao Executar Sql!!" . $conection->connect_error);
+                                }
+                                // insiro os registro do banco de dados na tabela 
+                                while ($c_linha2 = $result->fetch_assoc()) {
+
+                                    echo "
+                                        <tr>
+                                        <td style='display:none'>$c_linha2[id]</td>
+                                        <td>$c_linha2[descricao]</td>
+                   
+                                        <td>
+                                        <form id='frmadd' method='POST' action=''>
+                                            <button type='submit' id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
+                                        </form>
+                                        </td>
+
+                                        </tr>
+                                    ";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
