@@ -24,13 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $c_atestado = "";
 }
 if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na agenda
-    $c_id_atestado = $c_linha['id'];
-    echo $c_id_atestado;
+    $c_id_atestado = $_POST['id_atestado'];
+    $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
+    $result_texto = $conection->query($c_sql_texto);
+ 
     // procuro o texto no cadastro de atestado para colocar no texto
     $c_sql_atestado = "SELECT atestados.texto FROM atestados WHERE atestados.id='$c_id_atestado'";
     $result_atestado = $conection->query($c_sql_atestado);
     $c_linha_atestado = $result_atestado->fetch_assoc();
-    //$c_atestado = $c_linha_atestado['texto'];
+    $c_atestado = $c_linha_atestado['texto'];
 }
 ?>
 
@@ -57,6 +59,14 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
+     <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
+     <script>
+        function pegaid(id) {
+            alert(id)
+            document.getElementById('id_atestado').value = id;
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -122,7 +132,7 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
         </div>
         <!-- Formulário com os profissionais para seleção -->
         <form method="post">
-            <input type="hidden" name="id_atestado">
+           
             <div class="panel panel-Linght">
                 <div class="panel-heading">
                     <div class="row mb-3">
@@ -147,7 +157,6 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
 
                         </div>
                     </div>
-
                 </div>
             </div>
         </form>
@@ -202,7 +211,8 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
                    
                                         <td>
                                         <form id='frmadd' method='POST' action=''>
-                                            <button type='submit' id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
+                                            <input type='hidden' name='id_atestado' id='id_atestado'>
+                                            <button onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
                                         </form>
                                         </td>
 
