@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na agenda
     $c_id_atestado = $_POST['id_atestado'];
     $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
-    
+
     $result_texto = $conection->query($c_sql_texto);
- 
+
     // procuro o texto no cadastro de atestado para colocar no texto
     $c_linha_atestado = $result_texto->fetch_assoc();
     $c_atestado = $c_linha_atestado['texto'];
@@ -59,10 +59,16 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
-     <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
-     <script>
+    <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
+    <script>
         function pegaid(id) {
             document.getElementById('id_atestado').value = id;
+        }
+    </script>
+    <!-- funcao para chamar rotina de registro do atestado no histórico do paciênte -->
+    <script>
+        function registro(id) {
+
         }
     </script>
 
@@ -121,6 +127,8 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
 
     <div class="container -my5">
         <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado</a>
+        <button onclick='registro($c_linha2[id])' id='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
+            <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
         <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         <hr>
         <div class="panel panel-success">
@@ -130,7 +138,7 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
         </div>
         <!-- Formulário com os profissionais para seleção -->
         <form method="post">
-           
+
             <div class="panel panel-Linght">
                 <div class="panel-heading">
                     <div class="row mb-3">
@@ -157,7 +165,7 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
                     </div>
                 </div>
             </div>
-           
+
         </form>
         <!-- fim do formulário de profissionais -->
         <ul class="nav nav-tabs" role="tablist">
@@ -192,36 +200,34 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
                                 </tr>
                             </thead>
                             <tbody>
-                            <form id='frmadd' method='POST' action=''>
-                            <input type='hidden' name='id_atestado' id='id_atestado'>
-                                <?php
-                                // faço a Leitura da tabela com sql
-                                $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
-                                $result = $conection->query($c_sql);
-                                // verifico se a query foi correto
-                                if (!$result) {
-                                    die("Erro ao Executar Sql!!" . $conection->connect_error);
-                                }
-                                // insiro os registro do banco de dados na tabela 
-                                while ($c_linha2 = $result->fetch_assoc()) {
+                                <form id='frmadd' method='POST' action=''>
+                                    <!-- input para capturar id do atestado a ter o texto capturado -->
+                                    <input type='hidden' name='id_atestado' id='id_atestado'>
+                                    <?php
+                                    // faço a Leitura da tabela com sql
+                                    $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
+                                    $result = $conection->query($c_sql);
+                                    // verifico se a query foi correto
+                                    if (!$result) {
+                                        die("Erro ao Executar Sql!!" . $conection->connect_error);
+                                    }
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha2 = $result->fetch_assoc()) {
 
-                                    echo "
+                                        echo "
                                         <tr>
                                         <td style='display:none'>$c_linha2[id]</td>
                                         <td>$c_linha2[descricao]</td>
                    
                                         <td>
-                                       
-                                             
-                                            <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
-                                       
+                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
                                         </td>
 
                                         </tr>
                                     ";
-                                }
-                                ?>
-                                 </form>
+                                    }
+                                    ?>
+                                </form>
                             </tbody>
                         </table>
                     </div>
