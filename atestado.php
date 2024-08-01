@@ -26,12 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na agenda
     $c_id_atestado = $_POST['id_atestado'];
     $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
+    
     $result_texto = $conection->query($c_sql_texto);
  
     // procuro o texto no cadastro de atestado para colocar no texto
-    $c_sql_atestado = "SELECT atestados.texto FROM atestados WHERE atestados.id='$c_id_atestado'";
-    $result_atestado = $conection->query($c_sql_atestado);
-    $c_linha_atestado = $result_atestado->fetch_assoc();
+    $c_linha_atestado = $result_texto->fetch_assoc();
     $c_atestado = $c_linha_atestado['texto'];
 }
 ?>
@@ -63,7 +62,6 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
      <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
      <script>
         function pegaid(id) {
-            alert(id)
             document.getElementById('id_atestado').value = id;
         }
     </script>
@@ -159,6 +157,7 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
                     </div>
                 </div>
             </div>
+           
         </form>
         <!-- fim do formulário de profissionais -->
         <ul class="nav nav-tabs" role="tablist">
@@ -193,6 +192,8 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
                                 </tr>
                             </thead>
                             <tbody>
+                            <form id='frmadd' method='POST' action=''>
+                            <input type='hidden' name='id_atestado' id='id_atestado'>
                                 <?php
                                 // faço a Leitura da tabela com sql
                                 $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
@@ -210,16 +211,17 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
                                         <td>$c_linha2[descricao]</td>
                    
                                         <td>
-                                        <form id='frmadd' method='POST' action=''>
-                                            <input type='hidden' name='id_atestado' id='id_atestado'>
-                                            <button onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
-                                        </form>
+                                       
+                                             
+                                            <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
+                                       
                                         </td>
 
                                         </tr>
                                     ";
                                 }
                                 ?>
+                                 </form>
                             </tbody>
                         </table>
                     </div>
