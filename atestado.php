@@ -20,10 +20,14 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+//if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $c_atestado = "";
+//}
+if ((isset($_POST["btnregistro"]))) {
+    echo 'rotina de registro';
 }
-if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na agenda
+// botão para incluir testo de atestado padrão selecionado
+if ((isset($_POST["btninclui"]))) {
     $c_id_atestado = $_POST['id_atestado'];
     $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
 
@@ -126,10 +130,14 @@ if ((isset($_POST["btninclui"]))) {  // botão para executar sql de pesquisa na 
     </div>
 
     <div class="container -my5">
-        <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado</a>
-        <button onclick='registro($c_linha2[id])' id='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
-            <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
-        <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
+        <form method="post">
+            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado</a>
+
+            <button type='submit' id='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
+                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
+
+            <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
+        </form>
         <hr>
         <div class="panel panel-success">
             <div class="panel-heading">
