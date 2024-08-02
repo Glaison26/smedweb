@@ -17,7 +17,7 @@ $c_sql = "Update atestados" .
 
 $result = $conection->query($c_sql);
 
-if($result ==true)
+if ($result == true)
 {
    
     $data = array(

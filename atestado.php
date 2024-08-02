@@ -20,19 +20,18 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
-//if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $c_atestado = "";
-//}
 if ((isset($_POST["btnregistro"]))) {
-    echo 'rotina de registro';
+    // verifico se paciente tem registro de historia
+    // se não tem historia insiro informação
+    // se tem história acrescento com update no registro do pacinte
+
 }
+$c_atestado = "";
 // botão para incluir testo de atestado padrão selecionado
 if ((isset($_POST["btninclui"]))) {
     $c_id_atestado = $_POST['id_atestado'];
     $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
-
     $result_texto = $conection->query($c_sql_texto);
-
     // procuro o texto no cadastro de atestado para colocar no texto
     $c_linha_atestado = $result_texto->fetch_assoc();
     $c_atestado = $c_linha_atestado['texto'];
@@ -133,7 +132,7 @@ if ((isset($_POST["btninclui"]))) {
         <form method="post">
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado</a>
 
-            <button type='submit' id='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
+            <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
 
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
