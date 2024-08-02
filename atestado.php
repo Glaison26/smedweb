@@ -13,6 +13,7 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
+$c_atestado = "";
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -22,11 +23,21 @@ if (!$result) {
 $c_linha = $result->fetch_assoc();
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
+    $c_atestado = $_POST['id_texto'];
+    $c_sql_contador = "select count(*) as contador from historia where id_paciente='$c_id'";
+
+    $result_contador = $conection->query($c_sql_contador);
+    $c_linha_contador = $result_contador->fetch_assoc();
+    if ($c_linha_contador['contador'] == 0) {
+        $c_sql_historia = "insert into historia (id_paciente, historia) value ('$c_id', '$c_atestado')";
+        echo $c_sql_historia;
+        $result_historia = $conection->query($c_sql_historia);
+    }
     // se não tem historia insiro informação
     // se tem história acrescento com update no registro do pacinte
 
 }
-$c_atestado = "";
+
 // botão para incluir testo de atestado padrão selecionado
 if ((isset($_POST["btninclui"]))) {
     $c_id_atestado = $_POST['id_atestado'];
@@ -134,7 +145,7 @@ if ((isset($_POST["btninclui"]))) {
 
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
-
+            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_atestado ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
         <hr>
@@ -174,7 +185,7 @@ if ((isset($_POST["btninclui"]))) {
             </div>
 
         </form>
-        <!-- fim do formulário de profissionais -->
+        <!-- fim do formulário de seleção de profissionais -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Atestado</a></li>
             <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Atestados</a></li>
