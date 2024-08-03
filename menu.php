@@ -91,9 +91,9 @@ if (!isset($_SESSION['newsession'])) {
 								<a class="dropdown-item" href="#">__________________________________</a>
 								<a class="dropdown-item" href="\smedweb\procedimentos_lista.php"><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
 								<a class="dropdown-item" href="\smedweb\itenslaudos_lista.php"><img src="\smedweb\images\laudo2.png" alt="" width="20" height="20"> Itens para Laudos...</a>
-								<a class="dropdown-item" href="\smedweb\medicamentos_lista.php"><img src="\smedweb\images\remedio.png" alt="" width="20" height="20"> Medicamentos...</a>
+								<a class="dropdown-item" href="\smedweb\medicamentos_lista.php"><img src="\smedweb\images\medicamento.png" alt="" width="20" height="20"> Medicamentos...</a>
 								<a class="dropdown-item" href="\smedweb\orientacoes_padrao_lista.php"><img src="\smedweb\images\orientacao2.png" alt="" width="20" height="20"> Orientações...</a>
-								<a class="dropdown-item" href="\smedweb\formula_padrao_lista.php"><img src="\smedweb\images\formula2.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
+								<a class="dropdown-item" href="\smedweb\formula_padrao_lista.php"><img src="\smedweb\images\ff1.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
 								<a class="dropdown-item" href="\smedweb\atestados_padroes_lista.php"><img src="\smedweb\images\atestado2.png" alt="" width="20" height="20"> Atestados Padrões...</a>
 								<a class="dropdown-item" href="#">__________________________________</a>
 								<a class="dropdown-item" href="\smedweb\grupoMedicamentos_lista.php"><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>

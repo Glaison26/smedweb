@@ -88,31 +88,25 @@ if ((isset($_POST["btninclui"]))) {
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
-    <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
+    <!-- funcao para chamar rotina para cortar registro de medicamento -->
     <script>
         function pegaid(id) {
             document.getElementById('id_atestado').value = id;
         }
     </script>
-    <!-- funcao para chamar rotina de registro do atestado no histórico do paciênte -->
-    <script>
-        function registro(id) {
-
-        }
-    </script>
 
     <script>
         $(document).ready(function() {
-            $('.tabatestado').DataTable({
+            $('.tabmedicamentos').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [2]
+                    'aTargets': [3]
                 }, {
                     'aTargets': [0],
-                    "visible": false
+                    "visible": true
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -150,15 +144,15 @@ if ((isset($_POST["btninclui"]))) {
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Emissão de atestado Médico<h5>
+            <h5>Prescrição de Medicamentos<h5>
         </div>
     </div>
 
     <div class="container -my5">
         <form method="post">
-            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado</a>
+            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
-                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
+                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_atestado ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
@@ -201,8 +195,8 @@ if ((isset($_POST["btninclui"]))) {
         </form>
         <!-- fim do formulário de seleção de profissionais -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Atestado</a></li>
-            <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Atestados</a></li>
+            <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Prescrição</a></li>
+            <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Lista de Medicamentos</a></li>
         </ul>
         <!-- paginas de edição e modelos de atestados -->
         <div class="tab-content">
@@ -211,9 +205,9 @@ if ((isset($_POST["btninclui"]))) {
                 <div style="padding-top:5px;">
                     <div style="padding-top:20px;">
                         <div class="form-group">
-                            <label class="col-sm-1 col-form-label">Texto do Atestado</label>
+                            <label class="col-sm-1 col-form-label">Texto da Prescrição</label>
                             <div class="col-sm-7">
-                                <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
+                                <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_prescricao; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -223,21 +217,24 @@ if ((isset($_POST["btninclui"]))) {
             <div role="tabpanel" class="tab-pane" id="modelos">
                 <div style="padding-top:5px;">
                     <div class="table-responsive=lg">
-                        <table class="table display table-bordered tabatestados">
+                        <table style="width:100%" class="table display table-bordered tabmedicamentos">
                             <thead class="thead">
                                 <tr class="info">
                                     <th style='display:none' scope="col">No.</th>
-                                    <th scope="col">Atestado</th>
+                                    <th scope="col">Medicamento</th>
+                                    <th scope="col">Grupo</th>
                                     <th scope="col">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <form id='frmadd' method='POST' action=''>
                                     <!-- input para capturar id do atestado a ter o texto capturado -->
-                                    <input type='hidden' name='id_atestado' id='id_atestado'>
+                                    <input type='hidden' name='id_prescricao' id='id_prescricao'>
                                     <?php
                                     // faço a Leitura da tabela com sql
-                                    $c_sql = "SELECT atestados.id, atestados.descricao, atestados.texto FROM atestados ORDER BY atestados.descricao";
+                                    $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo from medicamentos
+                                            JOIN  grupos_medicamentos ON medicamentos.id_grupo=grupos_medicamentos.id
+                                            ORDER BY medicamentos.descricao";
                                     $result = $conection->query($c_sql);
                                     // verifico se a query foi correto
                                     if (!$result) {
@@ -250,9 +247,10 @@ if ((isset($_POST["btninclui"]))) {
                                         <tr>
                                         <td style='display:none'>$c_linha2[id]</td>
                                         <td>$c_linha2[descricao]</td>
+                                        <td>$c_linha2[grupo]</td>
                    
                                         <td>
-                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar atestado'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Atestado</button>
+                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Medicamento</button>
                                         </td>
 
                                         </tr>
