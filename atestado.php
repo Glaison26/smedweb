@@ -21,6 +21,7 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
+// rotina de registro de atestado na história clinica do paciente
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
     $c_atestado = $_POST['id_texto'];
@@ -28,17 +29,29 @@ if ((isset($_POST["btnregistro"]))) {
 
     $result_contador = $conection->query($c_sql_contador);
     $c_linha_contador = $result_contador->fetch_assoc();
+    // se não tem historia insiro informação
     if ($c_linha_contador['contador'] == 0) {
         $c_sql_historia = "insert into historia (id_paciente, historia) value ('$c_id', '$c_atestado')";
-        echo $c_sql_historia;
         $result_historia = $conection->query($c_sql_historia);
+        // se tem história acrescento com update no registro do pacinte
+    } else {
+        $c_sql_historia = "select historia.historia from historia where historia.id='$c_id'";
+        $c_result_historia = $conection->query($c_sql_historia);
+        $c_linha_historia = $c_result_historia->fetch_assoc();
+        $hoje = date('d/m/Y');
+        $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Atestado Médico Emitido" .
+            "\r\n" . $c_atestado;
+        $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
+        $result_historia = $conection->query($c_sql_historia);
+        echo "
+          <script>
+          alert('Atestado registrado na história clinica do paciente!!!');
+          </script>
+        ";
     }
-    // se não tem historia insiro informação
-    // se tem história acrescento com update no registro do pacinte
-
 }
 
-// botão para incluir testo de atestado padrão selecionado
+// botão para incluir texto de atestado padrão selecionado
 if ((isset($_POST["btninclui"]))) {
     $c_id_atestado = $_POST['id_atestado'];
     $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
