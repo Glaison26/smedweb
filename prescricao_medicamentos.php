@@ -13,7 +13,7 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_atestado = "";
+$c_prescricao = "";
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -21,12 +21,11 @@ if (!$result) {
     die("Erro ao Executar Sql!!" . $conection->connect_error);
 }
 $c_linha = $result->fetch_assoc();
-// rotina de registro de atestado na história clinica do paciente
+// rotina de registro de prescrição medicamento na história clinica do paciente
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
     $c_atestado = $_POST['id_texto'];
     $c_sql_contador = "select count(*) as contador from historia where id_paciente='$c_id'";
-
     $result_contador = $conection->query($c_sql_contador);
     $c_linha_contador = $result_contador->fetch_assoc();
     // se não tem historia insiro informação
@@ -53,14 +52,15 @@ if ((isset($_POST["btnregistro"]))) {
     }
 }
 
-// botão para incluir texto de atestado padrão selecionado
+// botão para incluir texto de medicamento selecionado
 if ((isset($_POST["btninclui"]))) {
-    $c_id_atestado = $_POST['id_atestado'];
-    $c_sql_texto = "select texto from atestados where id='$c_id_atestado'";
-    $result_texto = $conection->query($c_sql_texto);
+   
+    $c_id_medicamento = $_POST['id_medicamento'];
+    $c_sql_medicamento = "select descricao from medicamentos where id='$c_id_medicamento'";
+    $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de atestado para colocar no texto
-    $c_linha_atestado = $result_texto->fetch_assoc();
-    $c_atestado = $c_linha_atestado['texto'];
+    $c_linha_medicamento = $result_medicamento->fetch_assoc();
+    $c_prescricao = $c_prescricao. $c_linha_medicamento['descricao'];
 }
 ?>
 
@@ -91,7 +91,9 @@ if ((isset($_POST["btninclui"]))) {
     <!-- funcao para chamar rotina para cortar registro de medicamento -->
     <script>
         function pegaid(id) {
-            document.getElementById('id_atestado').value = id;
+           
+            document.getElementById('id_medicamento').value = id;
+            document.getElementById('obs').value += "<?php echo $c_prescricao ?>";
         }
     </script>
 
@@ -217,7 +219,7 @@ if ((isset($_POST["btninclui"]))) {
             <div role="tabpanel" class="tab-pane" id="modelos">
                 <div style="padding-top:5px;">
                     <div class="table-responsive=lg">
-                        <table style="width:100%" class="table display table-bordered tabmedicamentos">
+                        <table style="width:100%" class="table display table-bordered tabmedicamento">
                             <thead class="thead">
                                 <tr class="info">
                                     <th style='display:none' scope="col">No.</th>
@@ -229,7 +231,7 @@ if ((isset($_POST["btninclui"]))) {
                             <tbody>
                                 <form id='frmadd' method='POST' action=''>
                                     <!-- input para capturar id do atestado a ter o texto capturado -->
-                                    <input type='hidden' name='id_prescricao' id='id_prescricao'>
+                                    <input type='hidden' name='id_medicamento' id='id_medicamento'>
                                     <?php
                                     // faço a Leitura da tabela com sql
                                     $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo from medicamentos
@@ -250,7 +252,8 @@ if ((isset($_POST["btninclui"]))) {
                                         <td>$c_linha2[grupo]</td>
                    
                                         <td>
-                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Copiar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Copiar Medicamento</button>
+                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' 
+                                          data-toggle='modal' title='Selecionar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Medicamento</button>
                                         </td>
 
                                         </tr>
