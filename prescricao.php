@@ -147,7 +147,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                                                        
                     <td>
                     <a class='btn btn-info btn-sm' title='Atestatos' href='/smedweb/atestado.php?id=$c_linha[id]'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
-                    <a class='btn btn-info btn-sm' title='Formulas' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
+                    <a class='btn btn-info btn-sm' title='Formulas' href='/smedweb/prescricao_formulas.php?id=$c_linha[id]'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
                     <a class='btn btn-info btn-sm' title='Laudos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
                     <a class='btn btn-info btn-sm' title='Medicamentos' href='/smedweb/prescricao_medicamentos.php?id=$c_linha[id]'><img src='\smedweb\images\dio.png' width='20' height='20'> Medicamentos</a>
                     <a class='btn btn-info btn-sm' title='Orientações' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\orientacoes.png' width='20' height='20'> Orientações</a>

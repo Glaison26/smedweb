@@ -40,7 +40,7 @@ if ((isset($_POST["btnregistro"]))) {
         $c_sql_historia = "select historia.historia from historia where historia.id_paciente='$c_id'";
         $c_result_historia = $conection->query($c_sql_historia);
         $c_linha_historia = $c_result_historia->fetch_assoc();
-        
+
         $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Prescrição de Medicamento Emitido" .
             "\r\n" . $c_prescricao;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
@@ -61,7 +61,7 @@ if ((isset($_POST["btninclui"]))) {
     $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de medicamentos para colocar no texto
     $c_linha_medicamento = $result_medicamento->fetch_assoc();
-    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao']."...."."\r\n";
+    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "...." . "\r\n";
 }
 ?>
 
@@ -146,7 +146,7 @@ if ((isset($_POST["btninclui"]))) {
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Prescrição de Medicamentos<h5>
+            <h5>Prescrição de Fórmulas<h5>
         </div>
     </div>
 
@@ -154,7 +154,7 @@ if ((isset($_POST["btninclui"]))) {
         <form method="post">
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
-            <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
+                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
@@ -194,7 +194,8 @@ if ((isset($_POST["btninclui"]))) {
             <!-- fim do formulário de seleção de profissionais -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#prescricao" aria-controls="home" role="tab" data-toggle="tab">Editar Prescrição</a></li>
-                <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Lista de Medicamentos</a></li>
+                <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Fórmulas pré-definidas</a></li>
+                <li role="presentation"><a href="#componentes" aria-controls="Componentes" role="tab" data-toggle="tab">Lista de Componentes</a></li>
             </ul>
             <!-- paginas de edição medicamentos cadastrados -->
             <div class="tab-content">
@@ -215,25 +216,74 @@ if ((isset($_POST["btninclui"]))) {
                 <div role="tabpanel" class="tab-pane" id="modelos">
                     <div style="padding-top:5px;">
                         <div class="table-responsive=lg">
-                            <table style="width:100%" class="table display table-bordered tabmedicamentos">
+                            <table style="width:100%" class="table display table-bordered tabformulas">
                                 <thead class="thead">
                                     <tr class="info">
                                         <th style='display:none' scope="col">No.</th>
-                                        <th scope="col">Medicamento</th>
+                                        <th scope="col">Fórmula</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <!-- input para capturar id da prescricao a ter o texto capturado -->
+                                <input type='hidden' name='id_formula' id='id_formula'>
+                                <tbody>
+
+
+                                    <?php
+                                    // faço a Leitura da tabela com sql
+                                    $c_sql = "SELECT formulas_pre.id, formulas_pre.descricao FROM formulas_pre ORDER BY formulas_pre.descricao";
+                                    $result = $conection->query($c_sql);
+                                    // verifico se a query foi correto
+                                    if (!$result) {
+                                        die("Erro ao Executar Sql!!" . $conection->connect_error);
+                                    }
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha2 = $result->fetch_assoc()) {
+
+                                        echo "
+                                        <tr>
+                                        <td style='display:none'>$c_linha2[id]</td>
+                                        <td>$c_linha2[descricao]</td>
+               
+                                        <td>
+                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' 
+                                          data-toggle='modal' title='Selecionar Fórmula'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Fórmula</button>
+                                        </td>
+
+                                        </tr>
+                                    ";
+                                    }
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- fim aba de fórmalas pré definidas -->
+                <!-- aba de Componentes -->
+                <div role="tabpanel" class="tab-pane" id="componentes">
+                    <div style="padding-top:5px;">
+                        <div class="table-responsive=lg">
+                            <table style="width:100%" class="table display table-bordered tabcomponentes">
+                                <thead class="thead">
+                                    <tr class="info">
+                                        <th style='display:none' scope="col">No.</th>
+                                        <th scope="col">Componente</th>
                                         <th scope="col">Grupo</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
-                                 <!-- input para capturar id da prescricao a ter o texto capturado -->
-                                 <input type='hidden' name='id_medicamento' id='id_medicamento'>
+                                <!-- input para capturar id do componte a ser  capturado -->
+                                <input type='hidden' name='id_componente' id='id_componente'>
                                 <tbody>
 
-                                   
+
                                     <?php
                                     // faço a Leitura da tabela com sql
-                                    $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo from medicamentos
-                                            JOIN  grupos_medicamentos ON medicamentos.id_grupo=grupos_medicamentos.id
-                                            ORDER BY medicamentos.descricao";
+                                    $c_sql = "SELECT componentes.id, componentes.descricao, componentes.unidade, grupos_formulas.descricao AS grupo
+                                            FROM componentes
+                                            JOIN grupos_formulas ON componentes.id_grupo_componente=grupos_formulas.id
+                                            ORDER BY componentes.descricao";
                                     $result = $conection->query($c_sql);
                                     // verifico se a query foi correto
                                     if (!$result) {
@@ -247,10 +297,9 @@ if ((isset($_POST["btninclui"]))) {
                                         <td style='display:none'>$c_linha2[id]</td>
                                         <td>$c_linha2[descricao]</td>
                                         <td>$c_linha2[grupo]</td>
-                   
                                         <td>
                                           <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' 
-                                          data-toggle='modal' title='Selecionar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Medicamento</button>
+                                          data-toggle='modal' title='Selecionar Fórmula'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Componente</button>
                                         </td>
 
                                         </tr>
@@ -261,6 +310,8 @@ if ((isset($_POST["btninclui"]))) {
                                 </tbody>
                             </table>
                         </div>
+
+
                     </div>
                 </div>
             </div>
