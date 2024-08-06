@@ -106,9 +106,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     </div>
     <br>
     <div class="container-fluid">
-        <div class="col-lg-12" style="text-align: right;">
-            <a class="btn btn-light" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
-        </div>
+        <a class="btn btn-light" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         <form id="frmpaciente" method="POST" action="">
             <hr>
             <label for="up_parametroField" class="col-md-2 form-label">Nome para pesquisar</label>
@@ -151,7 +149,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                     <td>
                     <a class='btn btn-light btn-sm' title='Atestatos' href='/smedweb/atestado.php?id=$c_linha[id]'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
                     <a class='btn btn-light btn-sm' title='Formulas' href='/smedweb/prescricao_formulas.php?id=$c_linha[id]'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
-                    <a class='btn btn-light btn-sm' title='Laudos' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
+                    <a class='btn btn-light btn-sm' title='Laudos' href='/smedweb/prescricoes_laudos.php?id=$c_linha[id]'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
                     <a class='btn btn-light btn-sm' title='Medicamentos' href='/smedweb/prescricao_medicamentos.php?id=$c_linha[id]'><img src='\smedweb\images\dio.png' width='20' height='20'> Medicamentos</a>
                     <a class='btn btn-light btn-sm' title='Orientações' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\orientacoes.png' width='20' height='20'> Orientações</a>
                     <a class='btn btn-light btn-sm' title='Relatórios' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><img src='\smedweb\images\oto.png' width='20' height='20'> Relatórios</a>

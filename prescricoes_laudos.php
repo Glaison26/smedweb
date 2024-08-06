@@ -13,7 +13,7 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_formula = "";
+$c_laudo = "";
 $c_prescricao = "";
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
@@ -54,26 +54,37 @@ if ((isset($_POST["btnregistro"]))) {
     }
 }
 
-// botão para incluir texto de formula padrão selecionado
-if ((isset($_POST["btnformula"]))) {
-    $c_id_formula = $_POST['id_formula'];
-    $c_sql_texto = "select formula from formulas_pre where id='$c_id_formula'";
+// botão para incluir texto de baterias padrão selecionado
+if ((isset($_POST["btnbateria"]))) {
+    $c_id_bateria = $_POST['id_bateria'];
+    $c_sql_texto = "select exames from bateria where id='$c_id_bateria'";
     $result_texto = $conection->query($c_sql_texto);
-    // procuro o texto no cadastro de atestado para colocar no texto
-    $c_linha_formula = $result_texto->fetch_assoc();
-    $c_formula = $c_linha_formula['formula'];
+    // procuro o texto no cadastro de baterias para colocar no texto
+    $c_linha_bateria = $result_texto->fetch_assoc();
+    $c_laudo = $c_linha_bateria['exames'];
 }
 
-// botão para incluir texto de componete selecionado
-if ((isset($_POST["btncomponente"]))) {
+// botão para incluir texto de item de laudo selecionado
+if ((isset($_POST["btnitem"]))) {
 
-    $c_id_componente = $_POST['id_componente'];
-    $c_sql_componente = "select descricao, unidade from componentes where id='$c_id_componente'";
-    $result_componente = $conection->query($c_sql_componente);
+    $c_id_item = $_POST['id_item'];
+    $c_sql_item = "select exames.valref from exames where id='$c_id_item'";
+    $result_item = $conection->query($c_sql_item);
+    // procuro o texto no cadastro de itens para colocar no texto
+    $c_linha_item = $result_item->fetch_assoc();
+    $c_laudo = $_POST['prescricao']."\r\n". $c_linha_item['valref']."\r\n";
+       
+}
+
+// botão para incluir texto de medicamento selecionado
+if ((isset($_POST["btnmedicamento"]))) {
+
+    $c_id_medicamento = $_POST['id_medicamento'];
+    $c_sql_medicamento = "select descricao from medicamentos where id='$c_id_medicamento'";
+    $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de medicamentos para colocar no texto
-    $c_linha_componente = $result_componente->fetch_assoc();
-    $c_formula = $_POST['prescricao'] . $c_linha_componente['descricao'] . "    " .
-        $c_linha_componente['unidade'] . "\r\n";
+    $c_linha_medicamento = $result_medicamento->fetch_assoc();
+    $c_laudo = $_POST['prescricao'] . $c_linha_medicamento['descricao']."...."."\r\n";
 }
 ?>
 
@@ -101,24 +112,28 @@ if ((isset($_POST["btncomponente"]))) {
     <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 
-    <!-- funcao para chamar rotina para cortar registro de medicamento -->
+    <!-- funcao para chamar rotina para cortar registro de bateria -->
     <script>
         function pegaid(id) {
-            document.getElementById('id_formula').value = id;
-
+            document.getElementById('id_bateria').value = id;
         }
     </script>
-
+    <!-- funcao para chamar rotina para cortar registro de item de laudo -->
     <script>
         function pegaid2(id) {
-            document.getElementById('id_componente').value = id;
-
+            document.getElementById('id_item').value = id;
         }
     </script>
-
+    <!-- funcao para chamar rotina para cortar registro de medicamentos de laudo -->
+    <script>
+        function pegaid3(id) {
+            document.getElementById('id_medicamento').value = id;
+        }
+    </script>
+    <!-- configuração de tabela de itens -->
     <script>
         $(document).ready(function() {
-            $('.tabcomponentes').DataTable({
+            $('.tabitens').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
@@ -161,6 +176,55 @@ if ((isset($_POST["btncomponente"]))) {
 
         });
     </script>
+
+    <!-- configuração para tabela de medicamentos -->
+
+    <script>
+        $(document).ready(function() {
+            $('.tabmedicamentos').DataTable({
+                // 
+                "iDisplayLength": -1,
+                "order": [1, 'asc'],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': [3]
+                }, {
+                    'aTargets': [0],
+                    "visible": true
+                }],
+                "oLanguage": {
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sInfoFiltered": " - filtrado de _MAX_ registros",
+                    "oPaginate": {
+                        "spagingType": "full_number",
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+
+                        "sLast": "Último"
+                    },
+                    "sSearch": "Pesquisar",
+                    "sLengthMenu": 'Mostrar <select>' +
+                        '<option value="5">5</option>' +
+                        '<option value="10">10</option>' +
+                        '<option value="20">20</option>' +
+                        '<option value="30">30</option>' +
+                        '<option value="40">40</option>' +
+                        '<option value="50">50</option>' +
+                        '<option value="-1">Todos</option>' +
+                        '</select> Registros'
+
+                }
+
+            });
+
+        });
+    </script>
+
 
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -286,7 +350,7 @@ if ((isset($_POST["btncomponente"]))) {
                                 <thead class="thead">
                                     <tr class="info">
                                         <th style='display:none' scope="col">No.</th>
-                                        <th scope="col">Descrição do  Item</th>
+                                        <th scope="col">Descrição do Item</th>
                                         <th scope="col">Grupo do Item</th>
                                         <th scope="col">Ações</th>
                                     </tr>
@@ -312,7 +376,7 @@ if ((isset($_POST["btncomponente"]))) {
                                         <td>$c_linha2[descricao]</td>
                                         <td>$c_linha2[grupo]</td>
                                         <td>
-                                          <button type='submit' onclick='pegaid2($c_linha2[id])'  id='btncomponente' name='btncomponente' class='btn btn-info btn-sm editbtn' 
+                                          <button type='submit' onclick='pegaid2($c_linha2[id])'  id='btnitem' name='btnitem' class='btn btn-info btn-sm editbtn' 
                                           data-toggle='modal' title='Selecionar Fórmula'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Componente</button>
                                         </td>
 
@@ -328,7 +392,58 @@ if ((isset($_POST["btncomponente"]))) {
 
                     </div>
                 </div>
+                <!--  aba com medicamentos para laudos -->
+                <div role="tabpanel" class="tab-pane" id="medicamentos">
+                    <div style="padding-top:5px;">
+                        <div class="table-responsive=lg">
+                            <table style="width:100%" class="table display table-bordered tabmedicamentos">
+                                <thead class="thead">
+                                    <tr class="info">
+                                        <th style='display:none' scope="col">No.</th>
+                                        <th scope="col">Medicamento</th>
+                                        <th scope="col">Grupo</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <!-- input para capturar id da prescricao a ter o texto capturado -->
+                                <input type='hidden' name='id_medicamento' id='id_medicamento'>
+                                <tbody>
+
+                                    <?php
+                                    // faço a Leitura da tabela com sql
+                                    $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo from medicamentos
+                                            JOIN  grupos_medicamentos ON medicamentos.id_grupo=grupos_medicamentos.id
+                                            ORDER BY medicamentos.descricao";
+                                    $result = $conection->query($c_sql);
+                                    // verifico se a query foi correto
+                                    if (!$result) {
+                                        die("Erro ao Executar Sql!!" . $conection->connect_error);
+                                    }
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha2 = $result->fetch_assoc()) {
+
+                                        echo "
+                                        <tr>
+                                        <td style='display:none'>$c_linha2[id]</td>
+                                        <td>$c_linha2[descricao]</td>
+                                        <td>$c_linha2[grupo]</td>
+                   
+                                        <td>
+                                          <button type='submit' onclick='pegaid3($c_linha2[id])' id='btnmedicamento' name='btnmedicamento' class='btn btn-info btn-sm editbtn' 
+                                          data-toggle='modal' title='Selecionar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Medicamento</button>
+                                        </td>
+
+                                        </tr>
+                                    ";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </form>
     </div>
 

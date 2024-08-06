@@ -227,8 +227,7 @@ if ((isset($_POST["btninclui"]))) {
                                  <!-- input para capturar id da prescricao a ter o texto capturado -->
                                  <input type='hidden' name='id_medicamento' id='id_medicamento'>
                                 <tbody>
-
-                                   
+                                 
                                     <?php
                                     // faço a Leitura da tabela com sql
                                     $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo from medicamentos
