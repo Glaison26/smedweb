@@ -203,8 +203,8 @@ if ((isset($_POST["btninclui"]))) {
                     <div style="padding-top:5px;">
                         <div style="padding-top:20px;">
                             <div class="form-group">
-                                <label class="col-sm-1 col-form-label">Texto da Prescrição</label>
-                                <div class="col-sm-7">
+                                <label class="col-sm-2 col-form-label">Texto da Prescrição</label>
+                                <div class="col-sm-12">
                                     <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_prescricao; ?></textarea>
                                 </div>
                             </div>

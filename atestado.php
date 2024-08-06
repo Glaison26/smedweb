@@ -211,8 +211,8 @@ if ((isset($_POST["btninclui"]))) {
                 <div style="padding-top:5px;">
                     <div style="padding-top:20px;">
                         <div class="form-group">
-                            <label class="col-sm-1 col-form-label">Texto do Atestado</label>
-                            <div class="col-sm-7">
+                            <label class="col-sm-2 col-form-label">Texto do Atestado</label>
+                            <div class="col-sm-12">
                                 <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
                             </div>
                         </div>

@@ -13,7 +13,8 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_prescricao = "";
+$c_formula = "";
+$c_prescricao= "";
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -31,7 +32,7 @@ if ((isset($_POST["btnregistro"]))) {
     // se não tem historia insiro informação
     $hoje = date('d/m/Y');
     if ($c_linha_contador['contador'] == 0) {
-        $c_historia = "$hoje" . "\r\n" . "Prescrição de Medicamento Emitido" .
+        $c_historia = "$hoje" . "\r\n" . "Prescrição de Fórmula Emitido" .
             "\r\n" . $c_prescricao;
         $c_sql_historia = "insert into historia (id_paciente, historia) value ('$c_id', '$c_historia')";
         $result_historia = $conection->query($c_sql_historia);
@@ -41,27 +42,38 @@ if ((isset($_POST["btnregistro"]))) {
         $c_result_historia = $conection->query($c_sql_historia);
         $c_linha_historia = $c_result_historia->fetch_assoc();
 
-        $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Prescrição de Medicamento Emitido" .
+        $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Prescrição de Fórmula Emitido" .
             "\r\n" . $c_prescricao;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
         $result_historia = $conection->query($c_sql_historia);
         echo "
           <script>
-          alert('Prescrição de Medicamentos registrado na história clinica do paciente!!!');
+          alert('Prescrição de Fórmula registrado na história clinica do paciente!!!');
           </script>
         ";
     }
 }
 
-// botão para incluir texto de medicamento selecionado
-if ((isset($_POST["btninclui"]))) {
+// botão para incluir texto de formula padrão selecionado
+if ((isset($_POST["btnformula"]))) {
+    $c_id_formula = $_POST['id_formula'];
+    $c_sql_texto = "select formula from formulas_pre where id='$c_id_formula'";
+    $result_texto = $conection->query($c_sql_texto);
+    // procuro o texto no cadastro de atestado para colocar no texto
+    $c_linha_formula = $result_texto->fetch_assoc();
+    $c_formula = $c_linha_formula['formula'];
+}
 
-    $c_id_medicamento = $_POST['id_medicamento'];
-    $c_sql_medicamento = "select descricao from medicamentos where id='$c_id_medicamento'";
-    $result_medicamento = $conection->query($c_sql_medicamento);
-    // procuro o texto no cadastro de medicamentos para colocar no texto
-    $c_linha_medicamento = $result_medicamento->fetch_assoc();
-    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "...." . "\r\n";
+// botão para incluir texto de componete selecionado
+if ((isset($_POST["btncomponente"]))) {
+
+   $c_id_componente = $_POST['id_componente'];
+   $c_sql_componente = "select descricao, unidade from componentes where id='$c_id_componente'";
+   $result_componente = $conection->query($c_sql_componente);
+   // procuro o texto no cadastro de medicamentos para colocar no texto
+   $c_linha_componente = $result_componente->fetch_assoc();
+   $c_formula = $_POST['prescricao'] . $c_linha_componente['descricao'] . "    " .
+   $c_linha_componente['unidade']."\r\n";
 }
 ?>
 
@@ -92,14 +104,21 @@ if ((isset($_POST["btninclui"]))) {
     <!-- funcao para chamar rotina para cortar registro de medicamento -->
     <script>
         function pegaid(id) {
-            document.getElementById('id_medicamento').value = id;
+            document.getElementById('id_formula').value = id;
+
+        }
+    </script>
+
+    <script>
+        function pegaid2(id) {
+            document.getElementById('id_componente').value = id;
 
         }
     </script>
 
     <script>
         $(document).ready(function() {
-            $('.tabmedicamentos').DataTable({
+            $('.tabcomponentes').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
@@ -155,7 +174,7 @@ if ((isset($_POST["btninclui"]))) {
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
-            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
+            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_formula ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>
@@ -204,15 +223,15 @@ if ((isset($_POST["btninclui"]))) {
                     <div style="padding-top:5px;">
                         <div style="padding-top:20px;">
                             <div class="form-group">
-                                <label class="col-sm-1 col-form-label">Texto da Prescrição</label>
-                                <div class="col-sm-7">
-                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_prescricao; ?></textarea>
+                                <label class="col-sm-2 col-form-label">Texto da Prescrição</label>
+                                <div class="col-sm-12">
+                                    <textarea  class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_formula; ?></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- aba de medicamentos cadastrados -->
+                <!-- aba de fórmulas cadastrados -->
                 <div role="tabpanel" class="tab-pane" id="modelos">
                     <div style="padding-top:5px;">
                         <div class="table-responsive=lg">
@@ -246,7 +265,7 @@ if ((isset($_POST["btninclui"]))) {
                                         <td>$c_linha2[descricao]</td>
                
                                         <td>
-                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' 
+                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btnformula' name='btnformula' class='btn btn-info btn-sm editbtn' 
                                           data-toggle='modal' title='Selecionar Fórmula'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Fórmula</button>
                                         </td>
 
@@ -260,7 +279,7 @@ if ((isset($_POST["btninclui"]))) {
                         </div>
                     </div>
                 </div> <!-- fim aba de fórmalas pré definidas -->
-                <!-- aba de Componentes -->
+                <!-- aba de Componentes cadastrados-->
                 <div role="tabpanel" class="tab-pane" id="componentes">
                     <div style="padding-top:5px;">
                         <div class="table-responsive=lg">
@@ -298,7 +317,7 @@ if ((isset($_POST["btninclui"]))) {
                                         <td>$c_linha2[descricao]</td>
                                         <td>$c_linha2[grupo]</td>
                                         <td>
-                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' 
+                                          <button type='submit' onclick='pegaid2($c_linha2[id])'  id='btncomponente' name='btncomponente' class='btn btn-info btn-sm editbtn' 
                                           data-toggle='modal' title='Selecionar Fórmula'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Componente</button>
                                         </td>
 
