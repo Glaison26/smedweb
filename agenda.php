@@ -285,7 +285,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     </div>
     <?php
     if (isset($d_data)) {
-      $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
+        $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
     }
     ?>
     <div class="container-fluid">
@@ -297,7 +297,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                 <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
             </div>
             <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>
-            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Volar ao Menu</a>
+            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
             <br>
             <div class="panel panel-Linght">
                 <div class="panel-heading">
@@ -307,7 +307,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             <select class="form-control form-control-lg" id="profissional" name="profissional">
                                 <?php
                                 $c_sql = "SELECT profissionais.id, profissionais.nome FROM profissionais
-                            ORDER BY profissionais.nome";
+                                        ORDER BY profissionais.nome";
                                 $result = $conection->query($c_sql);
                                 // insiro os registro do banco de dados na tabela 
                                 while ($c_linha = $result->fetch_assoc()) {
@@ -378,7 +378,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
                                     echo "
                                     <tr>
-                                    <td >$c_linha2[id]</td>
+                                    <td>$c_linha2[id]</td>
                                     <td>$c_linha2[horario]</td>
                                     <td>$c_linha2[nome]</td>
                                     <td>$c_linha2[matricula]</td>
@@ -388,11 +388,11 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                     <td>$c_linha2[observacao]</td>
                                     <td>
                                     
-                                   <button class='btn btn-primary btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
-                                   <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-info'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
-                                   <button name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-primary'><span class='glyphicon glyphicon-scissors'></span> Cortar</button>
-                                   <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-primary'><span class='glyphicon glyphicon-duplicate'></span> Colar</button>
-                                   <a class='btn btn-danger btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
+                                   <button class='btn btn-light btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta'><span class='glyphicon glyphicon-calendar'></span> Marcação</button>
+                                   <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
+                                   <button name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-light'><span class='glyphicon glyphicon-scissors'></span> Cortar</button>
+                                   <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><span class='glyphicon glyphicon-duplicate'></span> Colar</button>
+                                   <a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
                                    </td>
 
@@ -471,7 +471,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                             ?>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>

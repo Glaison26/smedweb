@@ -122,7 +122,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         </div>
     </div>
     <br>
-    <div class="container -my5">
+    <div class="container-fluid">
 
         <a class="btn btn-success btn-sm" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
@@ -176,11 +176,11 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                     <td>$c_linha[fone2]</td>
                                      
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
-                    <a class='btn btn-primary btn-sm' title='História Clinica' href='/smedweb/historia.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'></span></a>
-                    <a class='btn btn-secondary btn-sm' title='Imagens' href='/smedweb/imagens.php?id=$c_linha[id]'><img src='\smedweb\images\imagens.png' alt='' width='20' height='20'></a>
-                    <a class='btn btn-success btn-sm' title='Eventos' href='#'><span class='glyphicon glyphicon-book'></span></a>
-                    <a class='btn btn-danger btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <a class='btn btn-light btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'> Editar</span></a>
+                    <a class='btn btn-light btn-sm' title='História Clinica' href='/smedweb/historia.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'> História</span></a>
+                    <a class='btn btn-light btn-sm' title='Imagens' href='/smedweb/imagens.php?id=$c_linha[id]'><img src='\smedweb\images\imagens.png' alt='' width='20' height='20'> Imagens</a>
+                    <a class='btn btn-light btn-sm' title='Eventos' href='#'><span class='glyphicon glyphicon-book'> Eventos</span></a>
+                    <a class='btn btn-danger btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'> Excluir</span></a>
                     </td>
 
                     </td>

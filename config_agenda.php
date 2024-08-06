@@ -96,9 +96,12 @@ include("conexao.php");
     </div>
     <br>
     <div class="container -my5">
-
-        <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
-        <a class='btn btn-warning' title="Suprimir datas para não serem geradas" href='datas_suprimidas_lista.php'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
+        <div class="container">
+            <div class="col-lg-12" style="text-align: right;">
+                <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+            </div>
+            <a class='btn btn-warning' title="Suprimir datas para não serem geradas" href='datas_suprimidas_lista.php'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
+        </div>
         <hr>
         <table class="table display table-bordered tabprofissionais">
             <thead class="thead">

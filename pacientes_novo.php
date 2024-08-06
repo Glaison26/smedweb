@@ -130,8 +130,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
-
-        header('location: /smedweb/pacientes_lista.php');
+        if ($_SESSION['incagenda']==false){
+            header('location: /smedweb/pacientes_lista.php');
+        }else{
+            header('location: /smedweb/agenda.php');
+        }
     } while (false);
 }
 
@@ -450,7 +453,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <div class="offset-sm-0 col-sm-3">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <?php
+                        if ($_SESSION['incagenda']==false){
+                            echo "<a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
+                        }else
+                        {
+                            echo "<a class='btn btn-danger' href='/smedweb/agenda.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

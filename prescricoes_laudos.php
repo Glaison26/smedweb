@@ -165,7 +165,7 @@ if ((isset($_POST["btncomponente"]))) {
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Prescrição de Fórmulas<h5>
+            <h5>Prescrição de Laudos<h5>
         </div>
     </div>
 
@@ -213,42 +213,43 @@ if ((isset($_POST["btncomponente"]))) {
             <!-- fim do formulário de seleção de profissionais -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#prescricao" aria-controls="home" role="tab" data-toggle="tab">Editar Prescrição</a></li>
-                <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Fórmulas pré-definidas</a></li>
-                <li role="presentation"><a href="#componentes" aria-controls="Componentes" role="tab" data-toggle="tab">Lista de Componentes</a></li>
+                <li role="presentation"><a href="#baterias" aria-controls="baterias" role="tab" data-toggle="tab">Baterias</a></li>
+                <li role="presentation"><a href="#itens" aria-controls="itens" role="tab" data-toggle="tab">Itens de Laudos</a></li>
+                <li role="presentation"><a href="#medicamentos" aria-controls="medicamentos" role="tab" data-toggle="tab">Medicamentos</a></li>
             </ul>
-            <!-- paginas de edição medicamentos cadastrados -->
+            <!-- paginas de edição de prescrição de  laudos -->
             <div class="tab-content">
-                <!-- aba de edição de medicamentos -->
+                <!-- aba de edição de laudos -->
                 <div role="tabpanel" class="tab-pane active" id="prescricao">
                     <div style="padding-top:5px;">
                         <div style="padding-top:20px;">
                             <div class="form-group">
                                 <label class="col-sm-2 col-form-label">Texto da Prescrição</label>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_formula; ?></textarea>
+                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_laudo; ?></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- aba de fórmulas cadastrados -->
-                <div role="tabpanel" class="tab-pane" id="modelos">
+                <!-- aba de baterias cadastrados -->
+                <div role="tabpanel" class="tab-pane" id="baterias">
                     <div style="padding-top:5px;">
                         <div class="table-responsive=lg">
-                            <table style="width:100%" class="table display table-bordered tabformulas">
+                            <table style="width:100%" class="table display table-bordered tabbaterias">
                                 <thead class="thead">
                                     <tr class="info">
                                         <th style='display:none' scope="col">No.</th>
-                                        <th scope="col">Fórmula</th>
+                                        <th scope="col">Bateria</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
                                 <!-- input para capturar id da prescricao a ter o texto capturado -->
-                                <input type='hidden' name='id_formula' id='id_formula'>
+                                <input type='hidden' name='id_bateria' id='id_bateria'>
                                 <tbody>
                                     <?php
-                                    // faço a Leitura da tabela com sql
-                                    $c_sql = "SELECT formulas_pre.id, formulas_pre.descricao FROM formulas_pre ORDER BY formulas_pre.descricao";
+                                    // faço a Leitura da tabela de baterias com sql
+                                    $c_sql = "SELECT bateria.id, bateria.descricao, bateria.exames FROM bateria ORDER BY bateria.descricao";
                                     $result = $conection->query($c_sql);
                                     // verifico se a query foi correto
                                     if (!$result) {
@@ -263,8 +264,8 @@ if ((isset($_POST["btncomponente"]))) {
                                         <td>$c_linha2[descricao]</td>
                
                                         <td>
-                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btnformula' name='btnformula' class='btn btn-info btn-sm editbtn' 
-                                          data-toggle='modal' title='Selecionar Fórmula'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Fórmula</button>
+                                          <button type='submit' onclick='pegaid($c_linha2[id])'  id='btnbateria' name='btnbateria' class='btn btn-info btn-sm editbtn' 
+                                          data-toggle='modal' title='Selecionar Bateria'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Bateria</button>
                                         </td>
 
                                         </tr>
@@ -276,29 +277,27 @@ if ((isset($_POST["btncomponente"]))) {
                             </table>
                         </div>
                     </div>
-                </div> <!-- fim aba de fórmalas pré definidas -->
-                <!-- aba de Componentes cadastrados-->
-                <div role="tabpanel" class="tab-pane" id="componentes">
+                </div> <!-- fim aba de baterias pré definidas -->
+                <!-- aba de itens de exames para laudos cadastrados-->
+                <div role="tabpanel" class="tab-pane" id="itens">
                     <div style="padding-top:5px;">
                         <div class="table-responsive=lg">
-                            <table style="width:100%" class="table display table-bordered tabcomponentes">
+                            <table style="width:100%" class="table display table-bordered tabitens">
                                 <thead class="thead">
                                     <tr class="info">
                                         <th style='display:none' scope="col">No.</th>
-                                        <th scope="col">Componente</th>
-                                        <th scope="col">Grupo</th>
+                                        <th scope="col">Descrição do  Item</th>
+                                        <th scope="col">Grupo do Item</th>
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
-                                <!-- input para capturar id do componte a ser  capturado -->
-                                <input type='hidden' name='id_componente' id='id_componente'>
+                                <!-- input para capturar id do item a ser  capturado -->
+                                <input type='hidden' name='id_item' id='id_item'>
                                 <tbody>
                                     <?php
                                     // faço a Leitura da tabela com sql
-                                    $c_sql = "SELECT componentes.id, componentes.descricao, componentes.unidade, grupos_formulas.descricao AS grupo
-                                            FROM componentes
-                                            JOIN grupos_formulas ON componentes.id_grupo_componente=grupos_formulas.id
-                                            ORDER BY componentes.descricao";
+                                    $c_sql = "SELECT exames.id, exames.descricao, grupos_laudos.descricao AS grupo FROM exames
+                                    JOIN grupos_laudos ON exames.id_grupo=grupos_laudos.id";
                                     $result = $conection->query($c_sql);
                                     // verifico se a query foi correto
                                     if (!$result) {

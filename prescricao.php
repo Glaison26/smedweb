@@ -105,16 +105,18 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         </div>
     </div>
     <br>
-    <div class="container -my5">
-    <a class="btn btn-light" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
+    <div class="container-fluid">
+        <div class="col-lg-12" style="text-align: right;">
+            <a class="btn btn-light" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
+        </div>
         <form id="frmpaciente" method="POST" action="">
             <hr>
             <label for="up_parametroField" class="col-md-2 form-label">Nome para pesquisar</label>
             <div class="col-sm-7">
-                 <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+                <input type="text" class="form-control" id="pesquisa" name="pesquisa">
             </div>
             <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-            
+
         </form>
         <br>
         <table class="table display table-bordered tabpacientes">
