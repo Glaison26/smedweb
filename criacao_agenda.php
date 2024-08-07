@@ -260,7 +260,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <div class="col-sm-2">
                             <input type="Date" maxlength="10" class="form-control" name="data2" id="data2" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
                         </div>
-                        <button type="submit" onclick="move()"name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
+                        <button type="submit" onclick="move()" name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
                         <!-- Botão  modal horário extra -->
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#extramodal"><img src='\smedweb\images\horarios_extra.png' alt='' width='15' height='15'>
                             Horário Extra

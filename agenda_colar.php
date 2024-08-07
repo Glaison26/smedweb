@@ -24,7 +24,7 @@ $c_linha1 = $result->fetch_assoc();
 $i_idconvenio = $c_linha1['id'];
 
 $c_sql = "Update agenda" .
-" SET nome = '$c_nome', id_convenio = '$c_convenio', matricula = '$c_matricula',  telefone = '$c_telefone', email = '$c_email' where id=$c_id";
+" SET nome = '$c_nome', id_convenio = '$i_idconvenio', matricula = '$c_matricula',  telefone = '$c_telefone', email = '$c_email' where id=$c_id";
 echo $c_sql;
 $result = $conection->query($c_sql);
 header('location: /smedweb/agenda.php');

@@ -31,7 +31,7 @@ if ((isset($_POST["btnregistro"]))) {
     // se não tem historia insiro informação
     $hoje = date('d/m/Y');
     if ($c_linha_contador['contador'] == 0) {
-        $c_historia = "$hoje" . "\r\n" . "Prescrição de Medicamento Emitido" .
+        $c_historia = "$hoje" . "\r\n" . "Relatório Médico Emitido" .
             "\r\n" . $c_prescricao;
         $c_sql_historia = "insert into historia (id_paciente, historia) value ('$c_id', '$c_historia')";
         $result_historia = $conection->query($c_sql_historia);
@@ -41,13 +41,13 @@ if ((isset($_POST["btnregistro"]))) {
         $c_result_historia = $conection->query($c_sql_historia);
         $c_linha_historia = $c_result_historia->fetch_assoc();
 
-        $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Prescrição de Medicamento Emitido" .
+        $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Relatório Médico Emitido" .
             "\r\n" . $c_prescricao;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
         $result_historia = $conection->query($c_sql_historia);
         echo "
           <script>
-          alert('Prescrição de Medicamentos registrado na história clinica do paciente!!!');
+          alert('Relatório Medico registrado na história clinica do paciente!!!');
           </script>
         ";
     }
