@@ -78,13 +78,12 @@ if ((isset($_POST["btnitem"]))) {
 
 // botão para incluir texto de medicamento selecionado
 if ((isset($_POST["btnmedicamento"]))) {
-
     $c_id_medicamento = $_POST['id_medicamento'];
     $c_sql_medicamento = "select descricao from medicamentos where id='$c_id_medicamento'";
     $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de medicamentos para colocar no texto
     $c_linha_medicamento = $result_medicamento->fetch_assoc();
-    $c_laudo = $_POST['prescricao'] . $c_linha_medicamento['descricao']."...."."\r\n";
+    $c_laudo = $_POST['prescricao'] . $c_linha_medicamento['descricao']."... "."\r\n";
 }
 ?>
 

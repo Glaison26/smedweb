@@ -135,6 +135,19 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
 </head>
 
+<style>
+    #myProgress {
+        width: 100%;
+        background-color: #ddd;
+    }
+
+    #myBar {
+        width: 0%;
+        height: 30px;
+        background-color: #04AA6D;
+    }
+</style>
+
 <body>
     <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
@@ -181,6 +194,30 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
         }
     </script>
+    <!-- script para mover barra -->
+    <script>
+        var i = 0;
+
+        function move() {
+            if (i == 0) {
+                i = 1;
+                var elem = document.getElementById("myBar");
+                var width = 1;
+                var id = setInterval(frame, 10);
+
+                function frame() {
+                    if (width >= 100) {
+                        clearInterval(id);
+                        i = 0;
+                    } else {
+                        width++;
+                        elem.style.width = width + "%";
+                    }
+                }
+            }
+        }
+    </script>
+
 
 
     <div class="panel panel-primary class">
@@ -223,12 +260,17 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <div class="col-sm-2">
                             <input type="Date" maxlength="10" class="form-control" name="data2" id="data2" value='<?php echo date("Y-m-d"); ?>' onkeypress="mascaraData(this)">
                         </div>
-                        <button type="submit" name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
+                        <button type="submit" onclick="move()"name='btncriacao' id='btncriacao' class="btn btn-primary"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"></span> Gerar Agenda</button>
                         <!-- Botão  modal horário extra -->
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#extramodal"><img src='\smedweb\images\horarios_extra.png' alt='' width='15' height='15'>
                             Horário Extra
                         </button>
                         <a class="btn btn-info" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+                    </div>
+                    <!-- barra de progresso para geração da agenda -->
+                    <label>Progresso da Geração</label>
+                    <div id="myProgress">
+                        <div id="myBar"></div>
                     </div>
                 </div>
             </div>
