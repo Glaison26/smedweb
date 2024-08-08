@@ -24,7 +24,7 @@ $c_linha = $result->fetch_assoc();
 // rotina de registro de atestado na história clinica do paciente
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
-    $c_atestado = $_POST['id_texto'];
+    $c_orientacao = $_POST['id_texto'];
     $c_sql_contador = "select count(*) as contador from historia where id_paciente='$c_id'";
 
     $result_contador = $conection->query($c_sql_contador);
@@ -32,7 +32,7 @@ if ((isset($_POST["btnregistro"]))) {
     // se não tem historia insiro informação
     if ($c_linha_contador['contador'] == 0) {
         $c_historia = "$hoje" . "\r\n" . "Orientação Médica Emitido" .
-            "\r\n" . $c_atestado;
+            "\r\n" . $c_orientacao;
         $c_sql_historia = "insert into historia (id_paciente, historia) value ('$c_id', '$c_historia')";
         $result_historia = $conection->query($c_sql_historia);
         // se tem história acrescento com update no registro do pacinte
@@ -42,7 +42,7 @@ if ((isset($_POST["btnregistro"]))) {
         $c_linha_historia = $c_result_historia->fetch_assoc();
         $hoje = date('d/m/Y');
         $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Orientação Médica Emitido" .
-            "\r\n" . $c_atestado;
+            "\r\n" . $c_orientacao;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
         $result_historia = $conection->query($c_sql_historia);
         echo "
@@ -97,55 +97,9 @@ if ((isset($_POST["btninclui"]))) {
     <!-- funcao para chamar rotina de registro do atestado no histórico do paciênte -->
     <script>
         function registro(id) {
-
         }
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('.taborientacoes').DataTable({
-                // 
-                "iDisplayLength": -1,
-                "order": [1, 'asc'],
-                "aoColumnDefs": [{
-                    'bSortable': false,
-                    'aTargets': [2]
-                }, {
-                    'aTargets': [0],
-                    "visible": false
-                }],
-                "oLanguage": {
-                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                    "sLengthMenu": "_MENU_ resultados por página",
-                    "sInfoFiltered": " - filtrado de _MAX_ registros",
-                    "oPaginate": {
-                        "spagingType": "full_number",
-                        "sNext": "Próximo",
-                        "sPrevious": "Anterior",
-                        "sFirst": "Primeiro",
-                        "sLoadingRecords": "Carregando...",
-                        "sProcessing": "Processando...",
-                        "sZeroRecords": "Nenhum registro encontrado",
-
-                        "sLast": "Último"
-                    },
-                    "sSearch": "Pesquisar",
-                    "sLengthMenu": 'Mostrar <select>' +
-                        '<option value="5">5</option>' +
-                        '<option value="10">10</option>' +
-                        '<option value="20">20</option>' +
-                        '<option value="30">30</option>' +
-                        '<option value="40">40</option>' +
-                        '<option value="50">50</option>' +
-                        '<option value="-1">Todos</option>' +
-                        '</select> Registros'
-
-                }
-
-            });
-
-        });
-    </script>
 
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -159,7 +113,7 @@ if ((isset($_POST["btninclui"]))) {
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra Orientação no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Orientação</button>
-            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_atestado ?>">
+            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_orientacao ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
         <hr>
@@ -223,7 +177,7 @@ if ((isset($_POST["btninclui"]))) {
             <div role="tabpanel" class="tab-pane" id="modelos">
                 <div style="padding-top:5px;">
                     <div class="table-responsive=lg">
-                        <table style="width:100%" class="table display table-bordered taborientacoes">
+                        <table style="width:100%" class="table display table-bordered tab">
                             <thead class="thead">
                                 <tr class="info">
                                     <th style='display:none' scope="col">No.</th>
