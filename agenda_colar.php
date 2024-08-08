@@ -18,7 +18,9 @@ $c_matricula = $_SESSION['matriculapac'];
 $c_telefone= $_SESSION['telefonepac'];
 $c_email= $_SESSION['emailpac'];
 // localizo na query codigo do convenio através do nome
-$c_sql1 = "select convenios.id from convenios where convenios.nome='$c_convenio'";
+ 
+$c_sql1 = "select convenios.id from convenios where convenios.id='$c_convenio'";
+echo $c_sql1;
 $result = $conection->query($c_sql1);
 $c_linha1 = $result->fetch_assoc();
 $i_idconvenio = $c_linha1['id'];
