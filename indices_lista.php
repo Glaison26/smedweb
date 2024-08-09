@@ -7,6 +7,7 @@
 //    header('location: /raxx/voltamenunegado.php');
 //}
 include("conexao.php");
+include("links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,25 +15,9 @@ include("conexao.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Smed - Sistema Médico</title>
-    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.css" rel="stylesheet">
-    <link href="DataTables/datatables.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
 </head>
 
 <body>
-    <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-
     <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
@@ -138,7 +123,7 @@ include("conexao.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-                
+
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -165,9 +150,9 @@ include("conexao.php");
             var c_id = $('#up_idField').val();
             var c_indice = $('#up_indiceField').val();
             var c_valor = $('#up_valorField').val();
-            
+
             if (c_indice != '') {
-                
+
                 $.ajax({
                     url: "indices_editar.php",
                     type: "post",
@@ -187,7 +172,7 @@ include("conexao.php");
                         }
                     }
                 });
-                
+
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
@@ -235,7 +220,7 @@ include("conexao.php");
 
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                    
+
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>

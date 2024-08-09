@@ -7,6 +7,7 @@
 
 // funções 
 include("conexao.php"); // conexão de banco de dados
+include("links.php");
 include_once "lib_gop.php";
 
 function carregadados()
@@ -163,26 +164,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script type="text/javascript" src="js/funcoes.js"></script>
 
     <title>Smed - Sistema Médico </title>
-
-    <title>SmartMed - Sistema Médico</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
-    <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
-    <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
-
-
 
     <script>
         const handlePhone = (event) => {

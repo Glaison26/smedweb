@@ -6,6 +6,7 @@ if (!isset($_SESSION['newsession'])) {
 
 include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
+include("links.php");
 if (isset($_GET["id"])) {
     $c_id = $_GET["id"]; // pego a id do paciente
     $_SESSION['refid'] = $c_id;
@@ -40,7 +41,7 @@ if ((isset($_POST["btnregistro"]))) {
         $c_sql_historia = "select historia.historia from historia where historia.id_paciente='$c_id'";
         $c_result_historia = $conection->query($c_sql_historia);
         $c_linha_historia = $c_result_historia->fetch_assoc();
-        
+
         $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Prescrição de Medicamento Emitido" .
             "\r\n" . $c_prescricao;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
@@ -61,7 +62,7 @@ if ((isset($_POST["btninclui"]))) {
     $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de medicamentos para colocar no texto
     $c_linha_medicamento = $result_medicamento->fetch_assoc();
-    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao']."...."."\r\n";
+    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "...." . "\r\n";
 }
 ?>
 
@@ -71,24 +72,9 @@ if ((isset($_POST["btninclui"]))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartmed - sistema Médico</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
 </head>
 
 <body>
-    <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-
     <!-- funcao para chamar rotina para cortar registro de medicamento -->
     <script>
         function pegaid(id) {
@@ -154,7 +140,7 @@ if ((isset($_POST["btninclui"]))) {
         <form method="post">
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
-            <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
+                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
@@ -224,10 +210,10 @@ if ((isset($_POST["btninclui"]))) {
                                         <th scope="col">Ações</th>
                                     </tr>
                                 </thead>
-                                 <!-- input para capturar id da prescricao a ter o texto capturado -->
-                                 <input type='hidden' name='id_medicamento' id='id_medicamento'>
+                                <!-- input para capturar id da prescricao a ter o texto capturado -->
+                                <input type='hidden' name='id_medicamento' id='id_medicamento'>
                                 <tbody>
-                                 
+
                                     <?php
                                     // faço a Leitura da tabela com sql
                                     $c_sql = "SELECT medicamentos.id, medicamentos.descricao, grupos_medicamentos.descricao AS grupo from medicamentos

@@ -7,6 +7,7 @@ session_start();
 
 include("conexao.php");
 include_once "lib_gop.php";
+include("links.php");
 
 $c_tabela = "";
 $c_custo = 0;
@@ -20,10 +21,10 @@ $id_proc = $_SESSION['codigo_proc'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_tabela = $_POST['addtabelaField'];
     $c_custo = $_POST['addcustoField'];
-    
+
     do {
         if (
-            empty($c_tabela)||empty($c_custo)
+            empty($c_tabela) || empty($c_custo)
         ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
@@ -49,14 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $c_sqlindice = "select * from indices where id='$i_indice'";
         $resultindice = $conection->query($c_sqlindice);
         $registroindice = $resultindice->fetch_assoc();
-        $c_valor = ($registroindice['valor']*$c_custo);
+        $c_valor = ($registroindice['valor'] * $c_custo);
         echo $registroindice['valor'];
         echo $c_valor;
         // grava dados no banco
         // faço a Leitura da tabela com sql
         $c_sql = "Insert into procedimentos_tabelas (id_procedimento, id_tabela, custo, valorreal)" .
             "Value ('$id_proc', '$c_id_tabela', '$c_custo', '$c_valor' )";
-        
+
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
@@ -78,19 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartMed - Sistema Médico</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
-    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/jquery-1.2.6.pack.js"></script>
-    <script type="text/javascript" src="js/jquery.maskedinput-1.1.4.pack.js"></script>
 </head>
+
 <div class="panel panel-primary class">
     <div class="panel-heading text-center">
         <h4>SmartMed - Sistema Médico</h4>
@@ -137,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="number" class="form-control" id="addcustoField" name="addcustoField">
                 </div>
             </div>
-           
+
             <?php
             if (!empty($msg_gravou)) {
                 echo "

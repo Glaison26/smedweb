@@ -105,13 +105,13 @@ if (!isset($_SESSION['newsession'])) {
 									<a class="dropdown-item" href="\smedweb\diagnosticos_lista.php"><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>
 
 								</div>
-
 							</li>
 							<li class="nav-item dropdown">
-								<a class="nav-link  dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
 									<a class="dropdown-item" href="\smedweb\usuarios_lista.php"><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
 									<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
+									<a class="dropdown-item" href="\smedweb\perfil_acesso.php"><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
 								</div>
 							</li>
 							<li class="nav-item active"><a href="#" data-toggle="modal" data-target="#modal" class="nav-link"><img src="\smedweb\images\config.png" alt="" width="20" height="20"> Configurações</a></li>
