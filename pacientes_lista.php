@@ -8,6 +8,7 @@ session_start();
 //}
 include("conexao.php");
 include("links.php");
+include("config_tabelas.php");
 // primeira entrada
 $c_sql = "";
 $_SESSION['incagenda'] = false;
@@ -29,14 +30,9 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
 }
 
 ?>
+
 <!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Smed - Sistema Médico</title>
-</head>
 
 <body>
     <script language="Javascript">
@@ -54,53 +50,6 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         }
     </script>
 
-
-    <script>
-        $(document).ready(function() {
-            $('.tabpacientes').DataTable({
-                // 
-                "iDisplayLength": -1,
-                "order": [1, 'asc'],
-                "aoColumnDefs": [{
-                    'bSortable': false,
-                    'aTargets': [5]
-                }, {
-                    'aTargets': [0],
-                    "visible": false
-                }],
-                "oLanguage": {
-                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                    "sLengthMenu": "_MENU_ resultados por página",
-                    "sInfoFiltered": " - filtrado de _MAX_ registros",
-                    "oPaginate": {
-                        "spagingType": "full_number",
-                        "sNext": "Próximo",
-                        "sPrevious": "Anterior",
-                        "sFirst": "Primeiro",
-                        "sLoadingRecords": "Carregando...",
-                        "sProcessing": "Processando...",
-                        "sZeroRecords": "Nenhum registro encontrado",
-
-                        "sLast": "Último"
-                    },
-                    "sSearch": "Pesquisar",
-                    "sLengthMenu": 'Mostrar <select>' +
-                        '<option value="5">5</option>' +
-                        '<option value="10">10</option>' +
-                        '<option value="20">20</option>' +
-                        '<option value="30">30</option>' +
-                        '<option value="40">40</option>' +
-                        '<option value="50">50</option>' +
-                        '<option value="-1">Todos</option>' +
-                        '</select> Registros'
-
-                }
-
-            });
-
-        });
-    </script>
-
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -113,6 +62,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         <a class="btn btn-success btn-sm" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <form id="frmpaciente" method="POST" action="">
+            <br>
             <div class="mb-5 row">
                 <hr>
                 <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>

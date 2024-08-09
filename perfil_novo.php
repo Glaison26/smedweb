@@ -1,75 +1,22 @@
 <?php
-// controle de acesso ao formulário
 session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
-
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
-
-$c_descricao = "";
-$c_grupo = "";
-$c_metodo = "";
-$c_material = "";
-$c_valref = "";
-
-
-// variaveis para mensagens de erro e suscessso da gravação
-$msg_gravou = "";
-$msg_erro = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $c_descricao = $_POST['add_descricaoField'];
-    $c_grupo = $_POST['add_grupoField'];
-    $c_metodo = $_POST['add_metodoField'];
-    $c_material = $_POST['add_materialField'];
-    $c_valor_ref = $_POST['add_valrefField'];
-
-    do {
-        if (
-            empty($c_descricao)
-        ) {
-            $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
-            break;
-        }
-        // pego a id do grupo seleciona no combo 
-
-        $c_sqlgrupo = "select id from grupos_laudos where grupos_laudos.descricao='$c_grupo'";
-        $result = $conection->query($c_sqlgrupo);
-        $c_linha = $result->fetch_assoc();
-        $c_id_grupo = $c_linha['id'];
-        // verifico se a query foi correto
-        if (!$result) {
-            die("Erro ao Executar Sql!!" . $conection->connect_error);
-        }
-        // grava dados no banco
-        $c_sql = "Insert into exames  (descricao, id_grupo, metodo, material, valref)" .
-            " Value ('$c_descricao','$c_id_grupo', '$c_metodo', '$c_material', '$c_valor_ref')";
-
-        $result = $conection->query($c_sql);
-
-        // verifico se a query foi correto
-        if (!$result) {
-            die("Erro ao Executar Sql!!" . $conection->connect_error);
-        }
-
-        $msg_gravou = "Dados Gravados com Sucesso!!";
-
-        header('location: /smedweb/itenslaudos_lista.php');
-    } while (false);
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
 }
+include("conexao.php");  // conexão
+include("links.php");
+include("config_tabelas.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-
+<body>
+    
 <div class="panel panel-primary class">
     <div class="panel-heading text-center">
         <h4>SmartMed - Sistema Médico</h4>
-        <h5>Novo Exame para Laudo do Sistema<h5>
+        <h5>Novo Perfil de Usuários do Sistema<h5>
     </div>
 </div>
 <br>
@@ -166,4 +113,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </body>
 
+</body>
 </html>
