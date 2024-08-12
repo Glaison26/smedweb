@@ -1265,6 +1265,7 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
   `agenda_desmarcar` char(1) DEFAULT NULL,
   `agenda_criacao` char(1) DEFAULT NULL,
   `prescricao_atestado` char(1) DEFAULT NULL,
+  `prescricao` char(1) DEFAULT NULL,
   `prescricao_formula` char(1) DEFAULT NULL,
   `prescricao_medicamento` char(1) DEFAULT NULL,
   `prescricao_laudos` char(1) DEFAULT NULL,
@@ -1292,9 +1293,9 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.perfil_usuarios_opcoes: ~2 rows (aproximadamente)
-REPLACE INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_esecialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
-	(1, 'perfil1', 'S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 'perfil2', 'S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+REPLACE INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_esecialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
+	(1, 'perfil1', 'S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2, 'perfil2', 'S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.procedimentos
 CREATE TABLE IF NOT EXISTS `procedimentos` (
