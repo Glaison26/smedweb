@@ -6,301 +6,224 @@ if (!isset($_SESSION['newsession'])) {
 include("conexao.php");  // conexão
 include("links.php");
 
-$c_descricao = "";
-// gravação das informações do perfil do formulário
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // criação das variaaveis com check ou não check 
-    $c_descricao = $_POST['add_descricaoField'];
-    if (isset($_POST['chkativo'])) {
-        $c_ativo = 'S';
-    } else {
-        $c_ativo = 'N';
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
+
+    if (!isset($_GET["id"])) {
+        header('location: /smedweb/perfil_acesso.php');
+        exit;
     }
-    if (isset($_POST['chkacessofichaclinica'])) {
-        $c_chkacessofichaclinica = 'S';
-    } else {
-        $c_chkacessofichaclinica = 'N';
+
+    $c_id = $_GET["id"];
+    // leitura do convenio através de sql usando id passada
+    $c_sql = "select * from perfil_usuarios_opcoes where id=$c_id";
+    $result = $conection->query($c_sql);
+    $registro = $result->fetch_assoc();
+
+    if (!$registro) {
+        header('location: /smedweb/perfil_acesso.php');
+        exit;
     }
-    if (isset($_POST['chkeditarfichaclinica'])) {
-        $c_chkeditarfichaclinica = 'S';
+    // captura valores para as variaveis
+    $c_descricao = $registro['descricao'];
+       
+    if ($registro['ativo']== 'S') {
+        $c_ativo = 'checked';
     } else {
-        $c_chkeditarfichaclinica = 'N';
+        $c_ativo = '';
     }
-    if (isset($_POST['chkhistoriaclinica'])) {
-        $c_chkhistoriaclinica = 'S';
+
+    if ($registro['fichaclinica']=='S') {
+        $c_chkacessofichaclinica = 'checked';
     } else {
-        $c_chkhistoriaclinica = 'N';
+        $c_chkacessofichaclinica = '';
     }
-    if (isset($_POST['chkimagens'])) {
-        $c_chkimagens = 'S';
+    if ($registro['fichaclinica_editar']=='S') {
+        $c_chkeditarfichaclinica = 'checked';
     } else {
-        $c_chkimagens = 'N';
+        $c_chkeditarfichaclinica = '';
     }
-    if (isset($_POST['chkeventos'])) {
-        $c_chkeventos = 'S';
+    if ($registro['fichaclinica_historia']=='S') {
+        $c_chkhistoriaclinica = 'checked';
     } else {
-        $c_chkeventos = 'N';
+        $c_chkhistoriaclinica = '';
     }
-    if (isset($_POST['chkexcluirpaciente'])) {
-        $c_chkexcluirpaciente = 'S';
+    if ($registro['fichaclinica_imagens']=='S') {
+        $c_chkimagens = 'checked';
     } else {
-        $c_chkexcluirpaciente = 'N';
+        $c_chkimagens = '';
     }
-    if (isset($_POST['chkagenda'])) {
-        $c_chkagenda = 'S';
+    if ($registro['fichaclinica_eventos']=='S') {
+        $c_chkeventos = 'checked';
     } else {
-        $c_chkagenda = 'N';
+        $c_chkeventos = '';
     }
-    if (isset($_POST['chkconfig_agenda'])) {
-        $c_chkconfig_agenda = 'S';
+    if ($registro['fichaclinica_excluir']=='S') {
+        $c_chkexcluirpaciente = 'checked';
     } else {
-        $c_chkconfig_agenda = 'N';
+        $c_chkexcluirpaciente = '';
     }
-    if (isset($_POST['chkmarcacao'])) {
-        $c_chkmarcacao = 'S';
+    if ($registro['agenda']=='S') {
+        $c_chkagenda = 'checked';
     } else {
-        $c_chkmarcacao = 'N';
+        $c_chkagenda = '';
     }
-    if (isset($_POST['chkincluir'])) {
-        $c_chkincluir = 'S';
+    if ($registro['agenda_criacao']=='S') {
+        $c_chkconfig_agenda = 'checked';
     } else {
-        $c_chkincluir = 'N';
+        $c_chkconfig_agenda = '';
     }
-    if (isset($_POST['chkremanejar'])) {
-        $c_chkremanejar = 'S';
+    if ($registro['agenda_marcacao']=='S') {
+        $c_chkmarcacao = 'checked';
     } else {
-        $c_chkremanejar = 'N';
+        $c_chkmarcacao = '';
     }
-    if (isset($_POST['chkdesmarcar'])) {
-        $c_chkdesmarcar = 'S';
+    if ($registro['agenda_incluir']=='S') {
+        $c_chkincluir = 'checked';
     } else {
-        $c_chkdesmarcar = 'N';
+        $c_chkincluir = '';
     }
-    if (isset($_POST['chkacessoprescricao'])) {
-        $c_chkacessoprescricao = 'S';
+    if ($registro['agenda_remanejar']=='S') {
+        $c_chkremanejar = 'checked';
     } else {
-        $c_chkacessoprescricao = 'N';
+        $c_chkremanejar = '';
     }
-    if (isset($_POST['chkatestado'])) {
-        $c_chkatestado = 'S';
+    if ($registro['agenda_desmarcar']=='S') {
+        $c_chkdesmarcar = 'checked';
     } else {
-        $c_chkatestado = 'N';
+        $c_chkdesmarcar = '';
     }
-    if (isset($_POST['chkformulas'])) {
-        $c_chkformulas = 'S';
+    if ($registro['prescricao']=='S') {
+        $c_chkacessoprescricao = 'checked';
     } else {
-        $c_chkformulas = 'N';
+        $c_chkacessoprescricao = '';
     }
-    if (isset($_POST['chkmedicamentos'])) {
-        $c_chkmedicamentos = 'S';
+    if ($registro['prescricao_atestado']=='S') {
+        $c_chkatestado = 'checked';
     } else {
-        $c_chkmedicamentos = 'N';
+        $c_chkatestado = '';
     }
-    if (isset($_POST['chklaudos'])) {
-        $c_chklaudos = 'S';
+    if ($registro['prescricao_formula']=='S') {
+        $c_chkformulas = 'checked';
     } else {
-        $c_chklaudos = 'N';
+        $c_chkformulas = '';
     }
-    if (isset($_POST['chkorientacoes'])) {
-        $c_chkorientacoes = 'S';
+    if ($registro['prescricao_medicamento']=='S') {
+        $c_chkmedicamentos = 'checked';
     } else {
-        $c_chkorientacoes = 'N';
+        $c_chkmedicamentos = '';
     }
-    if (isset($_POST['chkrelatorios'])) {
-        $c_chkrelatorios = 'S';
+    if ($registro['prescricao_laudos']=='S') {
+        $c_chklaudos = 'checked';
     } else {
-        $c_chkrelatorios = 'N';
+        $c_chklaudos = '';
     }
-    if (isset($_POST['chkconfigprescricao'])) {
-        $c_chkconfigprescricao = 'S';
+    if ($registro['prescricao_orientacao']=='S') {
+        $c_chkorientacoes = 'checked';
     } else {
-        $c_chkconfigprescricao = 'N';
+        $c_chkorientacoes = '';
     }
-    if (isset($_POST['chkfinanceiro'])) {
+    if ($registro['prescricao_relatorio']=='S') {
+        $c_chkrelatorios = 'checked';
+    } else {
+        $c_chkrelatorios = '';
+    }
+    if ($registro['prescricao_configuracao']=='S') {
+        $c_chkconfigprescricao = 'checked';
+    } else {
+        $c_chkconfigprescricao = '';
+    }
+    if ($registro['financeiro']=='S') {
         $c_chkfinanceiro = 'S';
     } else {
         $c_chkfinanceiro = 'N';
     }
-    if (isset($_POST['chkconfig'])) {
-        $c_chkconfig = 'S';
+    if ($registro['configuracoes']=='S') {
+        $c_chkconfig = 'checked';
     } else {
-        $c_chkconfig = 'N';
+        $c_chkconfig = '';
     }
-    if (isset($_POST['chkprofissionais'])) {
-        $c_chkprofissionais = 'S';
+    if ($registro['cad_profissionais']=='S') {
+        $c_chkprofissionais = 'checked';
     } else {
-        $c_chkprofissionais = 'N';
+        $c_chkprofissionais = '';
     }
-    if (isset($_POST['chkconvenios'])) {
-        $c_chkconvenios = 'S';
+    if ($registro['cad_convenios']=='S') {
+        $c_chkconvenios = 'checked';
     } else {
-        $c_chkconvenios = 'N';
+        $c_chkconvenios = '';
     }
-    if (isset($_POST['chkprocedimentos'])) {
-        $c_chkprocedimentos = 'S';
+    if ($registro['cad_procedimentos']=='S') {
+        $c_chkprocedimentos = 'checked';
     } else {
-        $c_chkprocedimentos = 'N';
+        $c_chkprocedimentos = '';
     }
-    if (isset($_POST['chkitenslaudos'])) {
-        $c_chkitenslaudos = 'S';
+    if ($registro['cad_itenslaudos']=='S') {
+        $c_chkitenslaudos = 'checked';
     } else {
-        $c_chkitenslaudos = 'N';
+        $c_chkitenslaudos = '';
     }
-    if (isset($_POST['chkmedicamentos'])) {
-        $c_chkmedicamentos = 'S';
+    if  ($registro['cad_medicamentos']=='S') {
+        $c_chkmedicamentos = 'checked';
     } else {
-        $c_chkmedicamentos = 'N';
+        $c_chkmedicamentos = '';
     }
-    if (isset($_POST['chkorientacoespadroes'])) {
-        $c_chkorientacoespadroes = 'S';
+    if  ($registro['cad_orientacoes']=='S') {
+        $c_chkorientacoespadroes = 'checked';
     } else {
-        $c_chkorientacoespadroes = 'N';
+        $c_chkorientacoespadroes = '';
     }
-    if (isset($_POST['chkformulaspadroes'])) {
-        $c_chkformulaspadroes = 'S';
+    if ($registro['cad_formula']=='S'){
+        $c_chkformulaspadroes = 'checked';
     } else {
-        $c_chkformulaspadroes = 'N';
+        $c_chkformulaspadroes = '';
     }
-    if (isset($_POST['chkatestadospadroes'])) {
-        $c_chkatestadospadroes = 'S';
+    if ($registro['cad_atestado']=='S') {
+        $c_chkatestadospadroes = 'checked';
     } else {
-        $c_chkatestadospadroes = 'N';
+        $c_chkatestadospadroes = '';
     }
-    if (isset($_POST['chkgruposmedicamentos'])) {
-        $c_chkgruposmedicamentos = 'S';
+    if  ($registro['cad_grupo_medicamento']=='S') {
+        $c_chkgruposmedicamentos = 'checked';
     } else {
-        $c_chkgruposmedicamentos = 'N';
+        $c_chkgruposmedicamentos = '';
     }
-    if (isset($_POST['chkgruposexames'])) {
-        $c_chkgruposexames = 'S';
+    if ($registro['cad_grupo_exame']=='S') {
+        $c_chkgruposexames = 'checked';
     } else {
-        $c_chkgruposexames = 'N';
+        $c_chkgruposexames = '';
     }
-    if (isset($_POST['chkgruposformulas'])) {
-        $c_chkgruposformulas = 'S';
+    if  ($registro['cad_componente_formula']=='S') {
+        $c_chkgruposformulas = 'checked';
     } else {
-        $c_chkgruposformulas = 'N';
+        $c_chkgruposformulas = '';
     }
-    if (isset($_POST['chkgruposcomponentes'])) {
-        $c_chkgruposcomponentes = 'S';
+    if  ($registro['cad_grupo_componentes']=='S') {
+        $c_chkgruposcomponentes = 'checked';
     } else {
-        $c_chkgruposcomponentes = 'N';
+        $c_chkgruposcomponentes = '';
     }
-    if (isset($_POST['chkespecialidades'])) {
-        $c_chkespecialidades = 'S';
+    if  ($registro['cad_especialidades']=='S'){
+        $c_chkespecialidades = 'checked';
     } else {
-        $c_chkespecialidades = 'N';
+        $c_chkespecialidades = '';
     }
-    if (isset($_POST['chkconfig_eventos'])) {
-        $c_chkconfig_eventos = 'S';
+    if  ($registro['cad_parametros_eventos']=='S') {
+        $c_chkconfig_eventos = 'checked';
     } else {
-        $c_chkconfig_eventos = 'N';
+        $c_chkconfig_eventos = '';
     }
-    if (isset($_POST['chkdiagnosticos'])) {
-        $c_chkdiagnosticos = 'S';
+    if  ($registro['cad_diagnosticos']=='S') {
+        $c_chkdiagnosticos = 'checked';
     } else {
-        $c_chkdiagnosticos = 'N';
+        $c_chkdiagnosticos = '';
     }
 
-    do {
 
-        if (empty($c_descricao)) {
-            $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
-            break;
-        }
-
-        // gravo os dados com sql
-        $c_sql = "Insert into perfil_usuarios_opcoes (descricao,
-              ativo,
-              fichaclinica,
-              fichaclinica_editar,
-              fichaclinica_historia,
-              fichaclinica_imagens,
-              fichaclinica_eventos,
-              fichaclinica_excluir,
-              agenda,
-              agenda_marcacao,
-              agenda_incluir,
-              agenda_remanejar,
-              agenda_desmarcar,
-              agenda_criacao,
-              prescricao,
-              prescricao_atestado,
-              prescricao_formula,
-              prescricao_medicamento,
-              prescricao_laudos,
-              prescricao_orientacao,
-              prescricao_relatorio,
-              prescricao_configuracao,
-              financeiro,
-              configuracoes,
-              cad_profissionais,
-              cad_convenios,
-              cad_procedimentos,
-              cad_itenslaudos,
-              cad_medicamentos,
-              cad_orientacoes,
-              cad_formula,
-              cad_atestado,
-              cad_grupo_medicamento,
-              cad_grupo_exame,
-              cad_componente_formula,
-              cad_grupo_componentes,
-              cad_especialidades,
-              cad_parametros_eventos,
-              cad_diagnosticos
-              )" .
-            " Value ('$c_descricao',
-              '$c_ativo',
-              '$c_chkacessofichaclinica',
-              '$c_chkeditarfichaclinica',
-              '$c_chkhistoriaclinica',
-              '$c_chkimagens',
-              '$c_chkeventos',
-              '$c_chkexcluirpaciente',
-              '$c_chkagenda',
-              '$c_chkmarcacao',
-              '$c_chkincluir',
-              '$c_chkremanejar',
-              '$c_chkdesmarcar',
-              '$c_chkconfig_agenda',
-              '$c_chkacessoprescricao',
-              '$c_chkatestado',
-              '$c_chkformulas',
-              '$c_chkmedicamentos',
-              '$c_chklaudos',
-              '$c_chkorientacoes',
-              '$c_chkrelatorios',
-              '$c_chkconfigprescricao',
-              '$c_chkfinanceiro',
-              '$c_chkconfig',
-              '$c_chkprofissionais',
-              '$c_chkconvenios',
-              '$c_chkprocedimentos',
-              '$c_chkitenslaudos',
-              '$c_chkmedicamentos',
-              '$c_chkorientacoespadroes',
-              '$c_chkformulaspadroes',
-              '$c_chkatestadospadroes',
-              '$c_chkgruposmedicamentos',
-              '$c_chkgruposexames',
-              '$c_chkgruposformulas',
-              '$c_chkgruposcomponentes',
-              '$c_chkespecialidades',
-              '$c_chkconfig_eventos',
-              '$c_chkdiagnosticos')";
-        echo $c_sql;
-        $result = $conection->query($c_sql);
-        // verifico se a query foi correto
-        if (!$result) {
-            die("Erro ao Executar Sql!!" . $conection->connect_error);
-        }
-        // fim de gravação
-        $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/perfil_acesso.php');
-    } while (false);
 }
 ?>
+
+<!-- formulário de edição dos perfis -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -318,7 +241,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <body>
 
-            <?php
+        <?php
             if (!empty($msg_erro)) {
                 echo "
             <div class='alert alert-danger' role='alert'>
@@ -348,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-2">
                                     <label class="form-check-label col-form-label">Perfil Ativo</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkativo" id="chkativo" checked>
+                                        <input class="form-check-input" type="checkbox"  name="chkativo" id="chkativo" <?php echo $c_ativo ?>>
                                     </div>
                                 </div>
                             </div>
@@ -368,13 +291,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acessar Ficha Clinica</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkacessofichaclinica" id="chkacessofichaclinica" checked>
+                                        <input class="form-check-input" type="checkbox"name="chkacessofichaclinica" id="chkacessofichaclinica" <?php echo $c_chkacessofichaclinica ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Editar Ficha Clinica</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkeditarfichaclinica" id="chkeditarfichaclinica" checked>
+                                        <input class="form-check-input" type="checkbox"  name="chkeditarfichaclinica" id="chkeditarfichaclinica"  <?php echo $c_chkeditarfichaclinica ?>>
                                     </div>
                                 </div>
                             </div>
@@ -383,13 +306,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acessar História Clinica</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkhistoriaclinica" id="chkhistoriaclinica" checked>
+                                        <input class="form-check-input" type="checkbox"  name="chkhistoriaclinica" id="chkhistoriaclinica" <?php echo $c_chkhistoriaclinica ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acessar Imagens Paciente</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkimagens" id="chkimagens" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkimagens" id="chkimagens" <?php echo $c_chkimagens ?>>
                                     </div>
                                 </div>
                             </div>
@@ -398,13 +321,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acessar Eventos Clinicos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkeventos" id="chkeventos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkeventos" id="chkeventos" <?php echo $c_chkeventos ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Excluir Paciente</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkexcluirpaciente" id="chkexcluirpaciente" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkexcluirpaciente" id="chkexcluirpaciente" <?php echo $c_chkexcluirpaciente ?>>
                                     </div>
                                 </div>
                             </div>
@@ -418,13 +341,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acessar Agenda</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkagenda" id="chkagenda" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkagenda" id="chkagenda" <?php echo $c_chkagenda ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Acessar Criação e configuração da Agenda</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkconfig_agenda" id="chkconfig_agenda" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkconfig_agenda" id="chkconfig_agenda" <?php echo $c_chkconfig_agenda ?>>
                                     </div>
                                 </div>
 
@@ -433,13 +356,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Marcação de Consultas</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkmarcacao" id="chkmarcacao" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkmarcacao" id="chkmarcacao" <?php echo $c_chkmarcacao ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Incluir Paciente</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkincluir" id="chkincluir" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkincluir" id="chkincluir" <?php echo $c_chkincluir ?>>
                                     </div>
 
                                 </div>
@@ -448,13 +371,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Remanejar Marcação</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkremanejar" id="chkremanejar" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkremanejar" id="chkremanejar" <?php echo $c_chkremanejar ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Desmarcar</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkdesmarcar" id="chkdesmacar" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkdesmarcar" id="chkdesmacar" <?php echo $c_chkdesmarcar ?>>
                                     </div>
                                 </div>
                             </div>
@@ -468,13 +391,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acesso as Prescrições</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkacessoprescricao" id="chkacessoprescricao" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkacessoprescricao" id="chkacessoprescricao" <?php echo $c_chkacessoprescricao ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Atestados Médicos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkatestado" id="chkatestado" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkatestado" id="chkatestado" <?php echo $c_chkatestado ?>>
                                     </div>
                                 </div>
                             </div>
@@ -482,13 +405,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Elaboração de Fórmulas</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkformulas" id="chkformulas" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkformulas" id="chkformulas" <?php echo $c_chkformulas ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Prescrição de Medicamentos</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkmedicamentos" id="chkmedicamentos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkmedicamentos" id="chkmedicamentos" <?php echo $c_chkmedicamentos ?>>
                                     </div>
                                 </div>
                             </div>
@@ -496,13 +419,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Emissão de Laudos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chklaudos" id="chklaudos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chklaudos" id="chklaudos" <?php echo $c_chklaudos ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Orientações Médicas</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkorientacoes" id="chkorientacoes" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkorientacoes" id="chkorientacoes" <?php echo $c_chkorientacoes ?>>
                                     </div>
                                 </div>
                             </div>
@@ -510,13 +433,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Relatórios Médicos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkrelatorios" id="chkrelatorios" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkrelatorios" id="chkrelatorios" <?php echo $c_chkrelatorios ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Configurações Prescrições</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkconfigprescricao" id="chkconfigprescricao" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkconfigprescricao" id="chkconfigprescricao" <?php echo $c_chkconfigprescricao ?>>
                                     </div>
                                 </div>
                             </div>
@@ -530,13 +453,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Acesso ao Financeiro</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkfinanceiro" id="chkfinanceiro" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkfinanceiro" id="chkfinanceiro" <?php echo $c_chkfinanceiro ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Acesso as configurações</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkconfig" id="chkconfig" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkconfig" id="chkconfig" <?php echo $c_chkconfig ?>>
                                     </div>
                                 </div>
                             </div>
@@ -544,13 +467,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Profissionais</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkprofissionais" id="chkprofissionais" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkprofissionais" id="chkprofissionais" <?php echo $c_chkprofissionais ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Convênios</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkconvenios" id="chkconvenios" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkconvenios" id="chkconvenios" <?php echo $c_chkconvenios ?>>
                                     </div>
                                 </div>
                             </div>
@@ -558,13 +481,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Procedimentos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkprocedimentos" id="chkprocedimentos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkprocedimentos" id="chkprocedimentos" <?php echo $c_chkprocedimentos ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Itens de Laudos</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkitenslaudos" id="chkitenslaudos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkitenslaudos" id="chkitenslaudos" <?php echo $c_chkitenslaudos ?>>
                                     </div>
                                 </div>
                             </div>
@@ -572,13 +495,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Medicamentos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkmedicamentos" id="chkmedicamentos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkmedicamentos" id="chkmedicamentos" <?php echo $c_chkmedicamentos ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Orientações padrões</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkorientacoespadroes" id="chkorientacoespadroes" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkorientacoespadroes" id="chkorientacoespadroes" <?php echo $c_chkorientacoespadroes ?>>
                                     </div>
                                 </div>
                             </div>
@@ -586,13 +509,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Fórmulas padrões</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkformulaspadroes" id="chkformulaspadroes" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkformulaspadroes" id="chkformulaspadroes" <?php echo $c_chkformulaspadroes ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Atestados padrões</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkatestadospadroes" id="chkatestadospadroes" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkatestadospadroes" id="chkatestadospadroes" <?php echo $c_chkatestadospadroes ?>>
                                     </div>
                                 </div>
                             </div>
@@ -600,13 +523,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Grupos de Medicamentos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkgruposmedicamentos" id="chkgruposmedicamentos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkgruposmedicamentos" id="chkgruposmedicamentos" <?php echo $c_chkgruposmedicamentos ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Grupos de Exames</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkgruposexames" id="chkgruposexames" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkgruposexames" id="chkgruposexames" <?php echo $c_chkgruposexames ?>>
                                     </div>
                                 </div>
                             </div>
@@ -614,13 +537,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Grupos de Fórmulas</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkgruposformulas" id="chkgruposformulas" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkgruposformulas" id="chkgruposformulas" <?php echo $c_chkgruposformulas ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Grupos de Componentes</label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkgruposcomponentes" id="chkgruposcomponentes" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkgruposcomponentes" id="chkgruposcomponentes" <?php echo $c_chkgruposcomponentes ?>>
                                     </div>
                                 </div>
                             </div>
@@ -628,13 +551,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Especialidades</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkespecialidades" id="chkespecialidades" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkespecialidades" id="chkespecialidades" <?php echo $c_chkespecialidades ?>>
                                     </div>
                                 </div>
                                 <div class="form-check col-sm-4">
                                     <label class="form-check-label col-form-label">Configuração de Eventos </label>
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkconfig_eventos" id="chkconfig_eventos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkconfig_eventos" id="chkconfig_eventos" <?php echo $c_chkconfig_eventos ?>>
                                     </div>
                                 </div>
                             </div>
@@ -642,7 +565,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Diagnósticos</label>
                                     <div class="col-sm-3">
-                                        <input class="form-check-input" type="checkbox" value="S" name="chkdiagnosticos" id="chkdiagnosticos" checked>
+                                        <input class="form-check-input" type="checkbox"   name="chkdiagnosticos" id="chkdiagnosticos" <?php echo $c_chkdiagnosticos ?>>
                                     </div>
                                 </div>
 

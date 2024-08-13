@@ -54,7 +54,7 @@ include("config_tabelas.php");
                
                     <td>
                  
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Perfil'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/perfil_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Perfil' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
