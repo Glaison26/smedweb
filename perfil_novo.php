@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $c_chkformulas = 'N';
     }
-    if (isset($_POST['chkmedicamentos'])) {
-        $c_chkmedicamentos = 'S';
+    if (isset($_POST['c_chkprescricaomedicamentos'])) {
+        $c_c_chkprescricaomedicamentos = 'S';
     } else {
-        $c_chkmedicamentos = 'N';
+        $c_c_chkprescricaomedicamentos = 'N';
     }
     if (isset($_POST['chklaudos'])) {
         $c_chklaudos = 'S';
@@ -210,86 +210,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // gravo os dados com sql
-        $c_sql = "Insert into perfil_usuarios_opcoes (descricao,
-              ativo,
-              fichaclinica,
-              fichaclinica_editar,
-              fichaclinica_historia,
-              fichaclinica_imagens,
-              fichaclinica_eventos,
-              fichaclinica_excluir,
-              agenda,
-              agenda_marcacao,
-              agenda_incluir,
-              agenda_remanejar,
-              agenda_desmarcar,
-              agenda_criacao,
-              prescricao,
-              prescricao_atestado,
-              prescricao_formula,
-              prescricao_medicamento,
-              prescricao_laudos,
-              prescricao_orientacao,
-              prescricao_relatorio,
-              prescricao_configuracao,
-              financeiro,
-              configuracoes,
-              cad_profissionais,
-              cad_convenios,
-              cad_procedimentos,
-              cad_itenslaudos,
-              cad_medicamentos,
-              cad_orientacoes,
-              cad_formula,
-              cad_atestado,
-              cad_grupo_medicamento,
-              cad_grupo_exame,
-              cad_componente_formula,
-              cad_grupo_componentes,
-              cad_especialidades,
-              cad_parametros_eventos,
-              cad_diagnosticos
-              )" .
-            " Value ('$c_descricao',
-              '$c_ativo',
-              '$c_chkacessofichaclinica',
-              '$c_chkeditarfichaclinica',
-              '$c_chkhistoriaclinica',
-              '$c_chkimagens',
-              '$c_chkeventos',
-              '$c_chkexcluirpaciente',
-              '$c_chkagenda',
-              '$c_chkmarcacao',
-              '$c_chkincluir',
-              '$c_chkremanejar',
-              '$c_chkdesmarcar',
-              '$c_chkconfig_agenda',
-              '$c_chkacessoprescricao',
-              '$c_chkatestado',
-              '$c_chkformulas',
-              '$c_chkmedicamentos',
-              '$c_chklaudos',
-              '$c_chkorientacoes',
-              '$c_chkrelatorios',
-              '$c_chkconfigprescricao',
-              '$c_chkfinanceiro',
-              '$c_chkconfig',
-              '$c_chkprofissionais',
-              '$c_chkconvenios',
-              '$c_chkprocedimentos',
-              '$c_chkitenslaudos',
-              '$c_chkmedicamentos',
-              '$c_chkorientacoespadroes',
-              '$c_chkformulaspadroes',
-              '$c_chkatestadospadroes',
-              '$c_chkgruposmedicamentos',
-              '$c_chkgruposexames',
-              '$c_chkgruposformulas',
-              '$c_chkgruposcomponentes',
-              '$c_chkespecialidades',
-              '$c_chkconfig_eventos',
-              '$c_chkdiagnosticos')";
-        echo $c_sql;
+        $c_sql = "Insert into perfil_usuarios_opcoes (descricao,ativo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
+              fichaclinica_eventos,fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
+              prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento,prescricao_laudos,prescricao_orientacao,prescricao_relatorio,
+              prescricao_configuracao,financeiro,configuracoes,cad_profissionais,cad_convenios,cad_procedimentos,cad_itenslaudos,cad_medicamentos,
+              cad_orientacoes,cad_formula,cad_atestado,cad_grupo_medicamento,cad_grupo_exame,cad_componente_formula,cad_grupo_componentes,
+              cad_especialidades,cad_parametros_eventos,cad_diagnosticos)" .
+            " Value ('$c_descricao','$c_ativo','$c_chkacessofichaclinica','$c_chkeditarfichaclinica','$c_chkhistoriaclinica','$c_chkimagens',
+              '$c_chkeventos','$c_chkexcluirpaciente','$c_chkagenda','$c_chkmarcacao','$c_chkincluir','$c_chkremanejar','$c_chkdesmarcar',
+              '$c_chkconfig_agenda','$c_chkacessoprescricao','$c_chkatestado','$c_chkformulas','$c_chkprescricaomedicamentos','$c_chklaudos',
+              '$c_chkorientacoes','$c_chkrelatorios','$c_chkconfigprescricao','$c_chkfinanceiro','$c_chkconfig','$c_chkprofissionais',
+              '$c_chkconvenios','$c_chkprocedimentos','$c_chkitenslaudos','$c_chkmedicamentos','$c_chkorientacoespadroes','$c_chkformulaspadroes',
+              '$c_chkatestadospadroes','$c_chkgruposmedicamentos','$c_chkgruposexames','$c_chkgruposformulas','$c_chkgruposcomponentes',
+              '$c_chkespecialidades','$c_chkconfig_eventos','$c_chkdiagnosticos')";
+        //echo $c_sql;
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {

@@ -13,6 +13,16 @@ include("config_tabelas.php");
 <html lang="en">
 
 <body>
+    <!-- script javascritp para confirmação de exclusão -->
+    <script language="Javascript">
+        function confirmacao(id) {
+            var resposta = confirm("Deseja remover esse registro?");
+            if (resposta == true) {
+                window.location.href = "/smedweb/perfil_excluir.php?id=" + id;
+            }
+        }
+    </script>
+
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>

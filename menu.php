@@ -42,8 +42,8 @@ if (!isset($_SESSION['newsession'])) {
 		
 				<div class="panel-heading text-center">
 				<br><br>
-					<h3><strong>SmartMed - Sistema Médico</strong></h3>
-					<br><br>
+					<h1><strong>SMARTMED - SISTEMA MÉDICO</strong></h1>
+					<br>
 				
 			</div>
 		</div>
