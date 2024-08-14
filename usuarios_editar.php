@@ -66,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_senha2 = $c_senha;
     $c_ativo = $registro['ativo'];
     $c_tipo = $registro['tipo'];
+    $c_id_perfil = $registro['id_perfil'];
 
     $c_telefone = $registro['telefone'];
     $c_email = $registro['email'];
@@ -88,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_tipo = $_POST['tipo'];
     $c_email = $_POST['email'];
     $c_telefone = $_POST['telefone'];
+    
     if (!isset($_POST['chkativo'])) {
         $c_ativo = 'N';
     } else {
@@ -136,10 +138,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         // grava dados no banco
         // criptografo senha
         $c_senha = base64_encode($c_senha);
+        //sql para pegar a id do perfil selecionado no combobox
+        $c_descricao_perfil = $_POST['perfil'];
+        $c_sql_perfil = "select perfil_usuarios_opcoes.id 
+        from perfil_usuarios_opcoes where perfil_usuarios_opcoes.descricao='$c_descricao_perfil'";
+        $result = $conection->query($c_sql_perfil);
+        $c_linha = $result->fetch_assoc();
+        $i_id_perfil = $c_linha['id'];
 
         // faço a alteração do registro
         $c_sql = "Update Usuario" .
-            " SET nome = '$c_nome', login ='$c_login',  email = '$c_email', telefone = '$c_telefone', senha ='$c_senha', ativo='$c_ativo', tipo='$c_tipo'" .
+            " SET nome = '$c_nome', login ='$c_login',  email = '$c_email', telefone = '$c_telefone',
+             senha ='$c_senha', ativo='$c_ativo', tipo='$c_tipo', id_perfil='$i_id_perfil'" .
             " where id=$c_id";
 
         $result = $conection->query($c_sql);
@@ -222,6 +232,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                     <select class="form-control form-control-lg" id="tipo" name="tipo" value="<?php echo $c_tipo; ?>">
                         <option <?php echo $op1 ?>>Administrador</option>
                         <option <?php echo $op2 ?>>Operador</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Perfil do Usuário</label>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-lg" id="perfil" name="perfil">
+                        <?php
+                        $c_sql = "SELECT perfil_usuarios_opcoes.id, perfil_usuarios_opcoes.descricao
+                                  FROM perfil_usuarios_opcoes ORDER BY perfil_usuarios_opcoes.descricao";
+                        $result = $conection->query($c_sql);
+                        // insiro os registro do banco de dados na tabela 
+                        while ($c_linha = $result->fetch_assoc()) {
+                            if ($c_linha['id']==$c_id_perfil){
+                                $c_op = 'selected';
+                            }
+                            else {
+                                $c_op='';
+                                }
+                            echo "<option $c_op>$c_linha[descricao]</option>";
+                        }
+                        ?>
+
                     </select>
                 </div>
             </div>

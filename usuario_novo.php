@@ -90,11 +90,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $c_tipo = '2';
         }
 
-        // grava dados no banco
+        //sql para pegar a id do perfil selecionado no combobox
+        $c_descricao_perfil = $_POST['perfil'];
+        $c_sql_perfil = "select perfil_usuarios_opcoes.id 
+        from perfil_usuarios_opcoes where perfil_usuarios_opcoes.descricao='$c_descricao_perfil'";
+        $result = $conection->query($c_sql_perfil);
+        $c_linha = $result->fetch_assoc();
+        $i_id_perfil = $c_linha['id'];
 
-        // faço a Leitura da tabela com sql
-        $c_sql = "Insert into usuario (nome, login, senha, ativo, tipo, email, telefone )" .
-            "Value ('$c_nome', '$c_login', '$c_senha', '$c_ativo', '$c_tipo', '$c_email', '$c_telefone' )";
+        // grava dados no banco
+      
+        $c_sql = "Insert into usuario (nome, login, senha, ativo, tipo, email, telefone, id_perfil )" .
+            "Value ('$c_nome', '$c_login', '$c_senha', '$c_ativo', '$c_tipo', '$c_email', '$c_telefone', '$i_id_perfil' )";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -171,6 +178,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <select class="form-control form-control-lg" id="tipo" name="tipo">
                         <option>Operador</option>
                         <option>Administrador</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Perfil do Usuário</label>
+                <div class="col-sm-2">
+                    <select class="form-control form-control-lg" id="perfil" name="perfil">
+                        <?php
+                        $c_sql = "SELECT perfil_usuarios_opcoes.id, perfil_usuarios_opcoes.descricao
+                                  FROM perfil_usuarios_opcoes ORDER BY perfil_usuarios_opcoes.descricao";
+                        $result = $conection->query($c_sql);
+                        // insiro os registro do banco de dados na tabela 
+                        while ($c_linha = $result->fetch_assoc()) {
+                            echo "
+                                 <option>$c_linha[descricao]</option>";
+                        }
+                        ?>
+
                     </select>
                 </div>
             </div>

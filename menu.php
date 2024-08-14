@@ -38,19 +38,21 @@ if (!isset($_SESSION['newsession'])) {
 
 <body class="sb-nav-fixed">
 	<main>
-		<div class="panel panel-primary class">
-		
+		<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
+			<div class="panel panel-primary class">
+
 				<div class="panel-heading text-center">
-				<br><br>
+					<br>
 					<h1><strong>SMARTMED - SISTEMA MÉDICO</strong></h1>
 					<br>
-				
+
+				</div>
 			</div>
 		</div>
 
 		<div class="container -my5">
-			
-			<div style="padding-top:2px;">
+
+			<div style="padding-top:1px;">
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">

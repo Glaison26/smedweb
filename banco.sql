@@ -14,6 +14,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Copiando estrutura do banco de dados para smed
+CREATE DATABASE IF NOT EXISTS `smed` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `smed`;
+
 -- Copiando estrutura para tabela smed.agenda
 CREATE TABLE IF NOT EXISTS `agenda` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -32,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   KEY `FK_agenda_convenios` (`id_convenio`),
   CONSTRAINT `FK_agenda_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_agenda_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3911 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agenda: ~762 rows (aproximadamente)
-REPLACE INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `horario`, `Nome`, `telefone`, `email`, `observacao`, `matricula`) VALUES
+-- Copiando dados para a tabela smed.agenda: ~375 rows (aproximadamente)
+INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `horario`, `Nome`, `telefone`, `email`, `observacao`, `matricula`) VALUES
 	(1, 1, 1, '2024-07-22', '1', '09:00:00', 'Jose da silva', '(31) 6546-5654', 'teste@gmail.com', 'teste', NULL),
 	(2, 1, 1, '2024-07-22', '1', '09:30:00', 'Lucio Machado', '(31) 5465-4654', 'teste@hotmail.com', 'teste2', NULL),
 	(3, 1, 3, '2024-07-22', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
@@ -807,7 +812,382 @@ REPLACE INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `h
 	(3907, 2, 3, '2024-08-14', '3', '08:30:00', NULL, NULL, NULL, NULL, NULL),
 	(3908, 2, 3, '2024-08-14', '3', '09:00:00', NULL, NULL, NULL, NULL, NULL),
 	(3909, 2, 3, '2024-08-14', '3', '09:30:00', NULL, NULL, NULL, NULL, NULL),
-	(3910, 2, 3, '2024-08-14', '3', '10:00:00', NULL, NULL, NULL, NULL, NULL);
+	(3910, 2, 3, '2024-08-14', '3', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28745, 1, 3, '2024-07-15', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28746, 1, 3, '2024-07-15', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28747, 1, 3, '2024-07-15', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28748, 1, 3, '2024-07-15', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28749, 1, 3, '2024-07-15', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28750, 1, 3, '2024-07-19', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28751, 1, 3, '2024-07-19', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28752, 1, 3, '2024-07-19', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28753, 1, 3, '2024-07-19', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28754, 1, 3, '2024-07-19', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28755, 1, 3, '2024-07-19', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28756, 1, 3, '2024-07-19', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28757, 1, 3, '2024-07-19', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28758, 1, 3, '2024-07-19', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28759, 1, 3, '2024-07-19', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28760, 1, 3, '2024-07-19', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28761, 1, 3, '2024-07-19', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28762, 1, 3, '2024-07-19', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28763, 1, 3, '2024-07-19', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28764, 1, 3, '2024-07-19', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28765, 1, 3, '2024-07-19', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28766, 1, 3, '2024-07-19', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28767, 1, 3, '2024-07-19', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28768, 1, 3, '2024-07-19', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28769, 1, 3, '2024-07-19', '5', '13:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28770, 1, 3, '2024-07-19', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28771, 1, 3, '2024-07-19', '5', '13:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28772, 1, 3, '2024-07-19', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28773, 1, 3, '2024-07-19', '5', '14:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28774, 1, 3, '2024-07-19', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28775, 1, 3, '2024-07-19', '5', '14:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28776, 1, 3, '2024-07-19', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28777, 1, 3, '2024-07-19', '5', '15:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28778, 1, 3, '2024-07-19', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28779, 1, 3, '2024-07-19', '5', '15:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28780, 1, 3, '2024-07-19', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28781, 1, 3, '2024-07-19', '5', '16:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28782, 1, 3, '2024-07-19', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28783, 1, 3, '2024-07-19', '5', '16:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28784, 1, 3, '2024-07-19', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28785, 1, 3, '2024-07-19', '5', '17:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28786, 1, 3, '2024-07-19', '5', '17:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28787, 1, 3, '2024-07-19', '5', '17:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28788, 1, 3, '2024-07-19', '5', '18:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28789, 1, 3, '2024-07-19', '5', '18:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28790, 1, 3, '2024-07-19', '5', '18:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28791, 1, 3, '2024-07-19', '5', '18:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28792, 1, 3, '2024-07-19', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28793, 1, 3, '2024-07-19', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28794, 1, 3, '2024-07-19', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28795, 1, 3, '2024-07-19', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28796, 1, 3, '2024-07-19', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28797, 1, 3, '2024-07-19', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28798, 1, 3, '2024-07-19', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28799, 1, 3, '2024-07-19', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28800, 1, 3, '2024-07-19', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28801, 1, 3, '2024-07-20', '6', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28802, 1, 3, '2024-07-20', '6', '08:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28803, 1, 3, '2024-07-20', '6', '08:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28804, 1, 3, '2024-07-20', '6', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28805, 1, 3, '2024-07-20', '6', '09:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28806, 1, 3, '2024-07-20', '6', '09:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28807, 1, 3, '2024-07-20', '6', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28808, 1, 3, '2024-07-20', '6', '10:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28809, 1, 3, '2024-07-20', '6', '10:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28810, 1, 3, '2024-07-20', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28811, 1, 3, '2024-07-22', '1', '09:00:00', 'Jussára Damião da Silva Neves', NULL, NULL, NULL, NULL),
+	(28812, 1, 3, '2024-07-22', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28813, 1, 3, '2024-07-22', '1', '10:00:00', 'Glaison Queiroz', '(36) 71-2550', 'glaison26.queiroz@gmail.com', 'dfdsfds', '88845665'),
+	(28814, 1, 3, '2024-07-22', '1', '10:30:00', '', '', '', '', ''),
+	(28815, 1, 3, '2024-07-22', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28816, 1, 3, '2024-07-26', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28817, 1, 3, '2024-07-26', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28818, 1, 3, '2024-07-26', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28819, 1, 3, '2024-07-26', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28820, 1, 3, '2024-07-26', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28821, 1, 3, '2024-07-26', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28822, 1, 3, '2024-07-26', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28823, 1, 3, '2024-07-26', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28824, 1, 3, '2024-07-26', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28825, 1, 3, '2024-07-26', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28826, 1, 3, '2024-07-26', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28827, 1, 3, '2024-07-26', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28828, 1, 3, '2024-07-26', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28829, 1, 3, '2024-07-26', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28830, 1, 3, '2024-07-26', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28831, 1, 3, '2024-07-26', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28832, 1, 3, '2024-07-26', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28833, 1, 3, '2024-07-26', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28834, 1, 3, '2024-07-26', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28835, 1, 3, '2024-07-26', '5', '13:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28836, 1, 3, '2024-07-26', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28837, 1, 3, '2024-07-26', '5', '13:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28838, 1, 3, '2024-07-26', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28839, 1, 3, '2024-07-26', '5', '14:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28840, 1, 3, '2024-07-26', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28841, 1, 3, '2024-07-26', '5', '14:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28842, 1, 3, '2024-07-26', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28843, 1, 3, '2024-07-26', '5', '15:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28844, 1, 3, '2024-07-26', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28845, 1, 3, '2024-07-26', '5', '15:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28846, 1, 3, '2024-07-26', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28847, 1, 3, '2024-07-26', '5', '16:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28848, 1, 3, '2024-07-26', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28849, 1, 3, '2024-07-26', '5', '16:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28850, 1, 3, '2024-07-26', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28851, 1, 3, '2024-07-26', '5', '17:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28852, 1, 3, '2024-07-26', '5', '17:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28853, 1, 3, '2024-07-26', '5', '17:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28854, 1, 3, '2024-07-26', '5', '18:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28855, 1, 3, '2024-07-26', '5', '18:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28856, 1, 3, '2024-07-26', '5', '18:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28857, 1, 3, '2024-07-26', '5', '18:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28858, 1, 3, '2024-07-26', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28859, 1, 3, '2024-07-26', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28860, 1, 3, '2024-07-26', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28861, 1, 3, '2024-07-26', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28862, 1, 3, '2024-07-26', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28863, 1, 3, '2024-07-26', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28864, 1, 3, '2024-07-26', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28865, 1, 3, '2024-07-26', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28866, 1, 3, '2024-07-26', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28867, 2, 3, '2024-07-22', '1', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28868, 2, 3, '2024-07-22', '1', '08:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28869, 2, 3, '2024-07-22', '1', '08:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28870, 2, 3, '2024-07-22', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28871, 2, 3, '2024-07-22', '1', '09:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28872, 2, 3, '2024-07-22', '1', '09:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28873, 2, 3, '2024-07-22', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28874, 2, 3, '2024-07-22', '1', '10:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28875, 2, 3, '2024-07-22', '1', '10:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28876, 2, 3, '2024-07-22', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28877, 2, 3, '2024-07-22', '1', '11:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28878, 2, 3, '2024-07-22', '1', '11:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28879, 2, 3, '2024-07-22', '1', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28880, 2, 3, '2024-07-22', '1', '12:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28881, 2, 3, '2024-07-22', '1', '12:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28882, 2, 3, '2024-07-22', '1', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28883, 2, 3, '2024-07-22', '1', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28884, 2, 3, '2024-07-22', '1', '14:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28885, 2, 3, '2024-07-22', '1', '14:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28886, 2, 3, '2024-07-22', '1', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28887, 2, 3, '2024-07-22', '1', '15:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28888, 2, 3, '2024-07-22', '1', '15:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28889, 2, 3, '2024-07-22', '1', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28890, 2, 3, '2024-07-22', '1', '16:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28891, 2, 3, '2024-07-22', '1', '16:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28892, 2, 3, '2024-07-22', '1', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28893, 2, 3, '2024-07-22', '1', '17:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28894, 2, 3, '2024-07-22', '1', '17:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28895, 2, 3, '2024-07-22', '1', '18:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28896, 1, 3, '2024-07-29', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28897, 1, 3, '2024-07-29', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28898, 1, 3, '2024-07-29', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28899, 1, 3, '2024-07-29', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28900, 1, 3, '2024-07-29', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28901, 1, 4, '2024-08-02', '5', '08:00:00', 'Glaison Queiroz', '(31) 98426-2508', 'glaison26.queiroz@gmail.com', '', '88845665'),
+	(28902, 1, 3, '2024-08-02', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28903, 1, 3, '2024-08-02', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28904, 1, 3, '2024-08-02', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28905, 1, 3, '2024-08-02', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28906, 1, 3, '2024-08-02', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28907, 1, 3, '2024-08-02', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28908, 1, 3, '2024-08-02', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28909, 1, 3, '2024-08-02', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28910, 1, 3, '2024-08-02', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28911, 1, 3, '2024-08-02', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28912, 1, 3, '2024-08-02', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28913, 1, 3, '2024-08-02', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28914, 1, 3, '2024-08-02', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28915, 1, 3, '2024-08-02', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28916, 1, 3, '2024-08-02', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28917, 1, 3, '2024-08-02', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28918, 1, 3, '2024-08-02', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28919, 1, 3, '2024-08-02', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28920, 1, 3, '2024-08-02', '5', '13:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28921, 1, 3, '2024-08-02', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28922, 1, 3, '2024-08-02', '5', '13:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28923, 1, 3, '2024-08-02', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28924, 1, 3, '2024-08-02', '5', '14:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28925, 1, 3, '2024-08-02', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28926, 1, 3, '2024-08-02', '5', '14:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28927, 1, 3, '2024-08-02', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28928, 1, 3, '2024-08-02', '5', '15:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28929, 1, 3, '2024-08-02', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28930, 1, 3, '2024-08-02', '5', '15:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28931, 1, 3, '2024-08-02', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28932, 1, 3, '2024-08-02', '5', '16:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28933, 1, 3, '2024-08-02', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28934, 1, 3, '2024-08-02', '5', '16:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28935, 1, 3, '2024-08-02', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28936, 1, 3, '2024-08-02', '5', '17:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28937, 1, 3, '2024-08-02', '5', '17:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28938, 1, 3, '2024-08-02', '5', '17:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28939, 1, 3, '2024-08-02', '5', '18:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28940, 1, 3, '2024-08-02', '5', '18:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28941, 1, 3, '2024-08-02', '5', '18:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28942, 1, 3, '2024-08-02', '5', '18:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28943, 1, 3, '2024-08-02', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28944, 1, 3, '2024-08-02', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28945, 1, 3, '2024-08-02', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28946, 1, 3, '2024-08-02', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28947, 1, 3, '2024-08-02', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28948, 1, 3, '2024-08-02', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28949, 1, 3, '2024-08-02', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28950, 1, 3, '2024-08-02', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28951, 1, 3, '2024-08-02', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28952, 1, 3, '2024-08-05', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28953, 1, 3, '2024-08-05', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28954, 1, 3, '2024-08-05', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28955, 1, 3, '2024-08-05', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28956, 1, 3, '2024-08-05', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28957, 1, 3, '2024-08-09', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28958, 1, 3, '2024-08-09', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28959, 1, 3, '2024-08-09', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28960, 1, 3, '2024-08-09', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28961, 1, 3, '2024-08-09', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28962, 1, 3, '2024-08-09', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28963, 1, 3, '2024-08-09', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28964, 1, 3, '2024-08-09', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28965, 1, 3, '2024-08-09', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28966, 1, 3, '2024-08-09', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28967, 1, 3, '2024-08-09', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28968, 1, 3, '2024-08-09', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28969, 1, 3, '2024-08-09', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28970, 1, 3, '2024-08-09', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28971, 1, 3, '2024-08-09', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28972, 1, 3, '2024-08-09', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28973, 1, 3, '2024-08-09', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28974, 1, 3, '2024-08-09', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28975, 1, 3, '2024-08-09', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28976, 1, 3, '2024-08-09', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28977, 1, 3, '2024-08-09', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28978, 1, 3, '2024-08-09', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28979, 1, 3, '2024-08-09', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28980, 1, 3, '2024-08-09', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(28981, 1, 3, '2024-08-09', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28982, 1, 3, '2024-08-09', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(28983, 1, 3, '2024-08-09', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28984, 1, 3, '2024-08-10', '6', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28985, 1, 3, '2024-08-10', '6', '08:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28986, 1, 3, '2024-08-10', '6', '08:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28987, 1, 3, '2024-08-10', '6', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28988, 1, 3, '2024-08-10', '6', '09:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28989, 1, 3, '2024-08-10', '6', '09:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28990, 1, 3, '2024-08-10', '6', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28991, 1, 3, '2024-08-10', '6', '10:20:00', NULL, NULL, NULL, NULL, NULL),
+	(28992, 1, 3, '2024-08-10', '6', '10:40:00', NULL, NULL, NULL, NULL, NULL),
+	(28993, 1, 3, '2024-08-10', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28994, 1, 3, '2024-08-12', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28995, 1, 3, '2024-08-12', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28996, 1, 3, '2024-08-12', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28997, 1, 3, '2024-08-12', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(28998, 1, 3, '2024-08-12', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(28999, 1, 3, '2024-08-16', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29000, 1, 3, '2024-08-16', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29001, 1, 3, '2024-08-16', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29002, 1, 3, '2024-08-16', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29003, 1, 3, '2024-08-16', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29004, 1, 3, '2024-08-16', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29005, 1, 3, '2024-08-16', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29006, 1, 3, '2024-08-16', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29007, 1, 3, '2024-08-16', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29008, 1, 3, '2024-08-16', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29009, 1, 3, '2024-08-16', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29010, 1, 3, '2024-08-16', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29011, 1, 3, '2024-08-16', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29012, 1, 3, '2024-08-16', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29013, 1, 3, '2024-08-16', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29014, 1, 3, '2024-08-16', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29015, 1, 3, '2024-08-16', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29016, 1, 3, '2024-08-16', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29017, 1, 3, '2024-08-16', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29018, 1, 3, '2024-08-16', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29019, 1, 3, '2024-08-16', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29020, 1, 3, '2024-08-16', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29021, 1, 3, '2024-08-16', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29022, 1, 3, '2024-08-16', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29023, 1, 3, '2024-08-16', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29024, 1, 3, '2024-08-16', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29025, 1, 3, '2024-08-16', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29026, 1, 3, '2024-08-17', '6', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29027, 1, 3, '2024-08-17', '6', '08:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29028, 1, 3, '2024-08-17', '6', '08:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29029, 1, 3, '2024-08-17', '6', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29030, 1, 3, '2024-08-17', '6', '09:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29031, 1, 3, '2024-08-17', '6', '09:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29032, 1, 3, '2024-08-17', '6', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29033, 1, 3, '2024-08-17', '6', '10:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29034, 1, 3, '2024-08-17', '6', '10:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29035, 1, 3, '2024-08-17', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29036, 1, 3, '2024-08-19', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29037, 1, 3, '2024-08-19', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29038, 1, 3, '2024-08-19', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29039, 1, 3, '2024-08-19', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29040, 1, 3, '2024-08-19', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29041, 1, 3, '2024-08-23', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29042, 1, 3, '2024-08-23', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29043, 1, 3, '2024-08-23', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29044, 1, 3, '2024-08-23', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29045, 1, 3, '2024-08-23', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29046, 1, 3, '2024-08-23', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29047, 1, 3, '2024-08-23', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29048, 1, 3, '2024-08-23', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29049, 1, 3, '2024-08-23', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29050, 1, 3, '2024-08-23', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29051, 1, 3, '2024-08-23', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29052, 1, 3, '2024-08-23', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29053, 1, 3, '2024-08-23', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29054, 1, 3, '2024-08-23', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29055, 1, 3, '2024-08-23', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29056, 1, 3, '2024-08-23', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29057, 1, 3, '2024-08-23', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29058, 1, 3, '2024-08-23', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29059, 1, 3, '2024-08-23', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29060, 1, 3, '2024-08-23', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29061, 1, 3, '2024-08-23', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29062, 1, 3, '2024-08-23', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29063, 1, 3, '2024-08-23', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29064, 1, 3, '2024-08-23', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29065, 1, 3, '2024-08-23', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29066, 1, 3, '2024-08-23', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29067, 1, 3, '2024-08-23', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29068, 1, 3, '2024-08-24', '6', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29069, 1, 3, '2024-08-24', '6', '08:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29070, 1, 3, '2024-08-24', '6', '08:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29071, 1, 3, '2024-08-24', '6', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29072, 1, 3, '2024-08-24', '6', '09:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29073, 1, 3, '2024-08-24', '6', '09:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29074, 1, 3, '2024-08-24', '6', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29075, 1, 3, '2024-08-24', '6', '10:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29076, 1, 3, '2024-08-24', '6', '10:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29077, 1, 3, '2024-08-24', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29078, 1, 3, '2024-08-26', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29079, 1, 3, '2024-08-26', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29080, 1, 3, '2024-08-26', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29081, 1, 3, '2024-08-26', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29082, 1, 3, '2024-08-26', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29083, 1, 3, '2024-08-30', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29084, 1, 3, '2024-08-30', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29085, 1, 3, '2024-08-30', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29086, 1, 3, '2024-08-30', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29087, 1, 3, '2024-08-30', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29088, 1, 3, '2024-08-30', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29089, 1, 3, '2024-08-30', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29090, 1, 3, '2024-08-30', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29091, 1, 3, '2024-08-30', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29092, 1, 3, '2024-08-30', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29093, 1, 3, '2024-08-30', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29094, 1, 3, '2024-08-30', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29095, 1, 3, '2024-08-30', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29096, 1, 3, '2024-08-30', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29097, 1, 3, '2024-08-30', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29098, 1, 3, '2024-08-30', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29099, 1, 3, '2024-08-30', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29100, 1, 3, '2024-08-30', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29101, 1, 3, '2024-08-30', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29102, 1, 3, '2024-08-30', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29103, 1, 3, '2024-08-30', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29104, 1, 3, '2024-08-30', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29105, 1, 3, '2024-08-30', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29106, 1, 3, '2024-08-30', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29107, 1, 3, '2024-08-30', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29108, 1, 3, '2024-08-30', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29109, 1, 3, '2024-08-30', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29110, 1, 3, '2024-08-31', '6', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29111, 1, 3, '2024-08-31', '6', '08:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29112, 1, 3, '2024-08-31', '6', '08:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29113, 1, 3, '2024-08-31', '6', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29114, 1, 3, '2024-08-31', '6', '09:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29115, 1, 3, '2024-08-31', '6', '09:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29116, 1, 3, '2024-08-31', '6', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29117, 1, 3, '2024-08-31', '6', '10:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29118, 1, 3, '2024-08-31', '6', '10:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29119, 1, 3, '2024-08-31', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.agendaconfig
 CREATE TABLE IF NOT EXISTS `agendaconfig` (
@@ -829,8 +1209,8 @@ CREATE TABLE IF NOT EXISTS `agendaconfig` (
   CONSTRAINT `FK_agendaconfig_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agendaconfig: ~21 rows (aproximadamente)
-REPLACE INTO `agendaconfig` (`id`, `id_profissional`, `dia`, `inicio1`, `fim1`, `duracao1`, `inicio2`, `fim2`, `duracao2`, `inicio3`, `fim3`, `duracao3`, `Habilitado`) VALUES
+-- Copiando dados para a tabela smed.agendaconfig: ~14 rows (aproximadamente)
+INSERT INTO `agendaconfig` (`id`, `id_profissional`, `dia`, `inicio1`, `fim1`, `duracao1`, `inicio2`, `fim2`, `duracao2`, `inicio3`, `fim3`, `duracao3`, `Habilitado`) VALUES
 	(21, 1, 1, '09:00:00', '11:00:00', 30, '14:00:00', '18:00:00', 15, '00:00:00', '00:00:00', 0, NULL),
 	(22, 1, 2, '08:00:00', '12:00:00', 30, '13:00:00', '18:00:00', 15, '00:00:00', '00:00:00', 0, NULL),
 	(23, 1, 3, '07:00:00', '11:00:00', 15, '12:00:00', '17:00:00', 30, '00:00:00', '00:00:00', 0, NULL),
@@ -862,7 +1242,7 @@ CREATE TABLE IF NOT EXISTS `atestados` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.atestados: ~3 rows (aproximadamente)
-REPLACE INTO `atestados` (`id`, `descricao`, `texto`) VALUES
+INSERT INTO `atestados` (`id`, `descricao`, `texto`) VALUES
 	(2, 'Dieta para diabetes', _binary 0x436f6d6572206d656e6f732061c3a7756361720a),
 	(8, 'RDPP', _binary 0x746573746520646520746573746f207061726120524450500a),
 	(10, 'AREOLAR', _binary 0x746578746f204152454f4c41520a);
@@ -879,7 +1259,7 @@ CREATE TABLE IF NOT EXISTS `atributos_parametros_eventos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.atributos_parametros_eventos: ~4 rows (aproximadamente)
-REPLACE INTO `atributos_parametros_eventos` (`id`, `id_parametro`, `descricao`, `formato`) VALUES
+INSERT INTO `atributos_parametros_eventos` (`id`, `id_parametro`, `descricao`, `formato`) VALUES
 	(1, 1, 'Atributo 1', '999'),
 	(2, 1, 'atributo 2', '99.99'),
 	(3, 1, 'atributo 3', '99'),
@@ -894,7 +1274,7 @@ CREATE TABLE IF NOT EXISTS `bateria` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.bateria: ~2 rows (aproximadamente)
-REPLACE INTO `bateria` (`id`, `descricao`, `exames`) VALUES
+INSERT INTO `bateria` (`id`, `descricao`, `exames`) VALUES
 	(1, 'PADRÃO', _binary 0x312e20416e7465636564656e74657320436972c3ba726769636f733a0d0a0d0a0d0a0d0a322e20416e7465636564656e74657320436cc3ad6e69636f733a0d0a0d0a0d0a0d0a332e20456e6665726d696461646520417475616c203a0d0a0d0a0d0a342e204d6564696361c3a7c3a36f20656d2055736f3a0d0a0d0a0d0a352e20486970657273656e736962696c6964616465204d65646963616d656e746f7361203a0d0a0d0a0d0a362e2048c3a16269746f730d0a0d0a0d0a372e204578616d652046c3ad7369636f203a0d0a0d0a0d0a502e413a20202020202020202020202020202020202020462e433a202020202020202020202020202020205065736f3a0d0a0d0a0d0a382e204578616d657320436f6d706c656d656e7461726573203a0d0a0d0a0d0a392e20436f6e636c7573c3a36f203a0d0a0d0a),
 	(2, 'Exame de Rotina', _binary 0x0d0a312e2050616369656e746520656d20626f6d2065737461646f20676572616c2c2073617564c3a176656c0d0a322e20525455204445205052c39353544154410d0a);
 
@@ -910,7 +1290,7 @@ CREATE TABLE IF NOT EXISTS `componentes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.componentes: ~4 rows (aproximadamente)
-REPLACE INTO `componentes` (`id`, `id_grupo_componente`, `descricao`, `unidade`) VALUES
+INSERT INTO `componentes` (`id`, `id_grupo_componente`, `descricao`, `unidade`) VALUES
 	(19, 1, 'Fenoratica', 'un'),
 	(20, 1, 'Ácido bórico', 'un'),
 	(21, 2, 'Amônia', 'un'),
@@ -944,11 +1324,12 @@ CREATE TABLE IF NOT EXISTS `convenios` (
   CONSTRAINT `FK_convenios_tabela` FOREIGN KEY (`id_tabela`) REFERENCES `tabela` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.convenios: ~3 rows (aproximadamente)
-REPLACE INTO `convenios` (`id`, `id_tabela`, `nome`, `razaosocial`, `cnpj`, `inscestad`, `inscmunicipal`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `diaenvio`, `diapagamento`, `percentch`, `contato`, `obs`) VALUES
+-- Copiando dados para a tabela smed.convenios: ~2 rows (aproximadamente)
+INSERT INTO `convenios` (`id`, `id_tabela`, `nome`, `razaosocial`, `cnpj`, `inscestad`, `inscmunicipal`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `diaenvio`, `diapagamento`, `percentch`, `contato`, `obs`) VALUES
 	(1, 2, 'Unimed', 'Unimed SA', '75515874000180', '411432', '41234123', 'teste', 'tste', 'Belo Horizonte', '34505480', 'MG', '(31) 589-6369', '(31) 6958-5544', 'unimed@unimed.com.br', 'teste', '', '', '100', 'Joelson', _binary ''),
 	(2, 1, 'Casu', 'Casu SA', '00172442000115', '', '', '', '', '', '', 'AC', '(48) 2759-4679', '(31) 6995-5555', 'suporte@sabara.mg.gov.br', '', '', '', '', 'Glaison', _binary ''),
-	(3, 2, 'Selecionar', 'Selecionar', '99999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '99999', NULL, 'teste', NULL, NULL, NULL, NULL, NULL, NULL);
+	(3, 2, 'Selecionar', 'Selecionar', '99999999', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '99999', NULL, 'teste', NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, 2, 'Particular', 'Particular', '62616951000147', '', '', '', '', '', '', 'AC', '(99) 9999-9999', '', 'glaison26.queiroz@gmail.com', '', '', '', '', 'Particular', _binary '');
 
 -- Copiando estrutura para tabela smed.datas_suprimidas
 CREATE TABLE IF NOT EXISTS `datas_suprimidas` (
@@ -960,7 +1341,7 @@ CREATE TABLE IF NOT EXISTS `datas_suprimidas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.datas_suprimidas: ~2 rows (aproximadamente)
-REPLACE INTO `datas_suprimidas` (`id`, `data_inicio`, `data_fim`, `motivo`) VALUES
+INSERT INTO `datas_suprimidas` (`id`, `data_inicio`, `data_fim`, `motivo`) VALUES
 	(1, '2024-12-23', '2024-12-31', 'Férias de Fim de Ano'),
 	(2, '2024-10-01', '2024-10-04', 'Seminário de Dermatologia'),
 	(4, '2024-08-01', '2024-08-01', 'Seminário médico');
@@ -973,8 +1354,8 @@ CREATE TABLE IF NOT EXISTS `diagnosticos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.diagnosticos: ~3 rows (aproximadamente)
-REPLACE INTO `diagnosticos` (`id`, `cid`, `descricao`) VALUES
+-- Copiando dados para a tabela smed.diagnosticos: ~2 rows (aproximadamente)
+INSERT INTO `diagnosticos` (`id`, `cid`, `descricao`) VALUES
 	(1, 'A00', 'Cólera'),
 	(6, 'G00', 'Meningite Bacteriana Não Classificada em Outra Parte');
 
@@ -983,10 +1364,10 @@ CREATE TABLE IF NOT EXISTS `especialidades` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(150) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.especialidades: ~3 rows (aproximadamente)
-REPLACE INTO `especialidades` (`id`, `descricao`) VALUES
+INSERT INTO `especialidades` (`id`, `descricao`) VALUES
 	(1, 'Pediatria'),
 	(2, 'Oftalmologia'),
 	(4, 'Geriatria 1');
@@ -1005,7 +1386,7 @@ CREATE TABLE IF NOT EXISTS `exames` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.exames: ~3 rows (aproximadamente)
-REPLACE INTO `exames` (`id`, `id_grupo`, `descricao`, `material`, `metodo`, `valref`) VALUES
+INSERT INTO `exames` (`id`, `id_grupo`, `descricao`, `material`, `metodo`, `valref`) VALUES
 	(1, 1, 'Paciente em bom estado geral, saudável', 'Sangue, Urina e Fezes', 'Analise de laboratorial', _binary 0x666673646666617364),
 	(3, 2, 'RISCO CIRURGICO DISCRETO', 'Sangue e Urina', 'Laboratorial', _binary 0x524953434f2043495255524749434f20444953435245544f2028415341204949204f5520474f4c444d414e20494929),
 	(4, 4, 'RTU DE PRÓSTATA', 'Não se aplica', 'Toque', _binary 0x53656e736962696c696461646522);
@@ -1018,8 +1399,8 @@ CREATE TABLE IF NOT EXISTS `formulas_pre` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.formulas_pre: ~3 rows (aproximadamente)
-REPLACE INTO `formulas_pre` (`id`, `descricao`, `formula`) VALUES
+-- Copiando dados para a tabela smed.formulas_pre: ~2 rows (aproximadamente)
+INSERT INTO `formulas_pre` (`id`, `descricao`, `formula`) VALUES
 	(1, 'Formula Fixa', _binary 0x546578746f206465207072696d6569726120666f726d756c610d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0a466f736661746f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0ac3816369646f2062c3b37269636f202020202020756e0d0a0d0a416dc3b46e6961202020202020756e0d0a),
 	(2, 'Formula Padrão', _binary 0xc3816369646f2062c3b37269636f2031322020202020756e0d0a466f736661746f2020313520202020756e0d0a);
 
@@ -1037,12 +1418,13 @@ CREATE TABLE IF NOT EXISTS `grupos_formulas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `descricao` varchar(150) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.grupos_formulas: ~2 rows (aproximadamente)
-REPLACE INTO `grupos_formulas` (`id`, `descricao`) VALUES
+INSERT INTO `grupos_formulas` (`id`, `descricao`) VALUES
 	(1, 'formula tipo 1'),
-	(2, 'formula tipo 2');
+	(2, 'formula tipo 2'),
+	(3, 'Grupo3');
 
 -- Copiando estrutura para tabela smed.grupos_laudos
 CREATE TABLE IF NOT EXISTS `grupos_laudos` (
@@ -1051,8 +1433,8 @@ CREATE TABLE IF NOT EXISTS `grupos_laudos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupos_laudos: ~4 rows (aproximadamente)
-REPLACE INTO `grupos_laudos` (`id`, `descricao`) VALUES
+-- Copiando dados para a tabela smed.grupos_laudos: ~5 rows (aproximadamente)
+INSERT INTO `grupos_laudos` (`id`, `descricao`) VALUES
 	(1, 'Exames Físicos'),
 	(2, 'Antecedentes Cirúrgicos'),
 	(4, 'PROSTATECTOMIA'),
@@ -1066,8 +1448,8 @@ CREATE TABLE IF NOT EXISTS `grupos_medicamentos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupos_medicamentos: ~3 rows (aproximadamente)
-REPLACE INTO `grupos_medicamentos` (`id`, `descricao`) VALUES
+-- Copiando dados para a tabela smed.grupos_medicamentos: ~2 rows (aproximadamente)
+INSERT INTO `grupos_medicamentos` (`id`, `descricao`) VALUES
 	(1, 'Analgésicos'),
 	(2, 'Medicamentos Dermatológicos');
 
@@ -1078,8 +1460,11 @@ CREATE TABLE IF NOT EXISTS `grupo_componentes` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupo_componentes: ~4 rows (aproximadamente)
-REPLACE INTO `grupo_componentes` (`id`, `descricao`) VALUES
+-- Copiando dados para a tabela smed.grupo_componentes: ~3 rows (aproximadamente)
+INSERT INTO `grupo_componentes` (`id`, `descricao`) VALUES
+	(1, 'Exames Acidos'),
+	(2, 'Exames de sangue'),
+	(3, 'Exames de Feses'),
 	(1, 'Exames Acidos'),
 	(2, 'Exames de sangue'),
 	(3, 'Exames de Feses');
@@ -1096,8 +1481,9 @@ CREATE TABLE IF NOT EXISTS `historia` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.historia: ~2 rows (aproximadamente)
-REPLACE INTO `historia` (`id`, `id_paciente`, `historia`, `data`) VALUES
+INSERT INTO `historia` (`id`, `id_paciente`, `historia`, `data`) VALUES
 	(1, 1, _binary 0x0d0a0d0a30382f30382f323032340d0a4f7269656e7461c3a7c3a36f204dc3a96469636120456d697469646f0d0a436f72726572203130206b6d0d0a50756c617220436f7264610d0a436f7274617220616c696d656e746f7320476f726475726f736f73, NULL),
+	(2, 3, _binary 0x0d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746578746f204152454f4c41520d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746578746f204152454f4c41520d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a436f6d6572206d656e6f732061c3a775636172, NULL),
 	(6, 4, _binary 0x436f6d6572206d656e6f732061c3a7756361720d0a0d0a0d0a30352f30382f323032340d0a50726573637269c3a7c3a36f206465204d65646963616d656e746f20456d697469646f0d0a504f564944494e452e2e2e2e0d0a50534f5245582e2e2e2e0d0a54594c454e4f4c2e2e2e2e0d0a564954414e4f4c2d412e2e2e2e0d0a0d0a0d0a0d0a, NULL);
 
 -- Copiando estrutura para tabela smed.imagens_pacientes
@@ -1112,8 +1498,8 @@ CREATE TABLE IF NOT EXISTS `imagens_pacientes` (
   CONSTRAINT `FK_imagens_pacientes_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.imagens_pacientes: ~7 rows (aproximadamente)
-REPLACE INTO `imagens_pacientes` (`id`, `id_paciente`, `pasta_imagem`, `data`, `descricao`) VALUES
+-- Copiando dados para a tabela smed.imagens_pacientes: ~6 rows (aproximadamente)
+INSERT INTO `imagens_pacientes` (`id`, `id_paciente`, `pasta_imagem`, `data`, `descricao`) VALUES
 	(2, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
 	(3, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
 	(4, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
@@ -1129,8 +1515,8 @@ CREATE TABLE IF NOT EXISTS `indices` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.indices: ~7 rows (aproximadamente)
-REPLACE INTO `indices` (`id`, `descricao`, `valor`) VALUES
+-- Copiando dados para a tabela smed.indices: ~3 rows (aproximadamente)
+INSERT INTO `indices` (`id`, `descricao`, `valor`) VALUES
 	(1, 'Real', 1),
 	(21, 'Dollar', 5.5),
 	(22, 'UTR', 30),
@@ -1149,8 +1535,8 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   CONSTRAINT `FK_medicamentos_grupos_medicamentos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_medicamentos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.medicamentos: ~5 rows (aproximadamente)
-REPLACE INTO `medicamentos` (`id`, `id_grupo`, `descricao`) VALUES
+-- Copiando dados para a tabela smed.medicamentos: ~4 rows (aproximadamente)
+INSERT INTO `medicamentos` (`id`, `id_grupo`, `descricao`) VALUES
 	(1, 2, 'VITANOL-A'),
 	(2, 1, 'TYLENOL'),
 	(3, 1, 'PSOREX'),
@@ -1174,7 +1560,7 @@ CREATE TABLE IF NOT EXISTS `medicamento_apresentacao` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.medicamento_apresentacao: ~3 rows (aproximadamente)
-REPLACE INTO `medicamento_apresentacao` (`id`, `id_medicamento`, `apresentacao`, `volume`, `quantidade`, `embalagem`, `uso`, `termo`, `veiculo`, `observacao`) VALUES
+INSERT INTO `medicamento_apresentacao` (`id`, `id_medicamento`, `apresentacao`, `volume`, `quantidade`, `embalagem`, `uso`, `termo`, `veiculo`, `observacao`) VALUES
 	(1, 3, 'Pastilha', '30 ml', '12', 'Caixa', 'Oral', 'remedio', 'Oral', _binary 0x7465737465),
 	(2, 3, 'Ampola', '15 ml', '20', 'Caixa', 'Injetável', 'Intra Muscular', 'Oral', _binary 0x7465737465),
 	(3, 3, 'Ampola', '120 ml', '1 dose', 'frasco', 'diário', 'continuo', 'Injetavel', _binary '');
@@ -1188,7 +1574,7 @@ CREATE TABLE IF NOT EXISTS `orientacoes_padrao` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.orientacoes_padrao: ~2 rows (aproximadamente)
-REPLACE INTO `orientacoes_padrao` (`id`, `descricao`, `texto`) VALUES
+INSERT INTO `orientacoes_padrao` (`id`, `descricao`, `texto`) VALUES
 	(1, 'Dieta para hipertensão', _binary 0x436f72726572203130206b6d0d0a50756c617220436f7264610d0a436f7274617220616c696d656e746f7320476f726475726f736f73),
 	(2, 'Dieta para diabetes', _binary 0x436f6d6572206d656e6f732061c3a7756361722e0a0a5072617469636172206578657263c3ad63696f732046c3ad7369636f732e);
 
@@ -1229,8 +1615,8 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   CONSTRAINT `FK_pacientes_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.pacientes: ~1 rows (aproximadamente)
-REPLACE INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pai`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
+-- Copiando dados para a tabela smed.pacientes: ~2 rows (aproximadamente)
+INSERT INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pai`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
 	(1, 1, 2, 'Glaison Queiroz ', 'M', 'Faio', '1968-10-26', 'Casado', 'Emilia ', 'Valdir Queiroz', 'Ruada Intendência, 316', 'Centro', 'Sabará', '34505480', 'SP', 'glaison26.queiroz@gmail.com', '(31)36722550', '(31)984262508', 'Programador', 'não se aplica', '2024-07-01', _binary 0x7465737465, 'Clinica', 'Brasileiro', 'Sabará', '88845665', '69551022653', 'm4662097'),
 	(3, 2, NULL, 'Maria da Graça', 'F', 'Leuco', '1985-11-26', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 6995-5666', '', '', '', '2024-07-03', _binary '', '', '', '', '45646546', '', ''),
 	(4, 2, NULL, 'Florentina de Jesus', 'M', 'Leuco', '1940-10-08', 'Solteiro', '', '', '', '', '', '', 'MG', 'flore@gmail.com', '(31) 3671-2563', '', '', '', '2024-07-26', _binary '', '', '', '', '8032566', '', '');
@@ -1243,7 +1629,7 @@ CREATE TABLE IF NOT EXISTS `parametros_eventos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.parametros_eventos: ~2 rows (aproximadamente)
-REPLACE INTO `parametros_eventos` (`id`, `descricao`) VALUES
+INSERT INTO `parametros_eventos` (`id`, `descricao`) VALUES
 	(1, 'Parametro de Testes'),
 	(2, 'Segundo Parâmetro');
 
@@ -1285,7 +1671,7 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
   `cad_grupo_exame` char(1) DEFAULT NULL,
   `cad_componente_formula` char(1) DEFAULT NULL,
   `cad_grupo_componentes` char(1) DEFAULT NULL,
-  `cad_esecialidades` char(1) DEFAULT NULL,
+  `cad_especialidades` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `cad_parametros_eventos` char(1) DEFAULT NULL,
   `cad_diagnosticos` char(1) DEFAULT NULL,
   `configuracoes` char(1) DEFAULT NULL,
@@ -1293,9 +1679,9 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.perfil_usuarios_opcoes: ~2 rows (aproximadamente)
-REPLACE INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_esecialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
-	(1, 'perfil1', 'S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, 'perfil2', 'S', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_especialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
+	(1, 'Gestor Total', 'S', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'),
+	(2, 'Médico', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'N');
 
 -- Copiando estrutura para tabela smed.procedimentos
 CREATE TABLE IF NOT EXISTS `procedimentos` (
@@ -1309,7 +1695,7 @@ CREATE TABLE IF NOT EXISTS `procedimentos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.procedimentos: ~2 rows (aproximadamente)
-REPLACE INTO `procedimentos` (`id`, `id_especialidade`, `descricao`, `codigoamb`) VALUES
+INSERT INTO `procedimentos` (`id`, `id_especialidade`, `descricao`, `codigoamb`) VALUES
 	(12, 1, 'Ligadura Elástica do Esôfago, Estômago e Duodeno', '45658789'),
 	(13, 2, 'Laringoscopia/Traqueoscopia para Intubação Oro ou Nasotraqueal', '24010080');
 
@@ -1328,7 +1714,7 @@ CREATE TABLE IF NOT EXISTS `procedimentos_tabelas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.procedimentos_tabelas: ~4 rows (aproximadamente)
-REPLACE INTO `procedimentos_tabelas` (`id`, `id_procedimento`, `id_tabela`, `custo`, `valorreal`) VALUES
+INSERT INTO `procedimentos_tabelas` (`id`, `id_procedimento`, `id_tabela`, `custo`, `valorreal`) VALUES
 	(2, 12, 1, 20, 20),
 	(4, 12, 2, 300, 1650),
 	(6, 13, 1, 40, 40),
@@ -1361,7 +1747,7 @@ CREATE TABLE IF NOT EXISTS `profissionais` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.profissionais: ~2 rows (aproximadamente)
-REPLACE INTO `profissionais` (`id`, `id_especialidade`, `nome`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `identidade`, `cpf`, `datanasc`, `sexo`, `gera_agenda`, `observacao`, `crm`) VALUES
+INSERT INTO `profissionais` (`id`, `id_especialidade`, `nome`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `identidade`, `cpf`, `datanasc`, `sexo`, `gera_agenda`, `observacao`, `crm`) VALUES
 	(1, 2, 'Dr. Arthur Queiroz', '', '', '', '', 'MG', '(48) 2759-4679', '(31) 2121-2223', 'suporte@sabara.mg.gov.br', NULL, '4565465', '69551022653', '2009-07-13', 'M', 'S', _binary 0x7465737465206465206f627365727661c3a7c3a36f, '565465'),
 	(2, 1, 'Dra. Maria de Souza Cruz', 'Beco da Chica,100', 'Campeche', 'Belo Horizonte', '3450480', 'MG', '(31) 589-6369', '(31) 6995-5555', 'dasilva@gmail.com', NULL, '', '07415768051', '1997-11-04', 'M', 'S', _binary '', 'crm/mg 456456'),
 	(4, 4, 'Dr. Abcedario', '', '', '', '', 'MG', '(48) 2759-4679', '', 'suporte@sabara.mg.gov.br', NULL, '', '02908681064', '1970-10-26', 'M', 'S', _binary '', '');
@@ -1377,7 +1763,7 @@ CREATE TABLE IF NOT EXISTS `tabela` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.tabela: ~2 rows (aproximadamente)
-REPLACE INTO `tabela` (`id`, `id_indice`, `descricao`) VALUES
+INSERT INTO `tabela` (`id`, `id_indice`, `descricao`) VALUES
 	(1, 1, 'TUSS'),
 	(2, 21, 'Tabela1');
 
@@ -1401,13 +1787,13 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id`),
   KEY `FK_usuario_perfil_usuarios_opcoes` (`id_perfil`),
   CONSTRAINT `FK_usuario_perfil_usuarios_opcoes` FOREIGN KEY (`id_perfil`) REFERENCES `perfil_usuarios_opcoes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.usuario: ~3 rows (aproximadamente)
-REPLACE INTO `usuario` (`id`, `id_perfil`, `nome`, `login`, `senha`, `ativo`, `prescricoes`, `pacientesdados`, `pacienteshistoria`, `agendamarcacao`, `agendageracao`, `cadastros`, `tipo`, `email`, `telefone`) VALUES
-	(1, NULL, 'Glaison Queiroz', 'Glaison', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'glaison26.queiroz@gmail.com', '3136712550'),
-	(2, NULL, 'Glaison Queiroz', 'Glaison2', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'suporte@sabara.mg.gov.br', '3136712550'),
-	(3, NULL, 'José da Silva', 'dasilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'dasilva@gmail.com', '3678985412');
+INSERT INTO `usuario` (`id`, `id_perfil`, `nome`, `login`, `senha`, `ativo`, `prescricoes`, `pacientesdados`, `pacienteshistoria`, `agendamarcacao`, `agendageracao`, `cadastros`, `tipo`, `email`, `telefone`) VALUES
+	(1, 1, 'Glaison Queiroz', 'Glaison', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'glaison26.queiroz@gmail.com', '3136712550'),
+	(3, 2, 'Dr. José da Silva', 'dasilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'dasilva@gmail.com', '3678985412'),
+	(4, 2, 'Dr. Manoel da Costa e Silva', 'ManoelSilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'glaison26.queiroz@gmail.com', '36712550');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

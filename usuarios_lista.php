@@ -1,8 +1,8 @@
 <?php // controle de acesso ao formulário
-//session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
+session_start();
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
@@ -44,7 +44,7 @@ include("links.php");
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [5]
+                    'aTargets': [6]
                 }, {
                     'aTargets': [0],
                     "visible": false
@@ -101,6 +101,7 @@ include("links.php");
                     <th scope="col">Nome</th>
                     <th scope="col">Login</th>
                     <th scope="col">Tipo de acesso</th>
+                    <th scope="col">Perfil</th>
                     <th scope="col">Ativo</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -109,8 +110,9 @@ include("links.php");
                 <?php
 
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT usuario.id, usuario.nome, usuario.login, usuario.senha, usuario.ativo,  usuario.tipo" .
-                    " FROM usuario" .
+                $c_sql = "SELECT usuario.id, usuario.nome, usuario.login, usuario.senha, usuario.ativo,  usuario.tipo," .
+                    " perfil_usuarios_opcoes.descricao AS perfil FROM usuario" .
+                    " JOIN perfil_usuarios_opcoes on usuario.id_perfil=perfil_usuarios_opcoes.id";
                     " ORDER BY usuario.nome";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
@@ -141,6 +143,7 @@ include("links.php");
                     <td>$c_linha[nome]</td>
                     <td>$c_linha[login]</td>
                     <td>$c_tipo</td>
+                    <td>$c_linha[perfil]</td>
                     <td>$c_ativo</td>
                     <td>
                     <a class='btn btn-info btn-sm' title='Editar Usuário' href='/smedweb/Usuarios_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
