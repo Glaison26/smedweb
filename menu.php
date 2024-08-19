@@ -4,6 +4,59 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
 	die('Acesso não autorizado!!!');
 }
+// pega usuário e seu perfil
+// conexão dom o banco de dados
+include("conexao.php");
+// query para capturar perfil do usuário logado
+$c_login = $_SESSION['c_usuario'];
+$c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
+              fichaclinica_eventos,fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
+              prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento,prescricao_laudos,prescricao_orientacao,prescricao_relatorio,
+              prescricao_configuracao,financeiro,configuracoes,cad_profissionais,cad_convenios,cad_procedimentos,cad_itenslaudos,cad_medicamentos,
+              cad_orientacoes,cad_formula,cad_atestado,cad_grupo_medicamento,cad_grupo_exame,cad_componente_formula,cad_grupo_componentes,
+              cad_especialidades,cad_parametros_eventos,cad_diagnosticos FROM usuario
+			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+			  where usuario.login='$c_login'";
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+	die("Erro ao Executar Sql !!" . $conection->connect_error);
+}
+$c_linha = $result->fetch_assoc();
+///////////////////////////////////////////////////////////////
+// permissões das opções de entrada no menu
+//////////////////////////////////////////////////////////////
+// ficha de pacientes
+if (($c_linha['fichaclinica'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_paciente = "\smedweb\pacientes_lista.php";
+} else {
+	$op_paciente = "javascript:negar()";
+}
+// Cadastro de usuários
+if (($c_linha['tipo'] == '1')) {
+	$op_usuarios = "\smedweb\usuarios_lista.php";
+} else {
+	$op_usuarios = "javascript:negar()";
+}
+// Cadastro de perfis
+if (($c_linha['tipo'] == '1')) {
+	$op_usuarios_perfil = "\smedweb\perfil_acesso.php";
+} else {
+	$op_usuarios_perfil = "javascript:negar()";
+}
+// agenda 
+if (($c_linha['agenda'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_agenda = "\smedweb\agenda.php";
+} else {
+	$op_agenda = "javascript:negar()";
+}
+// agenda Criação
+if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_agenda_criacao = "\smedweb\config_agenda.php";
+} else {
+	$op_agenda_criacao = "javascript:negar()";
+}
+
 ?>
 
 <!doctype html>
@@ -37,22 +90,31 @@ if (!isset($_SESSION['newsession'])) {
 </head>
 
 <body class="sb-nav-fixed">
+
+	<!-- função para negar acesso ao usuário não autorizado -->
+	<script>
+		function negar() {
+			alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+			void(0);
+		}
+	</script>
+	<!-- fim da função -->
 	<main>
 		<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
 			<div class="panel panel-primary class">
 
 				<div class="panel-heading text-center">
-					<br>
-					<h1><strong>SMARTMED - SISTEMA MÉDICO</strong></h1>
-					<br>
-
+					<h2><strong>SmartMed - Sistema Médico</strong></h2>
+					<h3>Menu Inicial<h3>
 				</div>
+
 			</div>
 		</div>
+		
 
 		<div class="container -my5">
 
-			<div style="padding-top:1px;">
+			<div style="padding-top:10px;">
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,16 +126,16 @@ if (!isset($_SESSION['newsession'])) {
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
-									<a class="dropdown-item" href="\smedweb\pacientes_lista.php"><img src="\smedweb\images\paciente.png" alt="" width="20" height="20"> Ficha Clinica...</a>
+									<a class="dropdown-item" href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="20" height="20"> Ficha Clinica...</a>
 									<a class="dropdown-item" href="#"><img src="\smedweb\images\estatisticas.png" alt="" width="20" height="20"> Estatíscas...</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agenda</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="\smedweb\agenda.php"><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
+									<a class="dropdown-item" href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
 									<a class="dropdown-item" href="#">____________________________________________</a>
-									<a class="dropdown-item" href="\smedweb\config_agenda.php"><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
+									<a class="dropdown-item" href=<?php echo $op_agenda_criacao; ?>><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
@@ -121,12 +183,12 @@ if (!isset($_SESSION['newsession'])) {
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="\smedweb\usuarios_lista.php"><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
+									<a class="dropdown-item" href=<?php echo $op_usuarios; ?>><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
 									<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
-									<a class="dropdown-item" href="\smedweb\perfil_acesso.php"><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
+									<a class="dropdown-item" href=<?php echo $op_usuarios_perfil; ?>><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
 								</div>
 							</li>
-							<li class="nav-item active"><a href="#" data-toggle="modal" data-target="#modal" class="nav-link"><img src="\smedweb\images\config.png" alt="" width="20" height="20"> Configurações</a></li>
+							<li class="nav-item active"><a href="#" data-toggle="modal" data-target="#modal" class="nav-link"> Configurações</a></li>
 							<li class="nav-item active"><a href="\smedweb\index.php" class="nav-link"><img src="\smedweb\images\saida.png" alt="" width="20" height="20"> Sair</a></li>
 						</ul>
 					</div>
