@@ -1,4 +1,5 @@
 <?php
+
 // controle de acesso ao formulário
 session_start();
 if (!isset($_SESSION['newsession'])) {
@@ -63,12 +64,108 @@ if (($c_linha['prescricao'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_prescricao = "javascript:negar()";
 }
 // acesso cadastro de profissionais
-// acesso a prescrição
 if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_cad_profissionais = "\smedweb\profissionais_lista.php";
 } else {
 	$op_cad_profissionais = "javascript:negar()";
 }
+// acesso cadastro de profissionais
+if (($c_linha['cad_convenios'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_convenios = "\smedweb\convenios_lista.php";
+} else {
+	$op_cad_convenios = "javascript:negar()";
+}
+// acesso cadastro de procedimentos
+if (($c_linha['cad_procedimentos'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_procedimentos = "\smedweb\procedimentos_lista.php";
+} else {
+	$op_cad_procedimentos = "javascript:negar()";
+}
+// acesso cadastro de procedimentos
+if (($c_linha['cad_itenslaudos'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_itenslaudos = "\smedweb\itenslaudos_lista.php";
+} else {
+	$op_cad_itenslaudos = "javascript:negar()";
+}
+// acesso cadastro de medicamentos
+if (($c_linha['cad_medicamentos'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_medicamentos = "\smedweb\medicamentos_lista.php";
+} else {
+	$op_cad_medicamentos = "javascript:negar()";
+}
+// acesso cadastro de orientações
+if (($c_linha['cad_orientacoes'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_orientacoes = "\smedweb\orientacoes_padrao_lista.php";
+} else {
+	$op_cad_orientacoes = "javascript:negar()";
+}
+// acesso cadastro de formulas
+if (($c_linha['cad_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_formulas = "\smedweb\formula_padrao_lista.php";
+} else {
+	$op_cad_formulas = "javascript:negar()";
+}
+// acesso cadastro de atestados padroes
+if (($c_linha['cad_atestado'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_atestado = "\smedweb\atestados_padroes_lista.php";
+} else {
+	$op_cad_atestado = "javascript:negar()";
+}
+// acesso cadastro de grupos de medicamentos
+if (($c_linha['cad_grupo_medicamento'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_grupo_medicamento = "\smedweb\grupoMedicamentos_lista.php";
+} else {
+	$op_cad_grupo_medicamento = "javascript:negar()";
+}
+// acesso cadastro de grupos de exames para laudos
+if (($c_linha['cad_grupo_exame'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_grupo_exame = "\smedweb\grupolaudos_lista.php";
+} else {
+	$op_cad_grupo_exame = "javascript:negar()";
+}
+// acesso cadastro de componentes de formulas
+if (($c_linha['cad_componente_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_componentes = "\smedweb\componentes_lista.php";
+} else {
+	$op_cad_componentes = "javascript:negar()";
+}
+// acesso cadastro de grupos componentes de formulas
+if (($c_linha['cad_grupo_componentes'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_grupos_componentes = "\smedweb\grupocomponentes_lista.php";
+} else {
+	$op_cad_grupos_componentes = "javascript:negar()";
+}
+// acesso cadastro de Especialidades
+if (($c_linha['cad_especialidades'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_especialidades = "\smedweb\especialidades_lista.php";
+} else {
+	$op_cad_especialidades = "javascript:negar()";
+}
+// acesso cadastro de parametros de eventos
+if (($c_linha['cad_parametros_eventos'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_parametros = "\smedweb\parametros_lista.php";
+} else {
+	$op_cad_parametros = "javascript:negar()";
+}
+// acesso cadastro de diagnosticos
+if (($c_linha['cad_diagnosticos'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_diagnosticos = "\smedweb\diagnosticos_lista.php";
+} else {
+	$op_cad_diagnosticos = "javascript:negar()";
+}
+// acesso financeiro indices
+if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_financeiro1 = "\smedweb\indices_lista.php";
+} else {
+	$op_financeiro1 = "javascript:negar()";
+}
+// acesso tabelas
+if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_financeiro2 = "\smedweb\tabelas_lista.php";
+} else {
+	$op_financeiro2 = "javascript:negar()";
+}
+
 
 ?>
 
@@ -117,6 +214,7 @@ if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
 			<div class="panel panel-primary class">
 
 				<div class="panel-heading text-center">
+					<br>
 					<h2><strong>SmartMed - Sistema Médico</strong></h2>
 					<h3>Menu Inicial<h3>
 				</div>
@@ -163,32 +261,32 @@ if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
 									<a class="dropdown-item" href="#"><img src="\smedweb\images\financeiro.png" alt="" width="20" height="20"> Lançamento...</a>
 									<a class="dropdown-item" href="#"><img src="\smedweb\images\movimentacao.png" alt="" width="20" height="20"> Movimentação...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href="\smedweb\indices_lista.php"><img src="\smedweb\images\indices.png" alt="" width="20" height="20"> Indices Financeiros...</a>
-									<a class="dropdown-item" href="\smedweb\tabelas_lista.php"><img src="\smedweb\images\tabela.png" alt="" width="20" height="20"> Tabelas...</a>
+									<a class="dropdown-item" href=<?php echo $op_financeiro1; ?>><img src="\smedweb\images\indices.png" alt="" width="20" height="20"> Indices Financeiros...</a>
+									<a class="dropdown-item" href=<?php echo $op_financeiro2; ?>><img src="\smedweb\images\tabela.png" alt="" width="20" height="20"> Tabelas...</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
 									<a class="dropdown-item" href=<?php echo $op_cad_profissionais; ?>><img src="\smedweb\images\equipemedica.png" alt="" width="20" height="20"> Profissionais...</a>
-									<a class="dropdown-item" href="\smedweb\convenios_lista.php"><img src="\smedweb\images\populacao.png" alt="" width="20" height="20"> Convênios...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_convenios; ?>><img src="\smedweb\images\populacao.png" alt="" width="20" height="20"> Convênios...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href="\smedweb\procedimentos_lista.php"><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
-									<a class="dropdown-item" href="\smedweb\itenslaudos_lista.php"><img src="\smedweb\images\laudo2.png" alt="" width="20" height="20"> Itens para Laudos...</a>
-									<a class="dropdown-item" href="\smedweb\medicamentos_lista.php"><img src="\smedweb\images\medicamento.png" alt="" width="20" height="20"> Medicamentos...</a>
-									<a class="dropdown-item" href="\smedweb\orientacoes_padrao_lista.php"><img src="\smedweb\images\orientacao2.png" alt="" width="20" height="20"> Orientações...</a>
-									<a class="dropdown-item" href="\smedweb\formula_padrao_lista.php"><img src="\smedweb\images\ff1.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
-									<a class="dropdown-item" href="\smedweb\atestados_padroes_lista.php"><img src="\smedweb\images\atestado2.png" alt="" width="20" height="20"> Atestados Padrões...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_procedimentos; ?>><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_itenslaudos; ?>><img src="\smedweb\images\laudo2.png" alt="" width="20" height="20"> Itens para Laudos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_medicamentos; ?>><img src="\smedweb\images\medicamento.png" alt="" width="20" height="20"> Medicamentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_orientacoes; ?>><img src="\smedweb\images\orientacao2.png" alt="" width="20" height="20"> Orientações...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_formulas; ?>><img src="\smedweb\images\ff1.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_atestado; ?>><img src="\smedweb\images\atestado2.png" alt="" width="20" height="20"> Atestados Padrões...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href="\smedweb\grupoMedicamentos_lista.php"><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
-									<a class="dropdown-item" href="\smedweb\grupolaudos_lista.php"><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupo_medicamento;?>><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupo_exame;?>><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href="\smedweb\componentes_lista.php"><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
-									<a class="dropdown-item" href="\smedweb\grupocomponentes_lista.php"><img src="\smedweb\images\grupocomponentes.png" alt="20" height="20"> Grupos de Componentes...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_componentes;?>><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupos_componentes; ?>><img src="\smedweb\images\grupocomponentes.png" alt="20" height="20"> Grupos de Componentes...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href="\smedweb\especialidades_lista.php"><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
-									<a class="dropdown-item" href="\smedweb\parametros_lista.php"><img src="\smedweb\images\parametros.png" alt="" width="20" height="20"> Parâmetros para Eventos...</a>
-									<a class="dropdown-item" href="\smedweb\diagnosticos_lista.php"><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_especialidades; ?>><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_parametros; ?>><img src="\smedweb\images\parametros.png" alt="" width="20" height="20"> Parâmetros para Eventos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_diagnosticos; ?>><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>
 
 								</div>
 							</li>

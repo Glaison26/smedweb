@@ -9,6 +9,7 @@ session_start();
 include("conexao.php");
 include("links.php");
 include("config_tabelas.php");
+
 // primeira entrada
 $c_sql = "";
 $_SESSION['incagenda'] = false;
@@ -35,6 +36,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
 <html lang="en">
 
 <body>
+    <!-- função para confirmação de exclusão de registro -->
     <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
@@ -44,6 +46,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         }
     </script>
 
+   
     <script language="Javascript">
         function mensagem(msg) {
             alert(msg);
