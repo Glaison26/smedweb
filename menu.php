@@ -56,6 +56,19 @@ if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
 } else {
 	$op_agenda_criacao = "javascript:negar()";
 }
+// acesso a prescrição
+if (($c_linha['prescricao'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_prescricao = "\smedweb\prescricao.php";
+} else {
+	$op_prescricao = "javascript:negar()";
+}
+// acesso cadastro de profissionais
+// acesso a prescrição
+if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
+	$op_cad_profissionais = "\smedweb\profissionais_lista.php";
+} else {
+	$op_cad_profissionais = "javascript:negar()";
+}
 
 ?>
 
@@ -110,8 +123,7 @@ if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
 
 			</div>
 		</div>
-		
-
+	
 		<div class="container -my5">
 
 			<div style="padding-top:10px;">
@@ -141,7 +153,7 @@ if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prescrições</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="\smedweb\prescricao.php"><img src="\smedweb\images\atestado.png" alt="" width="20" height="20">Emitir Prescrição...</a>
+									<a class="dropdown-item" href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="20" height="20">Emitir Prescrição...</a>
 									<a class="dropdown-item" href="#"><img src="\smedweb\images\config.png" alt="" width="20" height="20">Configurações...</a>
 								</div>
 							</li>
@@ -158,7 +170,7 @@ if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="\smedweb\profissionais_lista.php"><img src="\smedweb\images\equipemedica.png" alt="" width="20" height="20"> Profissionais...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_profissionais; ?>><img src="\smedweb\images\equipemedica.png" alt="" width="20" height="20"> Profissionais...</a>
 									<a class="dropdown-item" href="\smedweb\convenios_lista.php"><img src="\smedweb\images\populacao.png" alt="" width="20" height="20"> Convênios...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
 									<a class="dropdown-item" href="\smedweb\procedimentos_lista.php"><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
