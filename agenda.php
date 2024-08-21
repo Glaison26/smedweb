@@ -87,7 +87,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
+
 
     <!-- script para mascara de telefone -->
     <script>
@@ -183,6 +183,13 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
             });
 
+        });
+    </script>
+    <!-- controle de tab ao realizar pesquisa de pacientes -->
+    <script>
+        $("bntpesquisa").on('click', function() {
+            $("#tabs").tabs('option', 'active', 1);
+            /*index da aba que você quer selecionar*/
         });
     </script>
 
@@ -316,7 +323,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         </form>
 
         <!-- abas de agenda e cadstro de pacientes -->
-        <ul class="nav nav-tabs" role="tablist">
+        <ul class="nav nav-tabs" role="tablist" id='tabs'>
             <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
             <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
 
@@ -447,7 +454,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                      
                     <td>
                                                   
-                        <a class='btn btn-secondary' title='Copiar Dados'
+                        <a class='btn btn-light' title='Copiar Dados'
                         href='/smedweb/agenda_copia.php?id=$c_linha_pac[id]'><img src='\smedweb\images\copiar.png'alt='' width='15' height='15'> Copiar</a>
                     </td>
 

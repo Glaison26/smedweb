@@ -38,7 +38,7 @@ if (!isset($_SESSION['newsession'])) {
 
 <body class="sb-nav-fixed">
 	<main>
-		<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
+		<!--<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
 			<div class="panel panel-primary class">
 
 				<div class="panel-heading text-center">
@@ -48,19 +48,21 @@ if (!isset($_SESSION['newsession'])) {
 
 				</div>
 			</div>
-		</div>
+		</div>-->
 
 		<div class="container -my5">
 
-			<div style="padding-top:1px;">
+			<div style="padding-top:10px;">
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="fa fa-bars"></span>Menu
+						<span class="fa fa-bars">Menu</span>
 					</button>
 
 					<div class="collapse navbar-collapse" id="ftco-nav">
+						
 						<ul class="navbar-nav ml-auto">
+						
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -126,7 +128,7 @@ if (!isset($_SESSION['newsession'])) {
 									<a class="dropdown-item" href="\smedweb\perfil_acesso.php"><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
 								</div>
 							</li>
-							<li class="nav-item active"><a href="#" data-toggle="modal" data-target="#modal" class="nav-link"><img src="\smedweb\images\config.png" alt="" width="20" height="20"> Configurações</a></li>
+							<li class="nav-item active"><a href="#" data-toggle="modal" data-target="#modal" class="nav-link"> Configurações</a></li>
 							<li class="nav-item active"><a href="\smedweb\index.php" class="nav-link"><img src="\smedweb\images\saida.png" alt="" width="20" height="20"> Sair</a></li>
 						</ul>
 					</div>
@@ -153,6 +155,7 @@ if (!isset($_SESSION['newsession'])) {
 					<h5><strong> Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></strong></h5>
 				</div>
 			</div>
+			
 		</div>
 		<!-- END nav -->
 
