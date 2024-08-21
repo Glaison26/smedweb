@@ -118,13 +118,15 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     <br>
     <div class="container-fluid">
         <form id="frmpaciente" method="POST" action="">
-        <input type="hidden" id="acesso" name="acesso" value="<?php echo $op_editar; ?>">
-        <input type="hidden" id="input_historia" name="input_historia" value="<?php echo $op_historia; ?>">
+            <!-- inputs desabilitados para controle de acesso de usuários -->
+            <input type="hidden" id="acesso" name="acesso" value="<?php echo $op_editar; ?>">
+            <input type="hidden" id="input_historia" name="input_historia" value="<?php echo $op_historia; ?>">
+            <!-- -->
             <a class="btn btn-success" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
             <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png'
                     alt='' width='20' height='16'></span> Buscar</button>
             <a class="btn btn-secondary" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-            
+
             <hr>
             <div class="row mb-3">
                 <label for="up_parametroField" class="col-md-2 form-label">Nome para Busca</label>
