@@ -10,11 +10,6 @@ include("conexao.php"); // conexão de banco de dados
 include_once "lib_gop.php";
 include("links.php");
 
-function carregadados()
-{
-    
-}
-
 
 $c_nome = "";
 $c_endereco = "";

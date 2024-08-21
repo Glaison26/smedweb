@@ -1,8 +1,8 @@
 <?php // controle de acesso ao formulário
 session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
@@ -12,11 +12,7 @@ include("config_tabelas.php");
 
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
-              fichaclinica_eventos,fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
-              prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento,prescricao_laudos,prescricao_orientacao,prescricao_relatorio,
-              prescricao_configuracao,financeiro,configuracoes,cad_profissionais,cad_convenios,cad_procedimentos,cad_itenslaudos,cad_medicamentos,
-              cad_orientacoes,cad_formula,cad_atestado,cad_grupo_medicamento,cad_grupo_exame,cad_componente_formula,cad_grupo_componentes,
-              cad_especialidades,cad_parametros_eventos,cad_diagnosticos FROM usuario
+              fichaclinica_eventos,fichaclinica_excluir FROM usuario
 			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
 			  where usuario.login='$c_login'";
 $result = $conection->query($c_sql);
