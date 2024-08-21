@@ -70,7 +70,7 @@ if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_cad_profissionais = "javascript:negar()";
 }
 // acesso cadastro de profissionais
-if (($c_linha['cad_convenios'] == 'S') || ($c_linha['tipo'] == '1')) {
+if (($c_linha['cad_convenios'] == 'S') ||  ($c_linha['tipo'] == '1')) {
 	$op_cad_convenios = "\smedweb\convenios_lista.php";
 } else {
 	$op_cad_convenios = "javascript:negar()";

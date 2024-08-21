@@ -335,7 +335,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
                 <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
-                <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico de Agendamento</a></li>
+                <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico Agendamento</a></li>
 
             </ul>
             <!-- aba da agenda-->

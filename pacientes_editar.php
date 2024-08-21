@@ -23,7 +23,7 @@ $c_linha = $result->fetch_assoc();
 ///////////////////////////////////////////////////////////////
 // permissões das opções de ações na tabela de pacientes
 //////////////////////////////////////////////////////////////
-// ficha de pacientes
+// ficha de pacientes editar
 if (($c_linha['fichaclinica_editar'] == 'N') || ($c_linha['tipo'] == '2')) {
     header('location: /smedweb/pacientes_lista.php'); 
     
