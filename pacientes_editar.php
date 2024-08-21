@@ -8,6 +8,28 @@ include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 include("links.php");
 
+// query para capturar perfil do usuário logado
+$c_login = $_SESSION['c_usuario'];
+$c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
+              fichaclinica_eventos,fichaclinica_excluir FROM usuario
+			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+			  where usuario.login='$c_login'";
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+    die("Erro ao Executar Sql !!" . $conection->connect_error);
+}
+$c_linha = $result->fetch_assoc();
+///////////////////////////////////////////////////////////////
+// permissões das opções de ações na tabela de pacientes
+//////////////////////////////////////////////////////////////
+// ficha de pacientes
+if (($c_linha['fichaclinica_editar'] == 'N') || ($c_linha['tipo'] == '2')) {
+    header('location: /smedweb/pacientes_lista.php'); 
+    
+}
+
+
 // rotina de post dos dados do formuário
 
 $c_id = $_GET["id"];
@@ -210,6 +232,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 </head>
 
 <body>
+    <!-- função para negar acesso ao usuário não autorizado -->
+    <script>
+        function negar() {
+            alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            void(0);
+        }
+    </script>
+    <!-- fim da função -->
+
     <div class="container -my5">
 
         <body>
