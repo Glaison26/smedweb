@@ -30,6 +30,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     }
 }
 $c_sql2 = "";
+$c_sql3 = "";
 $c_dia_semana = "-";
 $c_mostradata = date("Y-m-d");
 
@@ -77,6 +78,24 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
     $result2 = $conection->query($c_sql2);
 }
+
+// pesquisa de histórico de agenda 
+if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de agenda
+   
+    $c_pesquisa_historico = $_POST['pesquisa_historico'];
+    $c_sql3 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
+    agenda.`data`, agenda.dia, agenda.horario,
+    agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula, profissionais.nome as medico FROM agenda 
+    JOIN convenios ON agenda.id_convenio=convenios.id
+    JOIN profissionais on agenda.id_profissional=profissionais.id";
+    $c_sql3 = $c_sql3 . " where agenda.nome LIKE " .  "'" . $c_pesquisa_historico . "%'";
+    $c_sql3 = $c_sql3 . " ORDER BY agenda.data,agenda.horario";
+    $result3 = $conection->query($c_sql3);
+    // verifico se a query foi correto
+    if (!$result3) {
+        die("Erro ao Executar Sql!!" . $conection->connect_error);
+    }
+}
 ?>
 
 <!-- front end da agenda -->
@@ -87,7 +106,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+    
 
     <!-- script para mascara de telefone -->
     <script>
@@ -320,57 +339,57 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
                 </div>
             </div>
-        </form>
+
 
         <!-- abas de agenda e cadstro de pacientes -->
-        <ul class="nav nav-tabs" role="tablist" id='tabs'>
+        <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
             <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
 
-        </ul>
-        <!-- aba da agenda-->
-        <div class="tab-content">
+            </ul>
+            <!-- aba da agenda-->
+            <div class="tab-content">
 
-            <div role="tabpanel" class="tab-pane active" id="agenda">
-                <div style="padding-top:5px;">
-                    <div class="panel panel-info">
-                        <div class="panel-heading text-left">
-                            <?php
-                            if (isset($d_data)) {
-
-                                echo "
-                            <h5>Agenda de  $c_profissional | $c_dia_semana  $c_mostradata <h5>
-                            ";
-                            }
-                            ?>
-                        </div>
-                    </div>
-
-                    <hr>
-                    <!-- montagem da tabela de agenda -->
-                    <table class="table display  tabagenda">
-                        <thead class="thead">
-                            <tr class="info">
-                                <th scope="col">No.</th>
-                                <th scope="col">Horário</th>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Matricula</th>
-                                <th scope="col">Convênio</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">e-mail</th>
-                                <th scope="col">Observação</th>
-                                <th scope="col">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-
-                            // loop para dados da agenda
-                            if (!empty($c_sql2)) {
-
-                                while ($c_linha2 = $result2->fetch_assoc()) {
+                <div role="tabpanel" class="tab-pane active" id="agenda">
+                    <div style="padding-top:5px;">
+                        <div class="panel panel-info">
+                            <div class="panel-heading text-left">
+                                <?php
+                                if (isset($d_data)) {
 
                                     echo "
+                            <h5>Agenda de  $c_profissional | $c_dia_semana  $c_mostradata <h5>
+                            ";
+                                }
+                                ?>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <!-- montagem da tabela de agenda -->
+                        <table class="table display  tabagenda">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Horário</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Matricula</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">e-mail</th>
+                                    <th scope="col">Observação</th>
+                                    <th scope="col">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+
+                                // loop para dados da agenda
+                                if (!empty($c_sql2)) {
+
+                                    while ($c_linha2 = $result2->fetch_assoc()) {
+
+                                        echo "
                                     <tr>
                                     <td>$c_linha2[id]</td>
                                     <td>$c_linha2[horario]</td>
@@ -392,18 +411,18 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
                                     </tr>
                                     ";
+                                    }
                                 }
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
 
+                    </div>
                 </div>
-            </div>
-            <!-- aba com o cadastro de pacientes -->
-            <div role="tabpanel" class="tab-pane" id="cadastro">
-                <div style="padding-top:20px;">
-                    <form id="frmpaciente" method="POST" action="">
+                <!-- aba com o cadastro de pacientes -->
+                <div role="tabpanel" class="tab-pane" id="cadastro">
+                    <div style="padding-top:20px;">
+
                         <div class="mb-5 row">
                             <hr>
                             <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
@@ -416,33 +435,33 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
                                 <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
                             </div>
                         </div>
-                    </form>
-                    <!-- tabela de pacientes -->
-                    <table class="table display table-bordered tabpacientes">
-                        <thead class="thead">
-                            <tr class="info">
-                                <th scope="col" style="display:none">Número</th>
-                                <th scope="col">Nome do Paciênte</th>
-                                <th scope="col">Convênio</th>
-                                <th scope="col">Matrícula</th>
-                                <th scope="col">Sexo</th>
-                                <th scope="col">Telefone 1</th>
-                                <th scope="col">Telefone 2</th>
-                                <th scope="col">Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            if (!empty($c_sql_pac)) {
-                                // insiro os registro do banco de dados na tabela 
-                                while ($c_linha_pac = $result_pac->fetch_assoc()) {
-                                    // Coloco string masculino ou feminino ao invés de m ou f
-                                    if ($c_linha_pac['sexo'] == 'M') {
-                                        $c_sexo = "Masculino";
-                                    } else {
-                                        $c_sexo = "Feminino";
-                                    }
-                                    echo "
+
+                        <!-- tabela de pacientes -->
+                        <table class="table display table-bordered tabpacientes">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col" style="display:none">Número</th>
+                                    <th scope="col">Nome do Paciênte</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Matrícula</th>
+                                    <th scope="col">Sexo</th>
+                                    <th scope="col">Telefone 1</th>
+                                    <th scope="col">Telefone 2</th>
+                                    <th scope="col">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($c_sql_pac)) {
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha_pac = $result_pac->fetch_assoc()) {
+                                        // Coloco string masculino ou feminino ao invés de m ou f
+                                        if ($c_linha_pac['sexo'] == 'M') {
+                                            $c_sexo = "Masculino";
+                                        } else {
+                                            $c_sexo = "Feminino";
+                                        }
+                                        echo "
                     <tr>
                     <td style='display:none'>$c_linha_pac[id] </td>
                     <td>$c_linha_pac[nome]</td>
@@ -460,14 +479,75 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
                     </tr>
                     ";
+                                    }
                                 }
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- aba com o historico da agenda -->
+                <div role="tabpanel" class="tab-pane" id="historico">
+                    <div style="padding-top:20px;">
+
+                        <div class="mb-5 row">
+                            <hr>
+                            <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
+
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="pesquisa_historico" name="pesquisa_historico">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" id='bntpesquisa_historico' name='btnpesquisa_historico' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+                            </div>
+                        </div>
+
+                        <!-- montagem da tabela de histórico agenda -->
+                        <table class="table display tabagendahistorico">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Horário</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Profissional</th>
+                                    <th scope="col">Matricula</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">e-mail</th>
+                                    <th scope="col">Observação</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // loop para dados da agenda historico
+                                if (!empty($c_sql3)) {
+                                    while ($c_linha3 = $result3->fetch_assoc()) {
+                                        $c_data = date("d-m-y", strtotime(str_replace('/', '-', $c_linha3['data'])));
+                                        echo "
+                                    <tr>
+                                    <td>$c_data</td>
+                                    <td>$c_linha3[horario]</td>
+                                    <td>$c_linha3[nome]</td>
+                                    <td>$c_linha3[medico]</td>
+                                    <td>$c_linha3[matricula]</td>
+                                    <td>$c_linha3[convenio]</td>
+                                    <td>$c_linha3[telefone]</td>
+                                    <td>$c_linha3[email]</td>
+                                    <td>$c_linha3[observacao]</td>
+                                    </tr>
+                                    ";
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <!-- janela Modal para marcação de consulta -->
@@ -547,9 +627,6 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             </div>
         </div>
     </div>
-
-
-
 
 </body>
 
