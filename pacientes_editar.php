@@ -8,29 +8,7 @@ include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 include("links.php");
 
-// query para capturar perfil do usuário logado
-$c_login = $_SESSION['c_usuario'];
-$c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
-              fichaclinica_eventos,fichaclinica_excluir FROM usuario
-			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
-			  where usuario.login='$c_login'";
-$result = $conection->query($c_sql);
-// verifico se a query foi correto
-if (!$result) {
-    die("Erro ao Executar Sql !!" . $conection->connect_error);
-}
-$c_linha = $result->fetch_assoc();
-///////////////////////////////////////////////////////////////
-// permissões das opções de ações na tabela de pacientes
-//////////////////////////////////////////////////////////////
-// ficha de pacientes editar
-if (($c_linha['fichaclinica_editar'] == 'N') || ($c_linha['tipo'] == '2')) {
-    header('location: /smedweb/pacientes_lista.php'); 
-    
-}
-
-
-// rotina de post dos dados do formuário
+// rotina de post dos dados do formuário 
 
 $c_id = $_GET["id"];
 // variaveis para mensagens de erro e suscessso da gravação
@@ -43,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         header('location: /smedweb/pacientes_lista.php');
         exit;
     }
-
 
     // leitura do paciente através de sql usando id passada
     $c_sql = "select * from pacientes where id=$c_id";
@@ -176,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
          indicacao='$c_indicacao', profissao='$c_profissao', pai='$c_pai', mae='$c_mae', estadocivil='$c_estadocivil', cor='$c_cor',
          naturalidade='$c_naturalidade', procedencia='$c_procedencia', matricula='$c_matricula', classificacao='$c_classificacao', dataprimeira='$c_dataprimeira',
          id_convenio='$c_id_convenio'" .
-            "where id=$c_id";
+         "where id=$c_id";
         echo $c_sql;
 
         $result = $conection->query($c_sql);

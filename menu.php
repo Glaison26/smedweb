@@ -210,7 +210,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	</script>
 	<!-- fim da função -->
 	<main>
-		<!--<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
+		<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
 			<div class="panel panel-primary class">
 
 				<div class="panel-heading text-center">

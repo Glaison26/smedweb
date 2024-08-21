@@ -10,6 +10,37 @@ include("conexao.php");
 include("links.php");
 include("config_tabelas.php");
 
+$c_login = $_SESSION['c_usuario'];
+$c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
+              fichaclinica_eventos,fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
+              prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento,prescricao_laudos,prescricao_orientacao,prescricao_relatorio,
+              prescricao_configuracao,financeiro,configuracoes,cad_profissionais,cad_convenios,cad_procedimentos,cad_itenslaudos,cad_medicamentos,
+              cad_orientacoes,cad_formula,cad_atestado,cad_grupo_medicamento,cad_grupo_exame,cad_componente_formula,cad_grupo_componentes,
+              cad_especialidades,cad_parametros_eventos,cad_diagnosticos FROM usuario
+			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+			  where usuario.login='$c_login'";
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+    die("Erro ao Executar Sql !!" . $conection->connect_error);
+}
+$c_linha2 = $result->fetch_assoc();
+///////////////////////////////////////////////////////////////
+// permissões das opções de entrada no menu
+//////////////////////////////////////////////////////////////
+// ficha de pacientes
+if (($c_linha2['fichaclinica_editar'] == 'S') || ($c_linha2['tipo'] == '1')) {
+    $op_editar = "S";
+} else {
+    $op_editar = "N";
+}
+// historia clinica
+if (($c_linha2['fichaclinica_historia'] == 'S') || ($c_linha2['tipo'] == '1')) {
+    $op_historia = "S";
+} else {
+    $op_historia = "N";
+}
+
 // primeira entrada
 $c_sql = "";
 $_SESSION['incagenda'] = false;
@@ -46,7 +77,32 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         }
     </script>
 
-   
+    <!-- função para chamar edição de registro -->
+    <script>
+        function editar(id) {
+            var acesso = $('#acesso').val();
+
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/pacientes_editar.php?id=" + id;
+            } else {
+                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            }
+
+        }
+    </script>
+    <!-- função para chamar historia de paciente -->
+    <script>
+        function historia(id) {
+            var acesso = $('#input_historia').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/historia.php?id=" + id;
+            } else {
+                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            }
+
+        }
+    </script>
+
     <script language="Javascript">
         function mensagem(msg) {
             alert(msg);
@@ -61,25 +117,23 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     </div>
     <br>
     <div class="container-fluid">
-
-        <a class="btn btn-success btn-sm" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <form id="frmpaciente" method="POST" action="">
-            <br>
-            <div class="mb-5 row">
-                <hr>
-                <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
-
-                <div class="col-md-7">
+        <input type="hidden" id="acesso" name="acesso" value="<?php echo $op_editar; ?>">
+        <input type="hidden" id="input_historia" name="input_historia" value="<?php echo $op_historia; ?>">
+            <a class="btn btn-success" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png'
+                    alt='' width='20' height='16'></span> Buscar</button>
+            <a class="btn btn-secondary" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+            
+            <hr>
+            <div class="row mb-3">
+                <label for="up_parametroField" class="col-md-2 form-label">Nome para Busca</label>
+                <div class="col-md-4">
                     <input type="text" class="form-control" id="pesquisa" name="pesquisa">
-
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
                 </div>
             </div>
         </form>
-
+        <hr>
         <table class="table display table-bordered tabpacientes">
             <thead class="thead">
                 <tr class="info">
@@ -115,8 +169,8 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                     <td>$c_linha[fone2]</td>
                                      
                     <td>
-                    <a class='btn btn-light btn-sm' title='Editar Paciênte' href='/smedweb/pacientes_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'> Editar</span></a>
-                    <a class='btn btn-light btn-sm' title='História Clinica' href='/smedweb/historia.php?id=$c_linha[id]'><span class='glyphicon glyphicon-header'> História</span></a>
+                    <a class='btn btn-light btn-sm' title='Editar Paciênte' href='javascript:func()'onclick='editar($c_linha[id])'><span class='glyphicon glyphicon-pencil'> Editar</span></a>
+                    <a class='btn btn-light btn-sm' title='História Clinica' href='javascript:func()'onclick='historia($c_linha[id])'><span class='glyphicon glyphicon-header'> História</span></a>
                     <a class='btn btn-light btn-sm' title='Imagens' href='/smedweb/imagens.php?id=$c_linha[id]'><img src='\smedweb\images\imagens.png' alt='' width='20' height='20'> Imagens</a>
                     <a class='btn btn-light btn-sm' title='Eventos' href='#'><span class='glyphicon glyphicon-book'> Eventos</span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'> Excluir</span></a>
