@@ -9,6 +9,30 @@ session_start();
 include("conexao.php");
 include("links.php");
 
+// query para capturar perfil do usuário logado
+$c_login = $_SESSION['c_usuario'];
+$c_sql = "SELECT usuario.id,usuario.tipo,
+              prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento, prescricao_laudos,prescricao_orientacao,
+              prescricao_relatorio, prescricao_configuracao
+              FROM usuario
+			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+			  where usuario.login='$c_login'";
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+    die("Erro ao Executar Sql !!" . $conection->connect_error);
+}
+$c_linha = $result->fetch_assoc();
+///////////////////////////////////////////////////////////////
+// permissões das opções de entrada no menu
+//////////////////////////////////////////////////////////////
+// atestados
+if (($c_linha['prescricao_atestado'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_atestado = "S";
+} else {
+    $op_atestado = "N";
+}
+
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];
@@ -18,7 +42,6 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         $c_sql = $c_sql . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
     }
     $c_sql = $c_sql . " order by pacientes.nome";
-
     $result = $conection->query($c_sql);
     // verifico se a query foi correto
     if (!$result) {
@@ -36,6 +59,18 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
 </head>
 
 <body>
+
+    <!-- função para chamar atestados -->
+    <script>
+        function atestado(id) {
+            var acesso = $('#atestado').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/atestado.php?id=" + id;
+            } else {
+                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -94,14 +129,19 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     <div class="container-fluid">
 
         <form id="frmpaciente" method="POST" action="">
+            <input type="hidden" id="input_atestado" name="input_atestado" value="<?php echo $op_atestado; ?>">
+
+            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt=''
+                    width='16' height='16'></span> Buscar</button>
+            <a class="btn btn-info" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>
-            <label for="up_parametroField" class="col-md-2 form-label">Nome para pesquisar</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+            <div class="row mb-3">
+                <label for="up_parametroField" class="col-md-2 form-label">Nome para Busca</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+                </div>
             </div>
-            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-            <a class="btn btn-info" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
         <br>
         <table class="table display table-bordered tabpacientes">
@@ -134,7 +174,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
           
                                                        
                     <td>
-                    <a class='btn btn-light btn-sm' title='Atestatos' href='/smedweb/atestado.php?id=$c_linha[id]'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
+                    <a class='btn btn-light btn-sm' title='Atestatos' href='javascript:func()'onclick='atestado($c_linha[id])'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
                     <a class='btn btn-light btn-sm' title='Formulas' href='/smedweb/prescricao_formulas.php?id=$c_linha[id]'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
                     <a class='btn btn-light btn-sm' title='Laudos' href='/smedweb/prescricoes_laudos.php?id=$c_linha[id]'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
                     <a class='btn btn-light btn-sm' title='Medicamentos' href='/smedweb/prescricao_medicamentos.php?id=$c_linha[id]'><img src='\smedweb\images\dio.png' width='20' height='20'> Medicamentos</a>

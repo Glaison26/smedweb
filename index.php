@@ -4,6 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $l_erro = '';
 } else {
     session_start();
+    unset($_SESSION['newsession']);
     // seções para agenda
     $_SESSION['nomepac'] = "";
     $_SESSION['conveniopac'] = "";

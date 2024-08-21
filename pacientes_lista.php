@@ -12,9 +12,9 @@ include("config_tabelas.php");
 
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
-              fichaclinica_eventos,fichaclinica_excluir FROM usuario
-			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
-			  where usuario.login='$c_login'";
+          fichaclinica_eventos,fichaclinica_excluir FROM usuario
+	      JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+		  where usuario.login='$c_login'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
 if (!$result) {
@@ -35,6 +35,24 @@ if (($c_linha2['fichaclinica_historia'] == 'S') || ($c_linha2['tipo'] == '1')) {
     $op_historia = "S";
 } else {
     $op_historia = "N";
+}
+// imagens
+if (($c_linha2['fichaclinica_imagens'] == 'S') || ($c_linha2['tipo'] == '1')) {
+    $op_imagem = "S";
+} else {
+    $op_imagem = "N";
+}
+// imagens
+if (($c_linha2['fichaclinica_eventos'] == 'S') || ($c_linha2['tipo'] == '1')) {
+    $op_eventos = "S";
+} else {
+    $op_eventos = "N";
+}
+// exclusão de pacientes
+if (($c_linha2['fichaclinica_excluir'] == 'S') || ($c_linha2['tipo'] == '1')) {
+    $op_excluir = "S";
+} else {
+    $op_excluir = "N";
 }
 
 // primeira entrada
@@ -66,9 +84,14 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     <!-- função para confirmação de exclusão de registro -->
     <script language="Javascript">
         function confirmacao(id) {
+            var acesso = $('#input_excluir').val();
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/pacientes_excluir.php?id=" + id;
+                if (acesso == 'S') {
+                    window.location.href = "/smedweb/pacientes_excluir.php?id=" + id;
+                } else {
+                    alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');  
+                }
             }
         }
     </script>
@@ -77,21 +100,46 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     <script>
         function editar(id) {
             var acesso = $('#acesso').val();
-
             if (acesso == 'S') {
                 window.location.href = "/smedweb/pacientes_editar.php?id=" + id;
             } else {
                 alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
             }
-
         }
     </script>
+
     <!-- função para chamar historia de paciente -->
     <script>
         function historia(id) {
             var acesso = $('#input_historia').val();
             if (acesso == 'S') {
                 window.location.href = "/smedweb/historia.php?id=" + id;
+            } else {
+                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            }
+
+        }
+    </script>
+
+    <!-- função para chamar eventos de paciente -->
+    <script>
+        function evento(id) {
+            var acesso = $('#input_evento').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/eventos.php?id=" + id;
+            } else {
+                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            }
+
+        }
+    </script>
+
+    <!-- função para chamar imagens de paciente -->
+    <script>
+        function imagem(id) {
+            var acesso = $('#input_imagem').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/imagens.php?id" + id;
             } else {
                 alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -117,10 +165,13 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             <!-- inputs desabilitados para controle de acesso de usuários -->
             <input type="hidden" id="acesso" name="acesso" value="<?php echo $op_editar; ?>">
             <input type="hidden" id="input_historia" name="input_historia" value="<?php echo $op_historia; ?>">
+            <input type="hidden" id="input_imagem" name="input_imagem" value="<?php echo $op_imagem; ?>">
+            <input type="hidden" id="input_evento" name="input_evento" value="<?php echo $op_eventos; ?>">
+            <input type="hidden" id="input_excluir" name="input_excluir" value="<?php echo $op_excluir; ?>">
             <!-- -->
-            <a class="btn btn-success" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
             <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png'
                     alt='' width='20' height='16'></span> Buscar</button>
+            <a class="btn btn-success" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
             <a class="btn btn-secondary" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
             <hr>
@@ -169,8 +220,8 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                     <td>
                     <a class='btn btn-light btn-sm' title='Editar Paciênte' href='javascript:func()'onclick='editar($c_linha[id])'><span class='glyphicon glyphicon-pencil'> Editar</span></a>
                     <a class='btn btn-light btn-sm' title='História Clinica' href='javascript:func()'onclick='historia($c_linha[id])'><span class='glyphicon glyphicon-header'> História</span></a>
-                    <a class='btn btn-light btn-sm' title='Imagens' href='/smedweb/imagens.php?id=$c_linha[id]'><img src='\smedweb\images\imagens.png' alt='' width='20' height='20'> Imagens</a>
-                    <a class='btn btn-light btn-sm' title='Eventos' href='#'><span class='glyphicon glyphicon-book'> Eventos</span></a>
+                    <a class='btn btn-light btn-sm' title='Imagens' href='javascript:func()'onclick='imagem($c_linha[id])'><img src='\smedweb\images\imagens.png' alt='' width='20' height='20'> Imagens</a>
+                    <a class='btn btn-light btn-sm' title='Eventos' href='javascript:func()'onclick='evento($c_linha[id])'><span class='glyphicon glyphicon-book'> Eventos</span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'> Excluir</span></a>
                     </td>
 
