@@ -12,13 +12,13 @@ include("conexao.php");
 // rotina de edição
 $c_id = $_GET["id"];
 // sql para capturar dados do paciente selecionado
-$c_sql = "SELECT pacientes.id, pacientes.id_convenio, pacientes.nome, pacientes.fone, pacientes.email, pacientes.matricula, convenios.nome as convenio
-          FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id where pacientes.id='$c_id'";
+$c_sql = "SELECT pacientes.id, pacientes.id_convenio, pacientes.nome, pacientes.fone, pacientes.email, pacientes.matricula, convenios.nome as convenio,
+          convenios.id as idconvenio FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 $c_linha = $result->fetch_assoc();
 //
 $_SESSION['nomepac'] = $c_linha['nome'];
-$_SESSION['conveniopac'] = $c_linha['convenio'];
+$_SESSION['conveniopac'] = $c_linha['idconvenio'];
 $_SESSION['telefonepac'] = $c_linha['fone'];
 $_SESSION['emailpac'] = $c_linha['email'];
 $_SESSION['matriculapac'] = $c_linha['matricula'];

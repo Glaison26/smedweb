@@ -210,7 +210,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	</script>
 	<!-- fim da função -->
 	<main>
-		<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
+		<!--<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
 			<div class="panel panel-primary class">
 
 				<div class="panel-heading text-center">
@@ -221,18 +221,20 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 
 			</div>
 		</div>
-	
+
 		<div class="container -my5">
 
 			<div style="padding-top:10px;">
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="fa fa-bars"></span>Menu
+						<span class="fa fa-bars">Menu</span>
 					</button>
 
 					<div class="collapse navbar-collapse" id="ftco-nav">
+						
 						<ul class="navbar-nav ml-auto">
+						
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -325,6 +327,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					<h5><strong> Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></strong></h5>
 				</div>
 			</div>
+			
 		</div>
 		<!-- END nav -->
 

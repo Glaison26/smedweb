@@ -105,6 +105,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
     <!-- script para mascara de telefone -->
     <script>
         const handlePhone = (event) => {
@@ -199,6 +202,13 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
             });
 
+        });
+    </script>
+    <!-- controle de tab ao realizar pesquisa de pacientes -->
+    <script>
+        $("bntpesquisa").on('click', function() {
+            $("#tabs").tabs('option', 'active', 1);
+            /*index da aba que você quer selecionar*/
         });
     </script>
 
@@ -464,7 +474,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                      
                     <td>
                                                   
-                        <a class='btn btn-secondary' title='Copiar Dados'
+                        <a class='btn btn-light' title='Copiar Dados'
                         href='/smedweb/agenda_copia.php?id=$c_linha_pac[id]'><img src='\smedweb\images\copiar.png'alt='' width='15' height='15'> Copiar</a>
                     </td>
 
