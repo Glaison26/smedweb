@@ -307,26 +307,51 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					}
 					?>
 
+
 					<div class="container" class="text-primary">
 						<div class="panel-body text-left">
 							<h5>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h5>
 						</div>
 
 					</div>
-					<div class="container" class="text-primary">
-						<p>
-						<h4 class=" text-primary" Align="justify">
-							Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
-							Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
-							tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
-							ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
 
-						</h4>
+				</div>
+				<hr>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm">
+							<div class="container" Align="left">
+								<img class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
+							</div>
+						</div>
+						<div class="col-sm-7">
+							<div class="container" class="text-primary">
+
+								<p><strong>
+										<h3 class=" text-primary" Align="justify">
+
+											Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
+											Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
+											tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
+											ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
+
+									</strong></h3>
+								</p>
+							</div>
+						</div>
+						<div class="col-sm-1">
+						</div>
+
 					</div>
 				</div>
+			</div>
 
 
-				<!-- END nav -->
+
+		</div>
+
+
+		<!-- END nav -->
 
 	</main>
 
