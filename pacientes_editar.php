@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <!-- função para negar acesso ao usuário não autorizado -->
     <script>
         function negar() {
-            alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+            alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             void(0);
         }
     </script>

@@ -98,7 +98,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/atestado.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>
@@ -109,7 +109,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/prescricao_formulas.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>
@@ -120,21 +120,11 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/prescricao_medicamentos.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>
-    <!-- função para chamar prescrição de medicamentos -->
-    <script>
-        function medicamento(id) {
-            var acesso = $('#input_medicamento').val();
-            if (acesso == 'S') {
-                window.location.href = "/smedweb/prescricao_medicamentos.php?id=" + id;
-            } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
-            }
-        }
-    </script>
+   
     <!-- função para chamar prescrição de Laudos -->
     <script>
         function laudo(id) {
@@ -142,7 +132,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/prescricoes_laudos.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>
@@ -153,7 +143,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/prescricao_orientacoes.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>
@@ -164,7 +154,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/prescricao_relatorio.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>

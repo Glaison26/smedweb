@@ -90,7 +90,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                 if (acesso == 'S') {
                     window.location.href = "/smedweb/pacientes_excluir.php?id=" + id;
                 } else {
-                    alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');  
+                    alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');  
                 }
             }
         }
@@ -103,7 +103,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/pacientes_editar.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
         }
     </script>
@@ -115,7 +115,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/historia.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
 
         }
@@ -128,7 +128,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/eventos.php?id=" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
 
         }
@@ -141,7 +141,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             if (acesso == 'S') {
                 window.location.href = "/smedweb/imagens.php?id" + id;
             } else {
-                alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
 
         }
