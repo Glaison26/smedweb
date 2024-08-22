@@ -486,66 +486,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         </table>
                     </div>
                 </div>
-                <!-- aba com o historico da agenda -->
-                <div role="tabpanel" class="tab-pane" id="historico">
-                    <div style="padding-top:20px;">
-
-                        <div class="mb-5 row">
-                            <hr>
-                            <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
-
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="pesquisa_historico" name="pesquisa_historico">
-
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" id='bntpesquisa_historico' name='btnpesquisa_historico' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-                            </div>
-                        </div>
-
-                        <!-- montagem da tabela de histórico agenda -->
-                        <table class="table display tabagendahistorico">
-                            <thead class="thead">
-                                <tr class="info">
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Horário</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Profissional</th>
-                                    <th scope="col">Matricula</th>
-                                    <th scope="col">Convênio</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">e-mail</th>
-                                    <th scope="col">Observação</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // loop para dados da agenda historico
-                                if (!empty($c_sql3)) {
-                                    while ($c_linha3 = $result3->fetch_assoc()) {
-                                        $c_data = date("d-m-y", strtotime(str_replace('/', '-', $c_linha3['data'])));
-                                        echo "
-                                    <tr>
-                                    <td>$c_data</td>
-                                    <td>$c_linha3[horario]</td>
-                                    <td>$c_linha3[nome]</td>
-                                    <td>$c_linha3[medico]</td>
-                                    <td>$c_linha3[matricula]</td>
-                                    <td>$c_linha3[convenio]</td>
-                                    <td>$c_linha3[telefone]</td>
-                                    <td>$c_linha3[email]</td>
-                                    <td>$c_linha3[observacao]</td>
-                                    </tr>
-                                    ";
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+               
             </div>
         </form>
     </div>

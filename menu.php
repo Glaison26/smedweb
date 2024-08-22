@@ -220,7 +220,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 				</div>
 
 			</div>
-		</div>
+		</div> -->
 
 		<div class="container -my5">
 
