@@ -29,8 +29,8 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         die("Erro ao Executar Sql!!" . $conection->connect_error);
     }
 }
-//$c_sql2 = "";
-//$c_sql3 = "";
+$c_sql2 = "";
+$c_sql3 = "";
 $c_dia_semana = "-";
 $c_mostradata = date("Y-m-d");
 
@@ -81,7 +81,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
 
 // pesquisa de histórico de agenda 
 if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de agenda
-
+   
     $c_pesquisa_historico = $_POST['pesquisa_historico'];
     $c_sql3 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
@@ -105,6 +105,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
     <!-- script para mascara de telefone -->
     <script>
         const handlePhone = (event) => {
@@ -156,10 +159,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         }
     </script>
 
-    
-
-    
-
     <script>
         $(document).ready(function() {
             $('.tabagenda').DataTable({
@@ -205,6 +204,16 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
         });
     </script>
+    <!-- controle de tab ao realizar pesquisa de pacientes -->
+    <script>
+        $("bntpesquisa").on('click', function() {
+            $("#tabs").tabs('option', 'active', 1);
+            /*index da aba que você quer selecionar*/
+        });
+    </script>
+
+
+
     <!-- Coleta dados da tabela para edição do registro -->
     <script>
         $(document).ready(function() {
@@ -332,11 +341,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             </div>
 
 
-            <!-- abas de agenda e cadstro de pacientes -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
-                <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
-                <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico Agendamento</a></li>
+        <!-- abas de agenda e cadstro de pacientes -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
+            <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
 
             </ul>
             <!-- aba da agenda-->
@@ -399,8 +407,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
                                    <a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
-                                   
                                    </td>
+
                                     </tr>
                                     ";
                                     }
@@ -421,6 +429,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
                             <div class="col-md-7">
                                 <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
@@ -477,72 +486,12 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         </table>
                     </div>
                 </div>
-                <!-- aba com o historico da agenda -->
-                <div role="tabpanel" class="tab-pane" id="historico">
-                    <div style="padding-top:20px;">
-
-                        <div class="mb-5 row">
-                            <hr>
-                            <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
-
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" id="pesquisa_historico" name="pesquisa_historico">
-
-                            </div>
-                            <div class="col-md-2">
-                                <button type="submit" id='bntpesquisa_historico' name='btnpesquisa_historico' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-                            </div>
-                        </div>
-
-                        <!-- montagem da tabela de histórico agenda -->
-                        <table class="table display tabagendahistorico">
-                            <thead class="thead">
-                                <tr class="info">
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Horário</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Profissional</th>
-                                    <th scope="col">Matricula</th>
-                                    <th scope="col">Convênio</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">e-mail</th>
-                                    <th scope="col">Observação</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                // loop para dados da agenda historico
-                                if (!empty($c_sql3)) {
-                                    while ($c_linha3 = $result3->fetch_assoc()) {
-                                        $c_data = date("d-m-y", strtotime(str_replace('/', '-', $c_linha3['data'])));
-                                        echo "
-                                    <tr>
-                                    <td>$c_data</td>
-                                    <td>$c_linha3[horario]</td>
-                                    <td>$c_linha3[nome]</td>
-                                    <td>$c_linha3[medico]</td>
-                                    <td>$c_linha3[matricula]</td>
-                                    <td>$c_linha3[convenio]</td>
-                                    <td>$c_linha3[telefone]</td>
-                                    <td>$c_linha3[email]</td>
-                                    <td>$c_linha3[observacao]</td>
-                                    </tr>
-                                    ";
-                                    }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
+               
             </div>
         </form>
     </div>
 
     <!-- janela Modal para marcação de consulta -->
-
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

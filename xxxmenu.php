@@ -10,8 +10,8 @@ if (!isset($_SESSION['newsession'])) {
 include("conexao.php");
 // query para capturar perfil do usuário logado
 $c_login = $_SESSION['c_usuario'];
-$c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,
-              agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
+$c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
+              fichaclinica_eventos,fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
               prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento,prescricao_laudos,prescricao_orientacao,prescricao_relatorio,
               prescricao_configuracao,financeiro,configuracoes,cad_profissionais,cad_convenios,cad_procedimentos,cad_itenslaudos,cad_medicamentos,
               cad_orientacoes,cad_formula,cad_atestado,cad_grupo_medicamento,cad_grupo_exame,cad_componente_formula,cad_grupo_componentes,
@@ -70,7 +70,7 @@ if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_cad_profissionais = "javascript:negar()";
 }
 // acesso cadastro de profissionais
-if (($c_linha['cad_convenios'] == 'S') ||  ($c_linha['tipo'] == '1')) {
+if (($c_linha['cad_convenios'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_cad_convenios = "\smedweb\convenios_lista.php";
 } else {
 	$op_cad_convenios = "javascript:negar()";
@@ -204,13 +204,23 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	<!-- função para negar acesso ao usuário não autorizado -->
 	<script>
 		function negar() {
-			alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+			alert('Acesso não autoriado para o usuário, consulte o administrador do Sistema!!!');
 			void(0);
 		}
 	</script>
 	<!-- fim da função -->
 	<main>
+		<!--<div style="padding-top:12px;padding-left:12px;padding-right:12px;">
+			<div class="panel panel-primary class">
 
+				<div class="panel-heading text-center">
+					<br>
+					<h2><strong>SmartMed - Sistema Médico</strong></h2>
+					<h3>Menu Inicial<h3>
+				</div>
+
+			</div>
+		</div> -->
 
 		<div class="container -my5">
 
@@ -222,9 +232,9 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					</button>
 
 					<div class="collapse navbar-collapse" id="ftco-nav">
-
+						
 						<ul class="navbar-nav ml-auto">
-
+						
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -270,10 +280,10 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 									<a class="dropdown-item" href=<?php echo $op_cad_formulas; ?>><img src="\smedweb\images\ff1.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
 									<a class="dropdown-item" href=<?php echo $op_cad_atestado; ?>><img src="\smedweb\images\atestado2.png" alt="" width="20" height="20"> Atestados Padrões...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href=<?php echo $op_cad_grupo_medicamento; ?>><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
-									<a class="dropdown-item" href=<?php echo $op_cad_grupo_exame; ?>><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupo_medicamento;?>><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupo_exame;?>><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
-									<a class="dropdown-item" href=<?php echo $op_cad_componentes; ?>><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_componentes;?>><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
 									<a class="dropdown-item" href=<?php echo $op_cad_grupos_componentes; ?>><img src="\smedweb\images\grupocomponentes.png" alt="20" height="20"> Grupos de Componentes...</a>
 									<a class="dropdown-item" href="#">__________________________________</a>
 									<a class="dropdown-item" href=<?php echo $op_cad_especialidades; ?>><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
@@ -290,67 +300,35 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 									<a class="dropdown-item" href=<?php echo $op_usuarios_perfil; ?>><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
 								</div>
 							</li>
-
+							<li class="nav-item active"><a href="#" data-toggle="modal" data-target="#modal" class="nav-link"> Configurações</a></li>
 							<li class="nav-item active"><a href="\smedweb\index.php" class="nav-link"><img src="\smedweb\images\saida.png" alt="" width="20" height="20"> Sair</a></li>
 						</ul>
 					</div>
-
 				</nav>
-				<div class="container -my5">
-					<?php
-					date_default_timezone_set('America/Sao_Paulo');
-					$agora = date('d/m/Y H:i');
-					if ($_SESSION['c_tipo'] == '1') {
-						$c_nivel = 'Administrador ';
-					} else {
-						$c_nivel = 'Operador';
-					}
-					?>
-
-
-					<div class="container" class="text-primary">
-						<div class="panel-body text-left">
-							<h5>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h5>
-						</div>
-
-					</div>
-
-				</div>
-				<hr>
-				<div class="container">
-					<div class="row">
-						<div class="col-sm">
-							<div class="container" Align="left">
-								<img class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
-							</div>
-						</div>
-						<div class="col-sm-7">
-							<div class="container" class="text-primary">
-
-								<p><strong>
-										<h3 class=" text-primary" Align="justify">
-
-											Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
-											Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
-											tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
-											ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
-
-									</strong></h3>
-								</p>
-							</div>
-						</div>
-						<div class="col-sm-1">
-						</div>
-
-					</div>
-				</div>
 			</div>
-
-
-
 		</div>
 
 
+		<?php
+		date_default_timezone_set('America/Sao_Paulo');
+		$agora = date('d/m/Y H:i');
+
+		?>
+		<div>
+			<?php
+			if ($_SESSION['c_tipo'] == '1') {
+				$c_nivel = 'Administrador ';
+			} else {
+				$c_nivel = 'Operador';
+			}
+			?>
+			<div class="container -my5">
+				<div style="padding-left:20px;">
+					<h5><strong> Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></strong></h5>
+				</div>
+			</div>
+			
+		</div>
 		<!-- END nav -->
 
 	</main>
