@@ -359,7 +359,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
                         <hr>
                         <!-- montagem da tabela de agenda -->
-                        <table class="table display  tabagenda">
+                        <table class="table display table-striped tabagenda">
                             <thead class="thead">
                                 <tr class="info">
                                     <th scope="col">No.</th>
