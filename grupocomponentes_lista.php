@@ -1,8 +1,8 @@
 <?php // controle de acesso ao formulário
-//session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
+session_start();
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
@@ -206,7 +206,7 @@ include("links.php");
             </thead>
             <tbody>
                 <?php
-                $fmt = new NumberFormatter('de_DE', NumberFormatter::CURRENCY);
+               
                 // faço a Leitura da tabela com sql
                 $c_sql = "SELECT grupo_componentes.id, grupo_componentes.descricao" .
                     " FROM grupo_componentes" .

@@ -101,7 +101,8 @@ if (($c_linha['cad_orientacoes'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de formulas
 if (($c_linha['cad_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_formulas = "\smedweb\formula_padrao_lista.php";
+	$op_cad_formulas = '\smedweb.\formula_padrao_lista.php';
+	
 } else {
 	$op_cad_formulas = "javascript:negar()";
 }
@@ -132,6 +133,7 @@ if (($c_linha['cad_componente_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
 // acesso cadastro de grupos componentes de formulas
 if (($c_linha['cad_grupo_componentes'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_cad_grupos_componentes = "\smedweb\grupocomponentes_lista.php";
+	$op_cad_grupos_componentes;
 } else {
 	$op_cad_grupos_componentes = "javascript:negar()";
 }
