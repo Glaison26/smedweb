@@ -202,20 +202,32 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <!-- The sidebar -->
+<div class="container -my5">
+	<!-- barra lateral com opções mais utilizadas -->
+	<div class="container -my5">
+		<div class="sidebar">
+			<a href="#"></a>
+			<a title='Ficha clinica de Paciente' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="30" height="30"></a>
+			<a title='Marcação de Consultas' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="30" height="30"></a>
+			<a title='Prescrições Médicas' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="30" height="30"></a>
+			<a title='Alterar Senha' href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="30" height="30"></a>
+			<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="30" height="40"></a>
+		</div>
+	</div>
 
-<body class="sb-nav-fixed">
+	<body class="sb-nav-fixed">
 
 
-	<!-- função para negar acesso ao usuário não autorizado -->
-	<script>
-		function negar() {
-			alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
-			void(0);
-		}
-	</script>
-	<!-- fim da função -->
-	<main>
-		<div class="container -my5">
+		<!-- função para negar acesso ao usuário não autorizado -->
+		<script>
+			function negar() {
+				alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+				void(0);
+			}
+		</script>
+		<!-- fim da função -->
+		<main>
+
 			<div style="padding-top:10px;">
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
@@ -224,6 +236,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					</button>
 
 					<div class="collapse navbar-collapse" id="ftco-nav">
+
 
 						<ul class="navbar-nav ml-auto">
 
@@ -290,15 +303,16 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 									<a class="dropdown-item" href=<?php echo $op_usuarios; ?>><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
 									<a class="dropdown-item" href=<?php echo $op_usuarios_perfil; ?>><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
 									<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
-									
+
 								</div>
 							</li>
 
-							
+
 						</ul>
 					</div>
 
 				</nav>
+
 				<div class="container -my5">
 					<?php
 					date_default_timezone_set('America/Sao_Paulo');
@@ -317,19 +331,12 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					</div>
 
 				</div>
-				<!-- barra lateral com opções mais utilizadas -->	
-				<div class="sidebar">
-					<a href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="25" height="25"> Ficha Clínica</a>
-					<a href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="25" height="25"> Marcação</a>
-					<a href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="25" height="25"> Prescrições</a>
-					<a href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="25" height="25"> Trocar Senha</a>
-					<a href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="25" height="25"> Sair</a>
-				</div>
+
 
 				<hr>
 				<div class="container">
 					<div class="row">
-						
+
 						<div class="col-sm-7">
 							<div class="container" class="text-primary">
 
@@ -358,15 +365,12 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 
 
 
-		</div>
+</div>
 
 
-		<!-- END nav -->
+<!-- END nav -->
 
-	</main>
-
-
-
+</main>
 
 </body>
 
@@ -375,12 +379,12 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	/* Style the sidebar - fixed full height */
 	.sidebar {
 		height: 100%;
-		width: 210px;
+		width: 70px;
 		position: fixed;
 		z-index: 1;
 		top: 0;
 		left: 0;
-		background-color: #1E90FF;
+		background-color: #4682B4;
 		overflow-x: hidden;
 		padding-top: 16px;
 	}
