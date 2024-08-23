@@ -329,7 +329,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 						<div class="col-sm-7">
 							<div class="container" class="text-primary">
 
-								<p><strong>
+								<p>
 										<h3 class=" text-primary" Align="justify">
 
 											Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
@@ -337,11 +337,11 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 											tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
 											ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
 
-									</strong></h3>
+									</h3>
 								</p>
 							</div>
 						</div>
-						<div class="col-sm-1">
+						<div class="col-sm-0">
 						</div>
 
 					</div>
