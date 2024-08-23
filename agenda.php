@@ -156,10 +156,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         }
     </script>
 
-    
-
-    
-
     <script>
         $(document).ready(function() {
             $('.tabagenda').DataTable({
