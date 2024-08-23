@@ -9,6 +9,61 @@ session_start();
 include("conexao.php");
 include("links.php");
 
+// query para capturar perfil do usuário logado
+$c_login = $_SESSION['c_usuario'];
+$c_sql = "SELECT usuario.id,usuario.tipo,
+              prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento, prescricao_laudos,prescricao_orientacao,
+              prescricao_relatorio, prescricao_configuracao
+              FROM usuario
+			  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+			  where usuario.login='$c_login'";
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+    die("Erro ao Executar Sql !!" . $conection->connect_error);
+}
+$c_linha = $result->fetch_assoc();
+///////////////////////////////////////////////////////////////
+// permissões das opções de entrada no menu
+//////////////////////////////////////////////////////////////
+// atestados
+if (($c_linha['prescricao_atestado'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_atestado = "S";
+} else {
+    $op_atestado = "N";
+}
+// formulas
+if (($c_linha['prescricao_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_formula = "S";
+} else {
+    $op_formula = "N";
+}
+// prescrição de medicamentos
+if (($c_linha['prescricao_medicamento'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_medicamento = "S";
+} else {
+    $op_medicamento = "N";
+}
+// prescrição de medicamentos
+if (($c_linha['prescricao_laudos'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_laudo = "S";
+} else {
+    $op_laudo = "N";
+}
+// prescrição de orientações
+if (($c_linha['prescricao_orientacao'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_orientacao = "S";
+} else {
+    $op_orientacao = "N";
+}
+// prescrição de relatório
+if (($c_linha['prescricao_relatorio'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_relatorio = "S";
+} else {
+    $op_relatorio = "N";
+}
+
+
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];
@@ -18,7 +73,6 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         $c_sql = $c_sql . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
     }
     $c_sql = $c_sql . " order by pacientes.nome";
-
     $result = $conection->query($c_sql);
     // verifico se a query foi correto
     if (!$result) {
@@ -36,6 +90,74 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
 </head>
 
 <body>
+
+    <!-- função para chamar atestados -->
+    <script>
+        function atestado(id) {
+            var acesso = $('#input_atestado').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/atestado.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
+    <!-- função para chamar formula -->
+    <script>
+        function formula(id) {
+            var acesso = $('#input_formula').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/prescricao_formulas.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
+    <!-- função para chamar prescrição de medicamentos -->
+    <script>
+        function medicamento(id) {
+            var acesso = $('#input_medicamento').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/prescricao_medicamentos.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
+   
+    <!-- função para chamar prescrição de Laudos -->
+    <script>
+        function laudo(id) {
+            var acesso = $('#input_laudo').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/prescricoes_laudos.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
+    <!-- função para chamar prescrição de orientações -->
+    <script>
+        function orientacao(id) {
+            var acesso = $('#input_orientacao').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/prescricao_orientacoes.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
+    <!-- função para chamar prescrição de relatórios -->
+    <script>
+        function relatorio(id) {
+            var acesso = $('#input_relatorio').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/prescricao_relatorio.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -94,14 +216,24 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     <div class="container-fluid">
 
         <form id="frmpaciente" method="POST" action="">
+            <input type="hidden" id="input_atestado" name="input_atestado" value="<?php echo $op_atestado; ?>">
+            <input type="hidden" id="input_formula" name="input_formula" value="<?php echo $op_formula; ?>">
+            <input type="hidden" id="input_medicamento" name="input_medicamento" value="<?php echo $op_medicamento; ?>">
+            <input type="hidden" id="input_laudo" name="input_laudo" value="<?php echo $op_laudo; ?>">
+            <input type="hidden" id="input_orientacao" name="input_orientacao" value="<?php echo $op_orientacao; ?>">
+            <input type="hidden" id="input_relatorio" name="input_relatorio" value="<?php echo $op_relatorio; ?>">
+            <!-- pesquisa -->
+            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt=''
+                    width='16' height='16'></span> Buscar</button>
+            <a class="btn btn-info" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>
-            <label for="up_parametroField" class="col-md-2 form-label">Nome para pesquisar</label>
-            <div class="col-sm-7">
-                <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+            <div class="row mb-3">
+                <label for="up_parametroField" class="col-md-2 form-label">Nome para Busca</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+                </div>
             </div>
-            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-            <a class="btn btn-info" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
         <br>
         <table class="table display table-bordered tabpacientes">
@@ -134,12 +266,12 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
           
                                                        
                     <td>
-                    <a class='btn btn-light btn-sm' title='Atestatos' href='/smedweb/atestado.php?id=$c_linha[id]'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
-                    <a class='btn btn-light btn-sm' title='Formulas' href='/smedweb/prescricao_formulas.php?id=$c_linha[id]'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
-                    <a class='btn btn-light btn-sm' title='Laudos' href='/smedweb/prescricoes_laudos.php?id=$c_linha[id]'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
-                    <a class='btn btn-light btn-sm' title='Medicamentos' href='/smedweb/prescricao_medicamentos.php?id=$c_linha[id]'><img src='\smedweb\images\dio.png' width='20' height='20'> Medicamentos</a>
-                    <a class='btn btn-light btn-sm' title='Orientações' href='/smedweb/prescricao_orientacoes.php?id=$c_linha[id]'><img src='\smedweb\images\orientacoes.png' width='20' height='20'> Orientações</a>
-                    <a class='btn btn-light btn-sm' title='Relatórios' href='/smedweb/prescricao_relatorio.php?id=$c_linha[id]'><img src='\smedweb\images\oto.png' width='20' height='20'> Relatórios</a>
+                    <a class='btn btn-light btn-sm' title='Atestatos' href='javascript:func()'onclick='atestado($c_linha[id])'><img src='\smedweb\images\atestado.png'  width='20' height='20'> Atestados</a>
+                    <a class='btn btn-light btn-sm' title='Formulas' href='javascript:func()'onclick='formula($c_linha[id])'><img src='\smedweb\images\as.png' width='20' height='20'> Fórmulas</a>
+                    <a class='btn btn-light btn-sm' title='Laudos' href='javascript:func()'onclick='laudo($c_linha[id])'><img src='\smedweb\images\laudo.png' width='20' height='20'> Laudos</a>
+                    <a class='btn btn-light btn-sm' title='Medicamentos' href='javascript:func()'onclick='medicamento($c_linha[id])'><img src='\smedweb\images\dio.png' width='20' height='20'> Medicamentos</a>
+                    <a class='btn btn-light btn-sm' title='Orientações' href='javascript:func()'onclick='orientacao($c_linha[id])'><img src='\smedweb\images\orientacoes.png' width='20' height='20'> Orientações</a>
+                    <a class='btn btn-light btn-sm' title='Relatórios' href='javascript:func()'onclick='relatorio($c_linha[id])'><img src='\smedweb\images\oto.png' width='20' height='20'> Relatórios</a>
 
                     </td>
                         
