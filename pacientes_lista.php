@@ -139,7 +139,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function imagem(id) {
             var acesso = $('#input_imagem').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/imagens.php?id" + id;
+                window.location.href = "/smedweb/imagens.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
