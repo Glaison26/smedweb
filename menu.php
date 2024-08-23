@@ -102,7 +102,6 @@ if (($c_linha['cad_orientacoes'] == 'S') || ($c_linha['tipo'] == '1')) {
 // acesso cadastro de formulas
 if (($c_linha['cad_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_cad_formulas = '\smedweb.\formula_padrao_lista.php';
-	
 } else {
 	$op_cad_formulas = "javascript:negar()";
 }
@@ -187,6 +186,8 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -200,8 +201,10 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	<script src="js/main.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
+<!-- The sidebar -->
 
 <body class="sb-nav-fixed">
+
 
 	<!-- função para negar acesso ao usuário não autorizado -->
 	<script>
@@ -212,10 +215,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	</script>
 	<!-- fim da função -->
 	<main>
-
-
 		<div class="container -my5">
-
 			<div style="padding-top:10px;">
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
@@ -288,12 +288,13 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
 									<a class="dropdown-item" href=<?php echo $op_usuarios; ?>><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
-									<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
 									<a class="dropdown-item" href=<?php echo $op_usuarios_perfil; ?>><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
+									<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
+									
 								</div>
 							</li>
 
-							<li class="nav-item active"><a href="\smedweb\index.php" class="nav-link"><img src="\smedweb\images\saida.png" alt="" width="20" height="20"> Sair</a></li>
+							
 						</ul>
 					</div>
 
@@ -308,8 +309,6 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 						$c_nivel = 'Operador';
 					}
 					?>
-
-
 					<div class="container" class="text-primary">
 						<div class="panel-body text-left">
 							<h5>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h5>
@@ -318,32 +317,41 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					</div>
 
 				</div>
+				<!-- barra lateral com opções mais utilizadas -->	
+				<div class="sidebar">
+					<a href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="25" height="25"> Ficha Clínica</a>
+					<a href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="25" height="25"> Marcação</a>
+					<a href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="25" height="25"> Prescrições</a>
+					<a href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="25" height="25"> Trocar Senha</a>
+					<a href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="25" height="25"> Sair</a>
+				</div>
+
 				<hr>
 				<div class="container">
 					<div class="row">
+						
+						<div class="col-sm-7">
+							<div class="container" class="text-primary">
+
+								<p>
+								<h2 class=" text-primary" Align="justify">
+
+									Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
+									Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
+									tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
+									ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
+
+								</h2>
+								</p>
+							</div>
+						</div>
 						<div class="col-sm">
 							<div class="container" Align="left">
 								<img class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
 							</div>
 						</div>
-						<div class="col-sm-7">
-							<div class="container" class="text-primary">
-
-								<p>
-										<h3 class=" text-primary" Align="justify">
-
-											Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
-											Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
-											tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
-											ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
-
-									</h3>
-								</p>
-							</div>
-						</div>
 						<div class="col-sm-0">
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -361,5 +369,54 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 
 
 </body>
+
+<!-- CSS para as barras laterais -->
+<style>
+	/* Style the sidebar - fixed full height */
+	.sidebar {
+		height: 100%;
+		width: 210px;
+		position: fixed;
+		z-index: 1;
+		top: 0;
+		left: 0;
+		background-color: #1E90FF;
+		overflow-x: hidden;
+		padding-top: 16px;
+	}
+
+	/* Style sidebar links */
+	.sidebar a {
+		padding: 6px 8px 6px 16px;
+		text-decoration: none;
+		font-size: 20px;
+		color: #F5F5F5;
+		display: block;
+	}
+
+	/* Style links on mouse-over */
+	.sidebar a:hover {
+		color: #f1f1f1;
+	}
+
+	/* Style the main content */
+	.main {
+		margin-left: 160px;
+		/* Same as the width of the sidenav */
+		padding: 0px 10px;
+	}
+
+	/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+	@media screen and (max-height: 450px) {
+		.sidebar {
+			padding-top: 15px;
+		}
+
+		.sidebar a {
+			font-size: 18px;
+		}
+	}
+</style>
+
 
 </html>
