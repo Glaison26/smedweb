@@ -1,4 +1,7 @@
 <?php
+////////////////////////////////////////////////////////////
+// rotina principal da agenda médica
+///////////////////////////////////////////////////////////
 session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
@@ -13,6 +16,42 @@ $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
+// controle de acesso para o usuário
+$c_login = $_SESSION['c_usuario'];
+$c_sql = "SELECT usuario.id,usuario.tipo,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar
+          FROM usuario
+		  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
+		  where usuario.login='$c_login'";
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+    die("Erro ao Executar Sql !!" . $conection->connect_error);
+}
+$c_linha = $result->fetch_assoc();
+// marcação
+if (($c_linha['agenda_marcacao'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_marcacao = "S";
+} else {
+    $op_marcacao = "N";
+}
+// inclusão de paciente
+if (($c_linha['agenda_incluir'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_incluir = "S";
+} else {
+    $op_incluir = "N";
+}
+// desmarcar paciente na agenda
+if (($c_linha['agenda_desmarcar'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_desmarcar = "S";
+} else {
+    $op_desmarcar = "N";
+}
+// remanejar paciente na agenda
+if (($c_linha['agenda_remanejar'] == 'S') || ($c_linha['tipo'] == '1')) {
+    $op_remanejar = "S";
+} else {
+    $op_remanejar = "N";
+}
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
     $c_pesquisa = $_POST['pesquisa'];
@@ -124,12 +163,52 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 </head>
 
 <body>
+    <!-- função para chamar marcação -->
+    <script>
+        function marcacao(id) {
+
+            var acesso = $('#input_marcacao').val();
+            if (acesso == 'S') {
+                $(document).ready(function() {
+
+                    $('.editbtn').on('click', function() {
+
+                        $('#editmodal').modal('show');
+
+                        $tr = $(this).closest('tr');
+
+                        var data = $tr.children("td").map(function() {
+                            return $(this).text();
+                        }).get();
+
+                        console.log(data);
+
+                        $('#up_idField').val(data[0]);
+                        $('#up_horarioField').val(data[1]);
+                        $('#up_nomeField').val(data[2]);
+                        $('#up_matriculaField').val(data[3]);
+                        $('#up_convenioField').val(data[4]);
+                        $('#up_telefoneField').val(data[5]);
+                        $('#up_emailField').val(data[6]);
+                        $('#up_obsField').val(data[7]);
+                    });
+                });
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
         function incluir(id) {
             var resposta = confirm("Deseja confirmar essa inclusão?");
+            var acesso = $('#input_incluir').val();
             if (resposta == true) {
-                window.location.href = "/smedweb/paciente_agenda.php?id=" + id;
+                if (acesso == "S") {
+                    window.location.href = "/smedweb/paciente_agenda.php?id=" + id;
+                } else {
+                    alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+                }
             }
         }
     </script>
@@ -137,22 +216,39 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     <!-- funcao para chamar rotina para desmacar marcação de agenda -->
     <script language="Javascript">
         function desmarca(id) {
-            var resposta = confirm("Deseja desmarcar essa marcação?");
+            var resposta = confirm("Deseja desmarcar essa agenda?");
+            var acesso = $('#input_desmarcar').val();
             if (resposta == true) {
-                window.location.href = "/smedweb/agenda_desmarcar.php?id=" + id;
+                if (acesso == "S") {
+                    window.location.href = "/smedweb/agenda_desmarcar.php?id=" + id;
+                } else {
+                    alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+                }
             }
         }
     </script>
     <!-- funcao para chamar rotina para colar marcação de agenda -->
     <script>
+        var acesso = $('#input_remanejar').val();
+
         function colar(id) {
-            window.location.href = "/smedweb/agenda_colar.php?id=" + id;
+            var acesso = $('#input_remanejar').val();
+            if (acesso == "S") {
+                window.location.href = "/smedweb/agenda_colar.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
         }
     </script>
     <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
     <script>
         function cortar(id) {
-            window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
+            var acesso = $('#input_remanejar').val();
+            if (acesso == "S") {
+                window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
         }
     </script>
 
@@ -199,33 +295,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
             });
 
-        });
-    </script>
-    <!-- Coleta dados da tabela para edição do registro -->
-    <script>
-        $(document).ready(function() {
-
-            $('.editbtn').on('click', function() {
-
-                $('#editmodal').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#up_idField').val(data[0]);
-                $('#up_horarioField').val(data[1]);
-                $('#up_nomeField').val(data[2]);
-                $('#up_matriculaField').val(data[3]);
-                $('#up_convenioField').val(data[4]);
-                $('#up_telefoneField').val(data[5]);
-                $('#up_emailField').val(data[6]);
-                $('#up_obsField').val(data[7]);
-            });
         });
     </script>
 
@@ -292,6 +361,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
         <!-- Formulário com as datas -->
         <form method="post">
+            <input type="hidden" id="input_marcacao" name="input_marcacao" value="<?php echo $op_marcacao; ?>">
+            <input type="hidden" id="input_incluir" name="input_incluir" value="<?php echo $op_incluir; ?>">
+            <input type="hidden" id="input_desmarcar" name="input_desmarcar" value="<?php echo $op_desmarcar; ?>">
+            <input type="hidden" id="input_remanejar" name="input_remanejar" value="<?php echo $op_remanejar; ?>">
             <label class="col-md-2 form-label">Data da agenda</label>
             <div class="col-sm-2">
                 <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
@@ -366,7 +439,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <th scope="col">Telefone</th>
                                     <th scope="col">e-mail</th>
                                     <th scope="col">Observação</th>
-                                    <th scope="col">Ações</th>
+                                    <th scope="col">Ações para agenda</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -388,8 +461,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>$c_linha2[email]</td>
                                     <td>$c_linha2[observacao]</td>
                                     <td>
-                                    
-                                   <button type='button' class='btn btn-light btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
+                                   
+                                   
+                                   <button type='button' class='btn btn-light btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
                                    <button name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
                                    <button name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>

@@ -211,7 +211,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 			<a title='Marcação de Consultas' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="30" height="30"></a>
 			<a title='Prescrições Médicas' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="30" height="30"></a>
 			<a title='Alterar Senha' href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="30" height="30"></a>
-			<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="30" height="40"></a>
+			<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="30" height="30"></a>
 		</div>
 	</div>
 
@@ -341,14 +341,14 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 							<div class="container" class="text-primary">
 
 								<p>
-								<h2 class=" text-primary" Align="justify">
+								<h3 class=" text-primary" Align="justify">
 
 									Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
 									Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
 									tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
 									ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
 
-								</h2>
+								</h3>
 								</p>
 							</div>
 						</div>
