@@ -224,7 +224,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             <input type="hidden" id="input_relatorio" name="input_relatorio" value="<?php echo $op_relatorio; ?>">
             <!-- pesquisa -->
             <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt=''
-                    width='16' height='16'></span> Buscar</button>
+                    width='20' height='20'></span> Buscar</button>
             <a class="btn btn-info" href="/smedweb/menu.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>

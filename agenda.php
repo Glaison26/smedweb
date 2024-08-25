@@ -106,7 +106,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
         case "6":
             $c_dia_semana = 'Sábado';
             break;
-        case "7":
+        case "0":
             $c_dia_semana = 'Domingo';
             break;
     }
@@ -370,7 +370,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
             </div>
             <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>
-            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+            <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="20" height="20"> Voltar</a>
             <br>
             <div class="panel panel-Linght">
                 <div class="panel-heading">
@@ -406,7 +406,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
                 <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
                 <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico Agendamento</a></li>
-
             </ul>
             <!-- aba da agenda-->
             <div class="tab-content">
@@ -419,7 +418,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                 if (isset($d_data)) {
 
                                     echo "
-                            <h5>Agenda de  $c_profissional | $c_dia_semana  $c_mostradata <h5>
+                            <h4>Agenda de  $c_profissional | $c_dia_semana  $c_mostradata <h4>
                             ";
                                 }
                                 ?>

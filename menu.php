@@ -229,6 +229,14 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 		<main>
 
 			<div style="padding-top:10px;">
+				<div class="panel">
+					<div class="panel-heading text-center text-info">
+						<br>
+						<h2><img Align="left" src="\smedweb\images\smed2.png"><strong>Menu Inicial</strong></h2>
+						<br>
+					</div>
+
+				</div>
 				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-blue ftco-navbar-light" id="ftco-navbar">
 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -325,38 +333,36 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 					?>
 					<div class="container" class="text-primary">
 						<div class="panel-body text-left">
-							<h5>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h5>
+							<h4>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h4>
 						</div>
 
 					</div>
 
 				</div>
-
-
 				<hr>
 				<div class="container">
 					<div class="row">
-
+						<div class="col-sm">
+							<div class="container" Align="left">
+								<img class="img-thumbnail" class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
+							</div>
+						</div>
 						<div class="col-sm-7">
 							<div class="container" class="text-primary">
 
 								<p>
-								<h3 class=" text-primary" Align="justify">
+								<h3 class="text-black-50" Align="justify">
 
 									Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
 									Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
-									tornando a administração do seu negócio mais simples e eficiente. Explore conosco as principais funcionalidades deste sistema e descubra como
+									tornando a administração do seu negócio mais simples e eficiente.<br><br> Explore conosco as principais funcionalidades deste sistema e descubra como
 									ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
 
 								</h3>
 								</p>
 							</div>
 						</div>
-						<div class="col-sm">
-							<div class="container" Align="left">
-								<img class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
-							</div>
-						</div>
+
 						<div class="col-sm-0">
 						</div>
 					</div>
