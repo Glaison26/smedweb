@@ -232,7 +232,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 				<div class="panel">
 					<div class="panel-heading text-center text-info">
 						<br>
-						<h2><img Align="left" src="\smedweb\images\smed2.png"><strong>Menu Inicial</strong></h2>
+						<h1><img Align="left" src="\smedweb\images\smed2.png"><strong>Sistema Médico</strong></h1>
 						<br>
 					</div>
 
@@ -245,7 +245,12 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 
 					<div class="collapse navbar-collapse" id="ftco-nav">
 
-
+						<div class="navbar-header">
+							<br>
+							<a class="navbar-brand" href="#">
+								<h5><span class="glyphicon glyphicon-home" aria-hidden="true"></span><strong>  Menu Inicial</strong></h5>
+							</a>
+						</div>
 						<ul class="navbar-nav ml-auto">
 
 							<li class="nav-item dropdown">
