@@ -5,6 +5,7 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
 	die('Acesso não autorizado!!!');
 }
+$_SESSION['sql'] = "";
 // pega usuário e seu perfil
 // conexão dom o banco de dados
 include("conexao.php");

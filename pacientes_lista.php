@@ -59,21 +59,15 @@ if (($c_linha2['fichaclinica_excluir'] == 'S') || ($c_linha2['tipo'] == '1')) {
 $c_sql = "";
 $_SESSION['incagenda'] = false;
 // faço a Leitura da tabela de pacientes com sql
-if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
-    $c_pesquisa = $_POST['pesquisa'];
     $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
-    FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id";
-    if ($c_pesquisa != ' ') {
-        $c_sql = $c_sql . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
-    }
-    $c_sql = $c_sql . " order by pacientes.nome";
+    FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id order by pacientes.nome";
 
     $result = $conection->query($c_sql);
     // verifico se a query foi correto
     if (!$result) {
         die("Erro ao Executar Sql!!" . $conection->connect_error);
     }
-}
+
 
 ?>
 
@@ -90,7 +84,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
                 if (acesso == 'S') {
                     window.location.href = "/smedweb/pacientes_excluir.php?id=" + id;
                 } else {
-                    alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');  
+                    alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }
             }
         }
@@ -169,18 +163,10 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             <input type="hidden" id="input_evento" name="input_evento" value="<?php echo $op_eventos; ?>">
             <input type="hidden" id="input_excluir" name="input_excluir" value="<?php echo $op_excluir; ?>">
             <!-- -->
-            <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png'
-                    alt='' width='20' height='16'></span> Buscar</button>
+           
             <a class="btn btn-success" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
             <a class="btn btn-secondary" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
-            <hr>
-            <div class="row mb-3">
-                <label for="up_parametroField" class="col-md-2 form-label">Nome para Busca</label>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" id="pesquisa" name="pesquisa">
-                </div>
-            </div>
+         
         </form>
         <hr>
         <table class="table display table-bordered tabpacientes">

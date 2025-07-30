@@ -26,8 +26,6 @@ $_SESSION['telefonepac'] = $c_linha['telefone'];
 $_SESSION['emailpac'] = $c_linha['email'];
 $_SESSION['matriculapac'] = $c_linha['matricula'];
 
-
-
 // atualização do horario desmarcado na agenda
 $c_sql = "Update agenda" .
 " SET nome = '', id_convenio = '3', matricula = '',  telefone = '', email = '', observacao = '' where id=$c_id";
