@@ -6,7 +6,6 @@ if (!isset($_SESSION['newsession'])) {
 
 // conexão dom o banco de dados
 include("conexao.php");
-
 // rotina de edição
 $c_id = $_GET['id'];
 $c_sql_dados = "select * from agenda where id='$c_id'";
@@ -25,7 +24,6 @@ $_SESSION['conveniopac'] = $c_linha['id_convenio'];
 $_SESSION['telefonepac'] = $c_linha['telefone'];
 $_SESSION['emailpac'] = $c_linha['email'];
 $_SESSION['matriculapac'] = $c_linha['matricula'];
-
 // atualização do horario desmarcado na agenda
 $c_sql = "Update agenda" .
 " SET nome = '', id_convenio = '3', matricula = '',  telefone = '', email = '', observacao = '' where id=$c_id";

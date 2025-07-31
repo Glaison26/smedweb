@@ -207,7 +207,7 @@ $_SESSION['incagenda'] = false;
                     <a class='btn btn-light btn-sm' title='Editar Paciênte' href='javascript:func()'onclick='editar($c_linha[id])'><span class='glyphicon glyphicon-pencil'> Editar</span></a>
                     <a class='btn btn-light btn-sm' title='História Clinica' href='javascript:func()'onclick='historia($c_linha[id])'><span class='glyphicon glyphicon-header'> História</span></a>
                     <a class='btn btn-light btn-sm' title='Imagens' href='javascript:func()'onclick='imagem($c_linha[id])'><img src='\smedweb\images\imagens.png' alt='' width='20' height='20'> Imagens</a>
-                    <a class='btn btn-light btn-sm' title='Eventos' href='javascript:func()'onclick='evento($c_linha[id])'><span class='glyphicon glyphicon-book'> Eventos</span></a>
+                    
                     <a class='btn btn-light btn-sm' title='Excluir Paciênte' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'> Excluir</span></a>
                     </td>
 
