@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   KEY `FK_agenda_convenios` (`id_convenio`),
   CONSTRAINT `FK_agenda_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_agenda_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29270 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agenda: ~375 rows (aproximadamente)
+-- Copiando dados para a tabela smed.agenda: ~1.147 rows (aproximadamente)
 INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `horario`, `Nome`, `telefone`, `email`, `observacao`, `matricula`) VALUES
 	(1, 1, 1, '2024-07-22', '1', '09:00:00', 'Jose da silva', '(31) 6546-5654', 'teste@gmail.com', 'teste', NULL),
 	(2, 1, 1, '2024-07-22', '1', '09:30:00', 'Lucio Machado', '(31) 5465-4654', 'teste@hotmail.com', 'teste2', NULL),
@@ -1187,7 +1187,157 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(29116, 1, 3, '2024-08-31', '6', '10:00:00', NULL, NULL, NULL, NULL, NULL),
 	(29117, 1, 3, '2024-08-31', '6', '10:20:00', NULL, NULL, NULL, NULL, NULL),
 	(29118, 1, 3, '2024-08-31', '6', '10:40:00', NULL, NULL, NULL, NULL, NULL),
-	(29119, 1, 3, '2024-08-31', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL);
+	(29119, 1, 3, '2024-08-31', '6', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29120, 1, 3, '2025-07-21', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29121, 1, 3, '2025-07-21', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29122, 1, 3, '2025-07-21', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29123, 1, 3, '2025-07-21', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29124, 1, 3, '2025-07-21', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29125, 1, 3, '2025-07-21', '1', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29126, 1, 3, '2025-07-21', '1', '14:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29127, 1, 3, '2025-07-21', '1', '14:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29128, 1, 3, '2025-07-21', '1', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29129, 1, 3, '2025-07-21', '1', '15:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29130, 1, 3, '2025-07-21', '1', '15:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29131, 1, 3, '2025-07-21', '1', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29132, 1, 3, '2025-07-21', '1', '16:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29133, 1, 3, '2025-07-21', '1', '16:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29134, 1, 3, '2025-07-21', '1', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29135, 1, 3, '2025-07-21', '1', '17:20:00', NULL, NULL, NULL, NULL, NULL),
+	(29136, 1, 3, '2025-07-21', '1', '17:40:00', NULL, NULL, NULL, NULL, NULL),
+	(29137, 1, 3, '2025-07-21', '1', '18:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29138, 1, 3, '2025-07-22', '2', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29139, 1, 3, '2025-07-22', '2', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29140, 1, 3, '2025-07-22', '2', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29141, 1, 3, '2025-07-22', '2', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29142, 1, 3, '2025-07-22', '2', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29143, 1, 3, '2025-07-22', '2', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29144, 1, 3, '2025-07-22', '2', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29145, 1, 3, '2025-07-22', '2', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29146, 1, 3, '2025-07-22', '2', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29147, 1, 3, '2025-07-22', '2', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29148, 1, 3, '2025-07-22', '2', '13:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29149, 1, 3, '2025-07-22', '2', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29150, 1, 3, '2025-07-22', '2', '13:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29151, 1, 3, '2025-07-22', '2', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29152, 1, 3, '2025-07-22', '2', '14:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29153, 1, 3, '2025-07-22', '2', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29154, 1, 3, '2025-07-22', '2', '14:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29155, 1, 3, '2025-07-22', '2', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29156, 1, 3, '2025-07-22', '2', '15:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29157, 1, 3, '2025-07-22', '2', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29158, 1, 3, '2025-07-22', '2', '15:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29159, 1, 3, '2025-07-22', '2', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29160, 1, 3, '2025-07-22', '2', '16:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29161, 1, 3, '2025-07-22', '2', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29162, 1, 3, '2025-07-22', '2', '16:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29163, 1, 3, '2025-07-22', '2', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29164, 1, 3, '2025-07-22', '2', '17:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29165, 1, 3, '2025-07-22', '2', '17:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29166, 1, 3, '2025-07-22', '2', '17:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29167, 1, 3, '2025-07-22', '2', '18:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29168, 1, 3, '2025-07-23', '3', '07:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29169, 1, 3, '2025-07-23', '3', '07:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29170, 1, 3, '2025-07-23', '3', '07:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29171, 1, 3, '2025-07-23', '3', '07:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29172, 1, 3, '2025-07-23', '3', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29173, 1, 3, '2025-07-23', '3', '08:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29174, 1, 3, '2025-07-23', '3', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29175, 1, 3, '2025-07-23', '3', '08:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29176, 1, 3, '2025-07-23', '3', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29177, 1, 3, '2025-07-23', '3', '09:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29178, 1, 3, '2025-07-23', '3', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29179, 1, 3, '2025-07-23', '3', '09:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29180, 1, 3, '2025-07-23', '3', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29181, 1, 3, '2025-07-23', '3', '10:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29182, 1, 3, '2025-07-23', '3', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29183, 1, 3, '2025-07-23', '3', '10:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29184, 1, 3, '2025-07-23', '3', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29185, 1, 3, '2025-07-23', '3', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29186, 1, 3, '2025-07-23', '3', '12:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29187, 1, 3, '2025-07-23', '3', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29188, 1, 3, '2025-07-23', '3', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29189, 1, 3, '2025-07-23', '3', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29190, 1, 3, '2025-07-23', '3', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29191, 1, 3, '2025-07-23', '3', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29192, 1, 3, '2025-07-23', '3', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29193, 1, 3, '2025-07-23', '3', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29194, 1, 3, '2025-07-23', '3', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29195, 1, 3, '2025-07-23', '3', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29196, 1, 3, '2025-07-24', '4', '07:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29197, 1, 3, '2025-07-24', '4', '07:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29198, 1, 3, '2025-07-24', '4', '08:00:00', '', '', '', '', ''),
+	(29199, 1, 3, '2025-07-24', '4', '08:30:00', '', '', '', '', ''),
+	(29200, 1, 3, '2025-07-24', '4', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29201, 1, 3, '2025-07-24', '4', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29202, 1, 3, '2025-07-24', '4', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29203, 1, 3, '2025-07-24', '4', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29204, 1, 3, '2025-07-24', '4', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29205, 1, 3, '2025-07-24', '4', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29206, 1, 4, '2025-07-24', '4', '12:00:00', 'teste', '(52) 34533-4534', 'teste@gmail.com', NULL, 'fasdf'),
+	(29207, 1, 3, '2025-07-24', '4', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29208, 1, 3, '2025-07-24', '4', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29209, 1, 3, '2025-07-24', '4', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29210, 1, 3, '2025-07-24', '4', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29211, 1, 3, '2025-07-24', '4', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29212, 1, 3, '2025-07-24', '4', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29213, 1, 3, '2025-07-24', '4', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29214, 1, 3, '2025-07-24', '4', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29215, 1, 3, '2025-07-24', '4', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29216, 1, 3, '2025-07-25', '5', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29217, 1, 3, '2025-07-25', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29218, 1, 3, '2025-07-25', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29219, 1, 3, '2025-07-25', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29220, 1, 3, '2025-07-25', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29221, 1, 3, '2025-07-25', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29222, 1, 3, '2025-07-25', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29223, 1, 3, '2025-07-25', '5', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29224, 1, 3, '2025-07-25', '5', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29225, 1, 3, '2025-07-25', '5', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29226, 1, 3, '2025-07-25', '5', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29227, 1, 3, '2025-07-25', '5', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29228, 1, 3, '2025-07-25', '5', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29229, 1, 3, '2025-07-25', '5', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29230, 1, 3, '2025-07-25', '5', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29231, 1, 3, '2025-07-25', '5', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29232, 1, 3, '2025-07-25', '5', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29233, 1, 3, '2025-07-25', '5', '17:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29234, 1, 3, '2025-07-25', '5', '19:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29235, 1, 3, '2025-07-25', '5', '19:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29236, 1, 3, '2025-07-25', '5', '19:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29237, 1, 3, '2025-07-25', '5', '19:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29238, 1, 3, '2025-07-25', '5', '20:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29239, 1, 3, '2025-07-25', '5', '20:15:00', NULL, NULL, NULL, NULL, NULL),
+	(29240, 1, 3, '2025-07-25', '5', '20:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29241, 1, 3, '2025-07-25', '5', '20:45:00', NULL, NULL, NULL, NULL, NULL),
+	(29242, 1, 3, '2025-07-25', '5', '21:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29243, 4, 3, '2025-07-30', '3', '08:00:00', '', '', '', '', ''),
+	(29244, 4, 3, '2025-07-30', '3', '08:30:00', '', '', '', '', ''),
+	(29245, 4, 3, '2025-07-30', '3', '09:00:00', '', '', '', '', ''),
+	(29246, 4, 3, '2025-07-30', '3', '09:30:00', '', '', '', '', ''),
+	(29247, 4, 2, '2025-07-30', '3', '10:00:00', 'Glaison Queiroz', '(52) 34533-4534', 'teste@gmail.com', NULL, '747474'),
+	(29248, 4, 3, '2025-07-30', '3', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29249, 4, 2, '2025-07-30', '3', '11:00:00', 'Glaison Queiroz', '(31) 5687-7777', '', '', ''),
+	(29250, 1, 3, '2025-07-31', '4', '07:00:00', '', '', '', '', ''),
+	(29251, 1, 3, '2025-07-31', '4', '07:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29252, 1, 3, '2025-07-31', '4', '08:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29253, 1, 3, '2025-07-31', '4', '08:30:00', '', '', '', '', ''),
+	(29254, 1, 4, '2025-07-31', '4', '09:00:00', 'Glaison Queiroz', '(52) 34533-4534', 'teste@gmail.com', NULL, '747474'),
+	(29255, 1, 3, '2025-07-31', '4', '09:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29256, 1, 3, '2025-07-31', '4', '10:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29257, 1, 3, '2025-07-31', '4', '10:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29258, 1, 3, '2025-07-31', '4', '11:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29259, 1, 3, '2025-07-31', '4', '11:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29260, 1, 3, '2025-07-31', '4', '12:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29261, 1, 3, '2025-07-31', '4', '13:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29262, 1, 3, '2025-07-31', '4', '13:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29263, 1, 3, '2025-07-31', '4', '14:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29264, 1, 3, '2025-07-31', '4', '14:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29265, 1, 3, '2025-07-31', '4', '15:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29266, 1, 3, '2025-07-31', '4', '15:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29267, 1, 3, '2025-07-31', '4', '16:00:00', NULL, NULL, NULL, NULL, NULL),
+	(29268, 1, 3, '2025-07-31', '4', '16:30:00', NULL, NULL, NULL, NULL, NULL),
+	(29269, 1, 3, '2025-07-31', '4', '17:00:00', NULL, NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.agendaconfig
 CREATE TABLE IF NOT EXISTS `agendaconfig` (
@@ -1209,9 +1359,9 @@ CREATE TABLE IF NOT EXISTS `agendaconfig` (
   CONSTRAINT `FK_agendaconfig_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agendaconfig: ~14 rows (aproximadamente)
+-- Copiando dados para a tabela smed.agendaconfig: ~21 rows (aproximadamente)
 INSERT INTO `agendaconfig` (`id`, `id_profissional`, `dia`, `inicio1`, `fim1`, `duracao1`, `inicio2`, `fim2`, `duracao2`, `inicio3`, `fim3`, `duracao3`, `Habilitado`) VALUES
-	(21, 1, 1, '09:00:00', '11:00:00', 30, '14:00:00', '18:00:00', 15, '00:00:00', '00:00:00', 0, NULL),
+	(21, 1, 1, '09:00:00', '11:00:00', 30, '14:00:00', '18:00:00', 20, '00:00:00', '00:00:00', 0, NULL),
 	(22, 1, 2, '08:00:00', '12:00:00', 30, '13:00:00', '18:00:00', 15, '00:00:00', '00:00:00', 0, NULL),
 	(23, 1, 3, '07:00:00', '11:00:00', 15, '12:00:00', '17:00:00', 30, '00:00:00', '00:00:00', 0, NULL),
 	(24, 1, 4, '07:00:00', '12:00:00', 30, '13:00:00', '17:00:00', 30, '00:00:00', '00:00:00', 0, NULL),
@@ -1296,6 +1446,20 @@ INSERT INTO `componentes` (`id`, `id_grupo_componente`, `descricao`, `unidade`) 
 	(21, 2, 'Amônia', 'un'),
 	(22, 3, 'Fosfato', 'un');
 
+-- Copiando estrutura para tabela smed.config
+CREATE TABLE IF NOT EXISTS `config` (
+  `id` int NOT NULL,
+  `nome_clinica` varchar(200) DEFAULT NULL,
+  `endereco_clinica` varchar(200) DEFAULT NULL,
+  `telefone_clinica` varchar(25) DEFAULT NULL,
+  `email_clinica` varchar(120) DEFAULT NULL,
+  `cidade_clinica` varchar(150) DEFAULT NULL,
+  `cnpj_clinica` varchar(18) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Copiando dados para a tabela smed.config: ~0 rows (aproximadamente)
+
 -- Copiando estrutura para tabela smed.convenios
 CREATE TABLE IF NOT EXISTS `convenios` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -1324,7 +1488,7 @@ CREATE TABLE IF NOT EXISTS `convenios` (
   CONSTRAINT `FK_convenios_tabela` FOREIGN KEY (`id_tabela`) REFERENCES `tabela` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.convenios: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.convenios: ~4 rows (aproximadamente)
 INSERT INTO `convenios` (`id`, `id_tabela`, `nome`, `razaosocial`, `cnpj`, `inscestad`, `inscmunicipal`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `diaenvio`, `diapagamento`, `percentch`, `contato`, `obs`) VALUES
 	(1, 2, 'Unimed', 'Unimed SA', '75515874000180', '411432', '41234123', 'teste', 'tste', 'Belo Horizonte', '34505480', 'MG', '(31) 589-6369', '(31) 6958-5544', 'unimed@unimed.com.br', 'teste', '', '', '100', 'Joelson', _binary ''),
 	(2, 1, 'Casu', 'Casu SA', '00172442000115', '', '', '', '', '', '', 'AC', '(48) 2759-4679', '(31) 6995-5555', 'suporte@sabara.mg.gov.br', '', '', '', '', 'Glaison', _binary ''),
@@ -1340,7 +1504,7 @@ CREATE TABLE IF NOT EXISTS `datas_suprimidas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.datas_suprimidas: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.datas_suprimidas: ~3 rows (aproximadamente)
 INSERT INTO `datas_suprimidas` (`id`, `data_inicio`, `data_fim`, `motivo`) VALUES
 	(1, '2024-12-23', '2024-12-31', 'Férias de Fim de Ano'),
 	(2, '2024-10-01', '2024-10-04', 'Seminário de Dermatologia'),
@@ -1420,7 +1584,7 @@ CREATE TABLE IF NOT EXISTS `grupos_formulas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupos_formulas: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.grupos_formulas: ~3 rows (aproximadamente)
 INSERT INTO `grupos_formulas` (`id`, `descricao`) VALUES
 	(1, 'formula tipo 1'),
 	(2, 'formula tipo 2'),
@@ -1460,7 +1624,7 @@ CREATE TABLE IF NOT EXISTS `grupo_componentes` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.grupo_componentes: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela smed.grupo_componentes: ~6 rows (aproximadamente)
 INSERT INTO `grupo_componentes` (`id`, `descricao`) VALUES
 	(1, 'Exames Acidos'),
 	(2, 'Exames de sangue'),
@@ -1478,13 +1642,14 @@ CREATE TABLE IF NOT EXISTS `historia` (
   PRIMARY KEY (`id`),
   KEY `FK_historia_pacientes` (`id_paciente`),
   CONSTRAINT `FK_historia_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.historia: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.historia: ~3 rows (aproximadamente)
 INSERT INTO `historia` (`id`, `id_paciente`, `historia`, `data`) VALUES
 	(1, 1, _binary 0x0d0a0d0a30382f30382f323032340d0a4f7269656e7461c3a7c3a36f204dc3a96469636120456d697469646f0d0a436f72726572203130206b6d0d0a50756c617220436f7264610d0a436f7274617220616c696d656e746f7320476f726475726f736f73, NULL),
 	(2, 3, _binary 0x0d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746578746f204152454f4c41520d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746578746f204152454f4c41520d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a436f6d6572206d656e6f732061c3a775636172, NULL),
-	(6, 4, _binary 0x436f6d6572206d656e6f732061c3a7756361720d0a0d0a0d0a30352f30382f323032340d0a50726573637269c3a7c3a36f206465204d65646963616d656e746f20456d697469646f0d0a504f564944494e452e2e2e2e0d0a50534f5245582e2e2e2e0d0a54594c454e4f4c2e2e2e2e0d0a564954414e4f4c2d412e2e2e2e0d0a0d0a0d0a0d0a, NULL);
+	(6, 4, _binary 0x436f6d6572206d656e6f732061c3a7756361720d0a0d0a0d0a30352f30382f323032340d0a50726573637269c3a7c3a36f206465204d65646963616d656e746f20456d697469646f0d0a504f564944494e452e2e2e2e0d0a50534f5245582e2e2e2e0d0a54594c454e4f4c2e2e2e2e0d0a564954414e4f4c2d412e2e2e2e0d0a0d0a0d0a0d0a, NULL),
+	(7, 5, _binary 0x417465737461646f204dc3a96469636f20456d697469646f0d0a0d0a74657374650d0a0d0a0d0a33312f30372f323032350d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746573746520646520746573746f207061726120524450500d0a, NULL);
 
 -- Copiando estrutura para tabela smed.imagens_pacientes
 CREATE TABLE IF NOT EXISTS `imagens_pacientes` (
@@ -1515,7 +1680,7 @@ CREATE TABLE IF NOT EXISTS `indices` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.indices: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela smed.indices: ~7 rows (aproximadamente)
 INSERT INTO `indices` (`id`, `descricao`, `valor`) VALUES
 	(1, 'Real', 1),
 	(21, 'Dollar', 5.5),
@@ -1613,13 +1778,14 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   KEY `FK_pacientes_profissionais` (`id_profissional`),
   CONSTRAINT `FK_pacientes_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_pacientes_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.pacientes: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.pacientes: ~4 rows (aproximadamente)
 INSERT INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pai`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
 	(1, 1, 2, 'Glaison Queiroz ', 'M', 'Faio', '1968-10-26', 'Casado', 'Emilia ', 'Valdir Queiroz', 'Ruada Intendência, 316', 'Centro', 'Sabará', '34505480', 'SP', 'glaison26.queiroz@gmail.com', '(31)36722550', '(31)984262508', 'Programador', 'não se aplica', '2024-07-01', _binary 0x7465737465, 'Clinica', 'Brasileiro', 'Sabará', '88845665', '69551022653', 'm4662097'),
 	(3, 2, NULL, 'Maria da Graça', 'F', 'Leuco', '1985-11-26', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 6995-5666', '', '', '', '2024-07-03', _binary '', '', '', '', '45646546', '', ''),
-	(4, 2, NULL, 'Florentina de Jesus', 'M', 'Leuco', '1940-10-08', 'Solteiro', '', '', '', '', '', '', 'MG', 'flore@gmail.com', '(31) 3671-2563', '', '', '', '2024-07-26', _binary '', '', '', '', '8032566', '', '');
+	(4, 2, NULL, 'Florentina de Jesus', 'M', 'Leuco', '1940-10-08', 'Solteiro', '', '', '', '', '', '', 'MG', 'flore@gmail.com', '', '', '', '', '2024-07-26', _binary '', '', '', '', '8032566', '69551022653', ''),
+	(5, 2, NULL, 'Glaison Queiroz', 'M', 'Leuco', '2025-07-02', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 5687-7777', '', '', '', '2025-07-09', _binary '', '', '', '', '', '69551022653', '');
 
 -- Copiando estrutura para tabela smed.parametros_eventos
 CREATE TABLE IF NOT EXISTS `parametros_eventos` (
@@ -1746,7 +1912,7 @@ CREATE TABLE IF NOT EXISTS `profissionais` (
   CONSTRAINT `FK_profissionais_especialidades` FOREIGN KEY (`id_especialidade`) REFERENCES `especialidades` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.profissionais: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.profissionais: ~3 rows (aproximadamente)
 INSERT INTO `profissionais` (`id`, `id_especialidade`, `nome`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `fone1`, `fone2`, `email`, `url`, `identidade`, `cpf`, `datanasc`, `sexo`, `gera_agenda`, `observacao`, `crm`) VALUES
 	(1, 2, 'Dr. Arthur Queiroz', '', '', '', '', 'MG', '(48) 2759-4679', '(31) 2121-2223', 'suporte@sabara.mg.gov.br', NULL, '4565465', '69551022653', '2009-07-13', 'M', 'S', _binary 0x7465737465206465206f627365727661c3a7c3a36f, '565465'),
 	(2, 1, 'Dra. Maria de Souza Cruz', 'Beco da Chica,100', 'Campeche', 'Belo Horizonte', '3450480', 'MG', '(31) 589-6369', '(31) 6995-5555', 'dasilva@gmail.com', NULL, '', '07415768051', '1997-11-04', 'M', 'S', _binary '', 'crm/mg 456456'),

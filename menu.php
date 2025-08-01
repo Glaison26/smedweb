@@ -163,11 +163,16 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso tabelas
 if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_financeiro2 = "\smedweb\tabelas_lista.php";
+	$op_financeiro2 = '\smedweb\tabelas_lista.php';
 } else {
 	$op_financeiro2 = "javascript:negar()";
 }
-
+// acesso as configurações somente para o administrador
+if (($c_linha['tipo'] == '1')) {
+	$op_configuracoes = "\smedweb\configuracoes.php";
+} else {
+	$op_configuracoes = "javascript:negar()";
+}
 
 ?>
 
@@ -217,8 +222,6 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	</div>
 
 	<body class="sb-nav-fixed">
-
-
 		<!-- função para negar acesso ao usuário não autorizado -->
 		<script>
 			function negar() {
@@ -249,7 +252,7 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 						<div class="navbar-header">
 							<br>
 							<a class="navbar-brand" href="#">
-								<h5><span class="glyphicon glyphicon-home" aria-hidden="true"></span><strong>  Menu Inicial</strong></h5>
+								<h5><span class="glyphicon glyphicon-home" aria-hidden="true"></span><strong> Menu Inicial</strong></h5>
 							</a>
 						</div>
 						<ul class="navbar-nav ml-auto">
@@ -308,7 +311,8 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 									<a class="dropdown-item" href=<?php echo $op_cad_especialidades; ?>><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
 									<a class="dropdown-item" href=<?php echo $op_cad_parametros; ?>><img src="\smedweb\images\parametros.png" alt="" width="20" height="20"> Parâmetros para Eventos...</a>
 									<a class="dropdown-item" href=<?php echo $op_cad_diagnosticos; ?>><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>
-
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_configuracoes; ?>><img src="\smedweb\images\config.png" alt="" with=20 height="20"> Configurações Gerais...</a>
 								</div>
 							</li>
 							<li class="nav-item dropdown">
