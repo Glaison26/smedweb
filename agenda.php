@@ -16,6 +16,7 @@ $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
+
 // controle de acesso para o usuário
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar
@@ -51,6 +52,18 @@ if (($c_linha['agenda_remanejar'] == 'S') || ($c_linha['tipo'] == '1')) {
     $op_remanejar = "S";
 } else {
     $op_remanejar = "N";
+}
+// executo query se já foi escolhido médico e data
+if ($_SESSION['sql'] != '') {
+    $c_sql2 = $_SESSION['sql'];
+    $result2 = $conection->query($c_sql2);
+    
+    // verifico se a query foi correto
+    if (!$result2) {
+        die("Erro ao Executar Sql !!" . $conection->connect_error);
+    }
+} else {
+    $c_sql2 = "";
 }
 // faço a Leitura da tabela de pacientes com sql
 if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de paciente
@@ -116,6 +129,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     JOIN convenios ON agenda.id_convenio=convenios.id
     WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
     $result2 = $conection->query($c_sql2);
+    $_SESSION['sql'] = $c_sql2;
 }
 
 // pesquisa de histórico de agenda 
@@ -230,7 +244,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     <!-- funcao para chamar rotina para colar marcação de agenda -->
     <script>
         var acesso = $('#input_remanejar').val();
-
         function colar(id) {
             var acesso = $('#input_remanejar').val();
             if (acesso == "S") {
@@ -244,11 +257,15 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     <script>
         function cortar(id) {
             var acesso = $('#input_remanejar').val();
-            if (acesso == "S") {
-                window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
-            } else {
-                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            var resposta = confirm("Confirma Operação?");
+            if (resposta == true) {
+                if (acesso == "S") {
+                    window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
+                } else {
+                    alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+                }
             }
+          
         }
     </script>
 
@@ -682,7 +699,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                    
                 </div>
                 </form>
             </div>

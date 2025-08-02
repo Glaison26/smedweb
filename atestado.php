@@ -4,9 +4,13 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
+
+
 include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 include("links.php");
+
+$_SESSION['atestado'] = ""; // inicializa a variável de sessão para o atestado
 
 if (isset($_GET["id"])) {
     $c_id = $_GET["id"]; // pego a id do paciente
@@ -64,6 +68,13 @@ if ((isset($_POST["btninclui"]))) {
     $c_linha_atestado = $result_texto->fetch_assoc();
     $c_atestado = $c_linha_atestado['texto'];
 }
+
+// botão para emissão de atestado
+if ((isset($_POST["btnprint"]))) {
+    $_SESSION['atestado'] = $_POST['obs'];
+    $_SESSION['paciente'] = $c_linha['nome'];
+    echo "<script> window.open('/smedweb/prescricoes/rel_atestado.php?id=', '_blank');</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +83,7 @@ if ((isset($_POST["btninclui"]))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
 </head>
 
 <body>
@@ -141,23 +152,27 @@ if ((isset($_POST["btninclui"]))) {
             <h5>Emissão de atestado Médico<h5>
         </div>
     </div>
+    <form method="post">
+        <div class="container -my5">
 
-    <div class="container -my5">
-        <form method="post">
-            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado</a>
+            <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir atestado'>
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado
+            </button>
+
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>
-                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado</button>
+                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Atestado
+            </button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_atestado ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
-        </form>
-        <hr>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+            <!--  </form> -->
+            <hr>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+                </div>
             </div>
-        </div>
-        <!-- Formulário com os profissionais para seleção -->
-        <form method="post">
+            <!-- Formulário com os profissionais para seleção -->
+            <!--<form method="post"> -->
 
             <div class="panel panel-Linght">
                 <div class="panel-heading">
@@ -186,41 +201,43 @@ if ((isset($_POST["btninclui"]))) {
                 </div>
             </div>
 
-        </form>
-        <!-- fim do formulário de seleção de profissionais -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Atestado</a></li>
-            <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Atestados</a></li>
-        </ul>
-        <!-- paginas de edição e modelos de atestados -->
-        <div class="tab-content">
-            <!-- aba de edição do atestado -->
-            <div role="tabpanel" class="tab-pane active" id="atestado">
-                <div style="padding-top:5px;">
-                    <div style="padding-top:20px;">
-                        <div class="form-group">
-                            <label class="col-sm-2 col-form-label">Texto do Atestado</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
+
+            <!-- fim do formulário de seleção de profissionais -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Atestado</a></li>
+                <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Atestados</a></li>
+            </ul>
+            <!-- paginas de edição e modelos de atestados -->
+            <div class="tab-content">
+                <!-- aba de edição do atestado -->
+
+                <div role="tabpanel" class="tab-pane active" id="atestado">
+                    <div style="padding-top:5px;">
+                        <div style="padding-top:20px;">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-form-label">Texto do Atestado</label>
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- aba de modelos de atestados -->
-            <div role="tabpanel" class="tab-pane" id="modelos">
-                <div style="padding-top:5px;">
-                    <div class="table-responsive=lg">
-                        <table class="table display table-bordered tabatestados">
-                            <thead class="thead">
-                                <tr class="info">
-                                    <th style='display:none' scope="col">No.</th>
-                                    <th scope="col">Atestado</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <form id='frmadd' method='POST' action=''>
+
+                <!-- aba de modelos de atestados -->
+                <div role="tabpanel" class="tab-pane" id="modelos">
+                    <div style="padding-top:5px;">
+                        <div class="table-responsive=lg">
+                            <table class="table display table-bordered tabatestados">
+                                <thead class="thead">
+                                    <tr class="info">
+                                        <th style='display:none' scope="col">No.</th>
+                                        <th scope="col">Atestado</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
                                     <!-- input para capturar id do atestado a ter o texto capturado -->
                                     <input type='hidden' name='id_atestado' id='id_atestado'>
                                     <?php
@@ -247,13 +264,15 @@ if ((isset($_POST["btninclui"]))) {
                                     ";
                                     }
                                     ?>
-                                </form>
-                            </tbody>
-                        </table>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </form>
     </div>
 
 

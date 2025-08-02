@@ -114,13 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_dataprimeira = date("Y-m-d", strtotime(str_replace('/', '-', $c_dataprimeira)));
 
     do {
-
-        if (
-            empty($c_nome) || empty($c_telefone1) || empty($d_datanasc) || empty($d_dataprimeira)
-        ) {
-            $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
-            break;
-        }
+      
         // consiste email
         if (!validaEmail($c_email) && !empty($c_email)) {
             $msg_erro = "E-mail informado inválido!!";
@@ -268,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Nome (*)</label>
                                 <div class="col-sm-5">
-                                    <input type="text" maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
+                                    <input type="text" required maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -333,11 +327,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Data Nascimento (*)</label>
                             <div class="col-sm-2">
-                                <input type="text" maxlength="10" class="form-control" placeholder="dd/mm/yyyy" name="datanasc" id="datanasc" onkeypress="mascaraData(this)" value="<?php echo $c_datanasc; ?>">
+                                <input type="text" required maxlength="10" class="form-control" placeholder="dd/mm/yyyy" name="datanasc" id="datanasc" onkeypress="mascaraData(this)" value="<?php echo $c_datanasc; ?>">
                             </div>
                             <label class="col-sm-1 col-form-label">1a. Consulta (*)</label>
                             <div class="col-sm-2">
-                                <input type="text" placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" id="dataprimeira" name="dataprimeira" value="<?php echo $c_dataprimeira; ?>">
+                                <input type="text" required placeholder="dd/mm/yyyy" onkeypress="mascaraData(this)" class="form-control" id="dataprimeira" name="dataprimeira" value="<?php echo $c_dataprimeira; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -411,7 +405,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Convênio </label>
                                 <div class="col-sm-3">
-                                    <select class="form-control form-control-lg" id="convenio" name="convenio">
+                                    <select class="form-control form-control-lg" id="convenio" required name="convenio">
                                         <?php
                                         $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
                                         $result = $conection->query($c_sql);
@@ -439,7 +433,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Fone 1 (*) </label>
                                 <div class="col-sm-2">
-                                    <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
+                                    <input type="tel" maxlength="25" required onkeyup="handlePhone(event)" class=" form-control" id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
                                 </div>
                                 <label class="col-sm-1 col-form-label">Fone 2</label>
                                 <div class="col-sm-2">
@@ -456,7 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <div class="form-group">
                                 <label class="col-sm-3 col-form-label">CPF</label>
                                 <div class="col-sm-2">
-                                    <input type="text" maxlength="11" placeholder="apenas numeros" class="form-control" name="cpf" value="<?php echo $c_cpf; ?>">
+                                    <input type="text" maxlength="11" required placeholder="apenas numeros" class="form-control" name="cpf" value="<?php echo $c_cpf; ?>">
                                 </div>
                                 <label class="col-sm-1 col-form-label">CI. </label>
                                 <div class="col-sm-2">
