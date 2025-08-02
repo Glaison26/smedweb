@@ -1,0 +1,11 @@
+<div class="panel panel-primary class">
+    <div class="panel-heading text-center">
+        <h4>GOP - Gestão Operacional</h4>
+        <h5>Novo Recurso<h5>
+    </div>
+</div>
+<br>
+
+<div class='alert alert-info' role='alert'>
+    <h5>Campos com (*) são obrigatórios</h5>
+</div>
