@@ -236,7 +236,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             </div>
         </form>
         <br>
-        <table class="table display table-bordered tabpacientes">
+        <table  class="table display table-bordered tabpacientes">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">Número</th>
