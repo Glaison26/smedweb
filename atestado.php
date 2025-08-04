@@ -71,6 +71,7 @@ if ((isset($_POST["btninclui"]))) {
 if ((isset($_POST["btnprint"]))) {
     $_SESSION['atestado'] = $_POST['obs'];
     $_SESSION['paciente'] = $c_linha['nome'];
+    $_SESSION['profissional'] = $_POST['profissional'];
     echo "<script> window.open('/smedweb/prescricoes/rel_atestado.php?id=', '_blank');</script>";
 }
 ?>
@@ -198,8 +199,6 @@ if ((isset($_POST["btnprint"]))) {
                     </div>
                 </div>
             </div>
-
-
             <!-- fim do formulário de seleção de profissionais -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#atestado" aria-controls="home" role="tab" data-toggle="tab">Editar Atestado</a></li>

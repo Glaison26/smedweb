@@ -7,25 +7,11 @@ $formato = $_GET['formato'] ?? 'html';
 try {
     // conexão dom o banco de dados
     include("..\conexao.php");
-    // sql para ler configurações padrões
-    $c_sql = "SELECT * FROM config";
-    $result = $conection->query($c_sql);
-    $registro = $result->fetch_assoc();
-    if (!$registro) {
-        throw new Exception('Configurações não encontradas.');
-    }
-    // atribuição dos valores do banco de dados as variáveis
-    $c_nome_clinica = $registro["nome_clinica"];    
-    $c_endereco_clinica = $registro['endereco_clinica'];
-    $c_telefone_clinica = $registro['telefone_clinica'];    
-    $c_email_clinica = $registro['email_clinica'];
-    $c_cidade_clinica = $registro['cidade_clinica'];
-    $c_cnpj_clinica = $registro['cnpj_clinica'];    
-    // Verifica se a sessão de atestado está definida
-    if (!isset($_SESSION['atestado'])) {
+       
+    $atestado = $_SESSION['atestado'];
+    if (!$atestado) {
         throw new Exception('Atestado não encontrado na sessão.');
     }
-    $atestado = $_SESSION['atestado'];
     $html = gerarHTMLAtestado($atestado);
 
     if ($formato === 'pdf') {
@@ -39,9 +25,49 @@ try {
 
 function gerarHTMLAtestado($atestado)
 {
+    include("..\conexao.php");
+     // sql para ler configurações padrões
+    $c_sql = "SELECT * FROM config";
+    $result = $conection->query($c_sql);
+    $registro = $result->fetch_assoc();
+    if (!$registro) {
+        throw new Exception('Configurações não encontradas.');
+    }
     $data_atual = date('d/m/Y');
     $paciente = $_SESSION['paciente'] ?? 'Paciente Desconhecido';
-  
+    // atribuição dos valores do banco de dados as variáveis
+    $c_nome_clinica = $registro["nome_clinica"];    
+    $c_endereco_clinica = $registro['endereco_clinica'];
+    $c_telefone_clinica = $registro['telefone_clinica'];    
+    $c_email_clinica = $registro['email_clinica'];
+    $c_cidade_clinica = $registro['cidade_clinica'];
+    $c_cnpj_clinica = $registro['cnpj_clinica'];    
+    // Verifica se a sessão de atestado está definida
+    if (!isset($_SESSION['atestado'])) {
+        throw new Exception('Atestado não encontrado na sessão.');
+    }
+    // Verifica se a sessão de profissional está definida
+    $profissional = $_SESSION['profissional'] ?? 'Profissional Desconhecido';
+     // sql para ler o profissional
+    $p_sql = "SELECT * FROM profissionais WHERE nome = '$profissional'";        
+    $p_result = $conection->query($p_sql);
+    if ($p_result->num_rows > 0) {
+        $p_linha = $p_result->fetch_assoc();
+        $crm = $p_linha['crm'];
+        // verifico a especialidade do profissional
+        $id_especialidade = $p_linha['id_especialidade'];
+        // sql para ler a especialidade
+        $e_sql = "SELECT descricao FROM especialidades WHERE id = '$id_especialidade'";
+        $e_result = $conection->query($e_sql);
+        if ($e_result->num_rows > 0) {
+            $e_linha = $e_result->fetch_assoc();
+            $especialidade = $e_linha['descricao'];
+        } else {
+            $especialidade = 'Especialidade Desconhecida';
+        }
+    } else {
+        $crm = 'CRM Desconhecido';
+    }
     return "
     <!DOCTYPE html>
     <html lang='pt-BR'>
@@ -154,11 +180,11 @@ function gerarHTMLAtestado($atestado)
     <body>
         <div class='header'>
             <div class='logo'>⚕️</div>
-            <div class='clinica-nome'>Clínica Médica São Paulo</div>
+            <div class='clinica-nome'>{$c_nome_clinica}</div>
             <div class='clinica-info'>
-                CRM: 123.456.789 | CNPJ: 12.345.678/0001-90<br>
-                Rua das Flores, 123 - Centro - São Paulo/SP<br>
-                Telefone: (11) 3456-7890 | Email: contato@clinicasp.com.br
+                CRM: {$crm} | CNPJ: {$c_cnpj_clinica}<br>
+                {$c_endereco_clinica} - {$c_cidade_clinica}<br>
+                Telefone: {$c_telefone_clinica} | Email: {$c_email_clinica}
             </div>
         </div>
         
@@ -166,22 +192,20 @@ function gerarHTMLAtestado($atestado)
         
         <div class='conteudo'>
             <p>Atesto para os devidos fins que o(a) paciente <span class='paciente'>{$paciente}</span> esteve sob meus cuidados médicos.</p>
-            
             <p><strong>Descrição:</strong> {$atestado}</p>
-            
             <p>Este atestado é válido para todos os fins legais e administrativos necessários.</p>
         </div>
         
         <div class='data-emissao'>
-            São Paulo, {$data_atual}
+            {$c_cidade_clinica}, {$data_atual}
         </div>
         
         <div class='assinatura'>
             <div class='linha-assinatura'></div>
             <div class='medico-info'>
-                <strong>Dr. João Silva</strong><br>
-                CRM-SP: 123.456<br>
-                Clínico Geral
+                <strong>{$profissional}</strong><br>
+                CRM: {$crm}<br>
+{                Especialidade: {$especialidade}
             </div>
         </div>
         
@@ -220,8 +244,4 @@ function gerarPDF($html, $atestado)
         }
     </script>";
 }
-?>
-
-
-
 ?>
