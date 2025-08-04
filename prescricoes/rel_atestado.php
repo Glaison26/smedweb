@@ -205,7 +205,7 @@ function gerarHTMLAtestado($atestado)
             <div class='medico-info'>
                 <strong>{$profissional}</strong><br>
                 CRM: {$crm}<br>
-{                Especialidade: {$especialidade}
+                Especialidade: {$especialidade}
             </div>
         </div>
         
