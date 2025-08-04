@@ -4,8 +4,6 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-
-
 include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 include("links.php");
@@ -164,7 +162,7 @@ if ((isset($_POST["btnprint"]))) {
             </button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_atestado ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
-            <!--  </form> -->
+            
             <hr>
             <div class="panel panel-success">
                 <div class="panel-heading">

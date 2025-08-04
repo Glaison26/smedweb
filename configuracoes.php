@@ -8,27 +8,47 @@ include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 include("links.php");
 
+// leitura do convenio através de sql usando id passada
+$c_sql = "select * from config";
+$result = $conection->query($c_sql);
+$registro = $result->fetch_assoc();
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
-
-    // leitura do convenio através de sql usando id passada
-    $c_sql = "select * from config";
-    $result = $conection->query($c_sql);
-    $registro = $result->fetch_assoc();
-
     if (!$registro) {
         header('location: /smedweb/menu.php');
         exit;
     }
     // atribuição dos valores do banco de dados as variáveis
-    $c_nome_clinica = $registro['nome_clinica'];
-    $c_endereco = $registro['endereco_clinica'];
-    $c_telefone = $registro['telefone_clinica'];
-    $c_email = $registro['email_clinica'];
-    $c_cidade = $registro['cidade_clinica'];
-    $c_cnpj = $registro['cnpj_clinica'];
+    $c_nome_clinica = $registro["nome_clinica"];
+    $c_endereco_clinica = $registro['endereco_clinica'];
+    $c_telefone_clinica = $registro['telefone_clinica'];
+    $c_email_clinica = $registro['email_clinica'];
+    $c_cidade_clinica = $registro['cidade_clinica'];
+    $c_cnpj_clinica = $registro['cnpj_clinica'];
+}
+// metodo post para salvar os dados do formulário
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $c_nome_clinica = $_POST['nome_clinica'];
+    $c_endereco_clinica = $_POST['endereco_clinica'];
+    $c_telefone_clinica = $_POST['telefone_clinica'];
+    $c_email_clinica = $_POST['email_clinica'];
+    $c_cidade_clinica = $_POST['cidade_clinica'];
+    $c_cnpj_clinica = $_POST['cnpj_clinica'];
+
+    // validação dos campos obrigatórios
+    if (empty($c_nome_clinica) || empty($c_endereco_clinica) || empty($c_telefone_clinica) || empty($c_email_clinica) || empty($c_cidade_clinica) || empty($c_cnpj_clinica)) {
+        $msg_erro = "Preencha todos os campos obrigatórios (*)";
+    } else {
+        // comando sql de atualização
+        $sql_update = "UPDATE config SET nome_clinica='$c_nome_clinica', endereco_clinica='$c_endereco_clinica', telefone_clinica='$c_telefone_clinica', email_clinica='$c_email_clinica', cidade_clinica='$c_cidade_clinica', cnpj_clinica='$c_cnpj_clinica' WHERE id=1";
+        if ($conection->query($sql_update) === TRUE) {
+            $msg_gravou = "Configurações atualizadas com sucesso!";
+        } else {
+            $msg_erro = "Erro ao atualizar configurações: " . $conection->error;
+        }
+    }
 }
 ?>
-
 
 <!--   front end da edição do formulário de configuração do sistema -->
 <!DOCTYPE html>
@@ -67,46 +87,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <h5>Campos com (*) são obrigatórios</h5>
         </div>
         <form method="post">
-            <input type="hidden" name="id" value="<?php echo $c_id; ?>">
-            <div class="mb-3 row">
-                <label class="col-md-3 form-label">Componentes para Fórmula</label>
-                <div class="col-sm-4">
-                    <select class="form-control form-control-lg" id="Sel_componente" name="Sel_componente">
-                        <?php
-                        $c_sql = "SELECT componentes.id, Componentes.descricao FROM Componentes ORDER BY Componentes.descricao";
-                        $result = $conection->query($c_sql);
-                        // insiro os registro do banco de dados na tabela 
-                        while ($c_linha = $result->fetch_assoc()) {
-                            echo "<option>$c_linha[descricao]</option>";
-                        }
-                        ?>
-                    </select>
-
-                </div>
-                <button class='btn btn-info' type="submit" id='btn_componente' name='btn_componente' title='Adicionar Componente a Fórmula'><span class='glyphicon glyphicon-plus'></span></button>
-            </div>
             <hr>
             <div class="mb-3 row">
-
-                <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
+                <label  class="col-md-3 form-label">Nome da Empresa (*)</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="up_descricaoField" name="up_descricaoField" value="<?php echo $c_descricao; ?>">
-                </div>
-
-            </div>
-
-
-            <div class="mb-3 row">
-                <label for="up_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
-                <div class="col-sm-6">
-                    <textarea class="form-control" id="up_formulaField" name="up_formulaField" rows="15"><?php echo $c_formula ?></textarea>
+                    <input type="text" required class="form-control" id="nome_clinica" name="nome_clinica" value="<?php echo $c_nome_clinica; ?>">
                 </div>
             </div>
+              <div class="mb-3 row">
+                <label class="col-md-3 form-label">Endereço (*)</label>
+                <div class="col-md-6">
+                    <input type="text" required class="form-control" id="endereco_clinica" name="endereco_clinica" value="<?php echo $c_endereco_clinica; ?>">
+                </div>
+            </div>
+             <div class="mb-3 row">
+                <label  class="col-md-3 form-label">Telefone (*)</label>
+                <div class="col-md-6">
+                    <input type="text" required class="form-control" id="telefone_clinica" name="telefone_clinica" value="<?php echo $c_telefone_clinica; ?>">
+                </div>
+            </div>
+           
+             <div class="mb-3 row">
+                <label  class="col-md-3 form-label">Cidade (*)</label>
+                <div class="col-md-6">
+                    <input type="text" required class="form-control" id="cidade_clinica" name="cidade_clinica" value="<?php echo $c_cidade_clinica; ?>">
+                </div>
+            </div>
+             <div class="mb-3 row">
+                <label class="col-md-3 form-label">E-mail (*)</label>
+                <div class="col-md-6">
+                    <input type="text" required class="form-control" id="email_clinica" name="email_clinica" value="<?php echo $c_email_clinica; ?>">
+                </div>
+            </div>
+             <div class="mb-3 row">
+                <label  class="col-md-3 form-label">CNPJ (*)</label>
+                <div class="col-md-6">
+                    <input type="text" required class="form-control" id="cnpj_clinica" name="cnpj_clinica" value="<?php echo $c_cnpj_clinica; ?>">
+                </div>
+            </div>
+            <hr>
 
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/menu.php'><span class='glyphicon glyphicon-remove'></span> Fechar</a>
                 </div>
 
             </div>

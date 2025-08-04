@@ -7,7 +7,24 @@ $formato = $_GET['formato'] ?? 'html';
 try {
     // conexão dom o banco de dados
     include("..\conexao.php");
-
+    // sql para ler configurações padrões
+    $c_sql = "SELECT * FROM config";
+    $result = $conection->query($c_sql);
+    $registro = $result->fetch_assoc();
+    if (!$registro) {
+        throw new Exception('Configurações não encontradas.');
+    }
+    // atribuição dos valores do banco de dados as variáveis
+    $c_nome_clinica = $registro["nome_clinica"];    
+    $c_endereco_clinica = $registro['endereco_clinica'];
+    $c_telefone_clinica = $registro['telefone_clinica'];    
+    $c_email_clinica = $registro['email_clinica'];
+    $c_cidade_clinica = $registro['cidade_clinica'];
+    $c_cnpj_clinica = $registro['cnpj_clinica'];    
+    // Verifica se a sessão de atestado está definida
+    if (!isset($_SESSION['atestado'])) {
+        throw new Exception('Atestado não encontrado na sessão.');
+    }
     $atestado = $_SESSION['atestado'];
     $html = gerarHTMLAtestado($atestado);
 
