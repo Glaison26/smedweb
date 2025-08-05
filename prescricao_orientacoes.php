@@ -55,7 +55,7 @@ if ((isset($_POST["btnregistro"]))) {
     }
 }
 
-// botão para incluir texto de atestado padrão selecionado
+// botão para incluir texto de orientação padrão selecionado
 if ((isset($_POST["btninclui"]))) {
     $c_id_orientacao = $_POST['id_orientacao'];
     $c_sql_texto = "select texto from orientacoes_padrao where id='$c_id_orientacao'";

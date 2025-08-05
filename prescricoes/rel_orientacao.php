@@ -8,7 +8,7 @@ try {
     // conexão dom o banco de dados
     include("..\conexao.php");
        
-    $atestado = $_SESSION['atestado'];
+    $orientacao = $_SESSION['atestado'];
     if (!$orientacao) {
         throw new Exception('Orientação não encontrado na sessão.');
     }
