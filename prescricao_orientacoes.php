@@ -64,6 +64,14 @@ if ((isset($_POST["btninclui"]))) {
     $c_linha_orientacao = $result_texto->fetch_assoc();
     $c_orientacao = $c_linha_orientacao['texto'];
 }
+// botão para emissão de orientação médica
+// verifico se o botão foi pressionado
+if ((isset($_POST["btnprint"]))) {
+    $_SESSION['orientacao'] = $_POST['obs'];
+    $_SESSION['paciente'] = $c_linha['nome'];
+    $_SESSION['profissional'] = $_POST['profissional'];
+    echo "<script> window.open('/smedweb/prescricoes/rel_orientacao.php?id=', '_blank');</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +80,7 @@ if ((isset($_POST["btninclui"]))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
 </head>
 
 <body>
@@ -84,21 +92,23 @@ if ((isset($_POST["btninclui"]))) {
     </script>
     <!-- funcao para chamar rotina de registro do atestado no histórico do paciênte -->
     <script>
-        function registro(id) {
-        }
+        function registro(id) {}
     </script>
 
 
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Emissão de Prescrição de Orientação Médico<h5>
+            <h5>Emissão de Prescrição de Orientação Médica<h5>
         </div>
     </div>
 
     <div class="container -my5">
         <form method="post">
-            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
+
+            <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir Orientação médica'>
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Orientação
+            </button>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra Orientação no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Orientação</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_orientacao ?>">

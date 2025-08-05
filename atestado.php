@@ -163,7 +163,6 @@ if ((isset($_POST["btnprint"]))) {
             </button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_atestado ?>">
             <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
-            
             <hr>
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -214,7 +213,7 @@ if ((isset($_POST["btnprint"]))) {
                             <div class="form-group">
                                 <label class="col-sm-2 col-form-label">Texto do Atestado</label>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
+                                    <textarea required class="form-control" id="obs" name="obs" rows="15"><?php echo $c_atestado; ?></textarea>
                                 </div>
                             </div>
                         </div>
