@@ -16,7 +16,6 @@ $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
-
 // controle de acesso para o usuário
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar
@@ -74,12 +73,15 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         $c_sql_pac = $c_sql_pac . " where pacientes.nome LIKE " .  "'" . $c_pesquisa . "%'";
     }
     $c_sql_pac = $c_sql_pac . " order by pacientes.nome";
-
     $result_pac = $conection->query($c_sql_pac);
     // verifico se a query foi correto
     if (!$result_pac) {
         die("Erro ao Executar Sql!!" . $conection->connect_error);
     }
+    // mudo a aba para cadastro de pacientes
+    $_SESSION['aba_agenda'] = 2;
+    
+
 }
 //$c_sql2 = "";
 //$c_sql3 = "";

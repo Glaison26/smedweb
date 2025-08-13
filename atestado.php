@@ -8,8 +8,14 @@ include_once "lib_gop.php";
 include("conexao.php"); // conexão de banco de dados
 include("links.php");
 
-$_SESSION['atestado'] = ""; // inicializa a variável de sessão para o atestado
 
+//if ((!isset($_POST["btninclui"])))
+if ($_SESSION['atestado'] == "") {
+    $c_atestado = "Inserir texto do atestado aqui";
+} else {
+    $c_atestado = $_SESSION['atestado'];
+}
+//    $c_atestado = ""; // inicializa a variável para o atestado
 if (isset($_GET["id"])) {
     $c_id = $_GET["id"]; // pego a id do paciente
     $_SESSION['refid'] = $c_id;
@@ -17,7 +23,6 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_atestado = "";
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -65,6 +70,12 @@ if ((isset($_POST["btninclui"]))) {
     // procuro o texto no cadastro de atestado para colocar no texto
     $c_linha_atestado = $result_texto->fetch_assoc();
     $c_atestado = $c_linha_atestado['texto'];
+    $_SESSION['atestado'] = $c_atestado;
+    //echo $c_atestado;
+    // coloco o texto no campo de texto do atestado
+    echo "<script>
+            document.getElementById('obs').value = '$c_atestado';
+          </script>";
 }
 
 // botão para emissão de atestado
@@ -223,6 +234,7 @@ if ((isset($_POST["btnprint"]))) {
                 <!-- aba de modelos de atestados -->
                 <div role="tabpanel" class="tab-pane" id="modelos">
                     <div style="padding-top:5px;">
+
                         <div class="table-responsive=lg">
                             <table class="table display table-bordered tabatestados">
                                 <thead class="thead">
@@ -260,7 +272,6 @@ if ((isset($_POST["btnprint"]))) {
                                     ";
                                     }
                                     ?>
-
                                 </tbody>
                             </table>
                         </div>
@@ -268,8 +279,9 @@ if ((isset($_POST["btnprint"]))) {
                 </div>
             </div>
         </div>
+
     </form>
-    </div>
+
 
 
 </body>

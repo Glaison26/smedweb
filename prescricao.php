@@ -8,6 +8,7 @@ session_start();
 //}
 include("conexao.php");
 include("links.php");
+$_SESSION['atestado'] = "";
 
 // query para capturar perfil do usuário logado
 $c_login = $_SESSION['c_usuario'];

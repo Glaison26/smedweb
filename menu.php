@@ -6,6 +6,7 @@ if (!isset($_SESSION['newsession'])) {
 	die('Acesso não autorizado!!!');
 }
 $_SESSION['sql'] = "";
+$_SESSION['aba_agenda'] = 1;
 // pega usuário e seu perfil
 // conexão dom o banco de dados
 include("conexao.php");
