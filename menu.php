@@ -67,11 +67,11 @@ if (($c_linha['prescricao'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de profissionais
 if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_profissionais = "\smedweb\profissionais_lista.php";
+	$op_cad_profissionais = "\smedweb\cadastros\profissionais\profissionais_lista.php";
 } else {
 	$op_cad_profissionais = "javascript:negar()";
 }
-// acesso cadastro de profissionais
+// acesso cadastro de convenios
 if (($c_linha['cad_convenios'] == 'S') ||  ($c_linha['tipo'] == '1')) {
 	$op_cad_convenios = "\smedweb\convenios_lista.php";
 } else {
