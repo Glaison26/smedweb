@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 
 // pego o id do procedimento
 if ($_SESSION["controle"]=='1') {
@@ -30,7 +30,7 @@ $c_id = $_SESSION['codigo_proc'];
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/procedimento_tabela_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/procedimentos/procedimento_tabela_excluir.php?id=" + id;
             }
         }
     </script>
@@ -116,8 +116,8 @@ $c_id = $_SESSION['codigo_proc'];
 
         ?>
         <!-- Button trigger modal -->
-        <a class='btn btn-success btn-sm' href='/smedweb/procedimentos_tabela_novo.php?id='$c_idtabela><span class="glyphicon glyphicon-plus"></span> Novo</a>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class='btn btn-success btn-sm' href='/smedweb/cadastros/procedimentos/procedimentos_tabela_novo.php?id='$c_idtabela><span class="glyphicon glyphicon-plus"></span> Novo</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/cadastros/procedimentos/procedimentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
         <div class='alert alert-info' role='alert'>
@@ -151,7 +151,7 @@ $c_id = $_SESSION['codigo_proc'];
                     <td>$c_linha[custo]</td>
                     <td>$n_valor</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Tabela X Procedimento' href='/smedweb/procedimentos_tabela_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Tabela X Procedimento' href='/smedweb/cadastros/procedimentos/procedimentos_tabela_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir tabela X Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 

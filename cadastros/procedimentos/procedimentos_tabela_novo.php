@@ -5,9 +5,9 @@ session_start();
 //    die('Acesso não autorizado!!!');
 //}
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 $c_tabela = "";
 $c_custo = 0;
