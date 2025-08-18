@@ -6,9 +6,9 @@
 //}
 
 // funções 
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
-include_once "lib_gop.php";
+include("../../conexao.php"); // conexão de banco de dados
+include("../../links.php");
+include_once "../../lib_gop.php";
 
 function carregadados()
 {
@@ -218,14 +218,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Nome (*)</label>
                             <div class="col-sm-5">
-                                <input type="text" maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
+                                <input type="text"  required maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Razão Social (*)</label>
                             <div class="col-sm-5">
-                                <input type="text" maxlength="200" class="form-control" name="razao" value="<?php echo $c_razao; ?>">
+                                <input type="text" required maxlength="200" class="form-control" name="razao" value="<?php echo $c_razao; ?>">
                             </div>
 
                         </div>
@@ -271,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <option>MA</option>
                                     <option>MT</option>
                                     <option>MS</option>
-                                    <option select>MG</option>
+                                    <option selected>MG</option>
                                     <option>PA</option>
                                     <option>PB</option>
                                     <option>PE</option>
@@ -298,7 +298,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Contato (*)</label>
                             <div class="col-sm-4">
-                                <input type="text" maxlength="100" class="form-control" name="contato" value="<?php echo $c_contato; ?>">
+                                <input type="text" required maxlength="100" class="form-control" name="contato" value="<?php echo $c_contato; ?>">
                             </div>
                         </div>
                         <hr>
@@ -310,13 +310,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <label class="col-sm-1 col-form-label">Fone 2</label>
                             <div class="col-sm-2">
-                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class="form-control" name="telefone2" value="<?php echo $c_telefone2; ?>">
+                                <input type="tel" required maxlength="25" onkeyup="handlePhone(event)" class="form-control" name="telefone2" value="<?php echo $c_telefone2; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">E-mail (*)</label>
                             <div class="col-sm-5">
-                                <input type="text" maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
+                                <input type="text" required maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -336,7 +336,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">CNPJ (*)</label>
                             <div class="col-sm-3">
-                                <input type="number" maxlength="18" placeholder="apenas números" class="form-control" name="cnpj" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false" value="<?php echo $c_cnpj; ?>">
+                                <input type="number" required maxlength="18" placeholder="apenas números" class="form-control" name="cnpj" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false" value="<?php echo $c_cnpj; ?>">
                             </div>
                         </div>
 
@@ -395,7 +395,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="form-group">
                             <label class="col-sm-1 col-form-label">Observação</label>
                             <div class="col-sm-7">
-                                <textarea class="form-control" id="obs" name="obs" rows="5"><?php echo $c_obs; ?></textarea>
+                                <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_obs; ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -404,7 +404,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <div class="offset-sm-0 col-sm-3">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/convenios_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <a class='btn btn-danger' href='/smedweb/cadastros/convenios/convenios_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
                 </div>
             </div>

@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 $_SESSION["controle"] = "1";
 ?>
 <!doctype html>
@@ -23,7 +23,7 @@ $_SESSION["controle"] = "1";
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/procedimentos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/procedimentos/procedimentos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -229,7 +229,6 @@ $_SESSION["controle"] = "1";
                 }
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
@@ -237,7 +236,7 @@ $_SESSION["controle"] = "1";
                     <td>$c_linha[especialidade]</td>
                     <td>$c_linha[codigoamb]</td>
                     <td>
-                    <a class='btn btn-warning btn-sm' title='Procedimentos X Tabelas' href='/smedweb/procedimentos_tabela_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-usd'></span></a>
+                    <a class='btn btn-warning btn-sm' title='Procedimentos X Tabelas' href='/smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-usd'></span></a>
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Procedimento'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Procedimento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>

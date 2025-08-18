@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 // rotina de post dos dados do formuário
 $c_descricao = "";
@@ -24,7 +24,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/itenslaudos_lista.php');
+        header('location: /smedweb/cadastros/itenslaudos/itenslaudos_lista.php');
         exit;
     }
 
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/itenslaudos_padrao_lista.php');
+        header('location: /smedweb/cadastros/itenslaudos/itenslaudos_padrao_lista.php');
         exit;
     }
     $c_descricao = $registro['descricao'];
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 die("Erro ao Executar Sql!!" . $conection->connect_error);
             }
             $msg_gravou = "Dados Gravados com Sucesso!!";
-            header('location: /smedweb/itenslaudos_lista.php');
+            header('location: /smedweb/cadastros/itenslaudos/itenslaudos_lista.php');
         } while (false);
     }
 }
@@ -124,13 +124,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 
                 <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="up_descricaoField" name="up_descricaoField" value="<?php echo $c_descricao; ?>">
+                    <input type="text" required class="form-control" id="up_descricaoField" name="up_descricaoField" value="<?php echo $c_descricao; ?>">
                 </div>
 
             </div>
             <hr>
             <div class="mb-3 row">
-                <label class="col-md-3 form-label">Grupo do Exame</label>
+                <label class="col-md-3 form-label">Grupo do Exame (*)</label>
                 <div class="col-sm-4">
                     <select class="form-control form-control-lg" id="up_grupoField" name="up_grupoField">
                         <?php
@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/itenslaudos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/cadastros/itenslaudos/itenslaudos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
@@ -184,7 +184,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class='offset-sm-3 col-sm-6'>
                              <div class='alert alert-success alert-dismissible fade show' role='alert'>
                                 <strong>$msg_gravou</strong>
-
                              </div>
                         </div>     
                     </div>    

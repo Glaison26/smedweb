@@ -5,10 +5,9 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 
-// rotina de edição
-$c_id = $_POST['c_id'];
+// rotina de inclusão
 $c_procedimento = $_POST['c_procedimento'];
 $c_especialidade = $_POST['c_especialidade'];
 $c_codigoamb = $_POST['c_codigoamb'];
@@ -17,30 +16,23 @@ $c_sql_epecialidade = "select id from especialidades where descricao = '$c_espec
 $result_especialidade = $conection->query($c_sql_epecialidade);
 $registro = $result_especialidade->fetch_assoc();
 $i_id_especialidade = $registro["id"];
-$c_sql = "Update procedimentos" .
-" SET descricao = '$c_procedimento', id_especialidade = '$i_id_especialidade', codigoamb = '$c_codigoamb' where id=$c_id";
-//" SET descricao = '$c_indice' where id=$c_id";
+// insere dados na tabela 
+//$i_id_especialidade = 1;
+$c_sql = "Insert into procedimentos (descricao, id_especialidade, codigoamb) Value ('$c_procedimento','$i_id_especialidade','$c_codigoamb')";
 $result = $conection->query($c_sql);
 
-if($result ==true)
+if ($result == true)  // sql ok
 {
-   
     $data = array(
-        'status'=>'true',
-       
+        'status' => 'true',
+
+    );
+    echo json_encode($data);
+} else {  // sql com erro
+    $data = array(
+        'status' => 'false',
+
     );
 
     echo json_encode($data);
 }
-else
-{
-     $data = array(
-        'status'=>'false',
-      
-    );
-
-    echo json_encode($data);
-} 
-      
-
-?>

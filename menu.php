@@ -73,19 +73,19 @@ if (($c_linha['cad_profissionais'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de convenios
 if (($c_linha['cad_convenios'] == 'S') ||  ($c_linha['tipo'] == '1')) {
-	$op_cad_convenios = "\smedweb\convenios_lista.php";
+	$op_cad_convenios = "\smedweb\cadastros\convenios\convenios_lista.php";
 } else {
 	$op_cad_convenios = "javascript:negar()";
 }
 // acesso cadastro de procedimentos
 if (($c_linha['cad_procedimentos'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_procedimentos = "\smedweb\procedimentos_lista.php";
+	$op_cad_procedimentos = "\smedweb\cadastros\procedimentos\procedimentos_lista.php";
 } else {
 	$op_cad_procedimentos = "javascript:negar()";
 }
-// acesso cadastro de procedimentos
+// acesso cadastro itens de laudos
 if (($c_linha['cad_itenslaudos'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_itenslaudos = "\smedweb\itenslaudos_lista.php";
+	$op_cad_itenslaudos = "\smedweb\cadastros\itenslaudos\itenslaudos_lista.php";
 } else {
 	$op_cad_itenslaudos = "javascript:negar()";
 }

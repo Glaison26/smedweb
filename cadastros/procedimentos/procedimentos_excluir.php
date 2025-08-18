@@ -5,10 +5,10 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/procedimentos_lista.php');
+    header('location: /smedweb/cadastros/procedimentos/procedimentos_lista.php');
     exit;
 }
-include("conexao.php");
+include("../../conexao.php");
 $c_id = "";
 $c_id = $_GET["id"];
 
@@ -17,4 +17,4 @@ $c_sql = "delete from procedimentos where id=$c_id";
 
 $result = $conection->query($c_sql);
 
-header('location: /smedweb/procedimentos_lista.php');
+header('location: /smedweb/cadastros/procedimentos/procedimentos_lista.php');

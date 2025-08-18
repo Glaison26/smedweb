@@ -5,9 +5,9 @@ session_start();
 //    die('Acesso não autorizado!!!');
 //}
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 $c_descricao = "";
 $c_bateria = "";
@@ -42,7 +42,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/baterias_lista.php');
+        header('location: /smedweb/cadastros/itenslaudos/baterias_lista.php');
     } while (false);
 } else {  // insiro cmponente na formula
     if (isset($_POST["btn_bateria"])) {
@@ -127,7 +127,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/baterias_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/cadastros/itenslaudos/baterias_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
             </div>
             <?php

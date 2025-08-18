@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("..\..\conexao.php");
+include("..\..\links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +23,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/convenios_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/convenios/convenios_excluir.php?id=" + id;
             }
         }
     </script>
@@ -89,7 +89,7 @@ include("links.php");
     <br>
     <div class="container -my5">
 
-        <a class="btn btn-success btn-sm" href="/smedweb/convenio_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+        <a class="btn btn-success btn-sm" href="/smedweb/cadastros/convenios/convenio_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
@@ -130,7 +130,7 @@ include("links.php");
                     <td>$c_linha[contato]</td>
                     
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/convenio_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/cadastros/convenios/convenio_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Convenios' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 

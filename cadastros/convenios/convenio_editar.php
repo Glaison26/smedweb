@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include_once "lib_gop.php";
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
+include_once "../../lib_gop.php";
+include("../../conexao.php"); // conexão de banco de dados
+include("../../links.php");
 
 function carregadados()
 {
@@ -65,7 +65,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/convenios_lista.php');
+        header('location: /smedweb/cadastros/convenios/convenios_lista.php');
         exit;
     }
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/convenios_lista.php');
+        header('location: /smedweb/cadastros/convenios/convenios_lista.php');
         exit;
     }
     $c_nome = $registro['nome'];
@@ -169,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/convenios_lista.php');
+        header('location: /smedweb/cadastros/convenios/convenios_lista.php');
     } while (false);
 }
 ?>
@@ -247,14 +247,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Nome (*)</label>
                             <div class="col-sm-5">
-                                <input type="text" maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
+                                <input type="text" required maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Razão Social (*)</label>
                             <div class="col-sm-5">
-                                <input type="text" maxlength="200" class="form-control" name="razao" value="<?php echo $c_razao; ?>">
+                                <input type="text" required maxlength="200" class="form-control" name="razao" value="<?php echo $c_razao; ?>">
                             </div>
 
                         </div>
@@ -327,7 +327,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Contato (*)</label>
                             <div class="col-sm-4">
-                                <input type="text" maxlength="100" class="form-control" name="contato" value="<?php echo $c_contato; ?>">
+                                <input type="text" required maxlength="100" class="form-control" name="contato" value="<?php echo $c_contato; ?>">
                             </div>
                         </div>
                         <hr>
@@ -335,7 +335,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Fone 1 (*) </label>
                             <div class="col-sm-2">
-                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" name="telefone1" value="<?php echo $c_telefone1; ?>">
+                                <input type="tel" required maxlength="25" onkeyup="handlePhone(event)" class=" form-control" name="telefone1" value="<?php echo $c_telefone1; ?>">
                             </div>
                             <label class="col-sm-1 col-form-label">Fone 2</label>
                             <div class="col-sm-2">
@@ -345,7 +345,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">E-mail (*)</label>
                             <div class="col-sm-5">
-                                <input type="text" maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
+                                <input type="text" required maxlength="225" class="form-control" name="email" value="<?php echo $c_email; ?>">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -364,7 +364,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">CNPJ (*)</label>
                             <div class="col-sm-3">
-                                <input type="number" maxlength="18" placeholder="apenas números" class="form-control" name="cnpj" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false" value="<?php echo $c_cnpj; ?>">
+                                <input type="number" required maxlength="18" placeholder="apenas números" class="form-control" name="cnpj" data-inputmask="'mask': '9', 'repeat': 10, 'greedy' : false" value="<?php echo $c_cnpj; ?>">
                             </div>
                         </div>
 
@@ -440,7 +440,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <div class="row mb-3">
                     <div class="offset-sm-0 col-sm-3">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/convenios_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <a class='btn btn-danger' href='/smedweb/cadastros/convenios/convenios_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
                 </div>
             </div>

@@ -5,9 +5,9 @@ session_start();
 //    die('Acesso não autorizado!!!');
 //}
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 $c_descricao = "";
 $c_grupo = "";
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/itenslaudos_lista.php');
+        header('location: /smedweb/cadastros/itenslaudos/itenslaudos_lista.php');
     } while (false);
 }
 ?>
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="panel panel-primary class">
     <div class="panel-heading text-center">
         <h4>SmartMed - Sistema Médico</h4>
-        <h5>Novo Exame para Laudo do Sistema<h5>
+        <h5>Cadastro de Novo Exame para Laudo do Sistema<h5>
     </div>
 </div>
 <br>
@@ -94,15 +94,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <label for="add_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="add_descricaoField" name="add_descricaoField">
+                    <input type="text" required class="form-control" id="add_descricaoField" name="add_descricaoField">
                 </div>
 
             </div>
             <hr>
             <div class="mb-3 row">
-                <label class="col-md-3 form-label">Grupo do Exame</label>
+                <label class="col-md-3 form-label">Grupo do Exame (*)</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-lg" id="add_grupoField" name="add_grupoField">
+                    <select class="form-control form-control-lg" required id="add_grupoField" name="add_grupoField">
+                        <option></option>
                         <?php
                         $c_sql = "select grupos_laudos.id, grupos_laudos.descricao from grupos_laudos ORDER BY grupos_laudos.descricao";
                         $result = $conection->query($c_sql);
@@ -138,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/cadastros/itenslaudos/itenslaudos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
