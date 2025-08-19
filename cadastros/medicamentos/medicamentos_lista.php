@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 $_SESSION["controle"] = "1";
 $_SESSION["id_medic"] = "";
 ?>
@@ -25,7 +25,7 @@ $_SESSION["id_medic"] = "";
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/medicamentos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/medicamentos/medicamentos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -233,7 +233,7 @@ $_SESSION["id_medic"] = "";
                     <td>$c_linha[grupo]</td>
                     
                     <td>
-                    <a class='btn btn-secondary btn-sm' title='Apresentações do Medicamento' href='/smedweb/apresentacao_medicamentos_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-tags'></span></a>
+                    <a class='btn btn-secondary btn-sm' title='Apresentações do Medicamento' href='/smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-tags'></span></a>
                     <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Medicamento'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Medicamento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
@@ -262,13 +262,14 @@ $_SESSION["id_medic"] = "";
                         <div class="mb-3 row">
                             <label for="addnomeField" class="col-md-3 form-label">Medicamento (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addnomeField" name="addnomeField">
+                                <input type="text" required class="form-control" id="addnomeField" name="addnomeField">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-md-3 form-label">Grupo (*)</label>
                             <div class="col-sm-7">
                                 <select class="form-control form-control-lg" id="addgrupoField" name="addgrupoField">
+                                    <option></option>
                                     <?php
                                     $c_sql = "SELECT grupos_medicamentos.id, grupos_medicamentos.descricao FROM grupos_medicamentos ORDER BY grupos_medicamentos.descricao";
                                     $result = $conection->query($c_sql);
@@ -311,7 +312,7 @@ $_SESSION["id_medic"] = "";
                         <div class="mb-3 row">
                             <label for="up_nomeField" class="col-md-3 form-label">Medicamento (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_nomeField" name="up_nomeField">
+                                <input type="text" required class="form-control" id="up_nomeField" name="up_nomeField">
                             </div>
                         </div>
                         <div class="mb-3 row">

@@ -91,7 +91,7 @@ if (($c_linha['cad_itenslaudos'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de medicamentos
 if (($c_linha['cad_medicamentos'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_medicamentos = "\smedweb\medicamentos_lista.php";
+	$op_cad_medicamentos = "\smedweb\cadastros\medicamentos\medicamentos_lista.php";
 } else {
 	$op_cad_medicamentos = "javascript:negar()";
 }

@@ -5,14 +5,13 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/medicamentos_lista.php');
+    header('location: /smedweb/cadastros/medicamentos/medicamentos_lista.php');
     exit;
 }
-include("conexao.php");
-$c_id = "";
+include("../../conexao.php");
 $c_id = $_GET["id"];
 
 // Exclusão do registro
 $c_sql = "delete from medicamentos where id=$c_id";
 $result = $conection->query($c_sql);
-header('location: /smedweb/medicamentos_lista.php');
+header('location: /smedweb/cadastros/medicamentos/medicamentos_lista.php');
