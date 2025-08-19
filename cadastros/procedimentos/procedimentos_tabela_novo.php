@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php');
     } while (false);
 }
 

@@ -3,18 +3,13 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
-
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/procedimentos_tabela_lista.php');
+    header('location: /smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php');
     exit;
 }
-include("conexao.php");
-$c_id = "";
+include("../../conexao.php");
 $c_id = $_GET["id"];
-
 // Exclusão do registro
 $c_sql = "delete from procedimentos_tabelas where id=$c_id";
-
 $result = $conection->query($c_sql);
-
-header('location: /smedweb/procedimentos_tabela_lista.php');
+header('location: /smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php');

@@ -10,9 +10,9 @@ function carregadados()
     $c_custo = $_POST['addcustoField'];
 }
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 // rotina de post dos dados do formuário
 $c_id = "";
@@ -30,7 +30,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php');
         exit;
     }
     $c_id = $_GET["id"];
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php');
         exit;
     }
     $c_tabela = $registro["tabela"];
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/procedimentos_tabela_lista.php');
+        header('location: /smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php');
     } while (false);
 }
 ?>
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <div class="mb-3 row">
                 <label for="upcustoField" class="col-md-3 form-label">Custo (*)</label>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="addcustoField" name="upcustoField" value="<?php echo $c_custo; ?>">
+                    <input type="number" required class="form-control" id="addcustoField" name="upcustoField" value="<?php echo $c_custo; ?>">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -196,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <div class="row mb-3">
                     <div class="offset-sm-3 col-sm-3 d-grid">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/procedimentos_tabela_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <a class='btn btn-danger' href='/smedweb/cadastros/procedimentos/procedimentos_tabela_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
 
                 </div>
