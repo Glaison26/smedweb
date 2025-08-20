@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include("conexao.php");
-include("links.php");
-include_once "lib_gop.php";
+include("../../conexao.php");
+include("../../links.php");
+include_once "../../lib_gop.php";
 
 // rotina de post dos dados do formuário
 $c_apresentacao = "";
@@ -28,7 +28,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
    
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/apresentacao_medicamentos_lista.php');
+        header('location: /smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php');
         exit;
     }
     
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/apresentacao_medicamentos_lista.php');
+        header('location: /smedweb/cadastros/medicamentosapresentacao_medicamentos_lista.php');
         exit;
     }
     $c_apresentacao = $registro['apresentacao'];
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/apresentacao_medicamentos_lista.php');
+        header('location: /smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php');
     } while (false);
 }
 ?>
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 
                 <label for="addcustoField" class="col-md-3 form-label">Apresentação (*)</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="addapresentacaoField" name="addapresentacaoField" value="<?php echo $c_apresentacao; ?>">
+                    <input type="text" required class="form-control" id="addapresentacaoField" name="addapresentacaoField" value="<?php echo $c_apresentacao; ?>">
                 </div>
 
             </div>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <div class="row mb-3">
                     <div class="offset-sm-3 col-sm-3 d-grid">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/apresentacao_medicamentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <a class='btn btn-danger' href='/smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
 
                 </div>

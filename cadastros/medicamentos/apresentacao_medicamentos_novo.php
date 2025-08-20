@@ -5,9 +5,9 @@ session_start();
 //    die('Acesso não autorizado!!!');
 //}
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 $c_apresentacao = "";
 $c_volume = "";
@@ -17,7 +17,7 @@ $c_uso = "";
 $c_termo = "";
 $c_veiculo = "";
 $c_observacao = "";
-$c_id =$_SESSION["id_medic"];
+$c_id = $_SESSION["id_medic"];
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
 $msg_erro = "";
@@ -34,11 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     do {
         if (
-            empty($c_apresentacao)) {
+            empty($c_apresentacao)
+        ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
-        
+
         // grava dados no banco
         // faço a Leitura da tabela com sql
         $c_sql = "Insert into medicamento_apresentacao (id_medicamento, apresentacao, volume, quantidade, embalagem, uso, termo, veiculo, observacao)" .
@@ -52,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/apresentacao_medicamentos_lista.php');
+        header('location: /smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php');
     } while (false);
 }
 
@@ -61,23 +62,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartMed - Sistema Médico</title>
- 
-</head>
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Nova Apresentação de Medicamento<h5>
-    </div>
-</div>
-<br>
-<div class="container -my5">
+<body>
 
-    <body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SmartMed - Sistema Médico</title>
+
+    </head>
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Nova Apresentação de Medicamento<h5>
+        </div>
+    </div>
+    <br>
+    <div class="container -my5">
+
+
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -95,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <label for="addcustoField" class="col-md-3 form-label">Apresentação (*)</label>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="addapresentacaoField" name="addapresentacaoField">
+                    <input type="text" required class="form-control" id="addapresentacaoField" name="addapresentacaoField">
                 </div>
 
             </div>
@@ -144,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/apresentacao_medicamentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
@@ -163,13 +166,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
             <br>
-
-
-</div>
-
-</form>
-
-
+        </form>
+    </div>
 </body>
 
 </html>

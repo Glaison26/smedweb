@@ -10,7 +10,7 @@ if (!isset($_GET["id"])) {
 }
 include("../../conexao.php");
 $c_id = $_GET["id"];
-
+// verificos se existe registro com o id do medicamento informado na tabela de apresentação de medicamentos apresentação
 // Exclusão do registro
 $c_sql = "delete from medicamentos where id=$c_id";
 $result = $conection->query($c_sql);

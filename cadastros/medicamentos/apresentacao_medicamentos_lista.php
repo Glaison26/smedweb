@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 
 // pego o id do procedimento
 
@@ -17,8 +17,10 @@ if ($_SESSION["controle"] == '1') {
     
 }
 $c_id=$_SESSION["id_medic"];
-
-
+if (!isset($c_id)) {
+    header('location: /smedweb/cadastros/medicamentos/medicamentos_lista.php');
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -36,7 +38,7 @@ $c_id=$_SESSION["id_medic"];
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/apresentacao_medicamentos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/medicamentos/apresentacao_medicamentos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -103,7 +105,7 @@ $c_id=$_SESSION["id_medic"];
     <div class="container -my5">
         <?php
         // pego nome do medimecamento
-        $c_sql =    "SELECT * FROM medicamentos WHERE medicamentos.id='$c_id'";
+        $c_sql = "SELECT * FROM medicamentos WHERE medicamentos.id='$c_id'";
         $result = $conection->query($c_sql);
         $registro = $result->fetch_assoc();
         $c_medicamento = $registro["descricao"];
@@ -122,8 +124,8 @@ $c_id=$_SESSION["id_medic"];
 
         ?>
         <!-- Button trigger modal -->
-        <a class='btn btn-success btn-sm' href='/smedweb/apresentacao_medicamentos_novo.php?id=$c_linha[id_medicamento]'><span class="glyphicon glyphicon-plus"></span> Novo</a>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/medicamentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class='btn btn-success btn-sm' href='/smedweb/cadastros/medicamentos/apresentacao_medicamentos_novo.php?id=$c_linha[id_medicamento]'><span class="glyphicon glyphicon-plus"></span> Novo</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/cadastros/medicamentos/medicamentos_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
         <div class='alert alert-info' role='alert'>
@@ -158,7 +160,7 @@ $c_id=$_SESSION["id_medic"];
                     <td>$c_linha[quantidade]</td>
                     <td>$c_linha[embalagem]</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Apresentação de Medicamento' href='/smedweb/apresentacao_medicamentos_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Apresentação de Medicamento' href='/smedweb/cadastros/medicamentos/apresentacao_medicamentos_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Apresentação de Medicamento' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
