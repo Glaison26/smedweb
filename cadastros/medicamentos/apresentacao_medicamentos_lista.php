@@ -32,9 +32,7 @@ if (!isset($c_id)) {
 </head>
 
 <body>
-  
-
-    <script language="Javascript">
+   <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
