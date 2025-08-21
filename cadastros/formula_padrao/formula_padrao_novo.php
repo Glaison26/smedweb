@@ -5,9 +5,9 @@ session_start();
 //    die('Acesso não autorizado!!!');
 //}
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 $c_descricao = "";
 $c_formula = "";
@@ -19,7 +19,6 @@ $msg_erro = "";
 if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     $c_descricao = $_POST['add_descricaoField'];
     $c_formula = $_POST['add_formulaField'];
-
     do {
         if (
             empty($c_descricao)
@@ -29,13 +28,9 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         }
         // grava dados no banco
         // faço a Leitura da tabela com sql
-
-
         $c_sql = "Insert into formulas_pre  (descricao, formula)" .
             " Value ('$c_descricao','$c_formula')";
-
         $result = $conection->query($c_sql);
-
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
@@ -43,7 +38,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/formula_padrao_lista.php');
+        header('location: /smedweb/cadastros/formula_padrao/formula_padrao_lista.php');
     } while (false);
 } else {  // insiro cmponente na formula
     if (isset($_POST["btn_componente"])) {
@@ -97,6 +92,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 <label class="col-md-3 form-label">Componentes para Fórmula</label>
                 <div class="col-sm-4">
                     <select class="form-control form-control-lg" id="Sel_componente" name="Sel_componente">
+                      
                         <?php
                         $c_sql = "SELECT componentes.id, Componentes.descricao FROM Componentes ORDER BY Componentes.descricao";
                         $result = $conection->query($c_sql);
@@ -116,7 +112,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 
                 <label for="add_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" id="add_descricaoField" name="add_descricaoField">
+                    <input type="text" requerid class="form-control" id="add_descricaoField" name="add_descricaoField">
                 </div>
             </div>
                        
@@ -129,7 +125,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/cadastros/formula_padrao/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>

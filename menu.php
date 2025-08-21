@@ -97,13 +97,13 @@ if (($c_linha['cad_medicamentos'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de orientações
 if (($c_linha['cad_orientacoes'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_orientacoes = "\smedweb\orientacoes_padrao_lista.php";
+	$op_cad_orientacoes = "\smedweb\cadastros\orientacoes\orientacoes_padrao_lista.php";
 } else {
 	$op_cad_orientacoes = "javascript:negar()";
 }
 // acesso cadastro de formulas
 if (($c_linha['cad_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_formulas = '\smedweb.\formula_padrao_lista.php';
+	$op_cad_formulas = '\smedweb\cadastros\formula_padrao\formula_padrao_lista.php';
 } else {
 	$op_cad_formulas = "javascript:negar()";
 }

@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +23,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/formula_padrao_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/formula_padrao/formula_padrao_excluir.php?id=" + id;
             }
         }
     </script>
@@ -91,7 +91,7 @@ include("links.php");
     <div class="container -my5">
 
         <!-- Button trigger modal -->
-        <a class="btn btn-success btn-sm" href="/smedweb/formula_padrao_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+        <a class="btn btn-success btn-sm" href="/smedweb/cadastros/formula_padrao/formula_padrao_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
@@ -120,7 +120,7 @@ include("links.php");
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/formula_padrao_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/cadastros/formula_padrao/formula_padrao_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir formula padrão' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
                     </tr>

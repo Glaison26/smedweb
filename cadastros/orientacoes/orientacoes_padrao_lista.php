@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 
 ?>
 <!doctype html>
@@ -23,7 +23,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/orientacoes_padrao_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/orientacoes/orientacoes_padrao_excluir.php?id=" + id;
             }
         }
     </script>

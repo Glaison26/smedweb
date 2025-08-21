@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../../conexao.php");
+include_once "../../lib_gop.php";
+include("../../links.php");
 
 // rotina de post dos dados do formuário
 $c_descricao = "";
@@ -22,7 +22,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/formula_padrao_lista.php');
+        header('location: /smedweb/cadastros/formula_padrao/formula_padrao_lista.php');
         exit;
     }
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/formula_padrao_lista.php');
+        header('location: /smedweb/cadastros/formula_padrao/formula_padrao_lista.php');
         exit;
     }
     $c_descricao = $registro['descricao'];
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 die("Erro ao Executar Sql!!" . $conection->connect_error);
             }
             $msg_gravou = "Dados Gravados com Sucesso!!";
-            header('location: /smedweb/formula_padrao_lista.php');
+            header('location: /smedweb/cadastros/formula_padrao/formula_padrao_lista.php');
         } while (false);
     } else
     if (isset($_POST["btn_componente"])) {
@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    <a class='btn btn-danger' href='/smedweb/cadastros/formula_padrao/formula_padrao_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
