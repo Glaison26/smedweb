@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +23,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/grupomedicamentos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/grupos_medicamentos/grupomedicamentos_excluir.php?id=" + id;
             }
         }
     </script>

@@ -109,13 +109,13 @@ if (($c_linha['cad_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de atestados padroes
 if (($c_linha['cad_atestado'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_atestado = "\smedweb\atestados_padroes_lista.php";
+	$op_cad_atestado = "\smedweb\cadastros\atestados\atestados_padroes_lista.php";
 } else {
 	$op_cad_atestado = "javascript:negar()";
 }
 // acesso cadastro de grupos de medicamentos
 if (($c_linha['cad_grupo_medicamento'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_grupo_medicamento = "\smedweb\grupoMedicamentos_lista.php";
+	$op_cad_grupo_medicamento = "\smedweb\cadastros/grupos_medicamentos\grupoMedicamentos_lista.php";
 } else {
 	$op_cad_grupo_medicamento = "javascript:negar()";
 }

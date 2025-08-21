@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +23,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/atestados_padroes_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/atestados/atestados_padroes_excluir.php?id=" + id;
             }
         }
     </script>
@@ -256,7 +256,7 @@ include("links.php");
                         <div class="mb-3 row">
                             <label for="addatestadoField" class="col-md-3 form-label">Atestado (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addatestadoField" name="addatestadoField">
+                                <input type="text" required class="form-control" id="addatestadoField" name="addatestadoField">
                             </div>
                         </div>
                         <div class="mb-3 row">

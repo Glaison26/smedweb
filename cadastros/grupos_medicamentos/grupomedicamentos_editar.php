@@ -5,19 +5,18 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 
 // rotina de edição
 $c_id = $_POST['c_id'];
-$c_atestado = rtrim($_POST['c_atestado']);
-$c_texto = $_POST['c_texto'];
+$c_grupo = rtrim($_POST['c_grupo']);
 
-$c_sql = "Update atestados" .
-" SET descricao = '$c_atestado', texto = '$c_texto' where id=$c_id";
-
+$c_sql = "Update grupos_medicamentos " .
+" SET descricao = '$c_grupo' where id=$c_id";
+//" SET descricao = '$c_indice' where id=$c_id";
 $result = $conection->query($c_sql);
 
-if ($result == true)
+if($result ==true)
 {
    
     $data = array(

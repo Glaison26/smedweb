@@ -43,13 +43,19 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
 } else {  // insiro cmponente na formula
     if (isset($_POST["btn_componente"])) {
         // pego unidade do componente selecionado
-        $c_componente = $_POST["Sel_componente"];
-        $c_sql = "SELECT Componentes.unidade FROM Componentes where componentes.descricao='$c_componente'";
-        //
-        $result = $conection->query($c_sql);
-        $c_linha = $result->fetch_assoc();
-        $c_formula = $_POST["add_formulaField"] . $_POST["Sel_componente"] . "           " . $c_linha['unidade'] . "\r\n";
-        $c_descricao = $_POST["add_descricaoField"];
+        // se não tiver componente selecionado não faz nada
+        if ($_POST["Sel_componente"] == "-1") {
+            $msg_erro = "Selecione um Componente para a Fórmula!!";
+        } else {
+            // pego o componente selecionado
+            $c_componente = $_POST["Sel_componente"];
+            $c_sql = "SELECT Componentes.unidade FROM Componentes where componentes.descricao='$c_componente'";
+            //
+            $result = $conection->query($c_sql);
+            $c_linha = $result->fetch_assoc();
+            $c_formula = $_POST["add_formulaField"] . $_POST["Sel_componente"] . "           " . $c_linha['unidade'] . "\r\n";
+            $c_descricao = $_POST["add_descricaoField"];
+        }
     }
 }
 ?>
@@ -61,7 +67,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
 </head>
 
 <div class="panel panel-primary class">
@@ -88,15 +94,14 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             <h5>Campos com (*) são obrigatórios</h5>
         </div>
         <form method="post">
-        <div class="mb-3 row">
+            <div class="mb-3 row">
                 <label class="col-md-3 form-label">Componentes para Fórmula</label>
                 <div class="col-sm-4">
                     <select class="form-control form-control-lg" id="Sel_componente" name="Sel_componente">
-                      
+                        <option value="-1">Selecione o Componente</option>
                         <?php
                         $c_sql = "SELECT componentes.id, Componentes.descricao FROM Componentes ORDER BY Componentes.descricao";
                         $result = $conection->query($c_sql);
-
                         // insiro os registro do banco de dados na tabela 
                         while ($c_linha = $result->fetch_assoc()) {
                             echo "<option>$c_linha[descricao]</option>";
@@ -115,7 +120,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     <input type="text" requerid class="form-control" id="add_descricaoField" name="add_descricaoField">
                 </div>
             </div>
-                       
+
             <div class="mb-3 row">
                 <label for="add_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
                 <div class="col-sm-6">

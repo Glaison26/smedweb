@@ -4,11 +4,10 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 // rotina de inclusão
-$c_atestado = rtrim($_POST['c_atestado']);
-$c_texto = $_POST['c_texto'];
-$c_sql = "Insert into atestados (descricao,texto) Value ('$c_atestado', '$c_texto')";
+$c_grupo = rtrim($_POST['c_grupo']);
+$c_sql = "Insert into grupos_medicamentos (descricao) Value ('$c_grupo')";
 $result = $conection->query($c_sql);
 
 if($result ==true)

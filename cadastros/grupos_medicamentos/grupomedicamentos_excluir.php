@@ -4,16 +4,16 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/atestados_padroes_lista.php');
+    header('location: /smedweb/cadastros/grupos_medicamentos/grupomedicamentos_lista.php');
     exit;
 }
-include("conexao.php");
+include("../../conexao.php");
 $c_id = "";
 $c_id = $_GET["id"];
 
 // Exclusão do registro
-$c_sql = "delete from atestados where id=$c_id";
+$c_sql = "delete from grupos_medicamentos where id=$c_id";
 
 $result = $conection->query($c_sql);
 
-header('location: /smedweb/atestados_padroes_lista.php');
+header('location: /smedweb/cadastros/grupos_medicamentos/grupomedicamentos_lista.php');

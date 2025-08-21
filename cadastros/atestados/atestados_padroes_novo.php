@@ -3,17 +3,12 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
-
 // conexão dom o banco de dados
-include("conexao.php");
-
-// rotina de edição
-$c_id = $_POST['c_id'];
-$c_grupo = rtrim($_POST['c_grupo']);
-
-$c_sql = "Update grupos_medicamentos " .
-" SET descricao = '$c_grupo' where id=$c_id";
-//" SET descricao = '$c_indice' where id=$c_id";
+include("../../conexao.php");
+// rotina de inclusão
+$c_atestado = rtrim($_POST['c_atestado']);
+$c_texto = $_POST['c_texto'];
+$c_sql = "Insert into atestados (descricao,texto) Value ('$c_atestado', '$c_texto')";
 $result = $conection->query($c_sql);
 
 if($result ==true)
@@ -30,12 +25,10 @@ else
 {
      $data = array(
         'status'=>'false',
-      
+  
     );
 
     echo json_encode($data);
 } 
-
-        
 
 ?>
