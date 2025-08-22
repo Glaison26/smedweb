@@ -5,7 +5,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 
 // rotina de inclusão
 $c_descricao = $_POST['c_descricao'];

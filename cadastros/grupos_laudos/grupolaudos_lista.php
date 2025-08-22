@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,15 +15,15 @@ include("links.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+   
 </head>
 
 <body>
-     <script language="Javascript">
+    <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/componentes_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/grupos_laudos/grupolaudos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -37,13 +37,13 @@ include("links.php");
 
     <script>
         $(document).ready(function() {
-            $('.tabcomponentes').DataTable({
+            $('.tabgruposlaudos').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [4]
+                    'aTargets': [2]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -85,32 +85,27 @@ include("links.php");
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddcomponente', function(e) {
+        $(document).on('submit', '#frmaddgrupo', function(e) {
             e.preventDefault();
-            var c_descricao = $('#adddescricaoField').val();
             var c_grupo = $('#addgrupoField').val();
-            var c_unidade = $('#addunidadeField').val();
-
-            if (c_descricao != '') {
+            
+            if (c_grupo != '') {
 
                 $.ajax({
-                    url: "componentes_novo.php",
+                    url: "grupolaudos_novo.php",
                     type: "post",
                     data: {
-                        c_descricao: c_descricao,
-                        c_grupo: c_grupo,
-                        c_unidade: c_unidade
-
+                        c_grupo: c_grupo
+                      
                     },
-
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
 
                         location.reload();
                         if (status == 'true') {
-                            a
-                            $('#novocomponenteModal').modal('hide');
+
+                            $('#novogrupoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -128,7 +123,7 @@ include("links.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-
+                
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -140,34 +135,31 @@ include("links.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_descricaoField').val(data[1]);
-                $('#up_grupoField').val(data[2]);
-                $('#up_unidadeField').val(data[3]);
-
+                $('#up_grupoField').val(data[1]);
+         
 
             });
         });
     </script>
 
-    <!-- Função javascript e ajax para Alteração dos dados -->
     <script type="text/javascript">
-        $(document).on('submit', '#frmcomponente', function(e) {
+        ~
+        // Função javascript e ajax para Alteração dos dados
+        $(document).on('submit', '#frmgrupo', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_descricao = $('#up_descricaoField').val();
             var c_grupo = $('#up_grupoField').val();
-            var c_unidade = $('#up_unidadeField').val();
-            if (c_descricao != '') {
-
+            
+            
+            if (c_grupo != '') {
+                
                 $.ajax({
-                    url: "componentes_editar.php",
+                    url: "grupolaudos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_descricao: c_descricao,
-                        c_grupo: c_grupo,
-                        c_unidade: c_unidade
-
+                        c_grupo: c_grupo
+                        
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -180,7 +172,7 @@ include("links.php");
                         }
                     }
                 });
-
+                
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
@@ -191,52 +183,52 @@ include("links.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Componentes<h5>
+            <h5>Lista de Grupos para Exames<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novocomponenteModal"><span class="glyphicon glyphicon-plus"></span>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novogrupoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
-        <table class="table display table-bordered tabcomponentes">
+        <table class="table display table-bordered tabgruposlaudos">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
-                    <th scope="col">Componete</th>
-                    <th scope="col">Grupo</th>
-                    <th scope="col">Unidade</th>
+                    <th scope="col">Descrição do Grupo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+                $fmt = new NumberFormatter('de_DE', NumberFormatter::CURRENCY);
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT componentes.id, componentes.descricao, componentes.unidade, grupo_componentes.descricao AS grupo FROM componentes 
-                JOIN grupo_componentes ON componentes.id_grupo_componente=grupo_componentes.id
-                ORDER BY componentes.descricao";
+                $c_sql = "SELECT grupos_laudos.id, grupos_laudos.descricao" .
+                    " FROM grupos_laudos" .
+                    " ORDER BY grupos_laudos.descricao";
                 $result = $conection->query($c_sql);
                 // verifico se a query foi correto
                 if (!$result) {
                     die("Erro ao Executar Sql!!" . $conection->connect_error);
+                    
                 }
+
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-
+                   
                     echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    <td>$c_linha[grupo]</td>
-                    <td>$c_linha[unidade]</td>
+                    
                     <td>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Atestado'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Atestado' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Grupo'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir grupo' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
@@ -249,47 +241,25 @@ include("links.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novocomponenteModal" tabindex="-1" role="dialog" data-target=".bd-example-modal-lg" aria-labelledby="novocomponenteModal" aria-hidden="true">
+    <div class="modal fade" id="novogrupoModal" tabindex="-1" role="dialog" aria-labelledby="novagrupoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Componente</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Grupo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddcomponente" action="">
+                    <form id="frmaddgrupo" action="">
                         <div class="mb-3 row">
-                            <label for="adddescricoaField" class="col-md-3 form-label">Componente (*)</label>
+                            <label for="addgrupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="adddescricaoField" name="adddescricaoField">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-3 form-label">Grupo (*)</label>
-                            <div class="col-sm-7">
-                                <select class="form-control form-control-lg" id="addgrupoField" name="addgrupoField">
-                                    <?php
-                                    $c_sql = "SELECT grupo_Componentes.id, grupo_Componentes.descricao FROM grupo_Componentes ORDER BY grupo_Componentes.descricao";
-                                    $result = $conection->query($c_sql);
-
-                                    // insiro os registro do banco de dados na tabela 
-                                    while ($c_linha = $result->fetch_assoc()) {
-                                        echo "
-                                        <option>$c_linha[descricao]</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="addunidadeField" class="col-md-3 form-label">Unidade</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" id="addunidadeField" name="addunidadeField">
+                                <input type="text" required class="form-control" id="addgrupoField" name="addgrupoField">
                             </div>
                         </div>
 
+                       
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
@@ -308,49 +278,21 @@ include("links.php");
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Componente</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Grupo</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmcomponente" method="POST" action="">
+                    <form id="frmgrupo" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_descricoaField" class="col-md-3 form-label">Componente (*)</label>
+                            <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_descricaoField" name="up_descricaoField">
+                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label class="col-md-3 form-label">Grupo (*)</label>
-                            <div class="col-sm-7">
-                                <select class="form-control form-control-lg" id="up_grupoField" name="up_grupoField">
-                                    <?php
-                                    $c_sql = "SELECT grupo_Componentes.id, grupo_Componentes.descricao FROM grupo_Componentes ORDER BY grupo_Componentes.descricao";
-                                    $result = $conection->query($c_sql);
-
-                                    // insiro os registro do banco de dados na tabela 
-                                    while ($c_linha = $result->fetch_assoc()) {
-                                        $op = "";
-                                        if ($c_linha['descricao'] == $c_grupo) {
-                                            $op = "selected";
-                                        }
-
-                                        echo "
-                                        <option $op>$c_linha[descricao]</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="up_unidadeField" class="col-md-3 form-label">Unidade</label>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" id="up_unidadeField" name="up_unidadeField">
-                            </div>
-                        </div>
-
+                       
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>

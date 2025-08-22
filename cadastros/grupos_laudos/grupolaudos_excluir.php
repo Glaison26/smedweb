@@ -4,12 +4,11 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/grupomedicamentos_lista.php');
+    header('location: /smedweb/cadastros/grupos_laudos/grupomedicamentos_lista.php');
     exit;
 }
-include("conexao.php");
+include("../../conexao.php");
 $c_id = "";
 $c_id = $_GET["id"];
 
@@ -18,4 +17,4 @@ $c_sql = "delete from grupos_laudos where id=$c_id";
 
 $result = $conection->query($c_sql);
 
-header('location: /smedweb/grupolaudos_lista.php');
+header('location: /smedweb/cadastros/grupos_laudos/grupolaudos_lista.php');

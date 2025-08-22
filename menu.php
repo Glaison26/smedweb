@@ -121,13 +121,13 @@ if (($c_linha['cad_grupo_medicamento'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de grupos de exames para laudos
 if (($c_linha['cad_grupo_exame'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_grupo_exame = "\smedweb\grupolaudos_lista.php";
+	$op_cad_grupo_exame = "\smedweb\cadastros\grupos_laudos\grupolaudos_lista.php";
 } else {
 	$op_cad_grupo_exame = "javascript:negar()";
 }
 // acesso cadastro de componentes de formulas
 if (($c_linha['cad_componente_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_componentes = "\smedweb\componentes_lista.php";
+	$op_cad_componentes = "\smedweb\cadastros\componentes\componentes_lista.php";
 } else {
 	$op_cad_componentes = "javascript:negar()";
 }
