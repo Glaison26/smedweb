@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 
 if (isset($_GET["id"])) {
     $c_id = $_GET["id"];
@@ -35,7 +35,7 @@ $c_nomeparametro = $c_linha['descricao'];
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/atributo_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/atributos/atributo_excluir.php?id=" + id;
             }
         }
     </script>
@@ -206,7 +206,7 @@ $c_nomeparametro = $c_linha['descricao'];
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoatributoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/parametros_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/cadastros/parametros_eventos/parametros_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
 
         <hr>
@@ -271,7 +271,7 @@ $c_nomeparametro = $c_linha['descricao'];
                         <div class="mb-3 row">
                             <label for="addatributoField" class="col-md-3 form-label">Descrição do Atributo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addatributoField" name="addatributoField">
+                                <input type="text" required class="form-control" id="addatributoField" name="addatributoField">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -310,7 +310,7 @@ $c_nomeparametro = $c_linha['descricao'];
                         <div class="mb-3 row">
                             <label for="up_atributoField" class="col-md-3 form-label">Descrição do Atributo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_atributoField" name="up_atributoField">
+                                <input type="text" required class="form-control" id="up_atributoField" name="up_atributoField">
                             </div>
                         </div>
                         <div class="mb-3 row">

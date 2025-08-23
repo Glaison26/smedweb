@@ -140,19 +140,19 @@ if (($c_linha['cad_grupo_componentes'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de Especialidades
 if (($c_linha['cad_especialidades'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_especialidades = "\smedweb\especialidades_lista.php";
+	$op_cad_especialidades = "\smedweb\cadastros/especialidades/especialidades_lista.php";
 } else {
 	$op_cad_especialidades = "javascript:negar()";
 }
 // acesso cadastro de parametros de eventos
 if (($c_linha['cad_parametros_eventos'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_parametros = "\smedweb\parametros_lista.php";
+	$op_cad_parametros = "\smedweb/cadastros/parametros_eventos\parametros_lista.php";
 } else {
 	$op_cad_parametros = "javascript:negar()";
 }
 // acesso cadastro de diagnosticos
 if (($c_linha['cad_diagnosticos'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_diagnosticos = "\smedweb\diagnosticos_lista.php";
+	$op_cad_diagnosticos = "\smedweb\cadastros/diagnosticos/diagnosticos_lista.php";
 } else {
 	$op_cad_diagnosticos = "javascript:negar()";
 }

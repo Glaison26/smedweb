@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,15 +15,15 @@ include("links.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+  
 </head>
 
 <body>
-    <script language="Javascript">
+   <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/diagnosticos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/especialidades/especialidades_excluir.php?id=" + id;
             }
         }
     </script>
@@ -37,13 +37,13 @@ include("links.php");
 
     <script>
         $(document).ready(function() {
-            $('.tabdiagnosticos').DataTable({
+            $('.tabespecialidades').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [3]
+                    'aTargets': [2]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -84,21 +84,19 @@ include("links.php");
 
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
-
-
-        $(document).on('submit', '#frmadddiagnostico', function(e) {
+        $(document).on('submit', '#frmaddespecialidade', function(e) {
             e.preventDefault();
-            var c_diagnostico = $('#adddiagnosticoField').val();
-            var c_cid = $('#addcidField').val();
+            var c_descricao = $('#adddescricaoField').val();
 
-            if (c_diagnostico != '') {
+
+            if (c_descricao != '') {
 
                 $.ajax({
-                    url: "diagnosticos_novo.php",
+                    url: "especialidade_novo.php",
                     type: "post",
                     data: {
-                        c_diagnostico: c_diagnostico,
-                        c_cid: c_cid
+                        c_descricao: c_descricao
+
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -107,7 +105,7 @@ include("links.php");
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novadiagnosticoModal').modal('hide');
+                            $('#novaespecialidadeModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -137,30 +135,29 @@ include("links.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_diagnosticoField').val(data[1]);
-                $('#up_cidField').val(data[2]);
+                $('#up_descricaoField').val(data[1]);
+               
 
             });
         });
     </script>
 
     <script type="text/javascript">
-        // Função javascript e ajax para Alteração dos dados xxx
-        $(document).on('submit', '#frmdiagnostico', function(e) {
+        // Função javascript e ajax para Alteração dos dados
+        $(document).on('submit', '#frmespecialidade', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_diagnostico = $('#up_diagnosticoField').val();
-            var c_cid = $('#up_cidField').val();
+            var c_descricao = $('#up_descricaoField').val();
 
-            if (c_diagnostico != '') {
+            if (c_descricao != '') {
 
                 $.ajax({
-                    url: "diagnosticos_editar.php",
+                    url: "especialidade_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_diagnostico: c_diagnostico,
-                        c_cid: c_cid
+                        c_descricao: c_descricao
+                      
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -185,46 +182,48 @@ include("links.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Diagnosticos do Sistema<h5>
+            <h5>Lista de Especialidades Medicas do Sistema<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
-        <!-- A Botão trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novadiagnosticoModal"><span class="glyphicon glyphicon-plus"></span>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novaespecialidadeModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+
         <hr>
-        <table class="table display table-bordered tabdiagnosticos">
+        <table class="table display table-bordered tabespecialidades">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
-                    <th scope="col">Diagnostico</th>
-                    <th scope="col">CID</th>
+                    <th scope="col">Descrição</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
+
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT diagnosticos.id,diagnosticos.descricao, diagnosticos.cid FROM diagnosticos order by diagnosticos.descricao";
+                $c_sql = "SELECT especialidades.id,especialidades.descricao FROM especialidades order by especialidades.descricao";
                 $result = $conection->query($c_sql);
-                // verifico  se a query foi correto
+                // verifico se a query foi correto
                 if (!$result) {
                     die("Erro ao Executar Sql!!" . $conection->connect_error);
                 }
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
 
-                    echo  "
+                    echo "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    <td>$c_linha[cid]</td>
+                    
                     <td>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Diagnóstico'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Diagn´stico' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Especialidade'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir Especialidade' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
@@ -237,39 +236,34 @@ include("links.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novadiagnosticoModal" tabindex="-1" role="dialog" aria-labelledby="novadiagnosticoModal" aria-hidden="true">
+    <div class="modal fade" id="novaespecialidadeModal" tabindex="-1" role="dialog" aria-labelledby="novaespecialidadeModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Nova tabela</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Nova Especialidade</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmadddiagnostico" action="">
+                    <form id="frmaddespecialidade" action="">
                         <div class="mb-3 row">
-                            <label for="adddiagnosticoField" class="col-md-5 form-label">Diagnostico(*)</label>
+                            <label for="adddescricaoField" class="col-md-3 form-label">Descrição (*)</label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="adddiagnosticoField" name="adddiagnosticoField">
+                                <input type="text" class="form-control" id="adddescricaoField" name="adddescricaoField">
                             </div>
                         </div>
-                        <div class="mb-3 row">
-                            <label for="addcidField" class="col-md-5 form-label">CID (*)</label>
-                            <div class="col-md-5">
-                                <input type="text" class="form-control" id="addcidField" name="addcidField">
-                            </div>
-                        </div>
+
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 
 
     <!-- Modal para edição dos dados -->
@@ -283,19 +277,12 @@ include("links.php");
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmdiagnostico" action="">
+                    <form id="frmespecialidade" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-
-                            <label for="up_diagnosticoField" class="col-md-5 form-label">Diagnostico(*)</label>
+                            <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
                             <div class="col-md-7">
-                                <input type="text" class="form-control" id="up_diagnosticoField" name="up_diagnosticoField">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="up_cidField" class="col-md-5 form-label">CID (*)</label>
-                            <div class="col-md-5">
-                                <input type="text" class="form-control" id="up_cidField" name="up_cidField">
+                                <input type="text" required class="form-control" id="up_descricaoField" name="up_descricaoField">
                             </div>
                         </div>
                         <div class="modal-footer">

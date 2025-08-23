@@ -5,14 +5,14 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 
 // rotina de edição
 $c_id = $_POST['c_id'];
-$c_descricao = rtrim($_POST['c_descricao']);
+$c_parametro = rtrim($_POST['c_parametro']);
 
-$c_sql = "Update especialidades" .
-" SET descricao = '$c_descricao' where id=$c_id";
+$c_sql = "Update parametros_eventos " .
+" SET descricao = '$c_parametro' where id=$c_id";
 
 $result = $conection->query($c_sql);
 
@@ -36,6 +36,5 @@ else
     echo json_encode($data);
 } 
 
-        
 
 ?>

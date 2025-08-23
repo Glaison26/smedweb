@@ -3,22 +3,17 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
-
 // conexão dom o banco de dados
-include("conexao.php");
-
-// rotina de edição
-$c_id = $_POST['c_id'];
-$c_parametro = rtrim($_POST['c_parametro']);
-
-$c_sql = "Update parametros_eventos " .
-" SET descricao = '$c_parametro' where id=$c_id";
-
+include("../../conexao.php");
+// rotina de inclusão
+$c_diagnostico = rtrim($_POST['c_diagnostico']);
+$c_cid = rtrim($_POST['c_cid']);
+$c_sql = "Insert into diagnosticos (descricao,cid) Value ('$c_diagnostico', '$c_cid')";
 $result = $conection->query($c_sql);
 
 if($result ==true)
 {
-   
+  
     $data = array(
         'status'=>'true',
        
@@ -30,11 +25,10 @@ else
 {
      $data = array(
         'status'=>'false',
-      
+  
     );
 
     echo json_encode($data);
 } 
-
 
 ?>

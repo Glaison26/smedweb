@@ -4,16 +4,15 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 // rotina de inclusão
-$c_diagnostico = rtrim($_POST['c_diagnostico']);
-$c_cid = rtrim($_POST['c_cid']);
-$c_sql = "Insert into diagnosticos (descricao,cid) Value ('$c_diagnostico', '$c_cid')";
+$c_parametro = rtrim($_POST['c_parametro']);
+$c_sql = "Insert into parametros_eventos (descricao) Value ('$c_parametro')";
 $result = $conection->query($c_sql);
 
 if($result ==true)
 {
-  
+   
     $data = array(
         'status'=>'true',
        

@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $msg_erro = "Preencha todos os campos obrigatórios (*)";
     } else {
         // comando sql de atualização
-        $sql_update = "UPDATE config SET nome_clinica='$c_nome_clinica', endereco_clinica='$c_endereco_clinica', telefone_clinica='$c_telefone_clinica', email_clinica='$c_email_clinica', cidade_clinica='$c_cidade_clinica', cnpj_clinica='$c_cnpj_clinica' WHERE id=1";
+        $sql_update = "UPDATE config SET nome_clinica='$c_nome_clinica', endereco_clinica='$c_endereco_clinica', telefone_clinica='$c_telefone_clinica', email_clinica='$c_email_clinica',
+         cidade_clinica='$c_cidade_clinica', cnpj_clinica='$c_cnpj_clinica' WHERE id=1";
         if ($conection->query($sql_update) === TRUE) {
             $msg_gravou = "Configurações atualizadas com sucesso!";
         } else {

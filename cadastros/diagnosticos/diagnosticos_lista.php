@@ -6,7 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,32 +15,15 @@ include("conexao.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Smed - Sistema Médico</title>
-    <link rel="shortcut icon" type="imagex/png" href="./images/smed_icon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-2.0.3/datatables.min.css" rel="stylesheet">
-    <link href="DataTables/datatables.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+ 
 </head>
 
 <body>
-    <script scr="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script scr="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-
-
-
     <script language="Javascript">
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/parametros_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/diagnosticos/diagnosticos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -53,13 +37,13 @@ include("conexao.php");
 
     <script>
         $(document).ready(function() {
-            $('.tabparametros').DataTable({
+            $('.tabdiagnosticos').DataTable({
                 // 
                 "iDisplayLength": -1,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [2]
+                    'aTargets': [3]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -101,18 +85,20 @@ include("conexao.php");
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados
 
-        $(document).on('submit', '#frmaddparametro', function(e) {
+
+        $(document).on('submit', '#frmadddiagnostico', function(e) {
             e.preventDefault();
-            var c_parametro = $('#addparametroField').val();
-            
-            if (c_parametro != '') {
+            var c_diagnostico = $('#adddiagnosticoField').val();
+            var c_cid = $('#addcidField').val();
+
+            if (c_diagnostico != '') {
 
                 $.ajax({
-                    url: "parametros_novo.php",
+                    url: "diagnosticos_novo.php",
                     type: "post",
                     data: {
-                        c_parametro: c_parametro
-                      
+                        c_diagnostico: c_diagnostico,
+                        c_cid: c_cid
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -121,7 +107,7 @@ include("conexao.php");
                         location.reload();
                         if (status == 'true') {
 
-                            $('#novoparametroModal').modal('hide');
+                            $('#novadiagnosticoModal').modal('hide');
                             location.reload();
                         } else {
                             alert('falha ao incluir dados');
@@ -139,7 +125,7 @@ include("conexao.php");
         $(document).ready(function() {
 
             $('.editbtn').on('click', function() {
-                
+
                 $('#editmodal').modal('show');
 
                 $tr = $(this).closest('tr');
@@ -151,44 +137,44 @@ include("conexao.php");
                 console.log(data);
 
                 $('#up_idField').val(data[0]);
-                $('#up_parametroField').val(data[1]);
-         
+                $('#up_diagnosticoField').val(data[1]);
+                $('#up_cidField').val(data[2]);
 
             });
         });
     </script>
 
     <script type="text/javascript">
-        ~
-        // Função javascript e ajax para Alteração dos dados
-        $(document).on('submit', '#frmparametro', function(e) {
+        // Função javascript e ajax para Alteração dos dados xxx
+        $(document).on('submit', '#frmdiagnostico', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
-            var c_parametro = $('#up_parametroField').val();
-            
-            
-            if (c_parametro != '') {
-                
+            var c_diagnostico = $('#up_diagnosticoField').val();
+            var c_cid = $('#up_cidField').val();
+
+            if (c_diagnostico != '') {
+
                 $.ajax({
-                    url: "parametros_editar.php",
+                    url: "diagnosticos_editar.php",
                     type: "post",
                     data: {
                         c_id: c_id,
-                        c_parametro: c_parametro
-                        
+                        c_diagnostico: c_diagnostico,
+                        c_cid: c_cid
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
+
                         if (status == 'true') {
                             $('#editmodal').modal('hide');
                             location.reload();
                         } else {
-                            alert('falha ao alterar dados');
+                            alert('falha ao incluir dados');
                         }
                     }
                 });
-                
+
             } else {
                 alert('Todos os campos devem ser preenchidos!!');
             }
@@ -199,53 +185,46 @@ include("conexao.php");
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Parâmetros de Eventos<h5>
+            <h5>Lista de Diagnosticos do Sistema<h5>
         </div>
     </div>
     <br>
     <div class="container -my5">
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novoparametroModal"><span class="glyphicon glyphicon-plus"></span>
+        <!-- A Botão trigger modal -->
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novadiagnosticoModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
-       
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-
         <hr>
-        <table class="table display table-bordered tabparametros">
+        <table class="table display table-bordered tabdiagnosticos">
             <thead class="thead">
                 <tr class="info">
                     <th scope="col">No.</th>
-                    <th scope="col">Descrição do Parâmetro</th>
+                    <th scope="col">Diagnostico</th>
+                    <th scope="col">CID</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-               
                 // faço a Leitura da tabela com sql
-                $c_sql = "SELECT parametros_eventos.id, parametros_eventos.descricao" .
-                    " FROM parametros_eventos" .
-                    " ORDER BY parametros_eventos.descricao";
+                $c_sql = "SELECT diagnosticos.id,diagnosticos.descricao, diagnosticos.cid FROM diagnosticos order by diagnosticos.descricao";
                 $result = $conection->query($c_sql);
-                // verifico se a query foi correto
+                // verifico  se a query foi correto
                 if (!$result) {
                     die("Erro ao Executar Sql!!" . $conection->connect_error);
                 }
-
                 // insiro os registro do banco de dados na tabela 
                 while ($c_linha = $result->fetch_assoc()) {
-                   
-                    echo "
+
+                    echo  "
                     <tr>
                     <td>$c_linha[id]</td>
                     <td>$c_linha[descricao]</td>
-                    
+                    <td>$c_linha[cid]</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Atributos do Parâmetro' href='/smedweb/atributo_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-th-list'></span></a>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Parâmetro'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Parâmetro' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Diagnóstico'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir Diagn´stico' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>
@@ -258,35 +237,39 @@ include("conexao.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novoparametroModal" tabindex="-1" role="dialog" aria-labelledby="novoparametroModal" aria-hidden="true">
+    <div class="modal fade" id="novadiagnosticoModal" tabindex="-1" role="dialog" aria-labelledby="novadiagnosticoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Dados de Novo Parâmetro</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Dados de Nova tabela</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmaddparametro" action="">
+                    <form id="frmadddiagnostico" action="">
                         <div class="mb-3 row">
-                            <label for="addparametroField" class="col-md-3 form-label">Descrição do parâmetro (*)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="addparametroField" name="addparametroField">
+                            <label for="adddiagnosticoField" class="col-md-5 form-label">Diagnostico(*)</label>
+                            <div class="col-md-7">
+                                <input type="text" required class="form-control" id="adddiagnosticoField" name="adddiagnosticoField">
                             </div>
                         </div>
-                     
+                        <div class="mb-3 row">
+                            <label for="addcidField" class="col-md-5 form-label">CID (*)</label>
+                            <div class="col-md-5">
+                                <input type="text" required class="form-control" id="addcidField" name="addcidField">
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
-
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
+
 
 
     <!-- Modal para edição dos dados -->
@@ -294,21 +277,27 @@ include("conexao.php");
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Parâmetro</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Indice</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
                         <h5>Campos com (*) são obrigatórios</h5>
                     </div>
-                    <form id="frmparametro" method="POST" action="">
+                    <form id="frmdiagnostico" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
-                            <label for="up_parametroField" class="col-md-3 form-label">Descrição do Parâmetro (*)</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_parametroField" name="up_parametroField">
+
+                            <label for="up_diagnosticoField" class="col-md-5 form-label">Diagnostico(*)</label>
+                            <div class="col-md-7">
+                                <input type="text" required class="form-control" id="up_diagnosticoField" name="up_diagnosticoField">
                             </div>
                         </div>
-                       
+                        <div class="mb-3 row">
+                            <label for="up_cidField" class="col-md-5 form-label">CID (*)</label>
+                            <div class="col-md-5">
+                                <input type="text" required class="form-control" id="up_cidField" name="up_cidField">
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>

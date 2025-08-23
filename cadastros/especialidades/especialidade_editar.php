@@ -5,24 +5,29 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
-// rotina de inclusão
-$c_descricao = $_POST['c_descricao'];
+include("../../conexao.php");
 
-// insere dados na tabela 
-$c_sql = "Insert into especialidades (descricao) Value ('$c_descricao')";
+// rotina de edição
+$c_id = $_POST['c_id'];
+$c_descricao = rtrim($_POST['c_descricao']);
+
+$c_sql = "Update especialidades" .
+" SET descricao = '$c_descricao' where id=$c_id";
+
 $result = $conection->query($c_sql);
 
-if($result == true)  // sql ok
+if($result ==true)
 {
-   $data = array(
+   
+    $data = array(
         'status'=>'true',
        
     );
+
     echo json_encode($data);
 }
 else
-{  // sql com erro
+{
      $data = array(
         'status'=>'false',
       
@@ -31,5 +36,6 @@ else
     echo json_encode($data);
 } 
 
+        
 
 ?>
