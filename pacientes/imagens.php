@@ -165,7 +165,7 @@ $c_caminho = '/smedweb/pacientes/imagens_lista.php?id=' . $c_id;
                                             <td>$c_linha[descricao]</td>
                                             <td>$c_linha[pasta_imagem]</td>
                                             <td>
-                                            <a class='btn btn-info btn-sm' title='Visualizar ' href='/smedweb/imagens_visualizar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-eye-open'> Visualizar</span></a>
+                                            <a class='btn btn-info btn-sm' title='Visualizar ' href='/smedweb/pacientes/imagens_visualizar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-eye-open'> Visualizar</span></a>
                                             <a class='btn btn-danger btn-sm' title='Excluir' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span> Excluir</a>
                                             
                                             </td>
