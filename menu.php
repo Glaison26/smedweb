@@ -31,7 +31,7 @@ $c_linha = $result->fetch_assoc();
 //////////////////////////////////////////////////////////////
 // ficha de pacientes
 if (($c_linha['fichaclinica'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_paciente = "\smedweb\pacientes_lista.php";
+	$op_paciente = "\smedweb\pacientes/pacientes_lista.php";
 } else {
 	$op_paciente = "javascript:negar()";
 }
@@ -61,7 +61,7 @@ if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso a prescrição
 if (($c_linha['prescricao'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_prescricao = "\smedweb\prescricao.php";
+	$op_prescricao = "\smedweb\prescricoes\prescricao.php";
 } else {
 	$op_prescricao = "javascript:negar()";
 }
@@ -133,7 +133,7 @@ if (($c_linha['cad_componente_formula'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso cadastro de grupos componentes de formulas
 if (($c_linha['cad_grupo_componentes'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_cad_grupos_componentes = "\smedweb\grupocomponentes_lista.php";
+	$op_cad_grupos_componentes = "\smedweb\cadastros\grupocomponentes\grupocomponentes_lista.php";
 	$op_cad_grupos_componentes;
 } else {
 	$op_cad_grupos_componentes = "javascript:negar()";

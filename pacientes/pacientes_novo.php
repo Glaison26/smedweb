@@ -6,9 +6,9 @@ session_start();
 //}
 
 // funções 
-include("conexao.php"); // conexão de banco de dados
-include_once "lib_gop.php";
-include("links.php");
+include("../conexao.php"); // conexão de banco de dados
+include_once "../lib_gop.php";
+include("../links.php");
 
 
 $c_nome = "";
@@ -122,9 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
         if ($_SESSION['incagenda']==false){
-            header('location: /smedweb/pacientes_lista.php');
+            header('location: /smedweb/pacientes/pacientes_lista.php');
         }else{
-            header('location: /smedweb/agenda.php');
+            header('location: /smedweb/agenda/agenda.php');
         }
     } while (false);
 }
@@ -364,7 +364,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Convênio </label>
                             <div class="col-sm-3">
-                                <select class="form-control form-control-lg" id="convenio" name="convenio" required>
+                                <select class="form-control form-control-lg"  id="convenio" name="convenio" required>
+                                    
                                     <?php
                                     $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
                                     $result = $conection->query($c_sql);
@@ -421,7 +422,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div style="padding-top:20px;">
                         <div class="form-group">
                             <label class="col-sm-1 col-form-label">Observação</label>
-                            <div class="col-sm-7">
+                            <div class="col-sm-12">
                                 <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_obs; ?></textarea>
                             </div>
                         </div>
@@ -433,10 +434,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                         <?php
                         if ($_SESSION['incagenda']==false){
-                            echo "<a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
+                            echo "<a class='btn btn-danger' href='/smedweb/pacientes/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
                         }else
                         {
-                            echo "<a class='btn btn-danger' href='/smedweb/agenda.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
+                            echo "<a class='btn btn-danger' href='/smedweb/agenda/agenda.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
                         }
                         ?>
                     </div>

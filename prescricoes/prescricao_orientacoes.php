@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include_once "lib_gop.php";
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
+include_once "../lib_gop.php";
+include("../conexao.php"); // conexão de banco de dados
+include("../links.php");
 
 if (isset($_GET["id"])) {
     $c_id = $_GET["id"]; // pego a id do paciente
@@ -112,7 +112,7 @@ if ((isset($_POST["btnprint"]))) {
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra Orientação no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Orientação</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_orientacao ?>">
-            <a class="btn btn-light" href="/smedweb/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
+            <a class="btn btn-light" href="/smedweb/prescricoes/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
         </form>
         <hr>
         <div class="panel panel-success">

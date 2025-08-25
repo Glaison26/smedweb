@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include_once "lib_gop.php";
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
+include_once "../lib_gop.php";
+include("../conexao.php"); // conexão de banco de dados
+include("../links.php");
 
 // rotina de post dos dados do formuário 
 
@@ -18,7 +18,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/pacientes_lista.php');
+        header('location: /smedweb/pacientes/pacientes_lista.php');
         exit;
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/pacientes_lista.php');
+        header('location: /smedweb/pacientes/pacientes_lista.php');
         exit;
     }
 
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/pacientes_lista.php');
+        header('location: /smedweb/pacientes/pacientes_lista.php');
     } while (false);
 }
 
@@ -465,7 +465,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div style="padding-top:20px;">
                             <div class="form-group">
                                 <label class="col-sm-1 col-form-label">Observação</label>
-                                <div class="col-sm-7">
+                                <div class="col-sm-12">
                                     <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_obs; ?></textarea>
                                 </div>
                             </div>
@@ -475,7 +475,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                     <div class="row mb-3">
                         <div class="offset-sm-0 col-sm-3">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                            <a class='btn btn-danger' href='/smedweb/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                            <a class='btn btn-danger' href='/smedweb/pacientes/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                         </div>
                     </div>
 

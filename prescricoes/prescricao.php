@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../conexao.php");
+include("../links.php");
 $_SESSION['atestado'] = "";
 
 // query para capturar perfil do usuário logado
@@ -97,7 +97,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function atestado(id) {
             var acesso = $('#input_atestado').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/atestado.php?id=" + id;
+                window.location.href = "/smedweb/prescricoes/atestado.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -108,7 +108,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function formula(id) {
             var acesso = $('#input_formula').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/prescricao_formulas.php?id=" + id;
+                window.location.href = "/smedweb/prescricoes/prescricao_formulas.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -119,7 +119,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function medicamento(id) {
             var acesso = $('#input_medicamento').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/prescricao_medicamentos.php?id=" + id;
+                window.location.href = "/smedweb/prescricoes/prescricao_medicamentos.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -131,7 +131,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function laudo(id) {
             var acesso = $('#input_laudo').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/prescricoes_laudos.php?id=" + id;
+                window.location.href = "/smedweb/prescricoes/prescricoes_laudos.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -142,7 +142,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function orientacao(id) {
             var acesso = $('#input_orientacao').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/prescricao_orientacoes.php?id=" + id;
+                window.location.href = "/smedweb/prescricoes/prescricao_orientacoes.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -153,7 +153,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         function relatorio(id) {
             var acesso = $('#input_relatorio').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/prescricao_relatorio.php?id=" + id;
+                window.location.href = "/smedweb/prescricoes/prescricao_relatorio.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -214,7 +214,7 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
         </div>
     </div>
     <br>
-    <div class="container-fluid">
+    <div class="container-fluid -my5">
 
         <form id="frmpaciente" method="POST" action="">
             <input type="hidden" id="input_atestado" name="input_atestado" value="<?php echo $op_atestado; ?>">

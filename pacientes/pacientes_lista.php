@@ -6,9 +6,9 @@ if (!isset($_SESSION['newsession'])) {
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
-include("config_tabelas.php");
+include("../conexao.php");
+include("../links.php");
+include("../config_tabelas.php");
 
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
@@ -82,7 +82,7 @@ $_SESSION['incagenda'] = false;
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
                 if (acesso == 'S') {
-                    window.location.href = "/smedweb/pacientes_excluir.php?id=" + id;
+                    window.location.href = "/smedweb/pacientes/pacientes_excluir.php?id=" + id;
                 } else {
                     alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }
@@ -95,7 +95,7 @@ $_SESSION['incagenda'] = false;
         function editar(id) {
             var acesso = $('#acesso').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/pacientes_editar.php?id=" + id;
+                window.location.href = "/smedweb/pacientes/pacientes_editar.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -107,7 +107,7 @@ $_SESSION['incagenda'] = false;
         function historia(id) {
             var acesso = $('#input_historia').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/historia.php?id=" + id;
+                window.location.href = "/smedweb/pacientes/historia.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -120,7 +120,7 @@ $_SESSION['incagenda'] = false;
         function evento(id) {
             var acesso = $('#input_evento').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/eventos.php?id=" + id;
+                window.location.href = "/smedweb/pacientes/eventos.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -133,7 +133,7 @@ $_SESSION['incagenda'] = false;
         function imagem(id) {
             var acesso = $('#input_imagem').val();
             if (acesso == 'S') {
-                window.location.href = "/smedweb/imagens.php?id=" + id;
+                window.location.href = "/smedweb/pacientes/imagens.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -164,7 +164,7 @@ $_SESSION['incagenda'] = false;
             <input type="hidden" id="input_excluir" name="input_excluir" value="<?php echo $op_excluir; ?>">
             <!-- -->
            
-            <a class="btn btn-success" href="/smedweb/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+            <a class="btn btn-success" href="/smedweb/pacientes/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
             <a class="btn btn-secondary" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
          
         </form>

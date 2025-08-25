@@ -6,8 +6,8 @@ if (!isset($_SESSION['newsession'])) {
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../../conexao.php");
+include("../../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +23,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/grupocomponentes_excluir.php?id=" + id;
+                window.location.href = "/smedweb/cadastros/grupocomponentes/grupocomponentes_excluir.php?id=" + id;
             }
         }
     </script>
@@ -255,7 +255,7 @@ include("links.php");
                         <div class="mb-3 row">
                             <label for="addgrupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="addgrupoField" name="addgrupoField">
+                                <input type="text" required class="form-control" id="addgrupoField" name="addgrupoField">
                             </div>
                         </div>
 
@@ -289,7 +289,7 @@ include("links.php");
                         <div class="mb-3 row">
                             <label for="up_grupoField" class="col-md-3 form-label">Descrição do Grupo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_grupoField" name="up_grupoField">
+                                <input type="text" required class="form-control" id="up_grupoField" name="up_grupoField">
                             </div>
                         </div>
                        

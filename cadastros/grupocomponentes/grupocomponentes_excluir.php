@@ -6,10 +6,10 @@ if (!isset($_SESSION['newsession'])) {
 
 
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/grupocomponentes_lista.php');
+    header('location: /smedweb/cadastros/grupocomponentes/grupocomponentes_lista.php');
     exit;
 }
-include("conexao.php");
+include("../../conexao.php");
 $c_id = "";
 $c_id = $_GET["id"];
 
@@ -18,4 +18,4 @@ $c_sql = "delete from grupo_componentes where id=$c_id";
 
 $result = $conection->query($c_sql);
 
-header('location: /smedweb/grupocomponentes_lista.php');
+header('location: /smedweb/cadastros/grupocomponentes/grupocomponentes_lista.php');
