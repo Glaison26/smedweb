@@ -3,9 +3,9 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
-include("conexao.php");  // conexão
-include("links.php");
-include("config_tabelas.php");
+include("../conexao.php");  // conexão
+include("../links.php");
+include("../config_tabelas.php");
 ?>
 
 <!-- HTML frontend da pagina -->
@@ -18,7 +18,7 @@ include("config_tabelas.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/perfil_excluir.php?id=" + id;
+                window.location.href = "/smedweb/usuarioa/perfil_excluir.php?id=" + id;
             }
         }
     </script>
@@ -32,7 +32,7 @@ include("config_tabelas.php");
     <br>
     <div class="container -my5">
         <!-- botão de incluir -->
-        <a class="btn btn-success btn-sm" href="/smedweb/perfil_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+        <a class="btn btn-success btn-sm" href="/smedweb/usuarios/perfil_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <!-- botão de voltar -->
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <hr>
@@ -64,7 +64,7 @@ include("config_tabelas.php");
                
                     <td>
                  
-                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/perfil_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/usuarios/perfil_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Perfil' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 

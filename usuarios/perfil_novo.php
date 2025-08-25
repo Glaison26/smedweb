@@ -3,8 +3,8 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
-include("conexao.php");  // conexão
-include("links.php");
+include("../conexao.php");  // conexão
+include("../links.php");
 
 $c_descricao = "";
 // gravação das informações do perfil do formulário
@@ -231,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         // fim de gravação
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        header('location: /smedweb/perfil_acesso.php');
+        header('location: /smedweb/usuarios/perfil_acesso.php');
     } while (false);
 }
 ?>
@@ -290,7 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="mb-3 row">
                                 <label for="add_descricaoField" class="col-md-2 form-label">Descrição do Perfil (*)</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="add_descricaoField" name="add_descricaoField" Value="<?php echo $c_descricao; ?>">
+                                    <input type="text" required class="form-control" id="add_descricaoField" name="add_descricaoField" Value="<?php echo $c_descricao; ?>">
                                 </div>
                             </div>
                         </div>
@@ -589,7 +589,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="row mb-3">
                     <div class="col-sm-3">
                         <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/perfil_acesso.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                        <a class='btn btn-danger' href='/smedweb/usuarios/perfil_acesso.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
 
                 </div>
