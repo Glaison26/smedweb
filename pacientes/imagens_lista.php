@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../conexao.php");
+include_once "../lib_gop.php";
+include("../links.php");
 $c_id = $_GET["id"];
 $c_descricao = "";
 // sql para contar numero de refistros
@@ -36,7 +36,7 @@ $c_conta = $c_linha_conta['total'];
     <br>
     <div class="container -my5">
         <div class="class='mb-3 row">
-            <a class='btn btn-Light' href='/smedweb/imagens.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+            <a class='btn btn-Light' href='/smedweb/pacientes/imagens.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
         </div><br>
         <div class="panel panel-info">
             <div class="panel-heading">

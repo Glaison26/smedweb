@@ -1,7 +1,7 @@
 <?php
-include_once "lib_gop.php";
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
+include_once "../lib_gop.php";
+include("../conexao.php"); // conexão de banco de dados
+include("../links.php");
 date_default_timezone_set('America/Sao_Paulo');
 session_start();
 if (isset($_GET["id"])) { // pego a id do paciente
@@ -37,7 +37,7 @@ if (!$result) {
 }
 $c_linha = $result->fetch_assoc();
 $_SESSION["paciente_nome"] = $c_linha['nome'];
-$c_caminho = '/smedweb/imagens_lista.php?id=' . $c_id;
+$c_caminho = '/smedweb/pacientes/imagens_lista.php?id=' . $c_id;
 
 //
 ?>
@@ -101,7 +101,7 @@ $c_caminho = '/smedweb/imagens_lista.php?id=' . $c_id;
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/imagens_excluir.php?id=" + id;
+                window.location.href = "/smedweb/pacientes/imagens_excluir.php?id=" + id;
             }
         }
     </script>
@@ -125,7 +125,7 @@ $c_caminho = '/smedweb/imagens_lista.php?id=' . $c_id;
 
                         <button type="submit" name="btnfoto" id="btnfoto" class="btn btn-Ligth"> <img src="\smedweb\images\imagem2.png" alt="" width="20" height="20"> Carregar imagem</button>
                         <a class='btn btn-Light btn-sm' title='Lista de Imagens' href="<?php echo $c_caminho; ?>"><span class='glyphicon glyphicon-list-alt'></span> Listar Imagens</a>
-                        <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+                        <a class='btn btn-Light' href='/smedweb/pacientes/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                         <hr>
                         <input type="file" name="arquivo" class="form-control-file" id="arquivo" accept="image/*">
                     </div>

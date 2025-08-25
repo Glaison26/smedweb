@@ -1,7 +1,7 @@
 <?php
-include_once "lib_gop.php";
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
+include_once "../lib_gop.php";
+include("../conexao.php"); // conexão de banco de dados
+include("../links.php");
 $c_id = $_GET["id"]; // pego a id do paciente
 $c_historia = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_historia = $_POST['historia'];
     $c_sql = "update historia set historia='$c_historia' where id_paciente='$c_id'";
     $result = $conection->query($c_sql);
-    header('location: /smedweb/pacientes_lista.php');
+    header('location: /smedweb/pacientes/pacientes_lista.php');
 }
 // sair da historia
 ?>
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="row mb-3">
                         <div class="offset-sm-0 col-sm-3">
                             <button type="submit" class="btn btn-Light"></span> <img src="\smedweb\images\salvar.png" alt="" width="15" height="15"> Salvar</button>
-                            <a class='btn btn-Light' href='/smedweb/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+                            <a class='btn btn-Light' href='/smedweb/pacientes/pacientes_lista.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                         </div>
                     </div>
                 </div>

@@ -4,14 +4,13 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include("conexao.php");
-include_once "lib_gop.php";
-include("links.php");
+include("../conexao.php");
+include_once "../lib_gop.php";
+include("../links.php");
 
 // rotina de post dos dados do formuário
 $c_descricao = "";
 $d_data = "";
-
 $c_id = $_GET["id"];
 
 // variaveis para mensagens de erro e suscessso da gravação
@@ -22,7 +21,7 @@ $msg_erro = "";
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/imagens.php');
+        header('location: /smedweb/pacientes/imagens.php');
         exit;
     }
 
@@ -33,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $registro = $result->fetch_assoc();
 
     if (!$registro) {
-        header('location: /smedweb/imagens.php');
+        header('location: /smedweb/pacientes/imagens.php');
         exit;
     }
     $c_descricao = $registro['descricao'];
@@ -60,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 die("Erro ao Executar Sql!!" . $conection->connect_error);
             }
             $msg_gravou = "Dados Gravados com Sucesso!!";
-            header('location: /smedweb/imagens.php');
+            header('location: /smedweb/pacientes/imagens.php');
         } while (false);
     }
 }
@@ -135,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-Light"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-Light' href='/smedweb/imagens.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+                    <a class='btn btn-Light' href='/smedweb/pacientes/imagens.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
                 </div>
 
             </div>
