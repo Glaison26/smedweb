@@ -49,13 +49,13 @@ if (($c_linha['tipo'] == '1')) {
 }
 // agenda 
 if (($c_linha['agenda'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_agenda = "\smedweb\agenda.php";
+	$op_agenda = "\smedweb\agenda/agenda.php";
 } else {
 	$op_agenda = "javascript:negar()";
 }
 // agenda Criação
 if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_agenda_criacao = "\smedweb\config_agenda.php";
+	$op_agenda_criacao = "\smedweb/agenda\config_agenda.php";
 } else {
 	$op_agenda_criacao = "javascript:negar()";
 }
@@ -158,13 +158,13 @@ if (($c_linha['cad_diagnosticos'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // acesso financeiro indices
 if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_financeiro1 = "\smedweb\indices_lista.php";
+	$op_financeiro1 = "\smedweb/financeiro/indices/indices_lista.php";
 } else {
 	$op_financeiro1 = "javascript:negar()";
 }
 // acesso tabelas
 if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_financeiro2 = '\smedweb\tabelas_lista.php';
+	$op_financeiro2 = '\smedweb/financeiro/tabelas\tabelas_lista.php';
 } else {
 	$op_financeiro2 = "javascript:negar()";
 }

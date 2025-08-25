@@ -6,8 +6,8 @@
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../conexao.php");
+include("../links.php");
 ?>
 
 <!doctype html>
@@ -124,9 +124,9 @@ include("links.php");
                     <td>$c_linha[especialidade]</td>
                             
                     <td>
-                    <a class='btn btn-primary' title='Configuração da agenda do profissional' href='/smedweb/config_agenda_criacao.php?id=$c_linha[id]'>
+                    <a class='btn btn-primary' title='Configuração da agenda do profissional' href='/smedweb/agenda/config_agenda_criacao.php?id=$c_linha[id]'>
                     <span class='glyphicon glyphicon-calendar'></span> Configurar Agenda</a>
-                    <a class='btn btn-success' title='Gerar Agenda do Profissional' href='/smedweb/criacao_agenda.php?id=$c_linha[id]'>
+                    <a class='btn btn-success' title='Gerar Agenda do Profissional' href='/smedweb/agenda/criacao_agenda.php?id=$c_linha[id]'>
                     <img src='\smedweb\images\gerar_agenda2.png' alt='' width='20' height='20'> Gerar Agenda</a>
                     
                     </td>

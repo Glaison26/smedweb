@@ -5,16 +5,13 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../../conexao.php");
 
-// rotina de edição
-$c_id = $_POST['c_id'];
+// rotina de inclusão
 $c_indice = rtrim($_POST['c_indice']);
 $c_valor = $_POST['c_valor'];
 
-$c_sql = "Update indices" .
-" SET descricao = '$c_indice', valor = '$c_valor' where id=$c_id";
-//" SET descricao = '$c_indice' where id=$c_id";
+$c_sql = "Insert into indices (descricao, valor) Value ('$c_indice', '$c_valor')";
 $result = $conection->query($c_sql);
 
 if($result ==true)
@@ -36,7 +33,6 @@ else
 
     echo json_encode($data);
 } 
-
-        
+  
 
 ?>

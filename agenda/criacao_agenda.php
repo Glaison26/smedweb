@@ -4,9 +4,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include_once "lib_gop.php";
-include("conexao.php"); // conexão de banco de dados
-include("links.php");
+include_once "../lib_gop.php";
+include("../conexao.php"); // conexão de banco de dados
+include("../links.php");
 $msg_gerou = "";
 $c_id = $_GET["id"];
 // sql para pegar nome do medico
@@ -251,7 +251,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#extramodal"><img src='\smedweb\images\horarios_extra.png' alt='' width='15' height='15'>
                             Horário Extra
                         </button>
-                        <a class="btn btn-info" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+                        <a class="btn btn-info" href="/smedweb/agenda/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
                     </div>
                     <!-- barra de progresso para geração da agenda -->
                     <label>Progresso da Geração</label>

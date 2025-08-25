@@ -6,8 +6,8 @@ session_start();
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../conexao.php");
+include("../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,7 +24,7 @@ include("links.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/datas_suprimidos_excluir.php?id=" + id;
+                window.location.href = "/smedweb/agenda/datas_suprimidos_excluir.php?id=" + id;
             }
         }
     </script>
@@ -150,7 +150,7 @@ include("links.php");
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#novaModal"><span class="glyphicon glyphicon-plus"></span>
             Novo
         </button>
-        <a class="btn btn-secondary btn-sm" href="/smedweb/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/agenda/config_agenda.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
         <hr>
         <table class="table display table-bordered tabsuprimidas">
             <thead class="thead">
@@ -215,19 +215,19 @@ include("links.php");
                         <div class="mb-3 row">
                             <label for="add_data1Field" class="col-md-3 form-label">Data Inicio (*)</label>
                             <div class="col-md-4">
-                                <input type="date" class="form-control" id="add_data1Field" name="add_data1Field">
+                                <input type="date"  required class="form-control" id="add_data1Field" name="add_data1Field">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="add_data2Field" class="col-md-3 form-label">Data Fim (*)</label>
                             <div class="col-md-4">
-                                <input type="date" class="form-control" id="add_data2Field" name="add_data2Field">
+                                <input type="date" required class="form-control" id="add_data2Field" name="add_data2Field">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="add_motivoField" class="col-md-3 form-label">Motivo (*)</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="add_motivoField" name="add_motivoField">
+                                <input type="text" required class="form-control" id="add_motivoField" name="add_motivoField">
                             </div>
                         </div>
 

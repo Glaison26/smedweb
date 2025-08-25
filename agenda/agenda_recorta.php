@@ -5,7 +5,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../conexao.php");
 // rotina de edição
 $c_id = $_GET['id'];
 $c_sql_dados = "select * from agenda where id='$c_id'";
@@ -16,7 +16,7 @@ if ($c_linha['nome']=='') {
     <script>
     alert('Não existem dados para serem recortador!!!')
     </script>";
-    header('location: /smedweb/agenda.php');
+    header('location: /smedweb/agenda/agenda.php');
 }
 // jogo os dados para variaveis de memória
 $_SESSION['nomepac'] = $c_linha['Nome'];
@@ -30,7 +30,7 @@ $c_sql = "Update agenda" .
 echo $_SESSION['nomepac'];
 $result = $conection->query($c_sql);
 
-header('location: /smedweb/agenda.php');
+header('location: /smedweb/agenda/agenda.php');
         
 
 ?>

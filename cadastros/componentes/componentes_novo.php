@@ -33,7 +33,7 @@ else
 {  // sql com erro
      $data = array(
         'status'=>'false',
-      
+    
     );
 
     echo json_encode($data);

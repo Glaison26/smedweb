@@ -7,7 +7,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../conexao.php");
 
 // rotina de edição
 $c_id = $_GET["id"];
@@ -29,6 +29,6 @@ alert('Dados Copiados!!');
 </script>
 ";
 
-header('location: /smedweb/agenda.php');
+header('location: /smedweb/agenda/agenda.php');
 
 

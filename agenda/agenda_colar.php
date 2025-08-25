@@ -7,7 +7,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../conexao.php");
 
 // rotina de edição
 $c_id = $_GET["id"];
@@ -29,6 +29,6 @@ $c_sql = "Update agenda" .
 " SET nome = '$c_nome', id_convenio = '$i_idconvenio', matricula = '$c_matricula',  telefone = '$c_telefone', email = '$c_email' where id=$c_id";
 echo $c_sql;
 $result = $conection->query($c_sql);
-header('location: /smedweb/agenda.php');
+header('location: /smedweb/agenda/agenda.php');
 
 

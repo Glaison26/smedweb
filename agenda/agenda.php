@@ -7,9 +7,9 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include("conexao.php");
-include("links.php");
-include_once "lib_gop.php";
+include("../conexao.php");
+include("../links.php");
+include_once "../lib_gop.php";
 
 //  rotina para sql de pacientes no post
 $c_sql_pac = "";
@@ -236,7 +236,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             var acesso = $('#input_desmarcar').val();
             if (resposta == true) {
                 if (acesso == "S") {
-                    window.location.href = "/smedweb/agenda_desmarcar.php?id=" + id;
+                    window.location.href = "/smedweb/agenda/agenda_desmarcar.php?id=" + id;
                 } else {
                     alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }
@@ -249,7 +249,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         function colar(id) {
             var acesso = $('#input_remanejar').val();
             if (acesso == "S") {
-                window.location.href = "/smedweb/agenda_colar.php?id=" + id;
+                window.location.href = "/smedweb/agenda/agenda_colar.php?id=" + id;
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -262,7 +262,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             var resposta = confirm("Confirma Operação?");
             if (resposta == true) {
                 if (acesso == "S") {
-                    window.location.href = "/smedweb/agenda_recorta.php?id=" + id;
+                    window.location.href = "/smedweb/agenda/agenda_recorta.php?id=" + id;
                 } else {
                     alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }
@@ -553,9 +553,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     <td>
                                                   
                         <a class='btn btn-light' title='Copiar Dados'
-                        href='/smedweb/agenda_copia.php?id=$c_linha_pac[id]'><img src='\smedweb\images\copiar.png'alt='' width='15' height='15'> Copiar</a>
+                        href='/smedweb/agenda/agenda_copia.php?id=$c_linha_pac[id]'><img src='\smedweb\images\copiar.png'alt='' width='15' height='15'> Copiar</a>
                     </td>
-
                     </tr>
                     ";
                                     }
@@ -622,7 +621,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                 ?>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -652,7 +650,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         <div class="mb-3 row">
                             <label for="up_nomeField" class="col-md-3 form-label">Nome (*) </label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="up_nomeField" name="up_nomeField">
+                                <input type="text" required class="form-control" id="up_nomeField" name="up_nomeField">
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -664,7 +662,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Convênio </label>
                             <div class="col-sm-6">
-                                <select class="form-control form-control-lg" id="up_convenioField" name="up_convenioField">
+                                <select required class="form-control form-control-lg" id="up_convenioField" name="up_convenioField">
                                     <?php
                                     $c_sql3 = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
                                     $result3 = $conection->query($c_sql3);
@@ -682,13 +680,13 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Telefone </label>
                             <div class="col-sm-4">
-                                <input type="tel" maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="up_telefoneField" name="up_telefoneField">
+                                <input type="tel" required maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="up_telefoneField" name="up_telefoneField">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">E-mail</label>
                             <div class="col-sm-9">
-                                <input type="text" maxlength="225" class="form-control" id="up_emailField" name="up_emailField">
+                                <input type="text" required maxlength="225" class="form-control" id="up_emailField" name="up_emailField">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -701,7 +699,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
-                    
+                
                 </div>
                 </form>
             </div>
