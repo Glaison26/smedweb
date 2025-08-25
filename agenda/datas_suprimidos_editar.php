@@ -5,7 +5,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../conexao.php");
 $c_id = $_POST['c_id'];
 // rotina de edição
 // formata datas

@@ -1,1 +1,0 @@
- <input type='hidden' name='id_atestado' id='id_atestado'>

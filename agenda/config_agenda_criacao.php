@@ -4,14 +4,14 @@ if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
 
-include_once "lib_gop.php";
-include("links.php");
-include("conexao.php"); // conexão de banco de dados
+include_once "../lib_gop.php";
+include("../links.php");
+include("../conexao.php"); // conexão de banco de dados
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
 
     if (!isset($_GET["id"])) {
-        header('location: /smedweb/config_agenda.php');
+        header('location: /smedweb/agenda/config_agenda.php');
         exit;
     }
     $c_id = $_GET["id"];  // identificação do id do profissional
@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             </tbody>
         </table>
         <hr>
-        <a class='btn btn-info' href='/smedweb/config_agenda.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+        <a class='btn btn-info' href='/smedweb/agenda/config_agenda.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
     </div>
 
 
