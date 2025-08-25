@@ -37,13 +37,13 @@ if (($c_linha['fichaclinica'] == 'S') || ($c_linha['tipo'] == '1')) {
 }
 // Cadastro de usuários
 if (($c_linha['tipo'] == '1')) {
-	$op_usuarios = "\smedweb\usuarios_lista.php";
+	$op_usuarios = "\smedweb\usuarios\usuarios_lista.php";
 } else {
 	$op_usuarios = "javascript:negar()";
 }
 // Cadastro de perfis
 if (($c_linha['tipo'] == '1')) {
-	$op_usuarios_perfil = "\smedweb\perfil_acesso.php";
+	$op_usuarios_perfil = "\smedweb\usuarios\perfil_acesso.php";
 } else {
 	$op_usuarios_perfil = "javascript:negar()";
 }

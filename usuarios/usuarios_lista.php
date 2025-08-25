@@ -6,8 +6,8 @@ if (!isset($_SESSION['newsession'])) {
 //if ($_SESSION['c_tipo'] != '1') {
 //    header('location: /raxx/voltamenunegado.php');
 //}
-include("conexao.php");
-include("links.php");
+include("../conexao.php");
+include("../links.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -90,7 +90,7 @@ include("links.php");
     <br>
     <div class="container -my5">
 
-        <a class="btn btn-success btn-sm" href="/smedweb/usuario_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+        <a class="btn btn-success btn-sm" href="/smedweb/usuarios/usuario_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
         <a class="btn btn-secondary btn-sm" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
 
         <hr>
@@ -146,7 +146,7 @@ include("links.php");
                     <td>$c_linha[perfil]</td>
                     <td>$c_ativo</td>
                     <td>
-                    <a class='btn btn-info btn-sm' title='Editar Usuário' href='/smedweb/Usuarios_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
+                    <a class='btn btn-info btn-sm' title='Editar Usuário' href='/smedweb/usuarios/usuarios_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     </td>
 
                     </tr>
