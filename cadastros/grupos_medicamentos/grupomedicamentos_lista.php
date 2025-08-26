@@ -257,11 +257,10 @@ include("../../links.php");
                                 <input type="text" class="form-control" id="addgrupoField" name="addgrupoField">
                             </div>
                         </div>
-
-                       
+                    
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
 
                         </div>
                     </form>
@@ -294,7 +293,7 @@ include("../../links.php");
                        
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                         </div>
                     </form>
                 </div>
