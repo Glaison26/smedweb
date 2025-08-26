@@ -1,0 +1,17 @@
+smedweb - alterações
+
+pagina de orientações e atestados 
+
+tirar pagina modal para inclusão e edição
+
+agenda 
+
+checar tabulações
+
+terminar emissão das outras prescrições
+
+terminar parte fianceira 
+
+Gerar estatísticas
+
+colocar status de atendimento na agenda (atendido ou não)
