@@ -242,7 +242,7 @@ include("../../links.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" id="novoatestadoModal" tabindex="-1" role="dialog" data-target=".bd-example-modal-lg" aria-labelledby="novoatestadoModal" aria-hidden="true">
+    <div class="modal fade" id="novoatestadoModal" tabindex="-1" role="dialog" class="modal-dialog modal-xl"  data-target=".bd-example-modal-lg" aria-labelledby="novoatestadoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -260,9 +260,9 @@ include("../../links.php");
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="addtextoField" class="col-md-3 form-label">Texto do Atestado</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="addtextoField" name="addtextoField" rows="5"></textarea>
+                            <label for="addtextoField" class="col-md-5 form-label">Texto do Atestado</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="addtextoField" name="addtextoField" rows="15"></textarea>
                             </div>
                         </div>
 
@@ -280,7 +280,7 @@ include("../../links.php");
 
 
     <!-- Modal para edição dos dados -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+    <div class="modal fade" id="editmodal" tabindex="-1"  class="modal-dialog modal-fluid" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -299,15 +299,14 @@ include("../../links.php");
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="up_textoField" class="col-md-3 form-label">Texto do Atestado</label>
-                            <div class="col-md-9">
-                                <textarea class="form-control" id="up_textoField" name="up_textoField" rows="5"></textarea>
+                            <label for="up_textoField" class="col-md-5 form-label">Texto do Atestado</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control" id="up_textoField" name="up_textoField" rows="15"></textarea>
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                            <button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                         </div>
                     </form>
                 </div>

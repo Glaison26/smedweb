@@ -56,7 +56,7 @@ if (($c_linha['agenda_remanejar'] == 'S') || ($c_linha['tipo'] == '1')) {
 if ($_SESSION['sql'] != '') {
     $c_sql2 = $_SESSION['sql'];
     $result2 = $conection->query($c_sql2);
-    
+
     // verifico se a query foi correto
     if (!$result2) {
         die("Erro ao Executar Sql !!" . $conection->connect_error);
@@ -80,8 +80,6 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     }
     // mudo a aba para cadastro de pacientes
     $_SESSION['aba_agenda'] = 2;
-    
-
 }
 //$c_sql2 = "";
 //$c_sql3 = "";
@@ -246,6 +244,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     <!-- funcao para chamar rotina para colar marcação de agenda -->
     <script>
         var acesso = $('#input_remanejar').val();
+
         function colar(id) {
             var acesso = $('#input_remanejar').val();
             if (acesso == "S") {
@@ -267,7 +266,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }
             }
-          
+
         }
     </script>
 

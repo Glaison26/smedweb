@@ -244,7 +244,7 @@ include("../../links.php");
 
 
     <!-- janela Modal para inclusão de registro -->
-    <div class="modal fade" class="modal-dialog modal-lg" id="novoorientacaoModal" tabindex="-1" role="dialog" aria-labelledby="novoorientacaoModal" aria-hidden="true">
+    <div class="modal fade" class="modal-dialog modal-fluid"  id="novoorientacaoModal" tabindex="-1" role="dialog" aria-labelledby="novoorientacaoModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" class="modal-dialog modal-fullscreen-sm-down"  role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -252,7 +252,7 @@ include("../../links.php");
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
-                        <h5>Campos com (*) são obrigatórios. ESC para Fechar</h5>
+                        <h5>Campos com (*) são obrigatórios.</h5>
                     </div>
                     <form id="frmaddorientacao" action="">
                         <div class="mb-3 row">
@@ -262,9 +262,9 @@ include("../../links.php");
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="add_textoField" class="col-md-3 form-label">Texto da Orientação</label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" id="add_textoField" name="add_textoField" style="width: 348px;" rows="10"></textarea>
+                            <label for="add_textoField" class="col-md-5 form-label">Texto da Orientação</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="add_textoField" name="add_textoField"  rows="15"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -281,34 +281,34 @@ include("../../links.php");
 
 
     <!-- Modal para edição dos dados -->
-    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="editmodal" tabindex="-1" class="modal-dialog modal-fluid" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" class="modal-dialog modal-fullscreen-sm-down" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">Editar dados do Medicamento</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
-                        <h5>Campos com (*) são obrigatórios. ESC para fechar</h5>
+                        <h5>Campos com (*) são obrigatórios.</h5>
                     </div>
                     <form id="frmuporientacao" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
                         <div class="mb-3 row">
                             <label for="up_descricaoField" class="col-md-3 form-label">Descrição (*)</label>
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <input type="text" class="form-control" id="up_descricaoField" name="up_dscricaoField">
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="up_textoField" class="col-md-3 form-label">Texto da Orientação</label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control" id="up_textoField" name="up_textoField" style="width: 348px;" rows="10"></textarea>
+                            <label for="up_textoField" class="col-md-5 form-label">Texto da Orientação</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="up_textoField" name="up_textoField"  rows="15"></textarea>
                             </div>
                         </div>
 
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                            
+                            <button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
                         </div>
                     </form>
                 </div>
