@@ -466,7 +466,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                 if (!empty($c_sql2)) {
 
                                     while ($c_linha2 = $result2->fetch_assoc()) {
-
+                                        if ($c_linha2['convenio'] == 'Selecionar') {
+                                            $c_linha2['convenio'] = '';
+                                        }
                                         echo "
                                     <tr>
                                     <td>$c_linha2[id]</td>

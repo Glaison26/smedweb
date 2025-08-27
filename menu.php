@@ -379,7 +379,17 @@ if (($c_linha['tipo'] == '1')) {
 					</div>
 				</div>
 			</div>
+
+
 </div>
+
+
+
+<!-- END nav -->
+
+</main>
+
+</body>
 
 <div style="padding-bottom:15px;" style="padding-left :100px;">
 	<footer>
@@ -392,12 +402,6 @@ if (($c_linha['tipo'] == '1')) {
 	</footer>
 </div>
 
-
-<!-- END nav -->
-
-</main>
-
-</body>
 
 <!-- CSS para as barras laterais -->
 <style>
@@ -466,7 +470,7 @@ if (($c_linha['tipo'] == '1')) {
 		bottom: 0;
 		background-color: #4682B4;
 		color: #FFF;
-		width: 67%;
+		width: 68%;
 		height: 45px;
 		text-align: left;
 		line-height: 70px;
