@@ -385,7 +385,7 @@ if (($c_linha['tipo'] == '1')) {
 	<footer>
 		<div style="padding-left :15px;">
 			<p>
-			
+
 			<h4>SMARTMED - Todos os direitos reservados</h4>
 			</p>
 		</div>
