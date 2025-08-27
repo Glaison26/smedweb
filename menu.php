@@ -379,9 +379,17 @@ if (($c_linha['tipo'] == '1')) {
 					</div>
 				</div>
 			</div>
+</div>
 
-
-
+<div style="padding-bottom:15px;" style="padding-left :100px;">
+	<footer>
+		<div style="padding-left :15px;">
+			<p>
+			
+			<h4>SMARTMED - Todos os direitos reservados</h4>
+			</p>
+		</div>
+	</footer>
 </div>
 
 
@@ -436,6 +444,32 @@ if (($c_linha['tipo'] == '1')) {
 		.sidebar a {
 			font-size: 18px;
 		}
+	}
+</style>
+
+<!-- rodape do menu -->
+<style>
+	html,
+	body {
+		min-height: 100%;
+	}
+
+	body {
+		padding: 0;
+		margin: 0;
+	}
+
+	footer {
+		position: fixed;
+		left: 320px;
+		right: 520px;
+		bottom: 0;
+		background-color: #4682B4;
+		color: #FFF;
+		width: 67%;
+		height: 45px;
+		text-align: left;
+		line-height: 70px;
 	}
 </style>
 
