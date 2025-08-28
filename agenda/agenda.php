@@ -181,7 +181,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     <!-- função para chamar marcação -->
     <script>
         function marcacao(id) {
-
+            const c_chk_compareceu = document.getElementById('chk_compareceu');
+            const c_chk_novopaciente = document.getElementById('chk_novopaciente');
+            const c_chk_atendido = document.getElementById('chk_atendido');
             var acesso = $('#input_marcacao').val();
             if (acesso == 'S') {
                 $(document).ready(function() {
@@ -206,15 +208,13 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         $('#up_telefoneField').val(data[5]);
                         $('#up_emailField').val(data[6]);
                         $('#up_obsField').val(data[7]);
-                 
+
                         $('#chk_compareceu').val(data[9]);
                         $('#chk_atendido').val(data[10]);
                         $('#chk_novopaciente').val(data[11]);
                     });
                 });
-                const c_chk_compareceu = document.getElementById('chk_compareceu');
-                const c_chk_novopaciente = document.getElementById('chk_novopaciente');
-                const c_chk_atendido = document.getElementById('chk_atendido');
+
                 if (c_chk_compareceu.checked == true) {
                     c_chk_compareceu.value = 'S';
                 } else {
