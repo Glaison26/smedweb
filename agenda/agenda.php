@@ -125,7 +125,8 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     }
     $c_sql2 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
-    agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula FROM agenda 
+    agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula,
+    agenda.paciente_compareceu, agenda.paciente_atendido, agenda.paciente_novo FROM agenda 
     JOIN convenios ON agenda.id_convenio=convenios.id
     WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
     $result2 = $conection->query($c_sql2);
@@ -205,8 +206,31 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         $('#up_telefoneField').val(data[5]);
                         $('#up_emailField').val(data[6]);
                         $('#up_obsField').val(data[7]);
+                 
+                        $('#chk_compareceu').val(data[9]);
+                        $('#chk_atendido').val(data[10]);
+                        $('#chk_novopaciente').val(data[11]);
                     });
                 });
+                const c_chk_compareceu = document.getElementById('chk_compareceu');
+                const c_chk_novopaciente = document.getElementById('chk_novopaciente');
+                const c_chk_atendido = document.getElementById('chk_atendido');
+                if (c_chk_compareceu.checked == true) {
+                    c_chk_compareceu.value = 'S';
+                } else {
+                    c_chk_compareceu.value = '';
+                }
+                if (c_chk_novopaciente.value == 'S') {
+                    c_chk_novopaciente.checked = true;
+                } else {
+                    c_chk_novopaciente.checked = false;
+                }
+                if (c_chk_atendido.value == 'S') {
+                    c_chk_atendido.checked = true;
+                } else {
+                    c_chk_atendido.checked = false;
+                }
+
             } else {
                 alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
             }
@@ -278,7 +302,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [2]
+                    'aTargets': [9]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -317,7 +341,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
 
     <script type="text/javascript">
-        // Função javascript e ajax para Alteração dos dados
+        // Função javascript e ajax para ageda marcação
         $(document).on('submit', '#frmadd', function(e) {
             e.preventDefault();
             var c_id = $('#up_idField').val();
@@ -328,6 +352,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             var c_telefone = $('#up_telefoneField').val()
             var c_email = $('#up_emailField').val();
             var c_obs = $('#up_obsField').val();
+            var c_compareceu = $('#chk_compareceu').is(':checked') ? $('#chk_compareceu').val() : '';
+            var c_novopaciente = $('#chk_novopaciente').is(':checked') ? $('#chk_novopaciente').val() : '';
+            var c_atendido = $('#chk_atendido').is(':checked') ? $('#chk_atendido').val() : '';
 
             if (c_nome != '') {
 
@@ -342,7 +369,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         c_convenio: c_convenio,
                         c_telefone: c_telefone,
                         c_email: c_email,
-                        c_obs: c_obs
+                        c_obs: c_obs,
+                        c_compareceu: c_compareceu,
+                        c_novopaciente: c_novopaciente,
+                        c_atendido: c_atendido
 
                     },
                     success: function(data) {
@@ -394,7 +424,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <div class="panel-heading">
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Profissional</label>
-                        <div class="col-sm-6">
+                        <div class="col-sm-2">
                             <select class="form-control form-control-lg" id="profissional" name="profissional">
                                 <?php
                                 $c_sql = "SELECT profissionais.id, profissionais.nome FROM profissionais
@@ -417,8 +447,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
                 </div>
             </div>
-
-
             <!-- abas de agenda e cadstro de pacientes -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
@@ -457,6 +485,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <th scope="col">e-mail</th>
                                     <th scope="col">Observação</th>
                                     <th scope="col">Ações para agenda</th>
+                                    <th class="some" width: 1%; scope="col">Paciente Compareceu</th>
+                                    <th class="some" width: 1%; scope="col">Paciente Atendido</th>
+                                    <th class="some" width: 1%; scope="col">Paciente Novo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -490,6 +521,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
                                    
                                    </td>
+                                   <td class='some' width: 1%;>$c_linha2[paciente_compareceu]</td>
+                                   <th class='some' width: 1%;>$c_linha2[paciente_atendido]</th>
+                                   <th class='some' width: 1%;>$c_linha2[paciente_novo]
+                                   </th>
                                     </tr>
                                     ";
                                     }
@@ -655,7 +690,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="up_matriculaField" class="col-md-3 form-label">Matricula </label>
+                            <label for="up_matriculaField" class="col-md-3 form-label">Matricula</label>
                             <div class="col-md-5">
                                 <input type="text" class="form-control" id="up_matriculaField" name="up_matriculaField">
                             </div>
@@ -696,17 +731,70 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                 <input type="text" maxlength="100" class="form-control" id="up_obsField" name="up_obsField">
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Situação</label>
+                            <br>
+                        </div>
+                        <div class="row mb-3">
 
+                            <!-- checkbox para situação de paciente novo -->
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <div class="col-sm-2">
+                                        <input class="form-check-input" type="checkbox" value="S" id="chk_novopaciente">
+                                    </div>
+                                    <label class="form-check-label" for="chk_novopaciente">
+                                        Paciente Novo
+                                    </label>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="row mb-3">
+                            <!-- checkbox para situação de paciente comparecimento -->
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <div class="col-sm-2">
+                                        <input class="form-check-input" type="checkbox" value="S" id="chk_compareceu">
+                                    </div>
+                                    <label class="form-check-label" for="chk_compareceu">
+                                        Paciente Compareceu
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <!-- checkbox para situação de paciente foi atendido -->
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <div class="col-sm-2">
+                                        <input class="form-check-input" type="checkbox" value="S" id="chk_atendido">
+                                    </div>
+                                    <label class="form-check-label" for="chk_atendido">
+                                        Paciente foi atendido
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Confirmar</button>
-                    <button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
 
 </body>
+
+<style>
+    table th td {
+        border: 1px solid #000
+    }
+
+    .some {
+        display: none
+    }
+</style>
 
 </html>
