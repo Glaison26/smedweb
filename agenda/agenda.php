@@ -208,7 +208,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         $('#up_telefoneField').val(data[5]);
                         $('#up_emailField').val(data[6]);
                         $('#up_obsField').val(data[7]);
-
                         $('#chk_compareceu').val(data[9]);
                         $('#chk_atendido').val(data[10]);
                         $('#chk_novopaciente').val(data[11]);
@@ -755,7 +754,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <div class="col-sm-2">
-                                        <input class="form-check-input" type="checkbox" value="S" id="chk_compareceu">
+                                        <input class="form-check-input" type="checkbox" value="S" name="chk_compareceu" id="chk_compareceu">
                                     </div>
                                     <label class="form-check-label" for="chk_compareceu">
                                         Paciente Compareceu

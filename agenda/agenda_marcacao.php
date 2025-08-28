@@ -16,7 +16,7 @@ $c_convenio= $_POST['c_convenio'];
 $c_telefone= $_POST['c_telefone'];
 $c_email= $_POST['c_email'];
 $c_obs= $_POST['c_obs'];
-$c_compareceu= $_POST['c_compareceu'];
+$c_compareceu= 'S';
 $c_novopaciente= $_POST['c_novopaciente'];   
 $c_atendido= $_POST['c_atendido'];
 
