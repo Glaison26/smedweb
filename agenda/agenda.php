@@ -300,16 +300,32 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
         }
     </script>
+    <!-- funcao para chamar rotina para enviar email -->
+    <script>
+        function email(id) {
+            var acesso = $('#input_marcacao').val();
+            //confirmação de envio
+            var resposta = confirm("Confirma o envio do e-mail?");
+            if (resposta == false) {
+                return false;
+            }
+            if (acesso == "S") {
+                window.location.href = "/smedweb/agenda/agenda_email.php?id=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
             $('.tabagenda').DataTable({
                 // 
-                "iDisplayLength": 7,
+                "iDisplayLength": 5,
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [9]
+                    'aTargets': [0,2,3,4,5,6,7,8,9,10,11]
                 }, {
                     'aTargets': [0],
                     "visible": true
@@ -529,7 +545,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    <button type='button' name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
                                    <a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
-                                   
+                                   <button type='button' name='btnemail' onclick='email($c_linha2[id])' id='btnemail' class='btn btn-light'><img src='\smedweb\images\o-email.png' alt='' width='15' height='15'> e-mail</button>
                                    </td>
                                    
                                     </tr>
