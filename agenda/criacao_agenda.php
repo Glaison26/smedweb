@@ -7,6 +7,7 @@ if (!isset($_SESSION['newsession'])) {
 include_once "../lib_gop.php";
 include("../conexao.php"); // conexão de banco de dados
 include("../links.php");
+date_default_timezone_set('America/Sao_Paulo');
 $msg_gerou = "";
 $c_id = $_GET["id"];
 // sql para pegar nome do medico
