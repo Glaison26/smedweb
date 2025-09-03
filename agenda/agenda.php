@@ -810,12 +810,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
 </body>
 
-<style>
-    table th td {
-        border: 1px solid #000
-    }
 
-    .some {}
-</style>
 
 </html>
