@@ -465,7 +465,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="20" height="20"> Voltar</a>
             </div>
             <hr
-        </form>
+                </form>
     </div>
     <!-- abas de agenda e cadstro de pacientes -->
     <ul class="nav nav-tabs" role="tablist">
@@ -493,7 +493,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
                 <hr>
                 <!-- montagem da tabela de agenda -->
-                <table class="table display table-striped tabagenda">
+                <table class="table display table-striped table-bordered tabagenda">
                     <thead class="thead">
                         <tr class="info">
                             <th scope="col">No.</th>
@@ -504,9 +504,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                             <th scope="col">Telefone</th>
                             <th scope="col">e-mail</th>
                             <th scope="col">Observação</th>
+                            <th class="some" scope="col">Novo</th>
                             <th class="some" scope="col">Compareceu</th>
                             <th class="some" scope="col">Atendido</th>
-                            <th class="some" scope="col">Novo</th>
                             <th scope="col">Ações</th>
 
                         </tr>
@@ -531,9 +531,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>$c_linha2[telefone]</td>
                                     <td>$c_linha2[email]</td>
                                     <td>$c_linha2[observacao]</td>
-                                       <td class='some'>$c_linha2[paciente_compareceu]</td>
-                                        <td class='some'>$c_linha2[paciente_atendido]</td>
-                                        <td class='some'>$c_linha2[paciente_novo]</td>
+                                    <td class='some'>$c_linha2[paciente_novo]</td>
+                                    <td class='some'>$c_linha2[paciente_compareceu]</td>
+                                    <td class='some'>$c_linha2[paciente_atendido]</td>
+                                        
                                     <td>
                                                      
                                    <button type='button' class='btn btn-light btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
