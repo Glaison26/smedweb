@@ -8,7 +8,7 @@ if (!isset($_SESSION['newsession'])) {
 //}
 include("../conexao.php");
 include("../links.php");
-include("../config_tabelas.php");
+//include("../config_tabelas.php");
 
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
@@ -75,6 +75,52 @@ $_SESSION['incagenda'] = false;
 <html lang="en">
 
 <body>
+     <script>
+        $(document).ready(function() {
+            $('.tabpacientes').DataTable({
+                // 
+                "iDisplayLength": 5,
+                "order": [1, 'asc'],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': [0]
+                }, {
+                    'aTargets': [0],
+                    "visible": true
+                }],
+                "oLanguage": {
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sInfoFiltered": " - filtrado de _MAX_ registros",
+                    "oPaginate": {
+                        "spagingType": "full_number",
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+
+                        "sLast": "Último"
+                    },
+                    "sSearch": "Pesquisar",
+                    "sLengthMenu": 'Mostrar <select>' +
+                        '<option value="5">5</option>' +
+                        '<option value="10">10</option>' +
+                        '<option value="20">20</option>' +
+                        '<option value="30">30</option>' +
+                        '<option value="40">40</option>' +
+                        '<option value="50">50</option>' +
+                        '<option value="-1">Todos</option>' +
+                        '</select> Registros'
+
+                }
+
+            });
+
+        });
+    </script>
+
     <!-- função para confirmação de exclusão de registro -->
     <script language="Javascript">
         function confirmacao(id) {

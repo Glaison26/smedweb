@@ -212,9 +212,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         $('#up_telefoneField').val(data[5]);
                         $('#up_emailField').val(data[6]);
                         $('#up_obsField').val(data[7]);
-                        $('#up_compareceu').val(data[8]);
-                        $('#up_atendido').val(data[9]);
-                        $('#up_novo').val(data[10]);
+                        $('#up_compareceu').val(data[9]);
+                        $('#up_atendido').val(data[10]);
+                        $('#up_novo').val(data[8]);
 
 
                     });
@@ -464,8 +464,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <button type="submit" return false name='btnagenda' id='btnagenda' class="btn btn-primary"><img src="\smedweb\images\buscar.png" alt="" width="20" height="20"></span> Consultar</button>&nbsp;
                 <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="20" height="20"> Voltar</a>
             </div>
-            <hr
-                </form>
+            <hr>
+
     </div>
     <!-- abas de agenda e cadstro de pacientes -->
     <ul class="nav nav-tabs" role="tablist">
@@ -496,7 +496,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <table class="table display table-striped table-bordered tabagenda">
                     <thead class="thead">
                         <tr class="info">
-                            <th scope="col">No.</th>
+                            <th scope="col" style="width: 3px;"></th>
                             <th scope="col">Horário</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Matricula</th>
@@ -504,9 +504,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                             <th scope="col">Telefone</th>
                             <th scope="col">e-mail</th>
                             <th scope="col">Observação</th>
-                            <th class="some" scope="col">Novo</th>
-                            <th class="some" scope="col">Compareceu</th>
-                            <th class="some" scope="col">Atendido</th>
+                            <th scope="col">Novo</th>
+                            <th scope="col">Compareceu</th>
+                            <th scope="col">Atendido</th>
                             <th scope="col">Ações</th>
 
                         </tr>
@@ -521,9 +521,38 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                 if ($c_linha2['convenio'] == 'Selecionar') {
                                     $c_linha2['convenio'] = '';
                                 }
+                                // coloco cor para novo paciente
+                                if ($c_linha2['paciente_novo'] == 'Sim') {
+                                   $c_cor_novo = "class='text-success'";
+                                } if ($c_linha2['paciente_novo'] == 'Não')
+                                {
+                                    $c_cor_novo = "class='text-primary'";
+                                }
+                                if ($c_linha2['paciente_novo'] == '')
+                                {
+                                    $c_cor_novo = "";
+                                }
+                                // coloco cor para paciente que compareceu
+                                if ($c_linha2['paciente_compareceu'] == 'Sim') {
+                                    $c_cor_compareceu = "class='text-success'";
+                                } if ($c_linha2['paciente_compareceu'] == 'Não') {
+                                    $c_cor_compareceu = "class='text-warning'";
+                                }
+                                if ($c_linha2['paciente_compareceu'] == '') {
+                                    $c_cor_compareceu = "";
+                                }
+                                // coloco cor para paciente que foi atendido
+                                if ($c_linha2['paciente_atendido'] == 'Sim') {
+                                    $c_cor_atendido = "class='text-success'";
+                                } if ($c_linha2['paciente_atendido'] == 'Não') {
+                                    $c_cor_atendido = "class='text-warning'";
+                                }
+                                if ($c_linha2['paciente_atendido'] == '') {
+                                    $c_cor_atendido = "";
+                                }
                                 echo "
                                     <tr>
-                                    <td>$c_linha2[id]</td>
+                                    <td  style='width: 3px;' class='some'>$c_linha2[id]</td>
                                     <td>$c_linha2[horario]</td>
                                     <td>$c_linha2[nome]</td>
                                     <td>$c_linha2[matricula]</td>
@@ -531,13 +560,11 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>$c_linha2[telefone]</td>
                                     <td>$c_linha2[email]</td>
                                     <td>$c_linha2[observacao]</td>
-                                    <td class='some'>$c_linha2[paciente_novo]</td>
-                                    <td class='some'>$c_linha2[paciente_compareceu]</td>
-                                    <td class='some'>$c_linha2[paciente_atendido]</td>
-                                        
+                                    <td $c_cor_novo style='text-align: center;' class='h4'>$c_linha2[paciente_novo]</td>
+                                    <td $c_cor_compareceu style='text-align: center;' class='h4'>$c_linha2[paciente_compareceu]</td>
+                                    <td $c_cor_atendido style='text-align: center;' class='h4'>$c_linha2[paciente_atendido]</td>
                                     <td>
-                                                     
-                                   <button type='button' class='btn btn-light btn-sm editbtn' data-toggle=modal' data-target='#editmodal' title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
+                                   <button type='button' class='btn btn-light btn-sm editbtn' data-toggle=modal data-target='#editmodal' title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
                                    <button type='button' name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button type='button' name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
                                    <button type='button' name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
@@ -567,16 +594,18 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     <div class="col-md-7">
                         <input type="text" class="form-control" id="pesquisa" name="pesquisa">
                     </div>
+
                     <div class="col-md-2">
                         <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
                     </div>
+
                 </div>
 
                 <!-- tabela de pacientes -->
                 <table class="table display table-bordered tabpacientes">
                     <thead class="thead">
                         <tr class="info">
-                            <th scope="col" style="display:none">Número</th>
+                            <th scope="col" class="some" style="display:none">Número</th>
                             <th scope="col">Nome do Paciênte</th>
                             <th scope="col">Convênio</th>
                             <th scope="col">Matrícula</th>
@@ -680,9 +709,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 </table>
             </div>
         </div>
+        </form>
     </div>
-    </form>
-    </div>
+
+
 
     <!-- janela Modal para marcação de consulta -->
 
@@ -814,3 +844,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
 
 </html>
+
+<style>
+    .some {
+        visibility: collapse;
+    }
+</style>
