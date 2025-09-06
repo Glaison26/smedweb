@@ -19,11 +19,11 @@ $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
 // controle de acesso para o usuário
 $c_login = $_SESSION['c_usuario'];
-$c_sql = "SELECT usuario.id,usuario.tipo,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar
+$c_sql_usuario = "SELECT usuario.id,usuario.tipo,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar
           FROM usuario
 		  JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
 		  where usuario.login='$c_login'";
-$result = $conection->query($c_sql);
+$result = $conection->query($c_sql_usuario);
 // verifico se a query foi correto
 if (!$result) {
     die("Erro ao Executar Sql !!" . $conection->connect_error);
@@ -181,10 +181,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 <body>
     <!-- função para chamar marcação -->
     <script>
-        function marcacao(id) {
+        
 
-            var acesso = $('#input_marcacao').val();
-            if (acesso == 'S') {
+
                 $(document).ready(function() {
                     const c_chk_compareceu = document.getElementById('chk_compareceu');
                     const c_chk_novopaciente = document.getElementById('chk_novopaciente');
@@ -212,10 +211,9 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         $('#up_telefoneField').val(data[5]);
                         $('#up_emailField').val(data[6]);
                         $('#up_obsField').val(data[7]);
+                        $('#up_novo').val(data[8]);
                         $('#up_compareceu').val(data[9]);
                         $('#up_atendido').val(data[10]);
-                        $('#up_novo').val(data[8]);
-
 
                     });
 
@@ -239,10 +237,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     }
 
                 });
-            } else {
-                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
-            }
-        }
+            
     </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
@@ -429,6 +424,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
     }
     ?>
+
     <div class="container-fluid">
 
         <!-- Formulário com as datas -->
@@ -466,91 +462,92 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             </div>
             <hr>
 
-    </div>
-    <!-- abas de agenda e cadstro de pacientes -->
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
-        <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
-        <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico Agendamento</a></li>
-    </ul>
-    <!-- aba da agenda-->
-    <div class="tab-content">
 
-        <div role="tabpanel" class="tab-pane active" id="agenda">
-            <div style="padding-top:5px;">
-                <div class="panel panel-info">
-                    <div class="panel-heading text-left">
-                        <?php
-                        if (isset($d_data)) {
+            <!-- abas de agenda e cadstro de pacientes -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
+                <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
+                <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico Agendamento</a></li>
+            </ul>
+            <!-- aba da agenda-->
+            <div class="tab-content">
 
-                            echo "
+                <div role="tabpanel" class="tab-pane active" id="agenda">
+                    <div style="padding-top:5px;">
+                        <div class="panel panel-info">
+                            <div class="panel-heading text-left">
+                                <?php
+                                if (isset($d_data)) {
+
+                                    echo "
                             <h4>Agenda de  $c_profissional | $c_dia_semana  $c_mostradata <h4>
                             ";
-                        }
-                        ?>
-                    </div>
-                </div>
+                                }
+                                ?>
+                            </div>
+                        </div>
 
-                <hr>
-                <!-- montagem da tabela de agenda -->
-                <table class="table display table-striped table-bordered tabagenda">
-                    <thead class="thead">
-                        <tr class="info">
-                            <th scope="col" style="width: 3px;"></th>
-                            <th scope="col">Horário</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Matricula</th>
-                            <th scope="col">Convênio</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">e-mail</th>
-                            <th scope="col">Observação</th>
-                            <th scope="col">Novo</th>
-                            <th scope="col">Compareceu</th>
-                            <th scope="col">Atendido</th>
-                            <th scope="col">Ações</th>
+                        <hr>
+                        <!-- montagem da tabela de agenda -->
+                        <table class="table display table-striped table-bordered tabagenda">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col" style="width: 3px;"></th>
+                                    <th scope="col">Horário</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Matricula</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">e-mail</th>
+                                    <th scope="col">Observação</th>
+                                    <th scope="col">Novo</th>
+                                    <th scope="col">Compareceu</th>
+                                    <th scope="col">Atendido</th>
+                                    <th scope="col">Ações</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
 
-                        // loop para dados da agenda
-                        if (!empty($c_sql2)) {
+                                // loop para dados da agenda
+                                if (!empty($c_sql2)) {
 
-                            while ($c_linha2 = $result2->fetch_assoc()) {
-                                if ($c_linha2['convenio'] == 'Selecionar') {
-                                    $c_linha2['convenio'] = '';
-                                }
-                                // coloco cor para novo paciente
-                                if ($c_linha2['paciente_novo'] == 'Sim') {
-                                   $c_cor_novo = "class='text-success'";
-                                } if ($c_linha2['paciente_novo'] == 'Não')
-                                {
-                                    $c_cor_novo = "class='text-primary'";
-                                }
-                                if ($c_linha2['paciente_novo'] == '')
-                                {
-                                    $c_cor_novo = "";
-                                }
-                                // coloco cor para paciente que compareceu
-                                if ($c_linha2['paciente_compareceu'] == 'Sim') {
-                                    $c_cor_compareceu = "class='text-success'";
-                                } if ($c_linha2['paciente_compareceu'] == 'Não') {
-                                    $c_cor_compareceu = "class='text-warning'";
-                                }
-                                if ($c_linha2['paciente_compareceu'] == '') {
-                                    $c_cor_compareceu = "";
-                                }
-                                // coloco cor para paciente que foi atendido
-                                if ($c_linha2['paciente_atendido'] == 'Sim') {
-                                    $c_cor_atendido = "class='text-success'";
-                                } if ($c_linha2['paciente_atendido'] == 'Não') {
-                                    $c_cor_atendido = "class='text-warning'";
-                                }
-                                if ($c_linha2['paciente_atendido'] == '') {
-                                    $c_cor_atendido = "";
-                                }
-                                echo "
+                                    while ($c_linha2 = $result2->fetch_assoc()) {
+                                        if ($c_linha2['convenio'] == 'Selecionar') {
+                                            $c_linha2['convenio'] = '';
+                                        }
+                                        // coloco cor para novo paciente
+                                        if ($c_linha2['paciente_novo'] == 'Sim') {
+                                            $c_cor_novo = "class='text-success'";
+                                        }
+                                        if ($c_linha2['paciente_novo'] == 'Não') {
+                                            $c_cor_novo = "class='text-primary'";
+                                        }
+                                        if ($c_linha2['paciente_novo'] == '') {
+                                            $c_cor_novo = "";
+                                        }
+                                        // coloco cor para paciente que compareceu
+                                        if ($c_linha2['paciente_compareceu'] == 'Sim') {
+                                            $c_cor_compareceu = "class='text-success'";
+                                        }
+                                        if ($c_linha2['paciente_compareceu'] == 'Não') {
+                                            $c_cor_compareceu = "class='text-warning'";
+                                        }
+                                        if ($c_linha2['paciente_compareceu'] == '') {
+                                            $c_cor_compareceu = "";
+                                        }
+                                        // coloco cor para paciente que foi atendido
+                                        if ($c_linha2['paciente_atendido'] == 'Sim') {
+                                            $c_cor_atendido = "class='text-success'";
+                                        }
+                                        if ($c_linha2['paciente_atendido'] == 'Não') {
+                                            $c_cor_atendido = "class='text-warning'";
+                                        }
+                                        if ($c_linha2['paciente_atendido'] == '') {
+                                            $c_cor_atendido = "";
+                                        }
+                                        echo "
                                     <tr>
                                     <td  style='width: 3px;' class='some'>$c_linha2[id]</td>
                                     <td>$c_linha2[horario]</td>
@@ -564,7 +561,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td $c_cor_compareceu style='text-align: center;' class='h4'>$c_linha2[paciente_compareceu]</td>
                                     <td $c_cor_atendido style='text-align: center;' class='h4'>$c_linha2[paciente_atendido]</td>
                                     <td>
-                                   <button type='button' class='btn btn-light btn-sm editbtn' data-toggle=modal data-target='#editmodal' title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
+                                   
+                                   <button type='button'  class='btn btn-light btn-sm editbtn' data-toggle='modal' data-target='#editmodal'  title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
                                    <button type='button' name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button type='button' name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
                                    <button type='button' name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
@@ -575,58 +573,58 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    
                                     </tr>
                                     ";
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>
-        <!-- aba com o cadastro de pacientes -->
-        <div role="tabpanel" class="tab-pane" id="cadastro">
-            <div style="padding-top:20px;">
-
-                <div class="mb-5 row">
-                    <hr>
-                    <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
-
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" id="pesquisa" name="pesquisa">
-                    </div>
-
-                    <div class="col-md-2">
-                        <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
-                    </div>
-
-                </div>
-
-                <!-- tabela de pacientes -->
-                <table class="table display table-bordered tabpacientes">
-                    <thead class="thead">
-                        <tr class="info">
-                            <th scope="col" class="some" style="display:none">Número</th>
-                            <th scope="col">Nome do Paciênte</th>
-                            <th scope="col">Convênio</th>
-                            <th scope="col">Matrícula</th>
-                            <th scope="col">Sexo</th>
-                            <th scope="col">Telefone 1</th>
-                            <th scope="col">Telefone 2</th>
-                            <th scope="col">Ação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        if (!empty($c_sql_pac)) {
-                            // insiro os registro do banco de dados na tabela 
-                            while ($c_linha_pac = $result_pac->fetch_assoc()) {
-                                // Coloco string masculino ou feminino ao invés de m ou f
-                                if ($c_linha_pac['sexo'] == 'M') {
-                                    $c_sexo = "Masculino";
-                                } else {
-                                    $c_sexo = "Feminino";
+                                    }
                                 }
-                                echo "
+                                ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                <!-- aba com o cadastro de pacientes -->
+                <div role="tabpanel" class="tab-pane" id="cadastro">
+                    <div style="padding-top:20px;">
+
+                        <div class="mb-5 row">
+                            <hr>
+                            <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
+
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="pesquisa" name="pesquisa">
+                            </div>
+
+                            <div class="col-md-2">
+                                <button type="submit" id='bntpesquisa' name='btnpesquisa' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+                            </div>
+
+                        </div>
+
+                        <!-- tabela de pacientes -->
+                        <table class="table display table-bordered tabpacientes">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col" class="some" style="display:none">Número</th>
+                                    <th scope="col">Nome do Paciênte</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Matrícula</th>
+                                    <th scope="col">Sexo</th>
+                                    <th scope="col">Telefone 1</th>
+                                    <th scope="col">Telefone 2</th>
+                                    <th scope="col">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (!empty($c_sql_pac)) {
+                                    // insiro os registro do banco de dados na tabela 
+                                    while ($c_linha_pac = $result_pac->fetch_assoc()) {
+                                        // Coloco string masculino ou feminino ao invés de m ou f
+                                        if ($c_linha_pac['sexo'] == 'M') {
+                                            $c_sexo = "Masculino";
+                                        } else {
+                                            $c_sexo = "Feminino";
+                                        }
+                                        echo "
                     <tr>
                     <td style='display:none'>$c_linha_pac[id] </td>
                     <td>$c_linha_pac[nome]</td>
@@ -643,53 +641,53 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     </td>
                     </tr>
                     ";
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- aba com o historico da agenda -->
-        <div role="tabpanel" class="tab-pane" id="historico">
-            <div style="padding-top:20px;">
-
-                <div class="mb-5 row">
-                    <hr>
-                    <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
-
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" id="pesquisa_historico" name="pesquisa_historico">
-
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" id='bntpesquisa_historico' name='btnpesquisa_historico' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <!-- aba com o historico da agenda -->
+                <div role="tabpanel" class="tab-pane" id="historico">
+                    <div style="padding-top:20px;">
 
-                <!-- montagem da tabela de histórico agenda -->
-                <table class="table display tabagendahistorico">
-                    <thead class="thead">
-                        <tr class="info">
-                            <th scope="col">Data</th>
-                            <th scope="col">Horário</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Profissional</th>
-                            <th scope="col">Matricula</th>
-                            <th scope="col">Convênio</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col">e-mail</th>
-                            <th scope="col">Observação</th>
+                        <div class="mb-5 row">
+                            <hr>
+                            <label for="up_parametroField" class="col-md-3 form-label">Nome para pesquisar</label>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        // loop para dados da agenda historico
-                        if (!empty($c_sql3)) {
-                            while ($c_linha3 = $result3->fetch_assoc()) {
-                                $c_data = date("d-m-y", strtotime(str_replace('/', '-', $c_linha3['data'])));
-                                echo "
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="pesquisa_historico" name="pesquisa_historico">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button type="submit" id='bntpesquisa_historico' name='btnpesquisa_historico' class="btn btn-primary"><img src='\smedweb\images\pesquisapessoas.png' alt='' width='20' height='20'></span> Pesquisar</button>
+                            </div>
+                        </div>
+
+                        <!-- montagem da tabela de histórico agenda -->
+                        <table class="table display tabagendahistorico">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Horário</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Profissional</th>
+                                    <th scope="col">Matricula</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">e-mail</th>
+                                    <th scope="col">Observação</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // loop para dados da agenda historico
+                                if (!empty($c_sql3)) {
+                                    while ($c_linha3 = $result3->fetch_assoc()) {
+                                        $c_data = date("d-m-y", strtotime(str_replace('/', '-', $c_linha3['data'])));
+                                        echo "
                                     <tr>
                                     <td>$c_data</td>
                                     <td>$c_linha3[horario]</td>
@@ -702,22 +700,25 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>$c_linha3[observacao]</td>
                                     </tr>
                                     ";
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
         </form>
     </div>
+
+
 
 
 
     <!-- janela Modal para marcação de consulta -->
 
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLabel">Agênda Médica - Marcação</h4>

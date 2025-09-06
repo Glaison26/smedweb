@@ -222,7 +222,7 @@ include("../../links.php");
                     <td>$c_linha[descricao]</td>
                     
                     <td>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Especialidade'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal title='Editar Especialidade'><span class='glyphicon glyphicon-pencil'></span></button>
                     <a class='btn btn-danger btn-sm' title='Excluir Especialidade' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
