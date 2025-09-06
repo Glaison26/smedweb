@@ -181,63 +181,57 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 <body>
     <!-- função para chamar marcação -->
     <script>
-        
+        $(document).ready(function() {
+            const c_chk_compareceu = document.getElementById('chk_compareceu');
+            const c_chk_novopaciente = document.getElementById('chk_novopaciente');
+            const c_chk_atendido = document.getElementById('chk_atendido');
+            var c_valor_compareceu;
+            var c_valor_novo;
+            var c_valor_atendido;
+            $('.editbtn').on('click', function() {
 
+                $('#editmodal').modal('show');
 
-                $(document).ready(function() {
-                    const c_chk_compareceu = document.getElementById('chk_compareceu');
-                    const c_chk_novopaciente = document.getElementById('chk_novopaciente');
-                    const c_chk_atendido = document.getElementById('chk_atendido');
-                    var c_valor_compareceu;
-                    var c_valor_novo;
-                    var c_valor_atendido;
-                    $('.editbtn').on('click', function() {
+                $tr = $(this).closest('tr');
 
-                        $('#editmodal').modal('show');
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
 
-                        $tr = $(this).closest('tr');
+                console.log(data);
 
-                        var data = $tr.children("td").map(function() {
-                            return $(this).text();
-                        }).get();
-
-                        console.log(data);
-
-                        $('#up_idField').val(data[0]);
-                        $('#up_horarioField').val(data[1]);
-                        $('#up_nomeField').val(data[2]);
-                        $('#up_matriculaField').val(data[3]);
-                        $('#up_convenioField').val(data[4]);
-                        $('#up_telefoneField').val(data[5]);
-                        $('#up_emailField').val(data[6]);
-                        $('#up_obsField').val(data[7]);
-                        $('#up_novo').val(data[8]);
-                        $('#up_compareceu').val(data[9]);
-                        $('#up_atendido').val(data[10]);
-
-                    });
-
-                    c_valor_novo = document.getElementById('up_novo').value;
-                    if (c_valor_novo == 'Sim') {
-                        c_chk_novopaciente.checked = true;
-                    } else {
-                        c_chk_novopaciente.checked = false;
-                    }
-                    c_valor_compareceu = document.getElementById('up_compareceu').value;
-                    if (c_valor_compareceu == 'Sim') {
-                        c_chk_compareceu.checked = true;
-                    } else {
-                        c_chk_compareceu.checked = false;
-                    }
-                    c_valor_atendido = document.getElementById('up_atendido').value;
-                    if (c_valor_atendido == 'Sim') {
-                        c_chk_atendido.checked = true;
-                    } else {
-                        c_chk_atendido.checked = false;
-                    }
-
-                });
-            
+                $('#up_idField').val(data[0]);
+                $('#up_horarioField').val(data[1]);
+                $('#up_nomeField').val(data[2]);
+                $('#up_matriculaField').val(data[3]);
+                $('#up_convenioField').val(data[4]);
+                $('#up_telefoneField').val(data[5]);
+                $('#up_emailField').val(data[6]);
+                $('#up_obsField').val(data[7]);
+                $('#up_novo').val(data[8]);
+                $('#up_compareceu').val(data[9]);
+                $('#up_atendido').val(data[10]);
+                c_valor_novo = document.getElementById('up_novo').value;
+                console.log(c_valor_novo);
+                if (c_valor_novo == 'Sim') {
+                    c_chk_novopaciente.checked = true;
+                } else {
+                    c_chk_novopaciente.checked = false;
+                }
+                c_valor_compareceu = document.getElementById('up_compareceu').value;
+                if (c_valor_compareceu == 'Sim') {
+                    c_chk_compareceu.checked = true;
+                } else {
+                    c_chk_compareceu.checked = false;
+                }
+                c_valor_atendido = document.getElementById('up_atendido').value;
+                if (c_valor_atendido == 'Sim') {
+                    c_chk_atendido.checked = true;
+                } else {
+                    c_chk_atendido.checked = false;
+                }
+            });
+        });
     </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
