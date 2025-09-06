@@ -240,7 +240,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             var acesso = $('#input_incluir').val();
             if (resposta == true) {
                 if (acesso == "S") {
-                    window.location.href = "/smedweb/paciente_agenda.php?id=" + id;
+                    window.location.href = "/smedweb/pacientes/paciente_agenda.php?id=" + id;
                 } else {
                     alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }

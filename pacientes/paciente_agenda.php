@@ -8,7 +8,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 
 // conexão dom o banco de dados
-include("conexao.php");
+include("../conexao.php");
 
 // rotina de edição
 $c_id = $_GET['id'];
@@ -22,7 +22,7 @@ $_SESSION['telefonepac'] = $c_linha['telefone'];
 $_SESSION['emailpac'] = $c_linha['email'];
 $_SESSION['matriculapac'] = $c_linha['matricula'];
 
-header('location: /smedweb/pacientes_novo.php');
+header('location: /smedweb/pacientes/pacientes_novo.php');
         
 
 ?>
