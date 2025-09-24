@@ -7,7 +7,7 @@ if (!isset($_SESSION['newsession'])) {
 include_once "../lib_gop.php";
 include("../conexao.php"); // conexão de banco de dados
 include("../links.php");
-date_default_timezone_set('America/Sao_Paulo');
+// declara variaveis
 $msg_gerou = "";
 $c_id = $_GET["id"];
 // sql para pegar nome do medico
@@ -80,10 +80,11 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     // geração do turno da manhã
                     while (strtotime($inicio_manha) <= strtotime($fim_manha)) {  // loop de icremento de hora do turno da manhã
                         // inserir dados na tabela de agenda
-                        $c_sql = "insert into agenda (id_profissional, data, horario, dia, id_convenio) value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana', 3)";
+                        $c_sql = "insert into agenda (id_profissional, data, horario, dia, id_convenio) 
+                        value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana', 3)";
                         $result = $conection->query($c_sql);
                         $inicio_manha = gmdate('H:i:s', strtotime($inicio_manha) + strtotime($minuto_soma));
-                    }
+                       }
                 }
                 // geração do turno da tarde
                 $minuto_soma = "00:" . $duracao_tarde;
