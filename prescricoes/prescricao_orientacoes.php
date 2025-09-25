@@ -113,15 +113,15 @@ if ((isset($_POST["btnprint"]))) {
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Orientação</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_orientacao ?>">
             <a class="btn btn-light" href="/smedweb/prescricoes/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
-        </form>
-        <hr>
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+
+            <hr>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+                </div>
             </div>
-        </div>
-        <!-- Formulário com os profissionais para seleção -->
-        <form method="post">
+            <!-- Formulário com os profissionais para seleção -->
+
 
             <div class="panel panel-Linght">
                 <div class="panel-heading">
@@ -150,56 +150,56 @@ if ((isset($_POST["btnprint"]))) {
                 </div>
             </div>
 
-        </form>
-        <!-- fim do formulário de seleção de profissionais -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#orientacao" aria-controls="home" role="tab" data-toggle="tab">Editar Orientação Médica</a></li>
-            <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Orientações</a></li>
-        </ul>
-        <!-- paginas de edição e modelos de Orientações -->
-        <div class="tab-content">
-            <!-- aba de edição da Orientação -->
-            <div role="tabpanel" class="tab-pane active" id="orientacao">
-                <div style="padding-top:5px;">
-                    <div style="padding-top:20px;">
-                        <div class="form-group">
-                            <label class="col-sm-2 col-form-label">Texto da Orientação</label>
-                            <div class="col-sm-12">
-                                <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_orientacao; ?></textarea>
+
+            <!-- fim do formulário de seleção de profissionais -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#orientacao" aria-controls="home" role="tab" data-toggle="tab">Editar Orientação Médica</a></li>
+                <li role="presentation"><a href="#modelos" aria-controls="modelos" role="tab" data-toggle="tab">Modelos de Orientações</a></li>
+            </ul>
+            <!-- paginas de edição e modelos de Orientações -->
+            <div class="tab-content">
+                <!-- aba de edição da Orientação -->
+                <div role="tabpanel" class="tab-pane active" id="orientacao">
+                    <div style="padding-top:5px;">
+                        <div style="padding-top:20px;">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-form-label">Texto da Orientação</label>
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" id="obs" name="obs" rows="15"><?php echo $c_orientacao; ?></textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- aba de modelos de orientacões-->
-            <div role="tabpanel" class="tab-pane" id="modelos">
-                <div style="padding-top:5px;">
-                    <div class="table-responsive=lg">
-                        <table style="width:100%" class="table display table-bordered tab">
-                            <thead class="thead">
-                                <tr class="info">
-                                    <th style='display:none' scope="col">No.</th>
-                                    <th scope="col">Orientação</th>
-                                    <th scope="col">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <form id='frmadd' method='POST' action=''>
-                                    <!-- input para capturar id da orientação a ter o texto capturado -->
-                                    <input type='hidden' name='id_orientacao' id='id_orientacao'>
-                                    <?php
-                                    // faço a Leitura da tabela com sql
-                                    $c_sql = "SELECT orientacoes_padrao.id, orientacoes_padrao.descricao, orientacoes_padrao.texto 
+                <!-- aba de modelos de orientacões-->
+                <div role="tabpanel" class="tab-pane" id="modelos">
+                    <div style="padding-top:5px;">
+                        <div class="table-responsive=lg">
+                            <table style="width:100%" class="table display table-bordered tab">
+                                <thead class="thead">
+                                    <tr class="info">
+                                        <th style='display:none' scope="col">No.</th>
+                                        <th scope="col">Orientação</th>
+                                        <th scope="col">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <form id='frmadd' method='POST' action=''>
+                                        <!-- input para capturar id da orientação a ter o texto capturado -->
+                                        <input type='hidden' name='id_orientacao' id='id_orientacao'>
+                                        <?php
+                                        // faço a Leitura da tabela com sql
+                                        $c_sql = "SELECT orientacoes_padrao.id, orientacoes_padrao.descricao, orientacoes_padrao.texto 
                                     FROM orientacoes_padrao ORDER BY orientacoes_padrao.descricao";
-                                    $result = $conection->query($c_sql);
-                                    // verifico se a query foi correto
-                                    if (!$result) {
-                                        die("Erro ao Executar Sql!!" . $conection->connect_error);
-                                    }
-                                    // insiro os registro do banco de dados na tabela 
-                                    while ($c_linha2 = $result->fetch_assoc()) {
+                                        $result = $conection->query($c_sql);
+                                        // verifico se a query foi correto
+                                        if (!$result) {
+                                            die("Erro ao Executar Sql!!" . $conection->connect_error);
+                                        }
+                                        // insiro os registro do banco de dados na tabela 
+                                        while ($c_linha2 = $result->fetch_assoc()) {
 
-                                        echo "
+                                            echo "
                                         <tr>
                                         <td style='display:none'>$c_linha2[id]</td>
                                         <td>$c_linha2[descricao]</td>
@@ -211,18 +211,17 @@ if ((isset($_POST["btnprint"]))) {
 
                                         </tr>
                                     ";
-                                    }
-                                    ?>
-                                </form>
-                            </tbody>
-                        </table>
+                                        }
+                                        ?>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-
-
 </body>
 
 </html>

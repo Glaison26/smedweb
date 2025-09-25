@@ -142,10 +142,11 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     // se não existir registro na agenda exibir mensagem de alerta em javascript que não existe agenda gerada
     if ($total_reg == 0) {
         echo "<script language='javascript'> window.alert('Não existe agendamento para esse profissional nessa data!!!');</script>";
-    } else {
-        // mudo a aba para agenda
-        $_SESSION['aba_agenda'] = 1;
+    }else{
+     // mudo a aba para agenda
+    $_SESSION['aba_agenda'] = 1;
     }
+
 }
 
 // pesquisa de histórico de agenda 

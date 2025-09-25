@@ -64,6 +64,14 @@ if ((isset($_POST["btninclui"]))) {
     $c_linha_medicamento = $result_medicamento->fetch_assoc();
     $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "...." . "\r\n";
 }
+// botão para emissão de prescrição de medicamentos
+// verifico se o botão foi pressionado
+if ((isset($_POST["btnprint"]))) {
+    $_SESSION['medicamento'] = $_POST['obs'];
+    $_SESSION['paciente'] = $c_linha['nome'];
+    $_SESSION['profissional'] = $_POST['profissional'];
+    echo "<script> window.open('/smedweb/prescricoes/rel_medicamento.php?id=', '_blank');</script>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -138,9 +146,11 @@ if ((isset($_POST["btninclui"]))) {
 
     <div class="container -my5">
         <form method="post">
-            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
+             <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir Prescrição de medicamentos'>
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir prescrição de medicamentos
+            </button>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
-                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
+                <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição de medicamentos</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
             <a class="btn btn-light" href="/smedweb/prescricoes/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 

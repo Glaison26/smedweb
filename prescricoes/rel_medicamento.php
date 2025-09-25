@@ -8,15 +8,15 @@ try {
     // conexão dom o banco de dados
     include("..\conexao.php");
        
-    $orientacao = $_SESSION['orientacao'] ?? null;
+    $medicamento = $_SESSION['medicamento'] ?? null;
      // Verifica se a sessão de orientação está definida
-    if (!$orientacao) {
-        throw new Exception('Orientação não encontrado na sessão.');
+    if (!$medicamento) {
+        throw new Exception('Prescrição não encontrada na sessão.');
     }
-    $html = gerarHTMLOrientacao($orientacao);
+    $html = gerarHTMLOrientacao($medicamento);
 
     if ($formato === 'pdf') {
-        gerarPDF($html, $orientacao);
+        gerarPDF($html, $medicamento);
     } else {
         echo $html;
     }
@@ -44,8 +44,8 @@ function gerarHTMLOrientacao($orientacao)
     $c_cidade_clinica = $registro['cidade_clinica'];
     $c_cnpj_clinica = $registro['cnpj_clinica'];    
     // Verifica se a sessão de Orientacao está definida
-    if (!isset($_SESSION['orientacao'])) {
-        throw new Exception('Orientação não encontrado na sessão.');
+    if (!isset($_SESSION['medicamento'])) {
+        throw new Exception('Prescrição de medicamento não encontrada na sessão.');
     }
     // Verifica se a sessão de profissional está definida
     $profissional = $_SESSION['profissional'] ?? 'Profissional Desconhecido';
@@ -75,7 +75,7 @@ function gerarHTMLOrientacao($orientacao)
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Orientação Médica - " . $paciente . "'</title>
+        <title>Prescrição de Medicamento - " . $paciente . "'</title>
         <style>
             body {
                 font-family: 'Times New Roman', serif;
@@ -189,11 +189,11 @@ function gerarHTMLOrientacao($orientacao)
             </div>
         </div>
         
-        <h1 class='titulo'>Orientações Médicas</h1>
+        <h1 class='titulo'>Prescrição de Medicamentos</h1>
         
         <div class='conteudo'>
             
-            <p><strong>Descrição:</strong> {$orientacao}</p>
+            <p><strong>Descrição:</strong> {$medicamento}</p>
             
         </div>
         
@@ -211,7 +211,7 @@ function gerarHTMLOrientacao($orientacao)
         </div>
         
         <div class='rodape'>
-            <p>Orientação médica gerada em: {$data_atual} </p>
+            <p>Prescrição de medicamento gerada em: {$data_atual} </p>
           
         </div>
         

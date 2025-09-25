@@ -23,7 +23,10 @@ $_SESSION['conveniopac'] = $c_linha['idconvenio'];
 $_SESSION['telefonepac'] = $c_linha['fone'];
 $_SESSION['emailpac'] = $c_linha['email'];
 $_SESSION['matriculapac'] = $c_linha['matricula'];
-
+$_SESSION['paciente_novo'] = 'Não';
+$_SESSION['paciente_atendido'] = 'Não';
+$_SESSION['paciente_compareceu'] = 'Não';
+// mensagem de dados copiados
 
 echo "
 <script>

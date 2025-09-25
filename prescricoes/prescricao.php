@@ -8,7 +8,13 @@ session_start();
 //}
 include("../conexao.php");
 include("../links.php");
+// zerar variaveis de sessão
 $_SESSION['atestado'] = "";
+$_SESSION['formula'] = "";
+$_SESSION['medicamento'] = "";
+$_SESSION['laudo'] = "";
+$_SESSION['orientacao'] = "";
+$_SESSION['relatorio'] = "";
 
 // query para capturar perfil do usuário logado
 $c_login = $_SESSION['c_usuario'];
