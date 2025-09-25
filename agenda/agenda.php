@@ -124,6 +124,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             $c_dia_semana = 'Domingo';
             break;
     }
+    // sql para montar a agenda
     $c_sql2 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
     agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula,
@@ -132,6 +133,19 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
     $result2 = $conection->query($c_sql2);
     $_SESSION['sql'] = $c_sql2;
+    // verifico se a query foi correto
+    if (!$result2) {
+        die("Erro ao Executar Sql!!" . $conection->connect_error);
+    }
+    // verificos existe registro na agenda
+    $total_reg = $result2->num_rows;
+    // se não existir registro na agenda exibir mensagem de alerta em javascript que não existe agenda gerada
+    if ($total_reg == 0) {
+        echo "<script language='javascript'> window.alert('Não existe agendamento para esse profissional nessa data!!!');</script>";
+    } else {
+        // mudo a aba para agenda
+        $_SESSION['aba_agenda'] = 1;
+    }
 }
 
 // pesquisa de histórico de agenda 
