@@ -14,7 +14,7 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_prescricao = "";
+$c_prescricao = $_SESSION['medicamento'] ?? '';
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -62,14 +62,15 @@ if ((isset($_POST["btninclui"]))) {
     $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de medicamentos para colocar no texto
     $c_linha_medicamento = $result_medicamento->fetch_assoc();
-    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "...." . "\r\n";
+    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "... " .'<br>'. "\n";
 }
 // botão para emissão de prescrição de medicamentos
 // verifico se o botão foi pressionado
 if ((isset($_POST["btnprint"]))) {
-    $_SESSION['medicamento'] = $_POST['obs'];
+    $_SESSION['medicamento'] = $_POST['prescricao'];
     $_SESSION['paciente'] = $c_linha['nome'];
     $_SESSION['profissional'] = $_POST['profissional'];
+    $c_prescricao = $_POST['prescricao'];
     echo "<script> window.open('/smedweb/prescricoes/rel_medicamento.php?id=', '_blank');</script>";
 }
 ?>
@@ -245,7 +246,7 @@ if ((isset($_POST["btnprint"]))) {
                    
                                         <td>
                                           <button type='submit' onclick='pegaid($c_linha2[id])'  id='btninclui' name='btninclui' class='btn btn-info btn-sm editbtn' 
-                                          data-toggle='modal' title='Selecionar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar Medicamento</button>
+                                          data-toggle='modal' title='Selecionar Medicamento'><img src='\smedweb\images\copiar.png' alt='' width='20' height='20'> Selecionar</button>
                                         </td>
 
                                         </tr>

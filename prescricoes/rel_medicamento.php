@@ -4,6 +4,7 @@ session_start();
 
 $formato = $_GET['formato'] ?? 'html';
 
+
 try {
     // conexão dom o banco de dados
     include("..\conexao.php");
@@ -24,7 +25,7 @@ try {
     die('Erro: ' . $e->getMessage());
 }
 
-function gerarHTMLOrientacao($orientacao)
+function gerarHTMLOrientacao($medicamento)
 {
     include("..\conexao.php");
      // sql para ler configurações padrões
@@ -193,7 +194,7 @@ function gerarHTMLOrientacao($orientacao)
         
         <div class='conteudo'>
             
-            <p><strong>Descrição:</strong> {$medicamento}</p>
+            <p>{$medicamento}</p>
             
         </div>
         
