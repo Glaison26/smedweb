@@ -14,8 +14,7 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_formula = "";
-$c_prescricao = "";
+$c_formula = $_SESSION['medicamento'] ?? '';
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -75,6 +74,15 @@ if ((isset($_POST["btncomponente"]))) {
     $c_linha_componente = $result_componente->fetch_assoc();
     $c_formula = $_POST['prescricao'] . $c_linha_componente['descricao'] . "    " .
         $c_linha_componente['unidade'] . "\r\n";
+}
+// botão para emissão de prescrição de medicamentos
+// verifico se o botão foi pressionado
+if ((isset($_POST["btnprint"]))) {
+    $_SESSION['formula'] = $_POST['prescricao'];
+    $_SESSION['paciente'] = $c_linha['nome'];
+    $_SESSION['profissional'] = $_POST['profissional'];
+    $c_formula = $_POST['prescricao'];
+    echo "<script> window.open('/smedweb/prescricoes/rel_formulas.php?id=', '_blank');</script>";
 }
 ?>
 
@@ -159,7 +167,9 @@ if ((isset($_POST["btncomponente"]))) {
 
     <div class="container -my5">
         <form method="post">
-            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
+            <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir Prescrição de Fórmulas'>
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir prescrição
+            </button>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_formula ?>">

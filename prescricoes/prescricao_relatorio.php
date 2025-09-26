@@ -15,7 +15,8 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_prescricao = "";
+
+$c_relatorio = $_SESSION['relatorio'] ?? '';
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -55,6 +56,15 @@ if ((isset($_POST["btnregistro"]))) {
     }
 }
 
+// botão para emissão de relatório médico
+// verifico se o botão foi pressionado
+if ((isset($_POST["btnprint"]))) {
+    $_SESSION['relatorio'] = $_POST['prescricao'];
+    $_SESSION['paciente'] = $c_linha['nome'];
+    $_SESSION['profissional'] = $_POST['profissional'];
+    $c_relatorio = $_POST['prescricao'];
+    echo "<script> window.open('/smedweb/prescricoes/rel_relatorio.php?id=', '_blank');</script>";
+}
 
 ?>
 
@@ -76,7 +86,9 @@ if ((isset($_POST["btnregistro"]))) {
 
     <div class="container -my5">
         <form method="post">
-            <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
+            <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir relatório médico'>
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição
+            </button>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
             <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
@@ -129,7 +141,7 @@ if ((isset($_POST["btnregistro"]))) {
                             <div class="form-group">
                                 <label class="col-sm-2 col-form-label">Texto da Prescrição</label>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_prescricao; ?></textarea>
+                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_relatorio; ?></textarea>
                                 </div>
                             </div>
                         </div>

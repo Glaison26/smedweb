@@ -15,7 +15,8 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_orientacao = "";
+
+$c_orientacao = $_SESSION['orientacao'] ?? '';
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -70,6 +71,7 @@ if ((isset($_POST["btnprint"]))) {
     $_SESSION['orientacao'] = $_POST['obs'];
     $_SESSION['paciente'] = $c_linha['nome'];
     $_SESSION['profissional'] = $_POST['profissional'];
+    $c_orientacao = $_POST['obs'];
     echo "<script> window.open('/smedweb/prescricoes/rel_orientacao.php?id=', '_blank');</script>";
 }
 ?>
@@ -107,7 +109,7 @@ if ((isset($_POST["btnprint"]))) {
         <form method="post">
 
             <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir Orientação médica'>
-                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Orientação
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição
             </button>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra Orientação no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Orientação</button>

@@ -166,7 +166,7 @@ if ((isset($_POST["btnprint"]))) {
         <div class="container -my5">
 
             <button type='submit' id='btnprint' name='btnprint' class='btn btn-light' data-toggle='modal' title='Emitir atestado'>
-                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Atestado
+                <img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição
             </button>
 
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra atestado no histórico do paciente'>

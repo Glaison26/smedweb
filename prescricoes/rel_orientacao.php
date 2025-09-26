@@ -217,7 +217,7 @@ function gerarHTMLOrientacao($orientacao)
         
         <div class='no-print' style='text-align: center; margin-top: 30px;'>
             <button onclick='window.print()' style='padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem;'>
-                🖨️ Imprimir Orientação
+                🖨️ Imprimir
             </button>
             <button onclick='window.close()' style='padding: 10px 20px; background: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-left: 10px;'>
                 ✖️ Fechar

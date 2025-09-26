@@ -4,18 +4,20 @@ session_start();
 
 $formato = $_GET['formato'] ?? 'html';
 
+
 try {
     // conexão dom o banco de dados
     include("..\conexao.php");
        
-    $atestado = $_SESSION['atestado'];
-    if (!$atestado) {
-        throw new Exception('Atestado não encontrado na sessão.');
+    $formula = $_SESSION['formula'] ?? null;
+     // Verifica se a sessão de formula está definida
+    if (!$formula) {
+        throw new Exception('Prescrição de fórmula não encontrada na sessão.');
     }
-    $html = gerarHTMLAtestado($atestado);
+    $html = gerarHTMLOrientacao($formula);
 
     if ($formato === 'pdf') {
-        gerarPDF($html, $atestado);
+        gerarPDF($html, $formula);
     } else {
         echo $html;
     }
@@ -23,7 +25,7 @@ try {
     die('Erro: ' . $e->getMessage());
 }
 
-function gerarHTMLAtestado($atestado)
+function gerarHTMLOrientacao($formula)
 {
     include("..\conexao.php");
      // sql para ler configurações padrões
@@ -42,9 +44,9 @@ function gerarHTMLAtestado($atestado)
     $c_email_clinica = $registro['email_clinica'];
     $c_cidade_clinica = $registro['cidade_clinica'];
     $c_cnpj_clinica = $registro['cnpj_clinica'];    
-    // Verifica se a sessão de atestado está definida
-    if (!isset($_SESSION['atestado'])) {
-        throw new Exception('Atestado não encontrado na sessão.');
+    // Verifica se a sessão de Orientacao está definida
+    if (!isset($_SESSION['formula'])) {
+        throw new Exception('Prescrição de formula não encontrada na sessão.');
     }
     // Verifica se a sessão de profissional está definida
     $profissional = $_SESSION['profissional'] ?? 'Profissional Desconhecido';
@@ -74,7 +76,7 @@ function gerarHTMLAtestado($atestado)
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>Atestado Médico - " . $paciente . "'</title>
+        <title>Prescrição de Medicamento - " . $paciente . "'</title>
         <style>
             body {
                 font-family: 'Times New Roman', serif;
@@ -188,12 +190,12 @@ function gerarHTMLAtestado($atestado)
             </div>
         </div>
         
-        <h1 class='titulo'>Atestado Médico</h1>
+        <h1 class='titulo'>Prescrição de Formulas</h1>
         
         <div class='conteudo'>
-            <p>Atesto para os devidos fins que o(a) paciente <span class='paciente'>{$paciente}</span> esteve sob meus cuidados médicos.</p>
-            <p><strong>Descrição:</strong> {$atestado}</p>
-            <p>Este atestado é válido para todos os fins legais e administrativos necessários.</p>
+            
+            <p>{$formula}</p>
+            
         </div>
         
         <div class='data-emissao'>
@@ -210,8 +212,8 @@ function gerarHTMLAtestado($atestado)
         </div>
         
         <div class='rodape'>
-            <p>Atestado gerado em: {$data_atual} </p>
-            <p>Este documento possui validade legal conforme legislação vigente.</p>
+            <p>Prescrição de formula gerada em: {$data_atual} </p>
+          
         </div>
         
         <div class='no-print' style='text-align: center; margin-top: 30px;'>
