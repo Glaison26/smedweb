@@ -174,6 +174,13 @@ $_SESSION['incagenda'] = false;
         }
     </script>
 
+    <!-- função para chamar anamnese de paciente -->
+    <script>
+        function anamnese(id) {
+            window.location.href = "/smedweb/anamnese/anamnese_lista.php?idpaciente=" + id;
+        }
+    </script>
+
     <!-- função para chamar imagens de paciente -->
     <script>
         function imagem(id) {
