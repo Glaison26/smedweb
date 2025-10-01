@@ -13,7 +13,7 @@ $result = $conection->query($c_sql);
 if (!$result) {
     die("Erro ao Executar Sql !!" . $conection->connect_error);
 }
-$c_linha = $result->fetch_assoc();
+
 // pego o nome do paciente
 $c_sql2 = "SELECT nome FROM pacientes WHERE id = $idpaciente";
 $result2 = $conection->query($c_sql2);
@@ -94,8 +94,8 @@ $nomepaciente = $c_linha2['nome'];
             </div>
         </div>
         <hr>
-         <a class="btn btn-success" href="/smedweb/pacientes/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Nova Anamnese</a>
-         <a class="btn btn-secondary" href="/smedweb/pacientes.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+         <a class="btn btn-success" href="/smedweb/anamnese/anamnese_nova.php"><span class="glyphicon glyphicon-plus"></span> Nova Anamnese</a>
+         <a class="btn btn-secondary" href="/smedweb/pacientes/pacientes_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
          <hr>
         <!-- tabela com as anamneses do paciente selecionado -->
         <table class="table table-striped table-bordered tabpacientes">
@@ -124,14 +124,13 @@ $nomepaciente = $c_linha2['nome'];
                         $c_motivo = 'Outros';
                     }
                     echo "<tr>";
-
-                    echo "<td>" . date('d/m/Y', strtotime($c_linha['data_anamnese'])) . "</td>";
+                    echo "<td>" . date('d/m/Y', strtotime($c_linha['data'])) . "</td>";
                     echo "<td>" . $c_motivo . "</td>";
                     echo "<td>
                                 <a class='btn btn-light btn-sm' title='Editar Anamnese' href='javascript:func()'onclick='editar($c_linha[id])'>
                                 <span class='glyphicon glyphicon-pencil'> Editar</span></a>
                    
-                              </td>";
+                          </td>";
                     echo "</tr>";
                 }
 
