@@ -337,7 +337,85 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
+                    <!-- input para medicamentos em uso text area livre -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="c_medicamentos_uso">Medicamentos em Uso: *</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="c_medicamentos_uso" name="c_medicamentos_uso" rows="4" required></textarea>
+                        </div>
+                    </div>
+                    <h4>Hábitos de Vida</h4>
+                    <!-- radios com opções de  sim ou não dos hábitos de vida -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_tabagismo">Tabagismo: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_tabagismo">
+                                        <input type="radio" name="c_tabagismo" id="c_tabagismo_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_tabagismo">
+                                        <input type="radio" name="c_tabagismo" id="c_tabagismo_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--quando sim, perguntar quantos cigarros por dia e há quanto tempo -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="c_cigarros_dia">Cigarros por dia:</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_cigarros_dia" name="c_cigarros_dia" min="0">
+                        </div>
+                        <label class="col-sm-3 col-form-label" for="c_tempo_tabagismo">Há quanto tempo (anos):</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_tempo_tabagismo" name="c_tempo_tabagismo" min="0">
+                        </div>
+                    </div>
+                    <!-- quantidade de álcool por semana e tipo de bebida -->
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="c_alcool_semana">Quantidade de álcool por semana (em doses):</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_alcool_semana" name="c_alcool_semana" min="0">
+                        </div>
+                    </div>
 
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_alcoolismo">Etilismo: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_alcoolismo">
+                                        <input type="radio" name="c_alcoolismo" id="c_alcoolismo_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_alcoolismo">
+                                        <input type="radio" name="c_alcoolismo" id="c_alcoolismo_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_atividade_fisica">Atividade Física: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_atividade_fisica">
+                                        <input type="radio" name="c_atividade_fisica" id="c_atividade_fisica_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_atividade_fisica">
+                                        <input type="radio" name="c_atividade_fisica" id="c_atividade_fisica_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                         
                 </div>
             </div>
         </form>
