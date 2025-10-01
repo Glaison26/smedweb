@@ -55,6 +55,7 @@ require_once('../conexao.php');
         <div class="tab-content">
             <div id="home" class="container tab-pane active"><br>
                 <div class="form-group">
+                    
                     <label for="c_setor">Setor: *</label>
                     <input type="text" class="form-control" id="c_setor" name="c_setor" required>
                 </div>
@@ -82,8 +83,5 @@ require_once('../conexao.php');
         </div>
     </form>
 
-
-
-
-
 </body>
+</html>
