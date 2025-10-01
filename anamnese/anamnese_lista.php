@@ -6,7 +6,13 @@ require_once '../conexao.php';
 // require com link.php
 require_once '../links.php';
 // pego o id do paciente
-$idpaciente = $_GET['idpaciente'];
+   if (isset($_GET['idpaciente'])) {
+        $idpaciente = $_GET['idpaciente'];
+        $_SESSION['id_paciente'] = $idpaciente;
+    } else {
+        $idpaciente = $_SESSION['id_paciente'];
+    }
+
 // monto a query para pegar dados da anamnese
 $c_sql = "SELECT * FROM anamnese WHERE id_paciente = $idpaciente";
 $result = $conection->query($c_sql);
