@@ -22,7 +22,7 @@ require_once('../conexao.php');
             <h5>Nova Anamnese<h5>
         </div>
     </div>
-    <div class="container  px-0 mt-4">
+    <div class="container-fluid">
         <div class='alert alert-info' role='alert'>
             <h5>Campos com (*) são obrigatórios</h5>
         </div>
@@ -56,44 +56,44 @@ require_once('../conexao.php');
                     <h4>Dados Ocupacionais</h4>
                     <hr>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_setor">Setor: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_setor">Setor: *</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="c_setor" name="c_setor" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_cargo">Cargo: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_cargo">Cargo: *</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="c_cargo" name="c_cargo" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_admissao">Admissao: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_admissao">Admissao: *</label>
                         <div class="col-sm-2">
                             <input type="date" class="form-control" id="c_admissao" name="c_admissao" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_atividade">Atividade: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_atividade">Atividade: *</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="c_atividade" name="c_atividade" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_jornada">Jornada de Trabalho: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_jornada">Jornada de Trabalho: *</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" id="c_jornada" name="c_jornada" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_descricao_atividades">Descrição Atividades : *</label>
-                        <div class="col-sm-7">
+                        <label class="col-sm-2 col-form-label" for="c_descricao_atividades">Descrição Atividades : *</label>
+                        <div class="col-sm-5">
                             <input type="text" class="form-control" id="c_descricao_atividades" name="c_descricao_atividades" required>
                         </div>
                     </div>
-
+                    <hr>
                     <h4>Riscos Ocupacionais</h4>
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Físico (Ruído, calor, frio, vibração, radiação)</label>
                             <div class="col-sm-1">
@@ -101,7 +101,7 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Químico (Poeira, fumos, gases,vapores, produtos químicos)</label>
                             <div class="col-sm-1">
@@ -109,7 +109,7 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Biológico (Vírus, bactérias, fungos, parasitas)</label>
                             <div class="col-sm-1">
@@ -117,7 +117,7 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso)</label>
                             <div class="col-sm-1">
@@ -125,7 +125,7 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-2">
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Acidentes (Máquinas sem proteção, risco de quedas, eletricidade)</label>
                             <div class="col-sm-1">
@@ -138,7 +138,7 @@ require_once('../conexao.php');
                     <h4>Queixa Principal e História da Doença Atual (HDA)</h4>
                     <hr>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_motivo_consulta">Motivo da Consulta: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_motivo_consulta">Motivo da Consulta: *</label>
                         <div class="col-sm-3">
                             <select class="form-control form-control-lg" id="c_motivo_consulta" name="c_motivo_consulta" required>
                                 <option value="">Selecione</option>
@@ -152,13 +152,13 @@ require_once('../conexao.php');
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_queixa_principal">Queixa Principal: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_queixa_principal">Queixa Principal: *</label>
                         <div class="col-sm-7">
                             <input type="text" class="form-control" id="c_queixa_principal" name="c_queixa_principal" required>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_hda">História da Doença Atual (HDA): *</label>
+                        <label class="col-sm-2 col-form-label" for="c_hda">História da Doença Atual (HDA): *</label>
                         <div class="col-sm-7">
                             <textarea class="form-control" id="c_hda" name="c_hda" rows="8" required></textarea>
                         </div>
@@ -169,7 +169,7 @@ require_once('../conexao.php');
                     <hr>
                     <div class="row mb-2">
                         <!-- radios com opções de  sim ou não dos antecedentes pessoais -->
-                        <label class="col-sm-4 col-form-label" for="c_hipertensao">Hipertensão Arterial Sistêmica: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_hipertensao">Hipertensão Arterial Sistêmica: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -190,7 +190,7 @@ require_once('../conexao.php');
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_diabetes">Diabetes Mellitus: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_diabetes">Diabetes Mellitus: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -212,7 +212,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- doenças cardiovasculares -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_doencas_cardiovasculares">Doenças Cardiovasculares: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_doencas_cardiovasculares">Doenças Cardiovasculares: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -234,7 +234,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- Doenças Respiratórias -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_asma_bronquite">Asma/Bronquite: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_asma_bronquite">Asma/Bronquite: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -256,7 +256,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- Doenças Renais -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_doencas_renais">Doenças Renais: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_doencas_renais">Doenças Renais: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check  ">
@@ -277,7 +277,7 @@ require_once('../conexao.php');
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_doencas_neurologicas">Doenças Neurológicas: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_doencas_neurologicas">Doenças Neurológicas: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -300,7 +300,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- Disturbios Psiquiátricas -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_disturbios_psiquiatricos">Distúrbios Psiquiátricos: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_disturbios_psiquiatricos">Distúrbios Psiquiátricos: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -321,7 +321,7 @@ require_once('../conexao.php');
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_cancer">Câncer: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_cancer">Câncer: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -343,7 +343,7 @@ require_once('../conexao.php');
                     </div>
                     <div class="row mb-2">
                         <!--Alergias -->
-                        <label class="col-sm-4 col-form-label" for="c_alergias">Alergias: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_alergias">Alergias: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -365,7 +365,7 @@ require_once('../conexao.php');
                     </div>
                     <div class="row mb-2">
                         <!-- Cirurgias prévia   -->
-                        <label class="col-sm-4 col-form-label" for="c_cirurgias_previas">Cirurgias Prévias: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_cirurgias_previas">Cirurgias Prévias: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -387,7 +387,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- input para medicamentos em uso text area livre -->
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_medicamentos_uso">Medicamentos em Uso: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_medicamentos_uso">Medicamentos em Uso: *</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" id="c_medicamentos_uso" name="c_medicamentos_uso" rows="4" required></textarea>
                         </div>
@@ -395,7 +395,7 @@ require_once('../conexao.php');
                     <h4>Hábitos de Vida</h4>
                     <!-- radios com opções de  sim ou não dos hábitos de vida -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_tabagismo">Tabagismo: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_tabagismo">Tabagismo: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -413,25 +413,25 @@ require_once('../conexao.php');
                     </div>
                     <!--quando sim, perguntar quantos cigarros por dia e há quanto tempo -->
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_cigarros_dia">Cigarros por dia:</label>
-                        <div class="col-sm-2">
+                        <label class="col-sm-2 col-form-label" for="c_cigarros_dia">Cigarros por dia:</label>
+                        <div class="col-sm-1">
                             <input type="number" class="form-control" id="c_cigarros_dia" name="c_cigarros_dia" min="0">
                         </div>
-                        <label class="col-sm-3 col-form-label" for="c_tempo_tabagismo">Há quanto tempo (anos):</label>
-                        <div class="col-sm-2">
+                        <label class="col-sm-2 col-form-label" for="c_tempo_tabagismo">Há quanto tempo (anos):</label>
+                        <div class="col-sm-1">
                             <input type="number" class="form-control" id="c_tempo_tabagismo" name="c_tempo_tabagismo" min="0">
                         </div>
                     </div>
                     <!-- quantidade de álcool por semana e tipo de bebida -->
                     <div class="row mb-3">
-                        <label class="col-sm-3 col-form-label" for="c_alcool_semana">Quantidade de álcool por semana (em doses):</label>
-                        <div class="col-sm-2">
+                        <label class="col-sm-2 col-form-label" for="c_alcool_semana">Quantidade de álcool por semana (em doses):</label>
+                        <div class="col-sm-1">
                             <input type="number" class="form-control" id="c_alcool_semana" name="c_alcool_semana" min="0">
                         </div>
                     </div>
 
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_alcoolismo">Etilismo: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_alcoolismo">Etilismo: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -448,7 +448,7 @@ require_once('../conexao.php');
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_atividade_fisica">Atividade Física: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_atividade_fisica">Atividade Física: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -471,7 +471,7 @@ require_once('../conexao.php');
                     <!--input radio sim ou não para doenças familiares-->
                     <!-- Hipertensão -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_hipertensao_familiar">Hipertensão Arterial Sistêmica: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_hipertensao_familiar">Hipertensão Arterial Sistêmica: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -493,7 +493,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- Diabetes mellitus  -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_diabetes_familiar">Diabetes Mellitus: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_diabetes_familiar">Diabetes Mellitus: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -515,7 +515,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- doenças cardiovasculares -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_doencas_cardiovasculares_familiar">Doenças Cardiovasculares: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_doencas_cardiovasculares_familiar">Doenças Cardiovasculares: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -537,7 +537,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- Câncer -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_cancer_familiar">Câncer: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_cancer_familiar">Câncer: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -559,7 +559,7 @@ require_once('../conexao.php');
                     </div>
                     <!--  input com radio sim ou não Outras doenças -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_outras_doencas_familiar">Outras Doenças: *</label>
+                        <label class="col-sm-2 col-form-label" for="c_outras_doencas_familiar">Outras Doenças: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -582,11 +582,11 @@ require_once('../conexao.php');
 
                 </div> <!-- fim do menu3 -->
                 <div id="menu4" class="tab-pane fade"><br>
-                    <h4>Revisão de Sistemas</h4>
+                    <h4>Interrogatório Sintomatológico (Revisão por Sistemas)</h4>
                     <hr>
                     <!-- input radio sim ou não geral Febre, perda de peso, fadiga -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_geral">Geral (Febre, perda de peso, fadiga): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_geral">Geral (Febre, perda de peso, fadiga): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -601,10 +601,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- input radio sim ou não pele Lesões, coceira, manchas -->
-                    <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_pele">Pele (Lesões, coceira, manchas): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_pele">Pele (Lesões, coceira, manchas): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -622,7 +619,7 @@ require_once('../conexao.php');
                     </div>
                     <!-- input radio sim ou não cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço)  -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_cabeca_pescoco">Cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_cabeca_pescoco">Cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -637,10 +634,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- input radio sim ou não olhos (Alteração visual, dor, vermelhidão) -->
-                    <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_olhos">Olhos (Alteração visual, dor, vermelhidão): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_olhos">Olhos (Alteração visual, dor, vermelhidão): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -655,10 +649,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <!-- input radio sim ou não ouvidos (Dor, zumbido, perda auditiva) -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_ouvidos">Ouvidos (Dor, zumbido, perda auditiva): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_ouvidos">Ouvidos (Dor, zumbido, perda auditiva): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -673,10 +669,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- input radio sim ou não Respiratório (Tosse, falta de ar, dor no peito) -->
-                    <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_respiratorio">Respiratório (Tosse, falta de ar, dor no peito): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_respiratorio">Respiratório (Tosse, falta de ar, dor no peito): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -691,10 +684,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <!-- input radio sim ou não Cardiovascular (Palpitações, dor no peito, inchaço) -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_cardiovascular">Cardiovascular (Palpitações, dor no peito, inchaço): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_cardiovascular">Cardiovascular (Palpitações, dor no peito, inchaço): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -709,10 +704,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- input radio sim ou não Gastrointestinal (Dor abdominal, náusea, vômito) -->
-                    <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_gastrointestinal">Gastrointestinal (Dor abdominal, náusea, vômito): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_gastrointestinal">Gastrointestinal (Dor abdominal, náusea, vômito): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -727,10 +719,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                     <!-- input radio sim ou não Genitourinário (Dor ao urinar, sangue na urina, incontinência) -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_genitourinario">Genitourinário (Dor ao urinar, sangue na urina, incontinência): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_genitourinario">Genitourinário (Dor ao urinar, sangue na urina, incontinência): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -745,10 +739,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- input radio sim ou não Musculoesquelético (Dor nas articulações, fraqueza muscular) -->
-                    <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_musculoesqueletico">Musculoesquelético (Dor nas articulações, fraqueza muscular): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_musculoesqueletico">Musculoesquelético (Dor nas articulações, fraqueza muscular): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -764,9 +755,10 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
+
                     <!-- input radio sim ou não Neurológico (Tontura, fraqueza, convulsões) -->
                     <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_neurologico">Neurológico (Tontura, fraqueza, convulsões): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_neurologico">Neurológico (Tontura, fraqueza, convulsões): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -781,10 +773,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- input radio sim ou não Psiquiátrico (Ansiedade, depressão, insônia) -->
-                    <div class="row mb-2">
-                        <label class="col-sm-4 col-form-label" for="c_psiquiatrico">Psiquiátrico (Ansiedade, depressão, insônia): *</label>
+                        <label class="col-sm-3 col-form-label" for="c_psiquiatrico">Psiquiátrico (Ansiedade, depressão, insônia): *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
@@ -799,57 +788,167 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>    
-                </div>
-            </div> <!-- fim do menu4 -->
-            <!-- menu5 -->  
-            <div id="menu5" class="tab-pane fade"><br>
-                <h4>Exame Físico</h4>
+
+                    </div>
+                   
+                </div> <!-- fim do menu4 -->
+
+                <!-- menu5 -->
+                <div id="menu5" class="tab-pane fade"><br>
+                    <h4>Exame Físico</h4>
+                    <hr>
+                    <!-- input para sinais vitais -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_pressao_arterial">Pressão Arterial (mmHg):</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="c_pressao_arterial" name="c_pressao_arterial" placeholder="Ex: 120/80">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="c_frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_frequencia_cardiaca" name="c_frequencia_cardiaca" min="0" placeholder="Ex: 70">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="c_frequencia_respiratoria">Frequência Respiratória (rpm):</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_frequencia_respiratoria" name="c_frequencia_respiratoria" min="0" placeholder="Ex: 16">
+                        </div>
+                    </div>
+                    <!-- input de peso altura e IMC -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_peso">Peso (kg):</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_peso" name="c_peso" step="0.1" min="0" placeholder="Ex: 70.5">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="c_altura">Altura (m):</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_altura" name="c_altura" step="0.01" min="0" placeholder="Ex: 1.75">
+                        </div>
+                        <label class="col-sm-2 col-form-label" for="c_imc">IMC:</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="c_imc" name="c_imc" step="0.1" min="0" placeholder="Ex: 22.9">
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- input tipo text para ectoscopia -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_ectoscopia">Ectoscopia:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_ectoscopia" name="c_ectoscopia" placeholder="Descrição da ectoscopia">
+                        </div>
+                    </div>
+                    <!-- input tipo text para aparelho respirtório -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_aparelho_respiratorio">Aparelho Respiratório:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_aparelho_respiratorio" name="c_aparelho_respiratorio" placeholder="Descrição do aparelho respiratório">
+                        </div>
+                    </div>
+                    <!-- input tipo text para aparelho cardiovascular -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_aparelho_cardiovascular">Aparelho Cardiovascular:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_aparelho_cardiovascular" name="c_aparelho_cardiovascular" placeholder="Descrição do aparelho cardiovascular">
+                        </div>
+                    </div>
+                    <!-- input tipo text para aparelho abdome -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_aparelho_abdome">Aparelho Abdome:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_aparelho_abdome" name="c_aparelho_abdome" placeholder="Descrição do aparelho abdome">
+                        </div>
+                    </div>
+                    <!-- input tipo text para membros   -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_membros">Membros:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_membros" name="c_membros" placeholder="Descrição dos membros">
+                        </div>
+                    </div>
+                    <!-- input tipo text para coluna vertebral   -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_coluna_vertebral">Coluna Vertebral:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_coluna_vertebral" name="c_coluna_vertebral" placeholder="Descrição da coluna vertebral">
+                        </div>
+                    </div>
+                    <!-- input tipo text para Exme Neurologico   -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_exame_neurologico">Exame Neurológico:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_exame_neurologico" name="c_exame_neurologico" placeholder="Descrição do exame neurológico">
+                        </div>
+                    </div>
+                </div> <!-- fim do menu5 -->
+                <!-- menu6 Conduta e Parecer Médico -->
+                <div id="menu6" class="tab-pane fade"><br>
+                    <h4>Conduta e Parecer Médico</h4>
+                    <hr>
+                    <!-- input pra Hipótese Diagnóstica -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_hipotese_diagnostica">Hipótese Diagnóstica:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_hipotese_diagnostica" name="c_hipotese_diagnostica" placeholder="Descrição da hipótese diagnóstica">
+                        </div>
+                    </div>
+                    <!-- input para Exames Complementares Solicitados -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_exames_complementares">Exames Complementares Solicitados:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_exames_complementares" name="c_exames_complementares" placeholder="Descrição dos exames complementares solicitados">
+                        </div>
+                    </div>
+                    <!-- input tipo text para conduta -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_conduta">Conduta:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="c_conduta" name="c_conduta" placeholder="Descrição da conduta">
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- input tipo radio para parecer médico contendo ( ) Apto para a função ( ) Apto para a função com restrições. Inapto para função -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_parecer_medico">Parecer Médico: *</label>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <div class="row mb-2">
+                                        <label for="c_parecer_medico">
+                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_apto" value="Apto para a função">
+                                            <span>Apto para a função</span>
+                                        </label>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="c_parecer_medico">
+                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_apto_restricoes" value="Apto para a função com restrições">
+                                            <span>Apto para a função com restrições</span>
+                                        </label>
+                                        <!-- input para descrever as restrições -->
+                                        <input type="text" class="form-control mt-2" id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
+                                        
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="c_parecer_medico">
+                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_inapto" value="Inapto para a função">
+                                            <span>Inapto para a função</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div> <!-- fim do tab content -->
                 <hr>
-                <!-- input para sinais vitais -->
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="c_pressao_arterial">Pressão Arterial (mmHg):</label>
-                    <div class="col-sm-2">
-                        <input type="text" class="form-control" id="c_pressao_arterial" name="c_pressao_arterial" placeholder="Ex: 120/80">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="c_frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="c_frequencia_cardiaca" name="c_frequencia_cardiaca" min="0" placeholder="Ex: 70">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="c_frequencia_respiratoria">Frequência Respiratória (rpm):</label>
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="c_frequencia_respiratoria" name="c_frequencia_respiratoria" min="0" placeholder="Ex: 16">
+                    <div class="offset-sm-0 col-sm-3">
+                        <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                        <a class='btn btn-danger' href='/smedweb/anamnese/anamnese_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>
                 </div>
-               <!-- input de peso altura e IMC -->
-               <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="c_peso">Peso (kg):</label>
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="c_peso" name="c_peso" step="0.1" min="0" placeholder="Ex: 70.5">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="c_altura">Altura (m):</label>
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="c_altura" name="c_altura" step="0.01" min="0" placeholder="Ex: 1.75">
-                    </div>
-                    <label class="col-sm-2 col-form-label" for="c_imc">IMC:</label>
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="c_imc" name="c_imc" step="0.1" min="0" placeholder="Ex: 22.9">
-                    </div>
-                </div>
-            </div> <!-- fim do menu5 -->
-             
-            <hr>
-            <div class="row mb-3">
-                <div class="offset-sm-0 col-sm-3">
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                    <a class='btn btn-danger' href='/smedweb/anamnese/anamnese_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
-
-                </div>
-            </div>
         </form>
-    </div> <!-- fim do tab content -->
+    </div> <!-- fim do container -->
 
-    </div>
+
 </body>
 
 </html>
