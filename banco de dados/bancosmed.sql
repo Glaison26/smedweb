@@ -141,15 +141,25 @@ CREATE TABLE IF NOT EXISTS `anamnese` (
   `queixa_principal` blob,
   `hda` blob,
   `antecedente_hipertencao` char(3) DEFAULT NULL,
+  `obs_hipertencao` varchar(150) DEFAULT NULL,
   `antecedente_diabete` char(3) DEFAULT NULL,
+  `obs_diabete` varchar(150) DEFAULT NULL,
   `antecedente_cardiaco` char(3) DEFAULT NULL,
+  `obs_cardiaco` varchar(150) DEFAULT NULL,
   `antecedente_asma_bronquite` char(3) DEFAULT NULL,
+  `obs_asma_bronquite` varchar(150) DEFAULT NULL,
   `antecedente_renais` char(3) DEFAULT NULL,
+  `obs_renais` varchar(150) DEFAULT NULL,
   `antecedente_neurologica` char(3) DEFAULT NULL,
+  `obs_neurologia` varchar(150) DEFAULT NULL,
   `antecedente_psquiatrico` char(3) DEFAULT NULL,
+  `obs_psiquiatrico` varchar(150) DEFAULT NULL,
   `antecedente_cancer` char(3) DEFAULT NULL,
+  `obs_cancer` varchar(150) DEFAULT NULL,
   `antecedente_alergia` char(3) DEFAULT NULL,
+  `obs_alergia` varchar(150) DEFAULT NULL,
   `antecedente_cirurgias` char(3) DEFAULT NULL,
+  `obs_cirurgia` varchar(150) DEFAULT NULL,
   `medicamentos_uso` blob,
   `habito_tabagismo` char(3) DEFAULT NULL,
   `tabagismo_tempo` int DEFAULT NULL,
@@ -160,10 +170,15 @@ CREATE TABLE IF NOT EXISTS `anamnese` (
   `atividade_fisica_qual` int DEFAULT NULL,
   `atividade_fisica_frequencia` varchar(80) DEFAULT NULL,
   `familiar_hipertencao` char(3) DEFAULT NULL,
+  `obs_familiar_hipertencao` varchar(150) DEFAULT NULL,
   `familiar_cancer` char(3) DEFAULT NULL,
+  `obs_familiar_cancer` varchar(150) DEFAULT NULL,
   `familiar_cardiaco` char(3) DEFAULT NULL,
+  `obs_familiar_cardiaco` varchar(150) DEFAULT NULL,
   `familiar_diabetes` char(3) DEFAULT NULL,
+  `obs_familiar_diabetes` varchar(150) DEFAULT NULL,
   `familiar_outros` char(3) DEFAULT NULL,
+  `obs_familiar_outros` varchar(150) DEFAULT NULL,
   `stm_geral` char(3) DEFAULT NULL,
   `stm_pele` char(3) DEFAULT NULL,
   `stm_cabeca_pescoso` char(3) DEFAULT NULL,
@@ -196,9 +211,11 @@ CREATE TABLE IF NOT EXISTS `anamnese` (
   PRIMARY KEY (`id`),
   KEY `FK_anamnese_pacientes` (`id_paciente`),
   CONSTRAINT `FK_anamnese_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.anamnese: ~0 rows (aproximadamente)
+INSERT INTO `anamnese` (`id`, `id_paciente`, `data`, `setor`, `funcao`, `admissao`, `jornada`, `atividades`, `risco_fisico`, `risco_quimico`, `risco_biologico`, `risco_ergonomico`, `risco_acidentes`, `usa_epi`, `quais_epi`, `motivo_consulta`, `queixa_principal`, `hda`, `antecedente_hipertencao`, `obs_hipertencao`, `antecedente_diabete`, `obs_diabete`, `antecedente_cardiaco`, `obs_cardiaco`, `antecedente_asma_bronquite`, `obs_asma_bronquite`, `antecedente_renais`, `obs_renais`, `antecedente_neurologica`, `obs_neurologia`, `antecedente_psquiatrico`, `obs_psiquiatrico`, `antecedente_cancer`, `obs_cancer`, `antecedente_alergia`, `obs_alergia`, `antecedente_cirurgias`, `obs_cirurgia`, `medicamentos_uso`, `habito_tabagismo`, `tabagismo_tempo`, `tabagismo_qtd_dia`, `etilismo`, `etilismo_frequencia`, `atividade_fisica`, `atividade_fisica_qual`, `atividade_fisica_frequencia`, `familiar_hipertencao`, `obs_familiar_hipertencao`, `familiar_cancer`, `obs_familiar_cancer`, `familiar_cardiaco`, `obs_familiar_cardiaco`, `familiar_diabetes`, `obs_familiar_diabetes`, `familiar_outros`, `obs_familiar_outros`, `stm_geral`, `stm_pele`, `stm_cabeca_pescoso`, `stm_olhos_ouvidos`, `stm_respiratorio`, `stm_cardiovascular`, `stm_gastro`, `stm_geniturario`, `stm_musculo_esqueletico`, `stm_neurologico`, `stm_pisiquico`, `exame_pa`, `exame_fc`, `exame_fr`, `exame_peso`, `exame_altura`, `exame_imc`, `exame_ectoscopia`, `exame_aparelho_respiratorio`, `exame_aparelho_cadio`, `exame_abdome`, `exame_membros`, `exame_coluna`, `exame_neurologico`, `conduta_hipotese_diag`, `conduta_exames_compl`, `conduta`, `parecer`, `restricoes`) VALUES
+	(1, 4, '2025-10-01', NULL, NULL, '2025-10-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.atestados
 CREATE TABLE IF NOT EXISTS `atestados` (
@@ -274,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `config` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.config: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela smed.config: ~0 rows (aproximadamente)
 INSERT INTO `config` (`id`, `nome_clinica`, `endereco_clinica`, `telefone_clinica`, `email_clinica`, `cidade_clinica`, `cnpj_clinica`) VALUES
 	(1, 'Clinica Belo Horizonte', 'Rua Comendador viana 148', '32323', 'teste@gmail.com', 'Belo Horizonte', '102842912342');
 
@@ -554,7 +571,7 @@ CREATE TABLE IF NOT EXISTS `orientacoes_padrao` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.orientacoes_padrao: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela smed.orientacoes_padrao: ~2 rows (aproximadamente)
 INSERT INTO `orientacoes_padrao` (`id`, `descricao`, `texto`) VALUES
 	(9, 'Promoção de Hábitos Saudáveis', _binary 0x416c696d656e7461c3a7c3a36f2041646571756164610a556d6120646965746120657175696c69627261646120c3a92061206261736520706172612061207361c3ba64652e205265636f6d656e64612d7365206f20636f6e73756d6f206162756e64616e74652064650a6672757461732c2076656765746169732c206772c3a36f7320696e7465677261697320652070726f7465c3ad6e6173206d61677261732e20412072656475c3a7c3a36f20646f20636f6e73756d6f2064650a616c696d656e746f732070726f6365737361646f732c2061c3a7c3ba636172657320726566696e61646f73206520676f7264757261732073617475726164617320c3a92066756e64616d656e74616c20706172610a70726576656e697220646f656ec3a7617320636f6d6f206f62657369646164652c206469616265746573207469706f2032206520646f656ec3a761732063617264696f76617363756c617265732e20410a68696472617461c3a7c3a36f2061646571756164612c20636f6d206120696e67657374c3a36f20646520c3a167756120737566696369656e746520616f206c6f6e676f20646f206469612c2074616d62c3a96d20c3a90a766974616c2070617261206f20626f6d2066756e63696f6e616d656e746f20646f206f7267616e69736d6f2e0a4578657263c3ad63696f732046c3ad7369636f730a41207072c3a17469636120726567756c617220646520617469766964616465732066c3ad736963617320c3a920696e64697370656e73c3a176656c2e204164756c746f7320646576656d206275736361722070656c6f0a6d656e6f7320313530206d696e75746f732064652061746976696461646520616572c3b36269636120646520696e74656e736964616465206d6f646572616461206f75203735206d696e75746f732064650a696e74656e736964616465207669676f726f736120706f722073656d616e612c20616cc3a96d206465206578657263c3ad63696f7320646520666f7274616c6563696d656e746f206d757363756c617220647561730a76657a657320706f722073656d616e612e204f732062656e6566c3ad63696f7320696e636c75656d20636f6e74726f6c65206465207065736f2c206d656c686f7261206461207361c3ba64650a63617264696f76617363756c61722c20666f7274616c6563696d656e746f20c3b37373656f2065206d757363756c61722c20652072656475c3a7c3a36f20646f2065737472657373652e20c38920696d706f7274616e74650a616461707461722061206174697669646164652066c3ad7369636120c3a020636f6e6469c3a7c3a36f20696e646976696475616c206520627573636172206f7269656e7461c3a7c3a36f2070726f66697373696f6e616c2e0a536f6e6f206465205175616c69646164650a4f20736f6e6f20c3a920756d2070696c6172206461207361c3ba64652c206d75697461732076657a657320737562657374696d61646f2e2041206d61696f72696120646f73206164756c746f730a6e656365737369746120646520372061203920686f72617320646520736f6e6f20706f72206e6f6974652e20556d20736f6e6f20726570617261646f7220636f6e747269627569207061726120610a7265637570657261c3a7c3a36f2066c3ad736963612065206d656e74616c2c206d656c686f726120612066756ec3a7c3a36f20636f676e69746976612c20666f7274616c656365206f2073697374656d610a696d756e6f6cc3b36769636f206520726567756c61206f2068756d6f722e204573746162656c6563657220756d6120726f74696e6120646520736f6e6f2c20637269617220756d20616d6269656e74650a70726f70c3ad63696f20652065766974617220657374696d756c616e74657320616e74657320646520646f726d69722073c3a36f207072c3a17469636173207265636f6d656e64616461732e0a),
 	(10, 'Vacinação e Exames de Rotina', _binary 0x566163696e61c3a7c3a36f0a4120766163696e61c3a7c3a36f20c3a920756d612064617320696e74657276656ec3a7c3b56573206465207361c3ba64652070c3ba626c696361206d6169732065666963617a65732e204d616e746572206f0a63616c656e64c3a172696f20646520766163696e61c3a7c3a36f20617475616c697a61646f2c20636f6e666f726d65206173207265636f6d656e6461c3a7c3b56573207061726120636164612066616978610a6574c3a1726961206520636f6e6469c3a7c3a36f206465207361c3ba64652c20c3a920657373656e6369616c20706172612070726576656e697220646f656ec3a7617320696e66656363696f736173206772617665732e204973736f0a696e636c756920766163696e617320636f6e7472612067726970652c2074c3a974616e6f2c2064696674657269612c20736172616d706f2c20636178756d62612c20727562c3a96f6c612c206865706174697465732c0a4850562c20656e747265206f75747261732e204120766163696e61c3a7c3a36f206ec3a36f2070726f74656765206170656e6173206f20696e646976c3ad64756f2c206d61732074616d62c3a96d20610a636f6d756e69646164652c206174726176c3a97320646120696d756e696461646520646520726562616e686f2e0a4578616d657320646520526f74696e610a4578616d6573206dc3a96469636f7320726567756c61726573207065726d6974656d2061206465746563c3a7c3a36f20707265636f636520646520636f6e6469c3a7c3b56573206465207361c3ba6465206520610a696e74657276656ec3a7c3a36f20616e7465732071756520736520746f726e656d206d616973206772617665732e2041206672657175c3aa6e6369612065206f207469706f206465206578616d65732076617269616d0a636f6e666f726d652069646164652c207365786f2c2068697374c3b37269636f2066616d696c6961722065206661746f72657320646520726973636f2e204578656d706c6f7320696e636c75656d206578616d65730a64652073616e6775652028636f6c65737465726f6c2c20676c6963656d6961292c206d656469c3a7c3a36f206461207072657373c3a36f20617274657269616c2c206d616d6f6772616669612c0a706170616e69636f6c61752c20636f6c6f6e6f73636f7069612065206578616d6573206465207072c3b373746174612e20412064697363757373c3a36f20636f6d206f206dc3a96469636f20736f627265206f0a68697374c3b37269636f20706573736f616c20652066616d696c69617220c3a9206372756369616c207061726120646566696e6972206f20706c616e6f206465206578616d657320616465717561646f2e0a),
@@ -597,7 +614,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   CONSTRAINT `FK_pacientes_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.pacientes: ~5 rows (aproximadamente)
+-- Copiando dados para a tabela smed.pacientes: ~4 rows (aproximadamente)
 INSERT INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pai`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
 	(1, 1, 2, 'Glaison Queiroz ', 'M', 'Faio', '1968-10-26', 'Casado', 'Emilia ', 'Valdir Queiroz', 'Ruada Intendência, 316', 'Centro', 'Sabará', '34505480', 'SP', 'glaison26.queiroz@gmail.com', '(31)36722550', '(31)984262508', 'Programador', 'não se aplica', '2024-07-01', _binary 0x7465737465, 'Clinica', 'Brasileiro', 'Sabará', '88845665', '69551022653', 'm4662097'),
 	(3, 2, NULL, 'Maria da Graça', 'F', 'Leuco', '1985-11-26', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 6995-5666', '', '', '', '2024-07-03', _binary '', '', '', '', '45646546', '', ''),
@@ -662,7 +679,7 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.perfil_usuarios_opcoes: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela smed.perfil_usuarios_opcoes: ~2 rows (aproximadamente)
 INSERT INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_especialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
 	(1, 'Gestor Total', 'S', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'),
 	(2, 'Médico', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'N'),
@@ -747,7 +764,7 @@ CREATE TABLE IF NOT EXISTS `tabela` (
   CONSTRAINT `FK_tabela_indices` FOREIGN KEY (`id_indice`) REFERENCES `indices` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.tabela: ~2 rows (aproximadamente)
+-- Copiando dados para a tabela smed.tabela: ~3 rows (aproximadamente)
 INSERT INTO `tabela` (`id`, `id_indice`, `descricao`) VALUES
 	(1, 1, 'TUSS'),
 	(2, 21, 'Tabela1');
@@ -774,7 +791,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   CONSTRAINT `FK_usuario_perfil_usuarios_opcoes` FOREIGN KEY (`id_perfil`) REFERENCES `perfil_usuarios_opcoes` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.usuario: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela smed.usuario: ~3 rows (aproximadamente)
 INSERT INTO `usuario` (`id`, `id_perfil`, `nome`, `login`, `senha`, `ativo`, `prescricoes`, `pacientesdados`, `pacienteshistoria`, `agendamarcacao`, `agendageracao`, `cadastros`, `tipo`, `email`, `telefone`) VALUES
 	(1, 1, 'Glaison Queiroz', 'Glaison', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'glaison26.queiroz@gmail.com', '3136712550'),
 	(3, 2, 'Dr. José da Silva', 'dasilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'dasilva@gmail.com', '3678985412'),
