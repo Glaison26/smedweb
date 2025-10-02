@@ -184,6 +184,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para hipertensão -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_hipertensao_obs" name="c_hipertensao_obs" placeholder="Observações">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_diabetes">Diabetes Mellitus: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -199,8 +205,11 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para diabetes -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_diabetes_obs" name="c_diabetes_obs" placeholder="Observações">
+                        </div>
                     </div>
-
                     <!-- doenças cardiovasculares -->
                     <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_doencas_cardiovasculares">Doenças Cardiovasculares: *</label>
@@ -218,6 +227,13 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para doenças cardiovasculares -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_doencas_cardiovasculares_obs" name="c_doencas_cardiovasculares_obs" placeholder="Observações">
+                        </div>
+                    </div>
+                    <!-- Doenças Respiratórias -->
+                    <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_asma_bronquite">Asma/Bronquite: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -233,8 +249,11 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para asma/bronquite -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_asma_bronquite_obs" name="c_asma_bronquite_obs" placeholder="Observações">
+                        </div>
                     </div>
-
                     <!-- Doenças Renais -->
                     <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_doencas_renais">Doenças Renais: *</label>
@@ -252,6 +271,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para doenças renais -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_doencas_renais_obs" name="c_doencas_renais_obs" placeholder="Observações">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_doencas_neurologicas">Doenças Neurológicas: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -267,8 +292,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <!-- campo de observação para doenças neurológicas -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_doencas_neurologicas_obs" name="c_doencas_neurologicas_obs" placeholder="Observações">
+                        </div>
 
+                    </div>
                     <!-- Disturbios Psiquiátricas -->
                     <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_disturbios_psiquiatricos">Distúrbios Psiquiátricos: *</label>
@@ -286,6 +315,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para disturbios psiquiátricas -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_disturbios_psiquiatricos_obs" name="c_disturbios_psiquiatricos_obs" placeholder="Observações">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_cancer">Câncer: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -301,8 +336,11 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para câncer -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_cancer_obs" name="c_cancer_obs" placeholder="Observações">
+                        </div>
                     </div>
-                    
                     <div class="row mb-2">
                         <!--Alergias -->
                         <label class="col-sm-4 col-form-label" for="c_alergias">Alergias: *</label>
@@ -320,6 +358,12 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+                        <!-- campo de observação para alergias -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_alergias_obs" name="c_alergias_obs" placeholder="Observações">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
                         <!-- Cirurgias prévia   -->
                         <label class="col-sm-4 col-form-label" for="c_cirurgias_previas">Cirurgias Prévias: *</label>
                         <div class="col-sm-2">
@@ -335,6 +379,10 @@ require_once('../conexao.php');
                                     </label>
                                 </div>
                             </div>
+                        </div>
+                        <!-- campo de observação para cirurgias prévias -->
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="c_cirurgias_previas_obs" name="c_cirurgias_previas_obs" placeholder="Observações">
                         </div>
                     </div>
                     <!-- input para medicamentos em uso text area livre -->
@@ -398,7 +446,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="row mb-2">
                         <label class="col-sm-4 col-form-label" for="c_atividade_fisica">Atividade Física: *</label>
                         <div class="col-sm-2">
@@ -415,18 +463,392 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                    </div>                         
+                    </div>
+                </div> <!-- fim do menu2 -->
+                <div id="menu3" class="tab-pane fade"><br>
+                    <h4>Antecedentes Familiares</h4>
+                    <hr>
+                    <!--input radio sim ou não para doenças familiares-->
+                    <!-- Hipertensão -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_hipertensao_familiar">Hipertensão Arterial Sistêmica: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_hipertensao_familiar">
+                                        <input type="radio" name="c_hipertensao_familiar" id="c_hipertensao_familiar_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_hipertensao_familiar">
+                                        <input type="radio" name="c_hipertensao_familiar" id="c_hipertensao_familiar_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- input com parentesco da pessoa com a doença -->
+                        <div class="col-sm-6 mt-2">
+                            <input type="text" class="form-control" id="c_hipertensao_familiar_parentesco" name="c_hipertensao_familiar_parentesco" placeholder="Parentesco">
+                        </div>
+                    </div>
+                    <!-- Diabetes mellitus  -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_diabetes_familiar">Diabetes Mellitus: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_diabetes_familiar">
+                                        <input type="radio" name="c_diabetes_familiar" id="c_diabetes_familiar_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_diabetes_familiar">
+                                        <input type="radio" name="c_diabetes_familiar" id="c_diabetes_familiar_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- input com parentesco da pessoa com a doença -->
+                        <div class="col-sm-6 mt-2">
+                            <input type="text" class="form-control" id="c_diabetes_familiar_parentesco" name="c_diabetes_familiar_parentesco" placeholder="Parentesco">
+                        </div>
+                    </div>
+                    <!-- doenças cardiovasculares -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_doencas_cardiovasculares_familiar">Doenças Cardiovasculares: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_doencas_cardiovasculares_familiar">
+                                        <input type="radio" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_doencas_cardiovasculares_familiar">
+                                        <input type="radio" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- input com parentesco da pessoa com a doença -->
+                        <div class="col-sm-6 mt-2">
+                            <input type="text" class="form-control" id="c_doencas_cardiovasculares_familiar_parentesco" name="c_doencas_cardiovasculares_familiar_parentesco" placeholder="Parentesco">
+                        </div>
+                    </div>
+                    <!-- Câncer -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_cancer_familiar">Câncer: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_cancer_familiar">
+                                        <input type="radio" name="c_cancer_familiar" id="c_cancer_familiar_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_cancer_familiar">
+                                        <input type="radio" name="c_cancer_familiar" id="c_cancer_familiar_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- input com parentesco da pessoa com a doença -->
+                        <div class="col-sm-6 mt-2">
+                            <input type="text" class="form-control" id="c_cancer_familiar_parentesco" name="c_cancer_familiar_parentesco" placeholder="Parentesco">
+                        </div>
+                    </div>
+                    <!--  input com radio sim ou não Outras doenças -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_outras_doencas_familiar">Outras Doenças: *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_outras_doencas_familiar">
+                                        <input type="radio" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_outras_doencas_familiar">
+                                        <input type="radio" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- input com parentesco da pessoa com a doença -->
+                        <div class="col-sm-6 mt-2">
+                            <input type="text" class="form-control" id="c_outras_doencas_familiar_parentesco" name="c_outras_doencas_familiar_parentesco" placeholder="Parentesco">
+                        </div>
+                    </div>
+
+                </div> <!-- fim do menu3 -->
+                <div id="menu4" class="tab-pane fade"><br>
+                    <h4>Revisão de Sistemas</h4>
+                    <hr>
+                    <!-- input radio sim ou não geral Febre, perda de peso, fadiga -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_geral">Geral (Febre, perda de peso, fadiga): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_geral">
+                                        <input type="radio" name="c_geral" id="c_geral_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_geral">
+                                        <input type="radio" name="c_geral" id="c_geral_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não pele Lesões, coceira, manchas -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_pele">Pele (Lesões, coceira, manchas): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_pele">
+                                        <input type="radio" name="c_pele" id="c_pele_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_pele">
+                                        <input type="radio" name="c_pele" id="c_pele_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço)  -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_cabeca_pescoco">Cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_cabeca_pescoco">
+                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_cabeca_pescoco">
+                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não olhos (Alteração visual, dor, vermelhidão) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_olhos">Olhos (Alteração visual, dor, vermelhidão): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_olhos">
+                                        <input type="radio" name="c_olhos" id="c_olhos_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_olhos">
+                                        <input type="radio" name="c_olhos" id="c_olhos_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não ouvidos (Dor, zumbido, perda auditiva) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_ouvidos">Ouvidos (Dor, zumbido, perda auditiva): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_ouvidos">
+                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_ouvidos">
+                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Respiratório (Tosse, falta de ar, dor no peito) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_respiratorio">Respiratório (Tosse, falta de ar, dor no peito): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_respiratorio">
+                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_respiratorio">
+                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Cardiovascular (Palpitações, dor no peito, inchaço) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_cardiovascular">Cardiovascular (Palpitações, dor no peito, inchaço): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_cardiovascular">
+                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_cardiovascular">
+                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Gastrointestinal (Dor abdominal, náusea, vômito) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_gastrointestinal">Gastrointestinal (Dor abdominal, náusea, vômito): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_gastrointestinal">
+                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_gastrointestinal">
+                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Genitourinário (Dor ao urinar, sangue na urina, incontinência) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_genitourinario">Genitourinário (Dor ao urinar, sangue na urina, incontinência): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_genitourinario">
+                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_genitourinario">
+                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Musculoesquelético (Dor nas articulações, fraqueza muscular) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_musculoesqueletico">Musculoesquelético (Dor nas articulações, fraqueza muscular): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_musculoesqueletico">
+                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_musculoesqueletico">
+                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Neurológico (Tontura, fraqueza, convulsões) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_neurologico">Neurológico (Tontura, fraqueza, convulsões): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_neurologico">
+                                        <input type="radio" name="c_neurologico" id="c_neurologico_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_neurologico">
+                                        <input type="radio" name="c_neurologico" id="c_neurologico_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- input radio sim ou não Psiquiátrico (Ansiedade, depressão, insônia) -->
+                    <div class="row mb-2">
+                        <label class="col-sm-4 col-form-label" for="c_psiquiatrico">Psiquiátrico (Ansiedade, depressão, insônia): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_psiquiatrico">
+                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_psiquiatrico">
+                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div> <!-- fim do menu4 -->
+            <!-- menu5 -->  
+            <div id="menu5" class="tab-pane fade"><br>
+                <h4>Exame Físico</h4>
+                <hr>
+                <!-- input para sinais vitais -->
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="c_pressao_arterial">Pressão Arterial (mmHg):</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="c_pressao_arterial" name="c_pressao_arterial" placeholder="Ex: 120/80">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="c_frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="c_frequencia_cardiaca" name="c_frequencia_cardiaca" min="0" placeholder="Ex: 70">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="c_frequencia_respiratoria">Frequência Respiratória (rpm):</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="c_frequencia_respiratoria" name="c_frequencia_respiratoria" min="0" placeholder="Ex: 16">
+                    </div>
+                </div>
+               <!-- input de peso altura e IMC -->
+               <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="c_peso">Peso (kg):</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="c_peso" name="c_peso" step="0.1" min="0" placeholder="Ex: 70.5">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="c_altura">Altura (m):</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="c_altura" name="c_altura" step="0.01" min="0" placeholder="Ex: 1.75">
+                    </div>
+                    <label class="col-sm-2 col-form-label" for="c_imc">IMC:</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="c_imc" name="c_imc" step="0.1" min="0" placeholder="Ex: 22.9">
+                    </div>
+                </div>
+            </div> <!-- fim do menu5 -->
+             
+            <hr>
+            <div class="row mb-3">
+                <div class="offset-sm-0 col-sm-3">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                    <a class='btn btn-danger' href='/smedweb/anamnese/anamnese_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+
                 </div>
             </div>
         </form>
-        <hr>
-        <div class="row mb-3">
-            <div class="offset-sm-0 col-sm-3">
-                <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                <a class='btn btn-danger' href='/smedweb/anamnese/anamnese_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+    </div> <!-- fim do tab content -->
 
-            </div>
-        </div>
     </div>
 </body>
 
