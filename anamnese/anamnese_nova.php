@@ -3,6 +3,7 @@ include_once("../links.php");
 // Conexão
 require_once('../conexao.php');
 
+
 ?>
 
 <!--  html para nova anamnese  -->
@@ -26,31 +27,41 @@ require_once('../conexao.php');
         <div class='alert alert-info' role='alert'>
             <h5>Campos com (*) são obrigatórios</h5>
         </div>
-
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home">Dados Ocupacionais</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu1">Queixa Principal e História da Doença Atual (HDA)</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu2">Antecedentes Pessoais</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu3">Antecedentes Familiares</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu4">Interrogatório Sintomatológico (Revisão por Sistemas)</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu5">Exame Físico (A ser preenchido pelo médico)</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#menu6">Conduta e Parecer Médico</a>
-            </li>
-        </ul>
         <form method="post" action="anamnese_grava.php">
+            <!-- botões salvar e cancelar -->
+            <div class="row mb-3">
+                <div class="offset-sm-0 col-sm-3">
+                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
+                    <a class='btn btn-danger' href='/smedweb/anamnese/anamnese_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                </div>
+            </div>
+            <hr>
+            <!-- abas para os diferentes tópicos da anamnese -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#home">Dados Ocupacionais</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu1">Queixa Principal e História da Doença Atual (HDA)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu2">Antecedentes Pessoais</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu3">Antecedentes Familiares</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu4">Interrogatório Sintomatológico (Revisão por Sistemas)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu5">Exame Físico (A ser preenchido pelo médico)</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu6">Conduta e Parecer Médico</a>
+                </li>
+            </ul>
+            <!-- Conteúdo das abas -->
+
             <div class="tab-content">
                 <div id="home" class="tab-pane active"><br>
                     <h4>Dados Ocupacionais</h4>
@@ -81,7 +92,7 @@ require_once('../conexao.php');
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_jornada">Jornada de Trabalho: *</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-2">
                             <input type="text" class="form-control" id="c_jornada" name="c_jornada" required>
                         </div>
                     </div>
@@ -790,7 +801,7 @@ require_once('../conexao.php');
                         </div>
 
                     </div>
-                   
+
                 </div> <!-- fim do menu4 -->
 
                 <!-- menu5 -->
@@ -923,7 +934,6 @@ require_once('../conexao.php');
                                         </label>
                                         <!-- input para descrever as restrições -->
                                         <input type="text" class="form-control mt-2" id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
-                                        
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
@@ -938,17 +948,12 @@ require_once('../conexao.php');
 
 
                 </div> <!-- fim do tab content -->
-                <hr>
-                <div class="row mb-3">
-                    <div class="offset-sm-0 col-sm-3">
-                        <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                        <a class='btn btn-danger' href='/smedweb/anamnese/anamnese_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
-                    </div>
-                </div>
+
+
+            </div> <!-- fim do painel body -->
         </form>
-    </div> <!-- fim do container -->
 
-
+    </div> <!-- fim do container principal -->
 </body>
 
 </html>
