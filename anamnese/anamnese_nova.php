@@ -23,6 +23,15 @@ require_once('../conexao.php');
             <h5>Nova Anamnese<h5>
         </div>
     </div>
+    <?php
+        if (!empty($msg_erro)) {
+            echo "
+            <div class='alert alert-warning' role='alert'>
+                <h4>$msg_erro</h4>
+            </div>
+                ";
+        }
+        ?>
     <div class="container-fluid">
         <div class='alert alert-info' role='alert'>
             <h5>Campos com (*) são obrigatórios</h5>

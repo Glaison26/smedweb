@@ -12,7 +12,7 @@ require_once '../links.php';
     } else {
         $idpaciente = $_SESSION['id_paciente'];
     }
-
+$_SESSION['msg_erro'] = "";
 // monto a query para pegar dados da anamnese
 $c_sql = "SELECT * FROM anamnese WHERE id_paciente = $idpaciente";
 $result = $conection->query($c_sql);
