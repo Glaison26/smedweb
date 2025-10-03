@@ -24,18 +24,16 @@ require_once('../conexao.php');
         </div>
     </div>
     <?php
-        if (!empty($msg_erro)) {
-            echo "
+    if (!empty($msg_erro)) {
+        echo "
             <div class='alert alert-warning' role='alert'>
                 <h4>$msg_erro</h4>
             </div>
                 ";
-        }
-        ?>
+    }
+    ?>
     <div class="container-fluid">
-        <div class='alert alert-info' role='alert'>
-            <h5>Campos com (*) são obrigatórios</h5>
-        </div>
+
         <form method="post" action="anamnese_grava.php">
             <!-- botões salvar e cancelar -->
             <div class="row mb-3">
@@ -45,6 +43,9 @@ require_once('../conexao.php');
                 </div>
             </div>
             <hr>
+            <div class='alert alert-info' role='alert'>
+                <h5>Campos com (*) são obrigatórios</h5>
+            </div>
             <!-- abas para os diferentes tópicos da anamnese -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
