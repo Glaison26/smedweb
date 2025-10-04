@@ -409,7 +409,7 @@ require_once('../conexao.php');
                     <!-- input para medicamentos em uso text area livre -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_medicamentos_uso">Medicamentos em Uso: *</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <textarea class="form-control" id="c_medicamentos_uso" name="c_medicamentos_uso" rows="4" required></textarea>
                         </div>
                     </div>
@@ -443,13 +443,7 @@ require_once('../conexao.php');
                             <input type="number" class="form-control" id="c_tempo_tabagismo" name="c_tempo_tabagismo" min="0">
                         </div>
                     </div>
-                    <!-- quantidade de álcool por semana e tipo de bebida -->
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="c_alcool_semana">Quantidade de álcool por semana (em doses):</label>
-                        <div class="col-sm-1">
-                            <input type="number" class="form-control" id="c_alcool_semana" name="c_alcool_semana" min="0">
-                        </div>
-                    </div>
+                   
 
                     <div class="row mb-2">
                         <label class="col-sm-2 col-form-label" for="c_alcoolismo">Etilismo: *</label>
@@ -466,6 +460,14 @@ require_once('../conexao.php');
                                     </label>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!--quando sim, perguntar quantas doses por semana e há quanto tempo -->
+                     <!-- quantidade de álcool por semana e tipo de bebida -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_alcool_semana">Quantidade de álcool por semana (em doses):</label>
+                        <div class="col-sm-1">
+                            <input type="number" class="form-control" id="c_alcool_semana" name="c_alcool_semana" min="0">
                         </div>
                     </div>
                     <div class="row mb-2">
