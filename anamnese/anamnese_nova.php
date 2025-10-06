@@ -194,12 +194,12 @@ require_once('../conexao.php');
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
-                                    <label for="c_hipertencao">
-                                        <input type="radio" name="c_hipertencao" id="c_hipertencao_sim" value="Sim">
+                                    <label for="c_hipertensao">
+                                        <input type="radio" name="c_hipertensao" id="c_hipertensao_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
-                                    <label for="c_hipertencao">
-                                        <input type="radio" name="c_hipertencao" id="c_hipertencao_nao" value="Não">
+                                    <label for="c_hipertensao">
+                                        <input type="radio" name="c_hipertensao" id="c_hipertensao_nao" value="Não">
                                         <span>Não</span>
                                     </label>
                                 </div>
