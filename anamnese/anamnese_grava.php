@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // verifico se a query foi correto
     if ($result === TRUE) {
         // Redireciona para a página de sucesso
-        header("Location: anamnese_sucesso.php");
+        header("Location: anamnese_lista.php");
         exit();
     } else {
         // Exibe mensagem de erro
