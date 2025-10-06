@@ -14,7 +14,7 @@ require_once '../links.php';
     }
 $_SESSION['msg_erro'] = "";
 // monto a query para pegar dados da anamnese
-$c_sql = "SELECT * FROM anamnese WHERE id_paciente = $idpaciente";
+$c_sql = "SELECT * FROM anamnese WHERE id_paciente = $idpaciente order by data desc";
 $result = $conection->query($c_sql);
 if (!$result) {
     die("Erro ao Executar Sql !!" . $conection->connect_error);
@@ -116,22 +116,10 @@ $nomepaciente = $c_linha2['nome'];
             <tbody>
                 <?php
                 while ($c_linha = $result->fetch_assoc()) {
-                    if ($c_linha['motivo_consulta'] == '1') {
-                        $c_motivo = 'Admissional';
-                    } elseif ($c_linha['motivo_consulta'] == '2') {
-                        $c_motivo = 'Periódico';
-                    } elseif ($c_linha['motivo_consulta'] == '3') {
-                        $c_motivo = 'Demissional';
-                    } elseif ($c_linha['motivo_consulta'] == '4') {
-                        $c_motivo = 'Mudança de Função';
-                    } elseif ($c_linha['motivo_consulta'] == '5') {
-                        $c_motivo = 'Retorno ao Trabalho';
-                    } elseif ($c_linha['motivo_consulta'] == '6') {
-                        $c_motivo = 'Outros';
-                    }
+                    
                     echo "<tr>";
                     echo "<td>" . date('d/m/Y', strtotime($c_linha['data'])) . "</td>";
-                    echo "<td>" . $c_motivo . "</td>";
+                    echo "<td>" . $c_linha['motivo_consulta'] . "</td>";
                     echo "<td>
                                 <a class='btn btn-light btn-sm' title='Editar Anamnese' href='javascript:func()'onclick='editar($c_linha[id])'>
                                 <span class='glyphicon glyphicon-pencil'> Editar</span></a>

@@ -86,7 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erro ao gravar a anamnese: " . $conection->error;
     }
     // Fecha a conexão com o banco de dados
+    
     $conection->close();
-    header("Location: anamnese_lista.php");
-    exit();
 }

@@ -162,13 +162,13 @@ require_once('../conexao.php');
                         <label class="col-sm-2 col-form-label" for="c_motivo_consulta">Motivo da Consulta: *</label>
                         <div class="col-sm-3">
                             <select class="form-control form-control-lg" id="c_motivo_consulta" name="c_motivo_consulta" required>
-                                <option value="">Selecione</option>
-                                <option value="1">Admissional</option>
-                                <option value="2">Periódico</option>
-                                <option value="3">Demissional</option>
-                                <option value="4">Mudança de Função</option>
-                                <option value="5">Retorno ao Trabalho</option>
-                                <option value="6">Outros</option>
+                                <option>Selecione</option>
+                                <option>Admissional</option>
+                                <option>Periódico</option>
+                                <option>Demissional</option>
+                                <option>Mudança de Função</option>
+                                <option>Retorno ao Trabalho</option>
+                                <option>Outros</option>
                             </select>
                         </div>
                     </div>
