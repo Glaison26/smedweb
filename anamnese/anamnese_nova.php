@@ -118,7 +118,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Físico (Ruído, calor, frio, vibração, radiação)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="chk_fisico" id="chk_fisico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_fisico" id="c_fisico" value="Sim">
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Químico (Poeira, fumos, gases,vapores, produtos químicos)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="chk_fisico" id="chk_fisico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_quimico" id="c_quimico" value="Sim">
                             </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Biológico (Vírus, bactérias, fungos, parasitas)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="chk_fisico" id="chk_fisico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_biologico" id="c_biologico" value="Sim">
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="chk_fisico" id="chk_fisico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_ergonomico" id="c_ergonomico" value="Sim">
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Acidentes (Máquinas sem proteção, risco de quedas, eletricidade)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="chk_fisico" id="chk_fisico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_acidente" id="c_risco_acidente" value="Sim">
                             </div>
                         </div>
                     </div>
