@@ -78,8 +78,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_historia_doenca_atual = $_POST['c_hda'];
     // pego o valor selecionado do combo box de motivo de consulta
     $c_motivo_consulta = $_POST['c_motivo_consulta'];
-    // $c_outro_motivo = $_POST['c_outro_motivo
+    // uso de medicação
+    $c_uso_medicamentos = $_POST['c_medicamentos_uso'];
+    // tabagismo
+    $c_tabagismo = $_POST['c_tabagismo'];
+    // alcolismo
+    $c_alcolismo = $_POST['c_alcolismo'];
+    // atividade física
+    $c_atividade_fisica = $_POST['c_atividade_fisica'];
+
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
+
     if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada) ) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";
     }
@@ -97,12 +106,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_sql = "INSERT INTO anamnese (id_paciente, data, setor, funcao, admissao, atividades, jornada, descricao_atividades,
     risco_fisico, risco_quimico, risco_biologico, risco_ergonomico, risco_acidente, motivo_consulta, queixa_principal, hda,
     antecedente_hipertensao, antecedente_diabete, antecedente_cardiaco, antecedente_asma_bronquite, antecedente_renais, 
-    antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias) 
+    antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicacao_uso,
+     tabagismo, etilismo, atividade_fisica) 
             VALUES ('$id_paciente', '$d_data', '$c_setor', '$c_cargo', '$d_data_admissao', '$c_atividade', '$c_jornada', '$c_descricao_atividades',
             '$c_risco_fisico', '$c_risco_quimico', '$c_risco_biologico', '$c_risco_ergonomico', '$c_risco_acidente', '$c_motivo_consulta',
             '$c_queixa_principal', '$c_historia_doenca_atual', '$c_antecedente_hipertensao', '$c_antecedente_diabetes',
             '$c_antecedente_cardiovasculares', '$c_antecedente_asma_bronquite', '$c_doencas_renais', '$c_doencas_neurologicas',
-            '$c_disturbios_psiquiatricos', '$c_cancer', '$c_alergias', '$c_cirurgias_previas')";
+            '$c_disturbios_psiquiatricos', '$c_cancer', '$c_alergias', '$c_cirurgias_previas', '$c_uso_medicamentos',
+            '$c_tabagismo', '$c_alcolismo', '$c_atividade_fisica')";
     echo $c_sql;
     // Executa a query SQL        
     $result = $conection->query($c_sql);
