@@ -223,7 +223,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_hipertensao">
-                                        <input type="radio" name="c_hipertensao" id="c_hipertensao_nao" value="Não">
+                                        <input type="radio" name="c_hipertensao" id="c_hipertensao_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -244,7 +244,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_diabetes">
-                                        <input type="radio" name="c_diabetes" id="c_diabetes_nao" value="Não">
+                                        <input type="radio" name="c_diabetes" id="c_diabetes_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -266,7 +266,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_cardiovasculares">
-                                        <input type="radio" name="c_doencas_cardiovasculares" id="c_doencas_cardiovasculares_nao" value="Não">
+                                        <input type="radio" name="c_doencas_cardiovasculares" id="c_doencas_cardiovasculares_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -288,7 +288,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_asma_bronquite">
-                                        <input type="radio" name="c_asma_bronquite" id="c_asma_bronquite_nao" value="Não">
+                                        <input type="radio" name="c_asma_bronquite" id="c_asma_bronquite_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -310,7 +310,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_renais">
-                                        <input type="radio" name="c_doencas_renais" id="c_doencas_renais_nao" value="Não">
+                                        <input type="radio" name="c_doencas_renais" id="c_doencas_renais_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -331,7 +331,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_neurologicas">
-                                        <input type="radio" name="c_doencas_neurologicas" id="c_doencas_neurologicas_nao" value="Não">
+                                        <input type="radio" name="c_doencas_neurologicas" id="c_doencas_neurologicas_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -354,7 +354,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_disturbios_psiquiatricos">
-                                        <input type="radio" name="c_disturbios_psiquiatricos" id="c_disturbios_psiquiatricos_nao" value="Não">
+                                        <input type="radio" name="c_disturbios_psiquiatricos" id="c_disturbios_psiquiatricos_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -375,7 +375,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cancer">
-                                        <input type="radio" name="c_cancer" id="c_cancer_nao" value="Não">
+                                        <input type="radio" name="c_cancer" id="c_cancer_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -397,7 +397,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_alergias">
-                                        <input type="radio" name="c_alergias" id="c_alergias_nao" value="Não">
+                                        <input type="radio" name="c_alergias" id="c_alergias_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -419,7 +419,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cirurgias_previas">
-                                        <input type="radio" name="c_cirurgias_previas" id="c_cirurgias_previas_nao" value="Não">
+                                        <input type="radio" name="c_cirurgias_previas" id="c_cirurgias_previas_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -449,7 +449,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_tabagismo">
-                                        <input type="radio" name="c_tabagismo" id="c_tabagismo_nao" value="Não">
+                                        <input type="radio" name="c_tabagismo" id="c_tabagismo_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -479,7 +479,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_alcoolismo">
-                                        <input type="radio" name="c_alcoolismo" id="c_alcoolismo_nao" value="Não">
+                                        <input type="radio" name="c_alcoolismo" id="c_alcoolismo_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -504,7 +504,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_atividade_fisica">
-                                        <input type="radio" name="c_atividade_fisica" id="c_atividade_fisica_nao" value="Não">
+                                        <input type="radio" name="c_atividade_fisica" id="c_atividade_fisica_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -527,7 +527,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_hipertensao_familiar">
-                                        <input type="radio" name="c_hipertensao_familiar" id="c_hipertensao_familiar_nao" value="Não">
+                                        <input type="radio" name="c_hipertensao_familiar" id="c_hipertensao_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -549,7 +549,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_diabetes_familiar">
-                                        <input type="radio" name="c_diabetes_familiar" id="c_diabetes_familiar_nao" value="Não">
+                                        <input type="radio" name="c_diabetes_familiar" id="c_diabetes_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -571,7 +571,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_cardiovasculares_familiar">
-                                        <input type="radio" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_nao" value="Não">
+                                        <input type="radio" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -593,7 +593,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cancer_familiar">
-                                        <input type="radio" name="c_cancer_familiar" id="c_cancer_familiar_nao" value="Não">
+                                        <input type="radio" name="c_cancer_familiar" id="c_cancer_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -615,7 +615,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_outras_doencas_familiar">
-                                        <input type="radio" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_nao" value="Não">
+                                        <input type="radio" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -642,7 +642,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_geral">
-                                        <input type="radio" name="c_geral" id="c_geral_nao" value="Não">
+                                        <input type="radio" name="c_geral" id="c_geral_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -657,7 +657,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_pele">
-                                        <input type="radio" name="c_pele" id="c_pele_nao" value="Não">
+                                        <input type="radio" name="c_pele" id="c_pele_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -675,7 +675,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cabeca_pescoco">
-                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_nao" value="Não">
+                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -690,7 +690,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_olhos">
-                                        <input type="radio" name="c_olhos" id="c_olhos_nao" value="Não">
+                                        <input type="radio" name="c_olhos" id="c_olhos_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -698,7 +698,6 @@ require_once('../conexao.php');
                         </div>
 
                     </div>
-
                     <!-- input radio sim ou não ouvidos (Dor, zumbido, perda auditiva) -->
                     <div class="row mb-2">
                         <label class="col-sm-3 col-form-label" for="c_ouvidos">Ouvidos (Dor, zumbido, perda auditiva): *</label>
@@ -710,7 +709,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_ouvidos">
-                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_nao" value="Não">
+                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -725,7 +724,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_respiratorio">
-                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_nao" value="Não">
+                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -745,7 +744,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cardiovascular">
-                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_nao" value="Não">
+                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -760,7 +759,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_gastrointestinal">
-                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_nao" value="Não">
+                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -780,7 +779,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_genitourinario">
-                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_nao" value="Não">
+                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -795,7 +794,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_musculoesqueletico">
-                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_nao" value="Não">
+                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -814,7 +813,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_neurologico">
-                                        <input type="radio" name="c_neurologico" id="c_neurologico_nao" value="Não">
+                                        <input type="radio" name="c_neurologico" id="c_neurologico_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -829,7 +828,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_psiquiatrico">
-                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_nao" value="Não">
+                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
