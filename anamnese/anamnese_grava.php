@@ -137,6 +137,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_membros = $_POST['c_membros'];
     $c_coluna_vertebral = $_POST['c_coluna_vertebral'];
     $c_exame_neurologico = $_POST['c_exame_neurologico'];
+    // conduta e parecer do médico
+    $c_hipotese_diagnostica = $_POST['c_hipotese_diagnostica'];
+    $c_conduta = $_POST['c_conduta'];
+    $c_exames_complementares = $_POST['c_exames_complementares'];
+    // radio butons com parecer do médico Apto para a função, Apto com restrições ou Inapto
+    $c_parecer_medico = $_POST['c_parecer_medico'];
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
     if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada) ) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";

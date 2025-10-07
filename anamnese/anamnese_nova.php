@@ -166,7 +166,7 @@ require_once('../conexao.php');
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_uso_epi">
-                                        <input type="radio" name="c_uso_epi" id="c_uso_epi_nao" value="Não">
+                                        <input type="radio" name="c_uso_epi" id="c_uso_epi_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -964,15 +964,15 @@ require_once('../conexao.php');
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_apto_restricoes" value="Apto para a função com restrições">
+                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_apto_restricoes" value="0">
                                             <span>Apto para a função com restrições</span>
                                         </label>
                                         <!-- input para descrever as restrições -->
-                                        <input type="text" class="form-control mt-2" id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
+                                        <input type="text" class="form-control mt-2" id="c_restricoes" name="c_restricoes" value="1" placeholder="Descreva as restrições">
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_inapto" value="Inapto para a função">
+                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
                                             <span>Inapto para a função</span>
                                         </label>
                                     </div>
@@ -980,11 +980,7 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
-
-
                 </div> <!-- fim do tab content -->
-
-
             </div> <!-- fim do painel body -->
         </form>
 
