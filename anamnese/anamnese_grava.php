@@ -19,6 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_atividade = $_POST['c_atividade'];
     $c_jornada = $_POST['c_jornada'];
     $c_descricao_atividades = $_POST['c_descricao_atividades'];
+    // pego dados de uso de epis
+    // radio de uso de epis sim ou não
+    $c_uso_epis = $_POST['c_uso_epi'];
+    // qual epis usa
+    $c_quais_epis = $_POST['c_qual_epi'];
     // leitura do cheklist de riscos sendo (fisico, químico, biológico, ergonômico, acidente)
     // risco fisico
     if (isset($_POST['c_risco_fisico'])) {
@@ -82,10 +87,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_uso_medicamentos = $_POST['c_medicamentos_uso'];
     // tabagismo
     $c_tabagismo = $_POST['c_tabagismo'];
+    // quantidade de cigarros por dia
+    $c_qtd_cigarros_dia = $_POST['c_cigarros_dia'];
+    // tempo de tabagismo em anos   
+    $c_tempo_tabagismo_anos = $_POST['c_tempo_tabagismo'];
     // alcolismo
-    $c_alcolismo = $_POST['c_alcolismo'];
+    $c_alcoolismo = $_POST['c_alcoolismo'];
+    // quantidade de doses por semana
+    $c_qtd_doses_semana = $_POST['c_alcool_semana'];
     // atividade física
     $c_atividade_fisica = $_POST['c_atividade_fisica'];
+    // dados de antecedentes familiares capturados nos radios butons
+    // hipertensão arterial sim ou não
+    $c_familiar_hipertensao = $_POST['c_hipertensao_familiar'];
+    // diabetes sim ou não
+    $c_familiar_diabetes = $_POST['c_diabetes_familiar'];
+    // cardiopatia sim ou não
+    $c_familiar_cardiovasculares = $_POST['c_doencas_cardiovasculares_familiar'];
+    // cancer sim ou não
+    $c_familiar_cancer = $_POST['c_cancer_familiar'];
+    //outras doenças sim ou não
+    $c_familiar_outras_doencas = $_POST['c_outras_doencas_familiar'];
 
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
 
@@ -106,14 +128,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_sql = "INSERT INTO anamnese (id_paciente, data, setor, funcao, admissao, atividades, jornada, descricao_atividades,
     risco_fisico, risco_quimico, risco_biologico, risco_ergonomico, risco_acidente, motivo_consulta, queixa_principal, hda,
     antecedente_hipertensao, antecedente_diabete, antecedente_cardiaco, antecedente_asma_bronquite, antecedente_renais, 
-    antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicacao_uso,
-     tabagismo, etilismo, atividade_fisica) 
+    antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicamentos_uso,
+    habito_tabagismo, etilismo, atividade_fisica, tabagismo_qtd_dia, tabagismo_tempo, etilismo_frequencia, usa_epi, quais_epi,
+    familiar_hipertencao, familiar_diabetes, familiar_cardiaco, familiar_cancer, familiar_outros) 
             VALUES ('$id_paciente', '$d_data', '$c_setor', '$c_cargo', '$d_data_admissao', '$c_atividade', '$c_jornada', '$c_descricao_atividades',
             '$c_risco_fisico', '$c_risco_quimico', '$c_risco_biologico', '$c_risco_ergonomico', '$c_risco_acidente', '$c_motivo_consulta',
             '$c_queixa_principal', '$c_historia_doenca_atual', '$c_antecedente_hipertensao', '$c_antecedente_diabetes',
             '$c_antecedente_cardiovasculares', '$c_antecedente_asma_bronquite', '$c_doencas_renais', '$c_doencas_neurologicas',
             '$c_disturbios_psiquiatricos', '$c_cancer', '$c_alergias', '$c_cirurgias_previas', '$c_uso_medicamentos',
-            '$c_tabagismo', '$c_alcolismo', '$c_atividade_fisica')";
+            '$c_tabagismo', '$c_alcoolismo', '$c_atividade_fisica', '$c_qtd_cigarros_dia', '$c_tempo_tabagismo_anos', '$c_qtd_doses_semana'
+            , '$c_uso_epis', '$c_quais_epis', '$c_familiar_hipertensao', '$c_familiar_diabetes', '$c_familiar_cardiovasculares',
+            '$c_familiar_cancer', '$c_familiar_outras_doencas')";
     echo $c_sql;
     // Executa a query SQL        
     $result = $conection->query($c_sql);

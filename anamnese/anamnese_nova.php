@@ -154,6 +154,30 @@ require_once('../conexao.php');
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <!-- radio com sim ou não para uso de epi -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_uso_epi">Uso de EPI (Equipamento de Proteção Individual): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_uso_epi">
+                                        <input type="radio" name="c_uso_epi" id="c_uso_epi_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_uso_epi">
+                                        <input type="radio" name="c_uso_epi" id="c_uso_epi_nao" value="Não">
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Qual EPI utiliza -->
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="c_qual_epi" name="c_qual_epi" placeholder="Qual EPI utiliza?">
+                        </div>
+                    </div>
                 </div>
                 <div id="menu1" class="tab-pane fade"><br>
                     <h4>Queixa Principal e História da Doença Atual (HDA)</h4>
