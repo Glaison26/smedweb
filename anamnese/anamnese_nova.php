@@ -18,7 +18,7 @@ require_once('../conexao.php');
 
 <body>
     <script src="habilitar.js"></script>
-   
+
     <!-- painel com título -->
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -175,10 +175,10 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Qual EPI utiliza -->
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_qual_epi" disabled  name="c_qual_epi" placeholder="Qual EPI utiliza?">
+                            <input type="text" class="form-control" id="c_qual_epi" disabled name="c_qual_epi" placeholder="Qual EPI utiliza?">
                         </div>
                     </div>
                 </div>
@@ -448,11 +448,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_tabagismo">
-                                        <input type="radio" name="c_tabagismo" id="c_tabagismo_sim" value="Sim">
+                                        <input type="radio" name="c_tabagismo" onClick="habilitacao()" id="c_tabagismo_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_tabagismo">
-                                        <input type="radio" name="c_tabagismo" id="c_tabagismo_nao" value="Não" checked>
+                                        <input type="radio" name="c_tabagismo" onClick="habilitacao()" id="c_tabagismo_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -463,40 +463,39 @@ require_once('../conexao.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_cigarros_dia">Cigarros por dia:</label>
                         <div class="col-sm-1">
-                            <input type="number" class="form-control" id="c_cigarros_dia" name="c_cigarros_dia" min="0">
+                            <input type="number" class="form-control" id="c_cigarros_dia" name="c_cigarros_dia" min="0" disabled>
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_tempo_tabagismo">Há quanto tempo (anos):</label>
                         <div class="col-sm-1">
-                            <input type="number" class="form-control" id="c_tempo_tabagismo" name="c_tempo_tabagismo" min="0">
+                            <input type="number" class="form-control" id="c_tempo_tabagismo" name="c_tempo_tabagismo" min="0" disabled>
                         </div>
                     </div>
-                   
-
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_alcoolismo">Etilismo: *</label>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_alcoolismo">
-                                        <input type="radio" name="c_alcoolismo" id="c_alcoolismo_sim" value="Sim">
+                                        <input type="radio" name="c_alcoolismo" onClick="habilitacao()" id="c_alcoolismo_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_alcoolismo">
-                                        <input type="radio" name="c_alcoolismo" id="c_alcoolismo_nao" value="Não" checked>
+                                        <input type="radio" name="c_alcoolismo" onClick="habilitacao()" id="c_alcoolismo_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--quando sim, perguntar quantas doses por semana e há quanto tempo -->
-                     <!-- quantidade de álcool por semana e tipo de bebida -->
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="c_alcool_semana">Quantidade de álcool por semana (em doses):</label>
+                        <label class="col-sm-2 col-form-label" for="c_alcool_semana">Doses Semanais:</label>
                         <div class="col-sm-1">
-                            <input type="number" class="form-control" id="c_alcool_semana" name="c_alcool_semana" min="0">
+                            <input type="number" class="form-control" id="c_alcool_semana" name="c_alcool_semana" min="0" disabled>
                         </div>
                     </div>
+                    <!--quando sim, perguntar quantas doses por semana e há quanto tempo -->
+                    <!-- quantidade de álcool por semana e tipo de bebida -->
+
                     <div class="row mb-2">
                         <label class="col-sm-2 col-form-label" for="c_atividade_fisica">Atividade Física: *</label>
                         <div class="col-sm-2">
@@ -526,11 +525,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_hipertensao_familiar">
-                                        <input type="radio" name="c_hipertensao_familiar" id="c_hipertensao_familiar_sim" value="Sim">
+                                        <input type="radio" name="c_hipertensao_familiar" onClick="habilitacao()"  id="c_hipertensao_familiar_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_hipertensao_familiar">
-                                        <input type="radio" name="c_hipertensao_familiar" id="c_hipertensao_familiar_nao" value="Não" checked>
+                                        <input type="radio" name="c_hipertensao_familiar" onClick="habilitacao()" id="c_hipertensao_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -538,7 +537,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- input com parentesco da pessoa com a doença -->
                         <div class="col-sm-6 mt-2">
-                            <input type="text" class="form-control" id="c_hipertensao_familiar_parentesco" name="c_hipertensao_familiar_parentesco" placeholder="Parentesco">
+                            <input type="text" class="form-control" disabled id="c_hipertensao_familiar_parentesco" name="c_hipertensao_familiar_parentesco" placeholder="Parentesco">
                         </div>
                     </div>
                     <!-- Diabetes mellitus  -->
@@ -548,11 +547,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_diabetes_familiar">
-                                        <input type="radio" name="c_diabetes_familiar" id="c_diabetes_familiar_sim" value="Sim">
+                                        <input type="radio" name="c_diabetes_familiar" onClick="habilitacao()" id="c_diabetes_familiar_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_diabetes_familiar">
-                                        <input type="radio" name="c_diabetes_familiar" id="c_diabetes_familiar_nao" value="Não" checked>
+                                        <input type="radio" name="c_diabetes_familiar" onClick="habilitacao()" id="c_diabetes_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -560,7 +559,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- input com parentesco da pessoa com a doença -->
                         <div class="col-sm-6 mt-2">
-                            <input type="text" class="form-control" id="c_diabetes_familiar_parentesco" name="c_diabetes_familiar_parentesco" placeholder="Parentesco">
+                            <input type="text" class="form-control" disabled id="c_diabetes_familiar_parentesco" name="c_diabetes_familiar_parentesco" placeholder="Parentesco">
                         </div>
                     </div>
                     <!-- doenças cardiovasculares -->
@@ -570,11 +569,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_doencas_cardiovasculares_familiar">
-                                        <input type="radio" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_sim" value="Sim">
+                                        <input type="radio" onClick="habilitacao()" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_cardiovasculares_familiar">
-                                        <input type="radio" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_nao" value="Não" checked>
+                                        <input type="radio" onClick="habilitacao()" name="c_doencas_cardiovasculares_familiar" id="c_doencas_cardiovasculares_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -582,7 +581,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- input com parentesco da pessoa com a doença -->
                         <div class="col-sm-6 mt-2">
-                            <input type="text" class="form-control" id="c_doencas_cardiovasculares_familiar_parentesco" name="c_doencas_cardiovasculares_familiar_parentesco" placeholder="Parentesco">
+                            <input type="text" disabled class="form-control" id="c_doencas_cardiovasculares_familiar_parentesco" name="c_doencas_cardiovasculares_familiar_parentesco" placeholder="Parentesco">
                         </div>
                     </div>
                     <!-- Câncer -->
@@ -592,11 +591,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_cancer_familiar">
-                                        <input type="radio" name="c_cancer_familiar" id="c_cancer_familiar_sim" value="Sim">
+                                        <input type="radio" onClick="habilitacao()" name="c_cancer_familiar" id="c_cancer_familiar_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cancer_familiar">
-                                        <input type="radio" name="c_cancer_familiar" id="c_cancer_familiar_nao" value="Não" checked>
+                                        <input type="radio" onClick="habilitacao()" name="c_cancer_familiar" id="c_cancer_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -604,7 +603,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- input com parentesco da pessoa com a doença -->
                         <div class="col-sm-6 mt-2">
-                            <input type="text" class="form-control" id="c_cancer_familiar_parentesco" name="c_cancer_familiar_parentesco" placeholder="Parentesco">
+                            <input type="text" class="form-control" disabled id="c_cancer_familiar_parentesco" name="c_cancer_familiar_parentesco" placeholder="Parentesco">
                         </div>
                     </div>
                     <!--  input com radio sim ou não Outras doenças -->
@@ -614,11 +613,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_outras_doencas_familiar">
-                                        <input type="radio" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_sim" value="Sim">
+                                        <input type="radio" onClick="habilitacao()" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_outras_doencas_familiar">
-                                        <input type="radio" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_nao" value="Não" checked>
+                                        <input type="radio" onClick="habilitacao()" name="c_outras_doencas_familiar" id="c_outras_doencas_familiar_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -626,7 +625,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- input com parentesco da pessoa com a doença -->
                         <div class="col-sm-6 mt-2">
-                            <input type="text" class="form-control" id="c_outras_doencas_familiar_parentesco" name="c_outras_doencas_familiar_parentesco" placeholder="Parentesco">
+                            <input type="text" class="form-control" disabled id="c_outras_doencas_familiar_parentesco" name="c_outras_doencas_familiar_parentesco" placeholder="Parentesco">
                         </div>
                     </div>
 

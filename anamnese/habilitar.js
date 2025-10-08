@@ -34,6 +34,14 @@ function habilitacao() {
     // cirurgias previas
     var cirurgias_previas_sim = document.getElementById("c_cirurgias_previas_sim");
     var cirurgias_previas_obs = document.getElementById("c_cirurgias_previas_obs");
+    // tabagismo
+    var tabagismo_sim = document.getElementById("c_tabagismo_sim");
+    var cigarros_dia = document.getElementById("c_cigarros_dia");
+    var cigarros_tempo = document.getElementById("c_tempo_tabagismo");
+    // Etilismo
+    var alcoolismo_sim = document.getElementById("c_alcoolismo_sim");
+    var alcool_semana = document.getElementById("c_alcool_semana");
+   
     // limpando os campos de observação e desabilitando-os
 
     // verificando se o radio button "Sim" está selecionado para epi
@@ -123,5 +131,24 @@ function habilitacao() {
     } else {
         cirurgias_previas_obs.value = "";
         cirurgias_previas_obs.disabled = true;
+    }
+    // verificando se o radio button "sim" está selecionado para tabagismo
+    if (tabagismo_sim.checked) {
+        cigarros_dia.disabled = false;
+        cigarros_dia.focus();
+        cigarros_tempo.disabled = false;
+    } else {
+        cigarros_dia.disabled = true;
+        cigarros_tempo.disabled = true;
+        cigarros_dia.value = "";
+        cigarros_tempo.value = "";
+    }
+    // verificando se o radio button "sim" está selecionado para alcoolismo
+    if (alcoolismo_sim.checked){
+        alcool_semana.disabled = false;
+        alcool_semana.focus();
+    } else{
+        alcool_semana.disabled = true;
+        alcool_semana.value = "";
     }
 }
