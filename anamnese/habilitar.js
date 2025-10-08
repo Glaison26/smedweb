@@ -41,6 +41,12 @@ function habilitacao() {
     // Etilismo
     var alcoolismo_sim = document.getElementById("c_alcoolismo_sim");
     var alcool_semana = document.getElementById("c_alcool_semana");
+    // hipertensao familiar
+    var hipertensao_familiar_sim = document.getElementById("c_hipertensao_familiar_sim");
+    var hipertensao_familiar_parentesco = document.getElementById("c_hipertensao_familiar_parentesco");
+    // Diabetis Familiar
+    var diabetes_familiar_sim = document.getElementById("c_diabetes_familiar_sim");
+    var diabetes_familiar_parentesco = document.getElementById("c_diabetes_familiar_parentesco");
    
     // limpando os campos de observação e desabilitando-os
 
@@ -150,5 +156,21 @@ function habilitacao() {
     } else{
         alcool_semana.disabled = true;
         alcool_semana.value = "";
+    }
+    // verificando se o radio button "sim" está selecionado para hipertensao familiar parentesco
+    if (hipertensao_familiar_sim.checked){
+        hipertensao_familiar_parentesco.disabled = false;
+        hipertensao_familiar_parentesco.focus();
+    }else{
+        hipertensao_familiar_parentesco.disabled = true;
+        hipertensao_familiar_parentesco.value = "";
+    }
+    // vericando se o radio button "sim" está selecionado para diabetis familiar parentesco
+    if (diabetes_familiar_sim.checked){
+        diabetes_familiar_parentesco.disabled = false;
+        diabetes_familiar_parentesco.focus();
+    }else{
+        diabetes_familiar_parentesco.disabled = true;
+        diabetes_familiar_parentesco.value = "";
     }
 }
