@@ -107,7 +107,6 @@ $nomepaciente = $c_linha2['nome'];
         <table class="table table-striped table-bordered tabpacientes">
             <thead>
                 <tr>
-
                     <th>Data da Anamnese</th>
                     <th>Motivo da Consulta</th>
                     <th>Ações</th>

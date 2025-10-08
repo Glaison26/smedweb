@@ -17,6 +17,9 @@ require_once('../conexao.php');
 </head>
 
 <body>
+    <script src="habilitar.js"></script>
+   
+    <!-- painel com título -->
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
@@ -162,11 +165,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_uso_epi">
-                                        <input type="radio" name="c_uso_epi" id="c_uso_epi_sim" value="Sim">
+                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_uso_epi">
-                                        <input type="radio" name="c_uso_epi" id="c_uso_epi_nao" value="Não" checked>
+                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -175,7 +178,7 @@ require_once('../conexao.php');
                         
                         <!-- Qual EPI utiliza -->
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_qual_epi" name="c_qual_epi" placeholder="Qual EPI utiliza?">
+                            <input type="text" class="form-control" id="c_qual_epi" disabled  name="c_qual_epi" placeholder="Qual EPI utiliza?">
                         </div>
                     </div>
                 </div>
@@ -219,11 +222,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_hipertensao">
-                                        <input type="radio" name="c_hipertensao" id="c_hipertensao_sim" value="Sim">
+                                        <input type="radio" name="c_hipertensao" onClick="habilitacao()" id="c_hipertensao_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_hipertensao">
-                                        <input type="radio" name="c_hipertensao" id="c_hipertensao_nao" value="Não" checked>
+                                        <input type="radio" name="c_hipertensao" onClick="habilitacao()" id="c_hipertensao_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -231,7 +234,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para hipertensão -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_hipertensao_obs" name="c_hipertensao_obs" placeholder="Observações">
+                            <input type="text" class="form-control" id="c_hipertensao_obs" name="c_hipertensao_obs" placeholder="Observações" disabled>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -240,11 +243,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_diabetes">
-                                        <input type="radio" name="c_diabetes" id="c_diabetes_sim" value="Sim">
+                                        <input type="radio" name="c_diabetes" onClick="habilitacao()" id="c_diabetes_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_diabetes">
-                                        <input type="radio" name="c_diabetes" id="c_diabetes_nao" value="Não" checked>
+                                        <input type="radio" name="c_diabetes" onClick="habilitacao()" id="c_diabetes_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -252,7 +255,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para diabetes -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_diabetes_obs" name="c_diabetes_obs" placeholder="Observações">
+                            <input type="text" class="form-control" id="c_diabetes_obs" name="c_diabetes_obs" disabled placeholder="Observações">
                         </div>
                     </div>
                     <!-- doenças cardiovasculares -->
@@ -262,11 +265,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_doencas_cardiovasculares">
-                                        <input type="radio" name="c_doencas_cardiovasculares" id="c_doencas_cardiovasculares_sim" value="Sim">
+                                        <input type="radio" name="c_doencas_cardiovasculares" onClick="habilitacao()" id="c_doencas_cardiovasculares_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_cardiovasculares">
-                                        <input type="radio" name="c_doencas_cardiovasculares" id="c_doencas_cardiovasculares_nao" value="Não" checked>
+                                        <input type="radio" name="c_doencas_cardiovasculares" onClick="habilitacao()" id="c_doencas_cardiovasculares_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -274,7 +277,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para doenças cardiovasculares -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_doencas_cardiovasculares_obs" name="c_doencas_cardiovasculares_obs" placeholder="Observações">
+                            <input type="text" class="form-control" id="c_doencas_cardiovasculares_obs" disabled name="c_doencas_cardiovasculares_obs" placeholder="Observações">
                         </div>
                     </div>
                     <!-- Doenças Respiratórias -->
@@ -284,11 +287,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_asma_bronquite">
-                                        <input type="radio" name="c_asma_bronquite" id="c_asma_bronquite_sim" value="Sim">
+                                        <input type="radio" name="c_asma_bronquite" onClick="habilitacao()" id="c_asma_bronquite_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_asma_bronquite">
-                                        <input type="radio" name="c_asma_bronquite" id="c_asma_bronquite_nao" value="Não" checked>
+                                        <input type="radio" name="c_asma_bronquite" onClick="habilitacao()" id="c_asma_bronquite_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -296,7 +299,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para asma/bronquite -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_asma_bronquite_obs" name="c_asma_bronquite_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_asma_bronquite_obs" name="c_asma_bronquite_obs" placeholder="Observações">
                         </div>
                     </div>
                     <!-- Doenças Renais -->
@@ -306,11 +309,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check  ">
                                     <label for="c_doencas_renais">
-                                        <input type="radio" name="c_doencas_renais" id="c_doencas_renais_sim" value="Sim">
+                                        <input type="radio" name="c_doencas_renais" onClick="habilitacao()" id="c_doencas_renais_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_renais">
-                                        <input type="radio" name="c_doencas_renais" id="c_doencas_renais_nao" value="Não" checked>
+                                        <input type="radio" name="c_doencas_renais" onClick="habilitacao()" id="c_doencas_renais_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -318,7 +321,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para doenças renais -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_doencas_renais_obs" name="c_doencas_renais_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_doencas_renais_obs" name="c_doencas_renais_obs" placeholder="Observações">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -327,11 +330,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_doencas_neurologicas">
-                                        <input type="radio" name="c_doencas_neurologicas" id="c_doencas_neurologicas_sim" value="Sim">
+                                        <input type="radio" name="c_doencas_neurologicas" onClick="habilitacao()" id="c_doencas_neurologicas_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_doencas_neurologicas">
-                                        <input type="radio" name="c_doencas_neurologicas" id="c_doencas_neurologicas_nao" value="Não" checked>
+                                        <input type="radio" name="c_doencas_neurologicas" onClick="habilitacao()" id="c_doencas_neurologicas_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -339,7 +342,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para doenças neurológicas -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_doencas_neurologicas_obs" name="c_doencas_neurologicas_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_doencas_neurologicas_obs" name="c_doencas_neurologicas_obs" placeholder="Observações">
                         </div>
 
                     </div>
@@ -350,11 +353,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_disturbios_psiquiatricos">
-                                        <input type="radio" name="c_disturbios_psiquiatricos" id="c_disturbios_psiquiatricos_sim" value="Sim">
+                                        <input type="radio" name="c_disturbios_psiquiatricos" onClick="habilitacao()" id="c_disturbios_psiquiatricos_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_disturbios_psiquiatricos">
-                                        <input type="radio" name="c_disturbios_psiquiatricos" id="c_disturbios_psiquiatricos_nao" value="Não" checked>
+                                        <input type="radio" name="c_disturbios_psiquiatricos" onClick="habilitacao()" id="c_disturbios_psiquiatricos_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -362,7 +365,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para disturbios psiquiátricas -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_disturbios_psiquiatricos_obs" name="c_disturbios_psiquiatricos_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_disturbios_psiquiatricos_obs" name="c_disturbios_psiquiatricos_obs" placeholder="Observações">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -371,11 +374,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_cancer">
-                                        <input type="radio" name="c_cancer" id="c_cancer_sim" value="Sim">
+                                        <input type="radio" name="c_cancer" onClick="habilitacao()" id="c_cancer_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cancer">
-                                        <input type="radio" name="c_cancer" id="c_cancer_nao" value="Não" checked>
+                                        <input type="radio" name="c_cancer" onClick="habilitacao()" id="c_cancer_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -383,7 +386,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para câncer -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_cancer_obs" name="c_cancer_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_cancer_obs" name="c_cancer_obs" placeholder="Observações">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -393,11 +396,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_alergias">
-                                        <input type="radio" name="c_alergias" id="c_alergias_sim" value="Sim">
+                                        <input type="radio" name="c_alergias" onClick="habilitacao()" id="c_alergias_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_alergias">
-                                        <input type="radio" name="c_alergias" id="c_alergias_nao" value="Não" checked>
+                                        <input type="radio" name="c_alergias" onClick="habilitacao()" id="c_alergias_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -405,7 +408,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para alergias -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_alergias_obs" name="c_alergias_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_alergias_obs" name="c_alergias_obs" placeholder="Observações">
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -415,11 +418,11 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_cirurgias_previas">
-                                        <input type="radio" name="c_cirurgias_previas" id="c_cirurgias_previas_sim" value="Sim">
+                                        <input type="radio" name="c_cirurgias_previas" onClick="habilitacao()" id="c_cirurgias_previas_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cirurgias_previas">
-                                        <input type="radio" name="c_cirurgias_previas" id="c_cirurgias_previas_nao" value="Não" checked>
+                                        <input type="radio" name="c_cirurgias_previas" onClick="habilitacao()" id="c_cirurgias_previas_nao" value="Não" checked>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -427,7 +430,7 @@ require_once('../conexao.php');
                         </div>
                         <!-- campo de observação para cirurgias prévias -->
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="c_cirurgias_previas_obs" name="c_cirurgias_previas_obs" placeholder="Observações">
+                            <input type="text" class="form-control" disabled id="c_cirurgias_previas_obs" name="c_cirurgias_previas_obs" placeholder="Observações">
                         </div>
                     </div>
                     <!-- input para medicamentos em uso text area livre -->
