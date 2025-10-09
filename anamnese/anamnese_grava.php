@@ -8,6 +8,7 @@ if (!isset($_SESSION['newsession'])) {
 // Inclui o arquivo de conexão com o banco de dados
 include_once("../conexao.php");
 $msg_erro = "";
+// declaro variáveis com valores padrões
 // Verifica se o formulário foi submetido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Coleta os dados do formulário
@@ -38,13 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $c_risco_quimico = 'N';
     }
     // risco biológico
-    if (isset($_POST['c_risco_biologico']) ) {
+    if (isset($_POST['c_risco_biologico'])) {
         $c_risco_biologico = 'S';
     } else {
         $c_risco_biologico = 'N';
-    }   
+    }
     // risco ergonômico
-    if (isset($_POST['c_risco_ergonomico']) ) {
+    if (isset($_POST['c_risco_ergonomico'])) {
         $c_risco_ergonomico = 'S';
     } else {
         $c_risco_ergonomico = 'N';
@@ -76,8 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_alergias = $_POST['c_alergias'];
     // cirurgias sim ou não
     $c_cirurgias_previas = $_POST['c_cirurgias_previas'];
-   
-
     // pego os dados do motivo da consulta
     $c_queixa_principal = $_POST['c_queixa_principal'];
     $c_historia_doenca_atual = $_POST['c_hda'];
@@ -88,9 +87,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // tabagismo
     $c_tabagismo = $_POST['c_tabagismo'];
     // quantidade de cigarros por dia
-    $c_qtd_cigarros_dia = $_POST['c_cigarros_dia'];
-    // tempo de tabagismo em anos   
-    $c_tempo_tabagismo_anos = $_POST['c_tempo_tabagismo'];
+    // verifico se a quantidade de cigarros é numérica
+    if (is_numeric($_POST['c_cigarros_dia'])) {
+        $c_qtd_cigarros_dia = $_POST['c_cigarros_dia'];
+    } else {
+        $c_qtd_cigarros_dia = 0;
+    }
+
+    // tempo de tabagismo em anos  
+    // verifico se tempo de tabagismo é numerico
+    if (is_numeric($_POST['c_tempo_tabagismo'])) {
+        $c_tempo_tabagismo_anos = $_POST['c_tempo_tabagismo'];
+    } else {
+        $c_tempo_tabagismo_anos = 0;
+    }
     // alcolismo
     $c_alcoolismo = $_POST['c_alcoolismo'];
     // quantidade de doses por semana
@@ -125,11 +135,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // pego dados do exame físico
     // rotina de validação dos dados recebidos
     $c_pressao_arterial = $_POST['c_pressao_arterial'];
-    $c_frequencia_cardiaca = $_POST['c_frequencia_cardiaca'];
-    $c_frequencia_respiratoria = $_POST['c_frequencia_respiratoria'];
-    $c_peso = $_POST['c_peso'];
-    $c_altura = $_POST['c_altura'];
-    $c_imc = $_POST['c_imc'];
+    // verifico se o valor da frequencia cardiaca é numerico
+    if ((is_numeric($_POST['c_pressao_arterial']))) {
+        $c_frequencia_cardiaca = $_POST['c_frequencia_cardiaca'];
+    } else {
+        $c_frequencia_cardiaca  = 0;
+    }
+    // verifico se o valor da frequencia respiratória é numerico
+    if (is_numeric($_POST['c_frequencia_respiratoria'])) {
+        $c_frequencia_respiratoria = $_POST['c_frequencia_respiratoria'];
+    } else {
+        $c_frequencia_respiratoria = 0;
+    }
+    // verifico se o valor do peso é numerico
+    if (is_numeric($_POST['c_frequencia_respiratoria'])) {
+        $c_peso = $_POST['c_peso'];
+    } else {
+        $c_peso = 0;
+    }
+    // verifico se o valor de altura é numérico
+    if (is_numeric($_POST['c_altura'])) {
+        $c_altura = $_POST['c_altura'];
+    } else {
+        $c_altura = 0;
+    }
+    // verifico se o valor de imc é numérico
+    if (is_numeric($_POST['c_imc'])) {
+        $c_imc = $_POST['c_imc'];
+    } else {
+        $c_imc = 0;
+    }
+
     $c_ecotoscopia = $_POST['c_ectoscopia'];
     $c_aparelho_respiratorio = $_POST['c_aparelho_respiratorio'];
     $c_aparelho_cardiovascular = $_POST['c_aparelho_cardiovascular'];
@@ -143,14 +179,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_exames_complementares = $_POST['c_exames_complementares'];
     // radio butons com parecer do médico Apto para a função, Apto com restrições ou Inapto
     $c_parecer_medico = $_POST['c_parecer_medico'];
+    // antecedentes pessoais com as observações
+    $c_antecedente_hipertencao_obs = $_POST['c_hipertensao_obs'];
+    $c_antecedente_diabetes_obs = $_POST['c_diabetes_obs'];
+    $c_antecedente_cardiovasculares_obs = $_POST['c_doencas_cardiovasculares_obs'];
+    $c_antecedente_asma_bronquite_obs = $_POST['c_asma_bronquite_obs'];
+    $c_antecedente_doencas_renais_obs = $_POST['c_doencas_renais_obs'];
+    $c_antecedente_doencas_neurologicas_obs = $_POST['c_doencas_neurologicas_obs'];
+    $c_antecedente_disturbios_psiquiatricos_obs = $_POST['c_disturbios_psiquiatricos_obs'];
+    $c_antecedentes_cancer_obs = $_POST['c_cancer_obs'];
+    $c_antecedentes_alergias_obs = $_POST['c_alergias_obs'];
+    $c_antecedentes_cirurgias_previa_obs = $_POST['c_cirurgias_previas_obs'];
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
-    if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada) ) {
+    if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada)) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";
     }
     if (strtotime($d_data_admissao) > strtotime(date('Y-m-d'))) {
         $msg_erro = "A data de admissão não pode ser no futuro.";
     }
-    if  ($c_motivo_consulta == "Selecione") {
+    if ($c_motivo_consulta == "Selecione") {
         $msg_erro = "Por favor, selecione o motivo da consulta.";
     }
     if (!empty($msg_erro)) {
@@ -167,7 +214,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     stm_geral, stm_pele, stm_cabeca_pescoso, stm_olhos, stm_ouvidos, stm_respiratorio, stm_cardiovascular,
     stm_gastro, stm_geniturario, stm_musculo_esqueletico, stm_neurologico, stm_pisiquico, exame_pa, exame_fc, exame_fr, exame_peso,
     exame_altura, exame_imc, exame_ectoscopia, exame_aparelho_respiratorio, exame_aparelho_cardio, exame_abdome,
-    exame_membros, exame_coluna, exame_neurologico) 
+    exame_membros, exame_coluna, exame_neurologico,
+    obs_hipertensao, obs_diabete, obs_cardiaco, obs_asma_bronquite, obs_renais, obs_neurologia, obs_psiquiatrico, obs_cancer,
+    obs_alergia, obs_cirurgia )
             VALUES ('$id_paciente', '$d_data', '$c_setor', '$c_cargo', '$d_data_admissao', '$c_atividade', '$c_jornada', '$c_descricao_atividades',
             '$c_risco_fisico', '$c_risco_quimico', '$c_risco_biologico', '$c_risco_ergonomico', '$c_risco_acidente', '$c_motivo_consulta',
             '$c_queixa_principal', '$c_historia_doenca_atual', '$c_antecedente_hipertensao', '$c_antecedente_diabetes',
@@ -179,7 +228,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             '$c_respiratorio', '$c_cardiovascular', '$c_gastrointestinal', '$c_genitourinario', '$c_musculo_esqueletico', 
             '$c_neurologico', '$c_psiquiatrico', '$c_pressao_arterial', '$c_frequencia_cardiaca', '$c_frequencia_respiratoria', '$c_peso',
             '$c_altura', '$c_imc', '$c_ecotoscopia', '$c_aparelho_respiratorio', '$c_aparelho_cardiovascular', '$c_aparelho_abdome',
-            '$c_membros', '$c_coluna_vertebral', '$c_exame_neurologico')";
+            '$c_membros', '$c_coluna_vertebral', '$c_exame_neurologico',
+            '$c_antecedente_hipertencao_obs', '$c_antecedente_diabetes_obs','$c_antecedente_cardiovasculares_obs',
+            '$c_antecedente_asma_bronquite_obs','$c_antecedente_doencas_renais_obs', '$c_antecedente_doencas_neurologicas_obs',
+            '$c_antecedente_disturbios_psiquiatricos_obs', '$c_antecedentes_cancer_obs', '$$c_antecedentes_alergias_obs', 
+            '$c_antecedentes_cirurgias_previa_obs')";
     echo $c_sql;
     // Executa a query SQL        
     $result = $conection->query($c_sql);
@@ -193,6 +246,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erro ao gravar a anamnese: " . $conection->error;
     }
     // Fecha a conexão com o banco de dados
-    
+
     $conection->close();
 }

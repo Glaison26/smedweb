@@ -208,7 +208,7 @@ require_once('../conexao.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_hda">História da Doença Atual (HDA): *</label>
                         <div class="col-sm-7">
-                            <textarea class="form-control" id="c_hda" name="c_hda" rows="8" required></textarea>
+                            <textarea class="form-control" id="c_hda" name="c_hda" rows="15" required></textarea>
                         </div>
                     </div>
                 </div>
