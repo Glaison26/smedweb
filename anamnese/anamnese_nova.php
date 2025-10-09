@@ -767,7 +767,6 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- input radio sim ou não Genitourinário (Dor ao urinar, sangue na urina, incontinência) -->
@@ -836,9 +835,7 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div> <!-- fim do menu4 -->
 
                 <!-- menu5 -->
@@ -960,21 +957,21 @@ require_once('../conexao.php');
                                 <div class="form-check">
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_apto" value="Apto para a função">
+                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto" value="Apto para a função" checked>
                                             <span>Apto para a função</span>
                                         </label>
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_apto_restricoes" value="0">
+                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto_restricoes" value="0">
                                             <span>Apto para a função com restrições</span>
                                         </label>
                                         <!-- input para descrever as restrições -->
-                                        <input type="text" class="form-control mt-2" id="c_restricoes" name="c_restricoes" value="1" placeholder="Descreva as restrições">
+                                        <input type="text" class="form-control mt-2" disabled id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
+                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
                                             <span>Inapto para a função</span>
                                         </label>
                                     </div>

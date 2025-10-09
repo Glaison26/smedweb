@@ -47,6 +47,18 @@ function habilitacao() {
     // Diabetis Familiar
     var diabetes_familiar_sim = document.getElementById("c_diabetes_familiar_sim");
     var diabetes_familiar_parentesco = document.getElementById("c_diabetes_familiar_parentesco");
+    // doencas cardiovasculares
+    var doencas_cardiovasculares_familiar_sim = document.getElementById("c_doencas_cardiovasculares_familiar_sim");
+    var doencas_cardiovasculares_familiar_parentesco = document.getElementById("c_doencas_cardiovasculares_familiar_parentesco");
+    // cancer 
+    var cancer_familiar_sim = document.getElementById("c_cancer_familiar_sim");
+    var cancer_familiar_parentesco = document.getElementById("c_cancer_familiar_parentesco");
+    // outras doenças
+    var outras_doencas_familiar_sim = document.getElementById("c_outras_doencas_familiar_sim");
+    var outras_doencas_familiar_parentesco = document.getElementById("c_outras_doencas_familiar_parentesco");
+    // parecer médico
+    var parecer_medico_apto_restricoes = document.getElementById("c_parecer_medico_apto_restricoes");
+    var restricoes = document.getElementById("c_restricoes");
    
     // limpando os campos de observação e desabilitando-os
 
@@ -150,7 +162,7 @@ function habilitacao() {
         cigarros_tempo.value = "";
     }
     // verificando se o radio button "sim" está selecionado para alcoolismo
-    if (alcoolismo_sim.checked){
+    if (alcoolismo_sim.checked) {
         alcool_semana.disabled = false;
         alcool_semana.focus();
     } else{
@@ -158,19 +170,52 @@ function habilitacao() {
         alcool_semana.value = "";
     }
     // verificando se o radio button "sim" está selecionado para hipertensao familiar parentesco
-    if (hipertensao_familiar_sim.checked){
+    if (hipertensao_familiar_sim.checked) {
         hipertensao_familiar_parentesco.disabled = false;
         hipertensao_familiar_parentesco.focus();
-    }else{
+    }else {
         hipertensao_familiar_parentesco.disabled = true;
         hipertensao_familiar_parentesco.value = "";
     }
-    // vericando se o radio button "sim" está selecionado para diabetis familiar parentesco
-    if (diabetes_familiar_sim.checked){
+    // verificando se o radio button "sim" está selecionado para diabetis familiar parentesco
+    if (diabetes_familiar_sim.checked) {
         diabetes_familiar_parentesco.disabled = false;
         diabetes_familiar_parentesco.focus();
-    }else{
+    }else {
         diabetes_familiar_parentesco.disabled = true;
         diabetes_familiar_parentesco.value = "";
     }
+    // verificando se o radio button "sim" está selecionado para doenças cardiovasculares parentesco
+    if (doencas_cardiovasculares_familiar_sim.checked) {
+        doencas_cardiovasculares_familiar_parentesco.disabled = false;
+        doencas_cardiovasculares_familiar_parentesco.focus();
+    } else {
+        doencas_cardiovasculares_familiar_parentesco.disabled = true;
+        doencas_cardiovasculares_familiar_parentesco.value = "";
+    }
+    // verificando se o radio button "sim" está selecionado para Cancer parentesco
+    if (cancer_familiar_sim.checked) {
+        cancer_familiar_parentesco.disabled = false;
+        cancer_familiar_parentesco.focus();
+    } else {
+        cancer_familiar_parentesco.disabled = true;
+        cancer_familiar_parentesco.value = "";
+    }
+    // verificando se o radio button "sim" está selecionado para outras doenças parentesco
+    if (outras_doencas_familiar_sim.checked) {
+        outras_doencas_familiar_parentesco.disabled = false;
+        outras_doencas_familiar_parentesco.focus();
+    } else {
+        outras_doencas_familiar_parentesco.disabled = true;
+        outras_doencas_familiar_parentesco.value = "";
+    }
+    // verificando se o radio button do parecer está marcado com restrições
+    if (parecer_medico_apto_restricoes.checked) {
+        restricoes.disabled = false;
+        restricoes.focus();
+    } else {
+        restricoes.disabled = true;
+        restricoes.value = "";
+    }
+
 }
