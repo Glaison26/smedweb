@@ -206,7 +206,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Prepara a query SQL para inserção dos dados
     $c_sql = "INSERT INTO anamnese (id_paciente, data, setor, funcao, admissao, atividades, jornada, descricao_atividades,
-    risco_fisico, risco_quimico, risco_biologico, risco_ergonomico, risco_acidente, motivo_consulta, queixa_principal, hda,
+    risco_fisico, risco_quimico, risco_biologico, risco_ergonomico, risco_acidentes, motivo_consulta, queixa_principal, hda,
     antecedente_hipertensao, antecedente_diabete, antecedente_cardiaco, antecedente_asma_bronquite, antecedente_renais, 
     antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicamentos_uso,
     habito_tabagismo, etilismo, atividade_fisica, tabagismo_qtd_dia, tabagismo_tempo, etilismo_frequencia, usa_epi, quais_epi,
