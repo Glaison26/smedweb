@@ -93,7 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $c_qtd_cigarros_dia = 0;
     }
-
     // tempo de tabagismo em anos  
     // verifico se tempo de tabagismo é numerico
     if (is_numeric($_POST['c_tempo_tabagismo'])) {

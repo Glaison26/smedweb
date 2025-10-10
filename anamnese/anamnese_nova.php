@@ -470,6 +470,7 @@ require_once('../conexao.php');
                             <input type="number" class="form-control" id="c_tempo_tabagismo" name="c_tempo_tabagismo" min="0" disabled>
                         </div>
                     </div>
+                    <hr>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_alcoolismo">Etilismo: *</label>
                         <div class="col-sm-2">
@@ -495,7 +496,7 @@ require_once('../conexao.php');
                     </div>
                     <!--quando sim, perguntar quantas doses por semana e há quanto tempo -->
                     <!-- quantidade de álcool por semana e tipo de bebida -->
-
+                    <hr>
                     <div class="row mb-2">
                         <label class="col-sm-2 col-form-label" for="c_atividade_fisica">Atividade Física: *</label>
                         <div class="col-sm-2">
@@ -512,6 +513,18 @@ require_once('../conexao.php');
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                   
+                    <div class="row mb-2">
+                        <label class="col-sm-2 col-form-label" for="c_qual_atividade">Quais ?</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="c_qual_atividade" name="c_qual_atividade" disabled>
+                        </div>
+                        <label class="col-sm-1 col-form-label" for="c_frequencia_atividade">Frequência</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" id="c_frequencia_atividade" name="c_frequencia_atividade" disabled>
+                        </div>
                     </div>
                 </div> <!-- fim do menu2 -->
                 <div id="menu3" class="tab-pane fade"><br>
@@ -525,7 +538,7 @@ require_once('../conexao.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_hipertensao_familiar">
-                                        <input type="radio" name="c_hipertensao_familiar" onClick="habilitacao()"  id="c_hipertensao_familiar_sim" value="Sim">
+                                        <input type="radio" name="c_hipertensao_familiar" onClick="habilitacao()" id="c_hipertensao_familiar_sim" value="Sim">
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_hipertensao_familiar">
