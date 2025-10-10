@@ -106,6 +106,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_qtd_doses_semana = $_POST['c_alcool_semana'];
     // atividade física
     $c_atividade_fisica = $_POST['c_atividade_fisica'];
+    $c_quais_atividades_fisicas = $_POST["c_qual_atividade"];
+    $c_frequencia_atividade_fisica = $_POST["c_frequencia_atividade"];
     // dados de antecedentes familiares capturados nos radios butons
     // hipertensão arterial sim ou não
     $c_familiar_hipertensao = $_POST['c_hipertensao_familiar'];
@@ -164,7 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $c_imc = 0;
     }
-
     $c_ecotoscopia = $_POST['c_ectoscopia'];
     $c_aparelho_respiratorio = $_POST['c_aparelho_respiratorio'];
     $c_aparelho_cardiovascular = $_POST['c_aparelho_cardiovascular'];
@@ -208,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     risco_fisico, risco_quimico, risco_biologico, risco_ergonomico, risco_acidentes, motivo_consulta, queixa_principal, hda,
     antecedente_hipertensao, antecedente_diabete, antecedente_cardiaco, antecedente_asma_bronquite, antecedente_renais, 
     antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicamentos_uso,
-    habito_tabagismo, etilismo, atividade_fisica, tabagismo_qtd_dia, tabagismo_tempo, etilismo_frequencia, usa_epi, quais_epi,
+    habito_tabagismo, etilismo, atividade_fisica, atividade_fisica_qual, atividade_fisica_frequencia, tabagismo_qtd_dia, tabagismo_tempo, etilismo_frequencia, usa_epi, quais_epi,
     familiar_hipertencao, familiar_diabetes, familiar_cardiaco, familiar_cancer, familiar_outros,
     stm_geral, stm_pele, stm_cabeca_pescoso, stm_olhos, stm_ouvidos, stm_respiratorio, stm_cardiovascular,
     stm_gastro, stm_geniturario, stm_musculo_esqueletico, stm_neurologico, stm_pisiquico, exame_pa, exame_fc, exame_fr, exame_peso,
@@ -221,7 +222,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             '$c_queixa_principal', '$c_historia_doenca_atual', '$c_antecedente_hipertensao', '$c_antecedente_diabetes',
             '$c_antecedente_cardiovasculares', '$c_antecedente_asma_bronquite', '$c_doencas_renais', '$c_doencas_neurologicas',
             '$c_disturbios_psiquiatricos', '$c_cancer', '$c_alergias', '$c_cirurgias_previas', '$c_uso_medicamentos',
-            '$c_tabagismo', '$c_alcoolismo', '$c_atividade_fisica', '$c_qtd_cigarros_dia', '$c_tempo_tabagismo_anos', '$c_qtd_doses_semana'
+            '$c_tabagismo', '$c_alcoolismo', '$c_atividade_fisica', '$c_quais_atividades_fisicas', '$c_frequencia_atividade_fisica',
+             '$c_qtd_cigarros_dia', '$c_tempo_tabagismo_anos', '$c_qtd_doses_semana'
             , '$c_uso_epi', '$c_quais_epi', '$c_familiar_hipertensao', '$c_familiar_diabetes', '$c_familiar_cardiovasculares',
             '$c_familiar_cancer', '$c_familiar_outras_doencas', '$c_geral', '$c_pele', '$c_cabeca_pescoco', '$c_olhos', '$c_ouvidos',
             '$c_respiratorio', '$c_cardiovascular', '$c_gastrointestinal', '$c_genitourinario', '$c_musculo_esqueletico', 
@@ -230,7 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             '$c_membros', '$c_coluna_vertebral', '$c_exame_neurologico',
             '$c_antecedente_hipertencao_obs', '$c_antecedente_diabetes_obs','$c_antecedente_cardiovasculares_obs',
             '$c_antecedente_asma_bronquite_obs','$c_antecedente_doencas_renais_obs', '$c_antecedente_doencas_neurologicas_obs',
-            '$c_antecedente_disturbios_psiquiatricos_obs', '$c_antecedentes_cancer_obs', '$$c_antecedentes_alergias_obs', 
+            '$c_antecedente_disturbios_psiquiatricos_obs', '$c_antecedentes_cancer_obs', '$c_antecedentes_alergias_obs', 
             '$c_antecedentes_cirurgias_previa_obs')";
     echo $c_sql;
     // Executa a query SQL        

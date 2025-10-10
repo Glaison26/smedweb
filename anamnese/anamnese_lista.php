@@ -40,6 +40,13 @@ $nomepaciente = $c_linha2['nome'];
 
 </head>
 
+<!-- função para chamar edição de registro -->
+    <script>
+        function editar(id) {
+           window.location.href = "/smedweb/anamnese/anamnese_editar.php?id=" + id;
+    }
+    </script>
+
 <body>
     <script>
         $(document).ready(function() {

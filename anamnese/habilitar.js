@@ -59,9 +59,24 @@ function habilitacao() {
     // parecer médico
     var parecer_medico_apto_restricoes = document.getElementById("c_parecer_medico_apto_restricoes");
     var restricoes = document.getElementById("c_restricoes");
-   
-    // limpando os campos de observação e desabilitando-os
+    // qual atividade fisica
+    var atividade_fisica_sim = document.getElementById("c_atividade_fisica_sim");
+    var qual_atividade = document.getElementById("c_qual_atividade");
+    var frequencia_atividade = document.getElementById("c_frequencia_atividade");
+    // frequencia de atividade fisica
 
+    // limpando os campos de observação e desabilitando-os
+    // verificando se o radio button "sim" está selecionado para atividade fisica
+    if (atividade_fisica_sim.checked) {
+        qual_atividade.disabled = false;
+        frequencia_atividade.disabled = false;
+        qual_atividade.focus();
+    } else {
+        qual_atividade.disabled = true;
+        frequencia_atividade.disabled = true;
+        qual_atividade.value = "";
+        frequencia_atividade.value = "";
+    }
     // verificando se o radio button "Sim" está selecionado para epi
     if (uso_epi_sim.checked) {
         qual_epi.disabled = false;
@@ -165,7 +180,7 @@ function habilitacao() {
     if (alcoolismo_sim.checked) {
         alcool_semana.disabled = false;
         alcool_semana.focus();
-    } else{
+    } else {
         alcool_semana.disabled = true;
         alcool_semana.value = "";
     }
@@ -173,7 +188,7 @@ function habilitacao() {
     if (hipertensao_familiar_sim.checked) {
         hipertensao_familiar_parentesco.disabled = false;
         hipertensao_familiar_parentesco.focus();
-    }else {
+    } else {
         hipertensao_familiar_parentesco.disabled = true;
         hipertensao_familiar_parentesco.value = "";
     }
@@ -181,7 +196,7 @@ function habilitacao() {
     if (diabetes_familiar_sim.checked) {
         diabetes_familiar_parentesco.disabled = false;
         diabetes_familiar_parentesco.focus();
-    }else {
+    } else {
         diabetes_familiar_parentesco.disabled = true;
         diabetes_familiar_parentesco.value = "";
     }

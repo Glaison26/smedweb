@@ -2,6 +2,13 @@
 include_once("../links.php");
 // Conexão
 require_once('../conexao.php');
+// pego id da anamenese
+$c_id = $_GET["id"];
+// php para carregar dos para variavies
+include('anamnese_carrega_dados.php');
+
+
+
 
 
 ?>
@@ -23,7 +30,7 @@ require_once('../conexao.php');
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>
-            <h5>Nova Anamnese<h5>
+            <h5>Editar dados de Anamnese<h5>
         </div>
     </div>
     <?php
@@ -82,37 +89,37 @@ require_once('../conexao.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_setor">Setor: *</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_setor" name="c_setor" required>
+                            <input type="text" class="form-control" id="c_setor" name="c_setor" value="<?php echo $c_setor; ?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_cargo">Cargo: *</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_cargo" name="c_cargo" required>
+                            <input type="text" class="form-control" id="c_cargo" name="c_cargo" value="<?php echo $c_cargo; ?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_admissao">Admissao: *</label>
                         <div class="col-sm-2">
-                            <input type="date" class="form-control" id="c_admissao" name="c_admissao" required>
+                            <input type="date" class="form-control" id="c_admissao" name="c_admissao" value="<?php echo $c_admissao; ?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_atividade">Atividade: *</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_atividade" name="c_atividade" required>
+                            <input type="text" class="form-control" id="c_atividade" name="c_atividade" value="<?php echo $c_atividade; ?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_jornada">Jornada de Trabalho: *</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="c_jornada" name="c_jornada" required>
+                            <input type="text" class="form-control" id="c_jornada" name="c_jornada" value="<?php echo $c_jornada; ?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_descricao_atividades">Descrição Atividades : *</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_descricao_atividades" name="c_descricao_atividades" required>
+                            <input type="text" class="form-control" id="c_descricao_atividades" name="c_descricao_atividades" value="<?php echo $c_descricao_atividade; ?>" required>
                         </div>
                     </div>
                     <hr>
@@ -121,7 +128,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Físico (Ruído, calor, frio, vibração, radiação)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_fisico" id="c_fisico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_fisico" id="c_fisico" <?php echo $c_risco_fisico; ?>>
                             </div>
                         </div>
                     </div>
@@ -129,7 +136,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Químico (Poeira, fumos, gases,vapores, produtos químicos)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_quimico" id="c_quimico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_quimico" id="c_quimico" <?php echo $c_risco_quimico; ?>>
                             </div>
                         </div>
                     </div>
@@ -137,7 +144,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Biológico (Vírus, bactérias, fungos, parasitas)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_biologico" id="c_biologico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_biologico" id="c_biologico" <?php echo $c_risco_biologico; ?> >
                             </div>
                         </div>
                     </div>
@@ -145,7 +152,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_ergonomico" id="c_ergonomico" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_ergonomico" id="c_ergonomico" <?php echo $c_risco_ergonomico; ?> >
                             </div>
                         </div>
                     </div>
@@ -153,7 +160,7 @@ require_once('../conexao.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Acidentes (Máquinas sem proteção, risco de quedas, eletricidade)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_acidente" id="c_risco_acidente" value="Sim">
+                                <input class="form-check-input" type="checkbox" name="c_risco_acidente" id="c_risco_acidente" <?php echo $c_risco_acidentes; ?>>
                             </div>
                         </div>
                     </div>
