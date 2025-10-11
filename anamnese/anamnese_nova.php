@@ -115,6 +115,33 @@ require_once('../conexao.php');
                             <input type="text" class="form-control" id="c_descricao_atividades" name="c_descricao_atividades" required>
                         </div>
                     </div>
+                    <!-- radio com sim ou não para uso de epi -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_uso_epi">Uso de EPI (Equipamento de Proteção Individual): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_uso_epi">
+                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_sim" value="Sim">
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_uso_epi">
+                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_nao" value="Não" checked>
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Qual EPI utiliza -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_qual_epi">Qual?</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="c_qual_epi" disabled name="c_qual_epi" placeholder="Qual EPI utiliza?">
+                        </div>
+                    </div>
+
                     <hr>
                     <h4>Riscos Ocupacionais</h4>
                     <div class="row mb-2">
@@ -158,29 +185,6 @@ require_once('../conexao.php');
                         </div>
                     </div>
                     <hr>
-                    <!-- radio com sim ou não para uso de epi -->
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="c_uso_epi">Uso de EPI (Equipamento de Proteção Individual): *</label>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <label for="c_uso_epi">
-                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_sim" value="Sim">
-                                        <span>Sim</span>
-                                    </label>
-                                    <label for="c_uso_epi">
-                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_nao" value="Não" checked>
-                                        <span>Não</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Qual EPI utiliza -->
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_qual_epi" disabled name="c_qual_epi" placeholder="Qual EPI utiliza?">
-                        </div>
-                    </div>
                 </div>
                 <div id="menu1" class="tab-pane fade"><br>
                     <h4>Queixa Principal e História da Doença Atual (HDA)</h4>
@@ -515,7 +519,7 @@ require_once('../conexao.php');
                         </div>
 
                     </div>
-                   <!-- Qual a atividade e frequencia -->
+                    <!-- Qual a atividade e frequencia -->
                     <div class="row mb-2">
                         <label class="col-sm-2 col-form-label" for="c_qual_atividade">Quais ?</label>
                         <div class="col-sm-5">

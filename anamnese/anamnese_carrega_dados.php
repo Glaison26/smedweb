@@ -46,4 +46,21 @@ if ($registro['risco_acidentes'] == 'S') {
 } else {
     $c_risco_acidentes = "";
 }
-
+// uso de epi sim ou não
+if ($registro['usa_epi'] == 'Sim') {
+    $c_check_usa_epi_sim = 'checked';
+    $c_check_usa_epi_nao = "";
+    $c_habilita_qual_epi = "";
+    $c_qual_epi = $registro['quais_epi'];
+} else {
+    $c_check_usa_epi_sim = "";
+    $c_check_usa_epi_nao = "checked";
+    $c_habilita_qual_epi = "disabled";
+    $c_qual_epi = "";
+}
+// motivo da consulta
+$c_motivo_consulta = $registro['motivo_consulta'];
+// queixa principal
+$c_queixa_principal = $registro['queixa_principal'];
+// hda
+$c_hda = $registro['hda'];

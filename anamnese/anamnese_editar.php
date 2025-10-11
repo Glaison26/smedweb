@@ -6,11 +6,6 @@ require_once('../conexao.php');
 $c_id = $_GET["id"];
 // php para carregar dos para variavies
 include('anamnese_carrega_dados.php');
-
-
-
-
-
 ?>
 
 <!--  html para nova anamnese  -->
@@ -26,6 +21,9 @@ include('anamnese_carrega_dados.php');
 <body>
     <script src="habilitar.js"></script>
 
+    <script>
+        habilitacao(); // Código JS direto para habilitar ou desabilitar os imputs
+    </script>
     <!-- painel com título -->
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -122,6 +120,33 @@ include('anamnese_carrega_dados.php');
                             <input type="text" class="form-control" id="c_descricao_atividades" name="c_descricao_atividades" value="<?php echo $c_descricao_atividade; ?>" required>
                         </div>
                     </div>
+                    <!-- radio com sim ou não para uso de epi -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_uso_epi">Uso de EPI (Equipamento de Proteção Individual): *</label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <label for="c_uso_epi">
+                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_sim" value="Sim" <?php echo $c_check_usa_epi_sim; ?>>
+                                        <span>Sim</span>
+                                    </label>
+                                    <label for="c_uso_epi">
+                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_nao" value="Não" <?php echo $c_check_usa_epi_nao; ?>>
+                                        <span>Não</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Qual EPI utiliza -->
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="c_qual_epi">Qual?</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="c_qual_epi" name="c_qual_epi" value = "<?php echo $c_qual_epi ?>" <?php echo $c_habilita_qual_epi; ?> placeholder="Qual EPI utiliza?">
+                        </div>
+                    </div>
+
+
                     <hr>
                     <h4>Riscos Ocupacionais</h4>
                     <div class="row mb-2">
@@ -144,7 +169,7 @@ include('anamnese_carrega_dados.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Biológico (Vírus, bactérias, fungos, parasitas)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_biologico" id="c_biologico" <?php echo $c_risco_biologico; ?> >
+                                <input class="form-check-input" type="checkbox" name="c_risco_biologico" id="c_biologico" <?php echo $c_risco_biologico; ?>>
                             </div>
                         </div>
                     </div>
@@ -152,7 +177,7 @@ include('anamnese_carrega_dados.php');
                         <div class="form-check col-sm-7">
                             <label class="form-check-label col-form-label">Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso)</label>
                             <div class="col-sm-1">
-                                <input class="form-check-input" type="checkbox" name="c_risco_ergonomico" id="c_ergonomico" <?php echo $c_risco_ergonomico; ?> >
+                                <input class="form-check-input" type="checkbox" name="c_risco_ergonomico" id="c_ergonomico" <?php echo $c_risco_ergonomico; ?>>
                             </div>
                         </div>
                     </div>
@@ -165,29 +190,7 @@ include('anamnese_carrega_dados.php');
                         </div>
                     </div>
                     <hr>
-                    <!-- radio com sim ou não para uso de epi -->
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="c_uso_epi">Uso de EPI (Equipamento de Proteção Individual): *</label>
-                        <div class="col-sm-2">
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <label for="c_uso_epi">
-                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_sim" value="Sim">
-                                        <span>Sim</span>
-                                    </label>
-                                    <label for="c_uso_epi">
-                                        <input type="radio" onClick="habilitacao()" name="c_uso_epi" id="c_uso_epi_nao" value="Não" checked>
-                                        <span>Não</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Qual EPI utiliza -->
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" id="c_qual_epi" disabled name="c_qual_epi" placeholder="Qual EPI utiliza?">
-                        </div>
-                    </div>
                 </div>
                 <div id="menu1" class="tab-pane fade"><br>
                     <h4>Queixa Principal e História da Doença Atual (HDA)</h4>
@@ -196,26 +199,25 @@ include('anamnese_carrega_dados.php');
                         <label class="col-sm-2 col-form-label" for="c_motivo_consulta">Motivo da Consulta: *</label>
                         <div class="col-sm-3">
                             <select class="form-control form-control-lg" id="c_motivo_consulta" name="c_motivo_consulta" required>
-                                <option>Selecione</option>
-                                <option>Admissional</option>
-                                <option>Periódico</option>
-                                <option>Demissional</option>
-                                <option>Mudança de Função</option>
-                                <option>Retorno ao Trabalho</option>
-                                <option>Outros</option>
+                                <option value="Admissional" <?= ($c_motivo_consulta == 'Admissional') ? 'selected' : '' ?>>Admissional</option>
+                                <option value="Periódico" <?= ($c_motivo_consulta == 'Periódico') ? 'selected' : '' ?>>Periódico</option>
+                                <option value="Demissional" <?= ($c_motivo_consulta == 'Demissional') ? 'selected' : '' ?>>Demissional</option>
+                                <option value="Mudança de Função" <?= ($c_motivo_consulta == 'Mudança de Função') ? 'selected' : '' ?>>Mudança de Função</option>
+                                <option value="Retorno ao Trabalho" <?= ($c_motivo_consulta == 'Retorno ao Trabalho') ? 'selected' : '' ?>>Retorno ao Trabalho</option>
+                                <option value="Outros" <?= ($c_motivo_consulta == 'Outros') ? 'selected' : '' ?>>Outros</option>
                             </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_queixa_principal">Queixa Principal: *</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" id="c_queixa_principal" name="c_queixa_principal" required>
+                            <input type="text" class="form-control" id="c_queixa_principal" name="c_queixa_principal" value = "<?php echo $c_queixa_principal;?>" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_hda">História da Doença Atual (HDA): *</label>
                         <div class="col-sm-7">
-                            <textarea class="form-control" id="c_hda" name="c_hda" rows="15" required></textarea>
+                            <textarea class="form-control" id="c_hda" name="c_hda" rows="15"  required><?php echo $c_hda;?></textarea>
                         </div>
                     </div>
                 </div>
@@ -522,7 +524,7 @@ include('anamnese_carrega_dados.php');
                         </div>
 
                     </div>
-                   <!-- Qual a atividade e frequencia -->
+                    <!-- Qual a atividade e frequencia -->
                     <div class="row mb-2">
                         <label class="col-sm-2 col-form-label" for="c_qual_atividade">Quais ?</label>
                         <div class="col-sm-5">
