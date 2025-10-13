@@ -64,3 +64,232 @@ $c_motivo_consulta = $registro['motivo_consulta'];
 $c_queixa_principal = $registro['queixa_principal'];
 // hda
 $c_hda = $registro['hda'];
+// Antecedentes pessoais
+// hipertensão sistemica 
+if ($registro['antecedente_hipertensao'] == 'Sim') {
+    $c_check_antecedente_hipertensao_sim = "checked";
+    $c_check_antecedente_hipertensao_nao = "";
+    $c_habilita_antecedente_hipertensao_obs = "";
+    $c_hipertensao_obs = $registro['obs_hipertensao'];
+} else {
+    $c_check_antecedente_hipertensao_sim = "";
+    $c_check_antecedente_hipertensao_nao = "checked";
+    $c_habilita_antecedente_hipertensao_obs = "disabled";
+    $c_hipertensao_obs = "";
+}
+// diabetis melinus
+if ($registro['antecedente_diabete'] == 'Sim') {
+    $c_check_antecedente_diabete_sim = "checked";
+    $c_check_antecedente_diabete_nao = "";
+    $c_habilita_antecedente_diabete_obs = "";
+    $c_diabete_obs = $registro['obs_diabete'];
+} else {
+    $c_check_antecedente_diabete_sim = "";
+    $c_check_antecedente_diabete_nao = "checked";
+    $c_habilita_antecedente_diabete_obs = "disabled";
+    $c_diabete_obs = "";
+}
+// doenças cardiovasculares
+if ($registro['antecedente_cardiaco'] == 'Sim') {
+    $c_check_antecedente_cardiaco_sim = "checked";
+    $c_check_antecedente_cardiaco_nao = "";
+    $c_habilita_antecedente_cardiaco_obs = "";
+    $c_cardiaco_obs = $registro['obs_cardiaco'];
+} else {
+    $c_check_antecedente_cardiaco_sim = "";
+    $c_check_antecedente_cardiaco_nao = "checked";
+    $c_habilita_antecedente_cardiaco_obs = "disabled";
+    $c_cardiaco_obs = "";
+}
+
+// asma / bronquite 
+if ($registro['antecedente_asma_bronquite'] == 'Sim') {
+    $c_check_antecedente_asma_bronquite_sim = "checked";
+    $c_check_antecedente_asma_bronquite_nao = "";
+    $c_habilita_antecedente_asma_bronquite_obs = "";
+    $c_asma_bronquite_obs = $registro['obs_asma_bronquite'];
+} else {
+    $c_check_antecedente_asma_bronquite_sim = "";
+    $c_check_antecedente_asma_bronquite_nao = "checked";
+    $c_habilita_antecedente_asma_bronquite_obs = "disabled";
+    $c_asma_bronquite_obs = "";
+}
+// Doenças renais
+if ($registro['antecedente_renais'] == 'Sim') {
+    $c_check_antecedente_renais_sim = "checked";
+    $c_check_antecedente_renais_nao = "";
+    $c_habilita_antecedente_renais_obs = "";
+    $c_renais_obs = $registro['obs_renais'];
+} else {
+    $c_check_antecedente_renais_sim = "";
+    $c_check_antecedente_renais_nao = "checked";
+    $c_habilita_antecedente_renais_obs = "disabled";
+    $c_renais_obs = "";
+}
+// antecedente neurologicos
+if ($registro['antecedente_neurologica'] == 'Sim') {
+    $c_check_antecedente_neurologicos_sim = "checked";
+    $c_check_antecedente_neurologicos_nao = "";
+    $c_habilita_antecedente_neurologicos_obs = "";
+    $c_neurologicos_obs = $registro['obs_neurologica'];
+} else {
+    $c_check_antecedente_neurologicos_sim = "";
+    $c_check_antecedente_neurologicos_nao = "checked";
+    $c_habilita_antecedente_neurologicos_obs = "disabled";
+    $c_neurologicos_obs = "";
+}
+// antecedentes psquiatricos
+if ($registro['antecedente_psquiatrico'] == 'Sim') {
+    $c_check_antecedente_psquiatrico_sim = "checked";
+    $c_check_antecedente_psquiatrico_nao = "";
+    $c_habilita_antecedente_psiquiatrico_obs = "";
+    $c_psquiatrico_obs = $registro['obs_psquiatrico'];
+} else {
+    $c_check_antecedente_psquiatrico_sim = "";
+    $c_check_antecedente_psquiatrico_nao = "checked";
+    $c_habilita_antecedente_psiquiatrico_obs = "disabled";
+    $c_psquiatrico_obs = "";
+}
+// Câncer
+if ($registro['antecedente_cancer'] == 'Sim') {
+    $c_check_antecedente_cancer_sim = "checked";
+    $c_check_antecedente_cancer_nao = "";
+    $c_habilita_antecedente_cancer_obs = "";
+    $c_cancer_obs = $registro['obs_cancer'];
+} else {
+    $c_check_antecedente_cancer_sim = "";
+    $c_check_antecedente_cancer_nao = "checked";
+    $c_habilita_antecedente_cancer_obs = "disabled";
+    $c_cancer_obs = "";
+}
+// Alergias
+if ($registro['antecedente_alergia'] == 'Sim') {
+    $c_check_antecedente_alergia_sim = "checked";
+    $c_check_antecedente_alergia_nao = "";
+    $c_habilita_antecedente_alergia_obs = "";
+    $c_alergia_obs = $registro['obs_alergia'];
+} else {
+    $c_check_antecedente_alergia_sim = "";
+    $c_check_antecedente_alergia_nao = "checked";
+    $c_habilita_antecedente_alergia_obs = "disabled";
+    $c_alergia_obs = "";
+}
+// cirurgias prévia
+if ($registro['antecedente_cirurgias'] == 'Sim') {
+    $c_check_antecedente_cirurgias_sim = "checked";
+    $c_check_antecedente_cirurgias_nao = "";
+    $c_habilita_antecedente_cirurgias_obs = "";
+    $c_cirurgia_obs = $registro['obs_cirurgia'];
+} else {
+    $c_check_antecedente_cirurgias_sim = "";
+    $c_check_antecedente_cirurgias_nao = "checked";
+    $c_habilita_antecedente_cirurgias_obs = "disabled";
+    $c_cirurgia_obs = "";
+}
+// medicamentos em uso (texto livre)
+$c_medicamento_uso = ltrim($registro['medicamentos_uso']);
+// tabagismo sim ou não
+if ($registro['habito_tabagismo'] == 'Sim') {
+    $c_check_tabagismo_sim = "checked";
+    $c_check_tabagismo_nao = "";
+    $c_Habilita_qtd_cigarros = "";
+    $c_habilita_tempo_cigarro = "";
+    $i_qtd_cigarros = $registro['tabagismo_qtd_dia'];
+    $i_tempo_cigarros = $registro['tabagismo_tempo'];
+} else {
+    $c_check_tabagismo_sim = "";
+    $c_check_tabagismo_nao = "checked";
+    $c_Habilita_qtd_cigarros = "disabled";
+    $c_habilita_tempo_cigarro = "disabled";
+    $i_qtd_cigarros = "";
+    $i_tempo_cigarros = "";
+}
+// Etilismo sim ou não
+if ($registro['etilismo']) {
+    $c_check_etilismo_sim = "checked";
+    $c_check_etilismo_nao = "";
+    $c_habilita_elitismo_freq = "";
+    $c_etilismo_freq = $registro['etilismo_frequencia'];
+} else {
+    $c_check_etilismo_sim = "";
+    $c_check_etilismo_nao = "checked";
+    $c_habilita_elitismo_freq = "disabled";
+    $c_etilismo_freq = "";
+}
+// atividade fisica
+if ($registro['atividade_fisica'] == 'Sim') {
+    $c_check_atividade_fisica_sim = "checked";
+    $c_check_atividade_fisica_nao = "";
+    $c_Habilita_atividade_fisica_qual = "";
+    $c_habilita_atividade_fisica_freq = "";
+    $c_atividade_fisica_qual = $registro['atividade_fisica_qual'];
+    $c_atividade_fisica_freq = $registro['atividade_fisica_frequencia'];
+} else {
+    $c_check_atividade_fisica_sim = "";
+    $c_check_atividade_fisica_nao = "checked";
+    $c_Habilita_atividade_fisica_qual = "enabled";
+    $c_habilita_atividade_fisica_freq = "enabled";
+    $c_atividade_fisica_qual = "";
+    $c_atividade_fisica_freq = "";
+}
+// antecedentes familiares
+// hipertensão
+if ($registro['familiar_hipertensao'] == 'Sim') {
+    $c_check_famimilar_hipertencao_sim = "checked";
+    $c_check_famimilar_hipertencao_nao = "";
+    $c_habilita_parentesco_hipertensao = "";
+    $c_parentesco_hipertensao = $registro['obs_familiar_hipertensao'];
+} else {
+    $c_check_famimilar_hipertencao_sim = "";
+    $c_check_famimilar_hipertencao_nao = "checked";
+    $c_habilita_parentesco_hipertensao = "disabled";
+    $c_parentesco_hipertensao = "";
+}
+// Diabetes
+if ($registro['familiar_diabetes'] == 'Sim') {
+    $c_check_famimilar_diabetes_sim = "checked";
+    $c_check_famimilar_diabetes_nao = "";
+    $c_habilita_parentesco_diabetes = "";
+    $c_parentesco_diabetes = $registro['obs_familiar_diabetes'];
+} else {
+    $c_check_famimilar_diabetes_sim = "";
+    $c_check_famimilar_diabetes_nao = "checked";
+    $c_habilita_parentesco_diabetes = "disabled";
+    $c_parentesco_diabetes = "";
+}
+// Doenças cardiovasculares
+if ($registro['familiar_cardiaco'] == 'Sim') {
+    $c_check_famimilar_cardiaco_sim = "checked";
+    $c_check_famimilar_cardiaco_nao = "";
+    $c_habilita_parentesco_cardiaco = "";
+    $c_parentesco_cardiaco = $registro['obs_familiar_cardiaco'];
+} else {
+    $c_check_famimilar_cardiaco_sim = "";
+    $c_check_famimilar_cardiaco_nao = "checked";
+    $c_habilita_parentesco_cardiaco = "disabled";
+    $c_parentesco_cardiaco = "";
+}
+// familiar cancer
+if ($registro['familiar_cancer'] == 'Sim') {
+    $c_check_famimilar_cancer_sim = "checked";
+    $c_check_famimilar_cancer_nao = "";
+    $c_habilita_parentesco_cancer = "";
+    $c_parentesco_cancer = $registro['obs_familiar_cancer'];
+} else {
+    $c_check_famimilar_cancer_sim = "";
+    $c_check_famimilar_cancer_nao = "checked";
+    $c_habilita_parentesco_cancer = "disabled";
+    $c_parentesco_cancer = "";
+}
+// paretescos outras donças
+if ($registro['familiar_outros'] == 'Sim') {
+    $c_check_famimilar_outros_sim = "checked";
+    $c_check_famimilar_outros_nao = "";
+    $c_habilita_parentesco_outros = "";
+    $c_parentesco_outros = $registro['obs_familiar_outros'];
+} else {
+    $c_check_famimilar_outros_sim = "";
+    $c_check_famimilar_outros_nao = "checked";
+    $c_habilita_parentesco_outros = "disabled";
+    $c_parentesco_outros = "";
+}

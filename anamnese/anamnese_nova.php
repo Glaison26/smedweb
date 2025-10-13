@@ -526,7 +526,7 @@ require_once('../conexao.php');
                             <input type="text" class="form-control" id="c_qual_atividade" name="c_qual_atividade" disabled>
                         </div>
                         <label class="col-sm-1 col-form-label" for="c_frequencia_atividade">Frequência</label>
-                        <div class="col-sm-1">
+                        <div class="col-sm-2">
                             <input type="text" class="form-control" id="c_frequencia_atividade" name="c_frequencia_atividade" disabled>
                         </div>
                     </div>
