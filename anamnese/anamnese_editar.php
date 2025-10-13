@@ -925,7 +925,7 @@ include('anamnese_carrega_dados.php');
                         <label class="col-sm-2 col-form-label" for="c_pressao_arterial">Pressão Arterial (mmHg):</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" id="c_pressao_arterial" name="c_pressao_arterial" 
-                            placeholder="Ex: 120/80" value=>
+                            placeholder="Ex: 120/80" value="<?php echo $c_pa; ?>">
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
                         <div class="col-sm-2">
