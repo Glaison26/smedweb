@@ -293,3 +293,108 @@ if ($registro['familiar_outros'] == 'Sim') {
     $c_habilita_parentesco_outros = "disabled";
     $c_parentesco_outros = "";
 }
+// Interrogatório Sintomatológico (Revisão por Sistemas)
+// Geral (Febre, perda de peso, fadiga)
+if ($registro['stm_geral'] == 'Sim') {
+    $c_check_smtp_geral_sim = "checked";
+    $c_check_smtp_geral_nao = "";
+} else {
+    $c_check_smtp_geral_sim = "";
+    $c_check_smtp_geral_nao = "checked";
+}
+// Cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço)
+if ($registro['stm_cabeca_pescoso'] == 'Sim') {
+    $c_check_smtp_cabeca_pescoco_sim = "checked";
+    $c_check_smtp_cabeca_pescoco_nao = "";
+} else {
+    $c_check_smtp_cabeca_pescoco_sim = "";
+    $c_check_smtp_cabeca_pescoco_nao = "checked";
+}
+// pele
+if ($registro['stm_pele'] == 'Sim') {
+    $c_check_smtp_pele_sim = "checked";
+    $c_check_smtp_pele_nao = "";
+} else {
+    $c_check_smtp_pele_sim = "";
+    $c_check_smtp_pele_nao = "checked";
+}
+// olhos
+if ($registro['stm_olhos'] == 'Sim') {
+    $c_check_smtp_olhos_sim = "checked";
+    $c_check_smtp_olhos_nao = "";
+} else {
+    $c_check_smtp_olhos_sim = "";
+    $c_check_smtp_olhos_nao = "checked";
+}
+// ouvidos
+if ($registro['stm_ouvidos'] == 'Sim') {
+    $c_check_smtp_ouvidos_sim = "checked";
+    $c_check_smtp_ouvidos_nao = "";
+} else {
+    $c_check_smtp_ouvidos_sim = "";
+    $c_check_smtp_ouvidos_nao = "checked";
+}
+// Respiratório (Tosse, falta de ar, dor no peito)
+if ($registro['stm_respiratorio'] == 'Sim') {
+    $c_check_smtp_respiratorio_sim = "checked";
+    $c_check_smtp_respiratorio_nao = "";
+} else {
+    $c_check_smtp_respiratorio_sim = "";
+    $c_check_smtp_respiratorio_nao = "checked";
+}
+// Cardiovascular (Palpitações, dor no peito, inchaço)
+if ($registro['stm_cardiovascular'] == 'Sim') {
+    $c_check_smtp_cardiovascular_sim = "checked";
+    $c_check_smtp_cardiovascular_nao = "";
+} else {
+    $c_check_smtp_cardiovascular_sim = "";
+    $c_check_smtp_cardiovascular_nao = "checked";
+}
+// Gastrointestinal (Dor abdominal, náusea, vômito)
+if ($registro['stm_gastro'] == 'Sim') {
+    $c_check_smtp_gastro_sim = "checked";
+    $c_check_smtp_gastro_nao = "";
+} else {
+    $c_check_smtp_gastro_sim = "";
+    $c_check_smtp_gastro_nao = "checked";
+}
+// Geniturario
+if ($registro['stm_geniturario'] == 'Sim') {
+    $c_check_smtp_geniturario_sim = "checked";
+    $c_check_smtp_geniturario_nao = "";
+} else {
+    $c_check_smtp_geniturario_sim = "";
+    $c_check_smtp_geniturario_nao = "checked";
+} 
+// Musculoesquelético (Dor nas articulações, fraqueza muscular)
+if ($registro['stm_musculo_esqueletico'] == 'Sim') {
+    $c_check_smtp_musculo_esqueletico_sim = "checked";
+    $c_check_smtp_musculo_esqueletico_nao = "";
+} else {
+    $c_check_smtp_musculo_esqueletico_sim = "";
+    $c_check_smtp_musculo_esqueletico_nao = "checked";
+}
+// Neurológico (Tontura, fraqueza, convulsões)
+if ($registro['stm_neurologico'] == 'Sim') {
+    $c_check_smtp_musculo_neurologico_sim = "checked";
+    $c_check_smtp_musculo_neurologico_nao = "";
+} else {
+    $c_check_smtp_musculo_neurologico_sim = "";
+    $c_check_smtp_musculo_neurologico_nao = "checked";
+}
+// Psiquiátrico (Ansiedade, depressão, insônia)
+if ($registro['stm_pisiquico'] == 'Sim') {
+    $c_check_smtp_musculo_psiquiatrico_sim = "checked";
+    $c_check_smtp_musculo_psiquiatrico_nao = "";
+} else {
+    $c_check_smtp_musculo_psiquiatrico_sim = "";
+    $c_check_smtp_musculo_psiquiatrico_nao = "checked";
+}
+
+$c_pa = $registro['exame_pa']; // Pressão Arterial
+$c_fc = $registro['exame_fc']; // frequencia cardiaca
+$c_fr = $registro['exame_fr']; // frequencia respiratoria
+$n_peso = $registro['exame_peso']; // peso
+$n_altura = $registro['exame_altura']; // altura
+$n_imc = $registro['exame_imc']; // indice de massa coorporal
+

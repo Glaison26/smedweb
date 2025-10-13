@@ -75,6 +75,7 @@ $nomepaciente = $c_linha2['nome'];
                         "sZeroRecords": "Nenhum registro encontrado",
 
                         "sLast": "Último"
+                        
                     },
                     "sSearch": "Pesquisar",
                     "sLengthMenu": 'Mostrar <select>' +

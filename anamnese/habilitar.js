@@ -1,3 +1,8 @@
+////////////////////////////////////////////////////////
+// arquivo java script para controle de radios butons
+///////////////////////////////////////////////////////
+
+
 // função para habilitar e desabilitar  os campos de acordo com a seleção do usuário
 function habilitacao() {
     // pegando os elementos do formulário

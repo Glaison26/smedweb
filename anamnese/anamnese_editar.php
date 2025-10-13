@@ -719,11 +719,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_geral">
-                                        <input type="radio" name="c_geral" id="c_geral_sim" value="Sim">
+                                        <input type="radio" name="c_geral" id="c_geral_sim" value="Sim" <?php echo $c_check_smtp_geral_sim;?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_geral">
-                                        <input type="radio" name="c_geral" id="c_geral_nao" value="Não" checked>
+                                        <input type="radio" name="c_geral" id="c_geral_nao" value="Não" <?php echo $c_check_smtp_geral_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -734,11 +734,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_pele">
-                                        <input type="radio" name="c_pele" id="c_pele_sim" value="Sim">
+                                        <input type="radio" name="c_pele" id="c_pele_sim" value="Sim" <?php echo $c_check_smtp_pele_sim;?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_pele">
-                                        <input type="radio" name="c_pele" id="c_pele_nao" value="Não" checked>
+                                        <input type="radio" name="c_pele" id="c_pele_nao" value="Não" <?php echo $c_check_smtp_pele_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -752,11 +752,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_cabeca_pescoco">
-                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_sim" value="Sim">
+                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_sim" value="Sim" <?php echo $c_check_smtp_cabeca_pescoco_sim;?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cabeca_pescoco">
-                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_nao" value="Não" checked>
+                                        <input type="radio" name="c_cabeca_pescoco" id="c_cabeca_pescoco_nao" value="Não" <?php echo $c_check_smtp_cabeca_pescoco_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -767,11 +767,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_olhos">
-                                        <input type="radio" name="c_olhos" id="c_olhos_sim" value="Sim">
+                                        <input type="radio" name="c_olhos" id="c_olhos_sim" value="Sim" <?php echo $c_check_smtp_olhos_sim;?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_olhos">
-                                        <input type="radio" name="c_olhos" id="c_olhos_nao" value="Não" checked>
+                                        <input type="radio" name="c_olhos" id="c_olhos_nao" value="Não" <?php echo $c_check_smtp_olhos_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -786,11 +786,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_ouvidos">
-                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_sim" value="Sim">
+                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_sim" value="Sim" <?php echo $c_check_smtp_ouvidos_sim;?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_ouvidos">
-                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_nao" value="Não" checked>
+                                        <input type="radio" name="c_ouvidos" id="c_ouvidos_nao" value="Não" <?php echo $c_check_smtp_ouvidos_nao; ?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -801,11 +801,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_respiratorio">
-                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_sim" value="Sim">
+                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_sim" value="Sim" <?php echo $c_check_smtp_respiratorio_sim;?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_respiratorio">
-                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_nao" value="Não" checked>
+                                        <input type="radio" name="c_respiratorio" id="c_respiratorio_nao" value="Não" <?php echo $c_check_smtp_respiratorio_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -821,11 +821,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_cardiovascular">
-                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_sim" value="Sim">
+                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_sim" value="Sim" <?php echo $c_check_smtp_cardiovascular_sim;?> >
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_cardiovascular">
-                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_nao" value="Não" checked>
+                                        <input type="radio" name="c_cardiovascular" id="c_cardiovascular_nao" value="Não" <?php echo $c_check_smtp_cardiovascular_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -836,18 +836,17 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_gastrointestinal">
-                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_sim" value="Sim">
+                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_sim" value="Sim" <?php echo $c_check_smtp_gastro_sim;?> >
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_gastrointestinal">
-                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_nao" value="Não" checked>
+                                        <input type="radio" name="c_gastrointestinal" id="c_gastrointestinal_nao" value="Não" <?php echo $c_check_smtp_gastro_nao;?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <!-- input radio sim ou não Genitourinário (Dor ao urinar, sangue na urina, incontinência) -->
                     <div class="row mb-2">
                         <label class="col-sm-3 col-form-label" for="c_genitourinario">Genitourinário (Dor ao urinar, sangue na urina, incontinência): *</label>
@@ -855,11 +854,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_genitourinario">
-                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_sim" value="Sim">
+                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_sim" value="Sim" <?php echo $c_check_smtp_geniturario_sim ?> >
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_genitourinario">
-                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_nao" value="Não" checked>
+                                        <input type="radio" name="c_genitourinario" id="c_genitourinario_nao" value="Não" <?php echo $c_check_smtp_geniturario_nao ?> >
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -870,11 +869,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_musculoesqueletico">
-                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_sim" value="Sim">
+                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_sim" value="Sim" <?php echo $c_check_smtp_musculo_esqueletico_sim?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_musculoesqueletico">
-                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_nao" value="Não" checked>
+                                        <input type="radio" name="c_musculoesqueletico" id="c_musculoesqueletico_nao" value="Não" <?php echo $c_check_smtp_musculo_esqueletico_nao?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -889,11 +888,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_neurologico">
-                                        <input type="radio" name="c_neurologico" id="c_neurologico_sim" value="Sim">
+                                        <input type="radio" name="c_neurologico" id="c_neurologico_sim" value="Sim" <?php echo $c_check_smtp_musculo_neurologico_sim?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_neurologico">
-                                        <input type="radio" name="c_neurologico" id="c_neurologico_nao" value="Não" checked>
+                                        <input type="radio" name="c_neurologico" id="c_neurologico_nao" value="Não" <?php echo $c_check_smtp_musculo_neurologico_nao?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -904,11 +903,11 @@ include('anamnese_carrega_dados.php');
                             <div class="form-group">
                                 <div class="form-check">
                                     <label for="c_psiquiatrico">
-                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_sim" value="Sim">
+                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_sim" value="Sim" <?php echo $c_check_smtp_musculo_psiquiatrico_sim?>>
                                         <span>Sim</span>
                                     </label>
                                     <label for="c_psiquiatrico">
-                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_nao" value="Não" checked>
+                                        <input type="radio" name="c_psiquiatrico" id="c_psiquiatrico_nao" value="Não" <?php echo $c_check_smtp_musculo_psiquiatrico_nao?>>
                                         <span>Não</span>
                                     </label>
                                 </div>
@@ -925,7 +924,8 @@ include('anamnese_carrega_dados.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_pressao_arterial">Pressão Arterial (mmHg):</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="c_pressao_arterial" name="c_pressao_arterial" placeholder="Ex: 120/80">
+                            <input type="text" class="form-control" id="c_pressao_arterial" name="c_pressao_arterial" 
+                            placeholder="Ex: 120/80" value=>
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
                         <div class="col-sm-2">
