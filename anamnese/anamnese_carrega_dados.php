@@ -405,6 +405,22 @@ $c_exame_abdome = $registro['exame_abdome'];
 $c_exame_membros = $registro['exame_membros'];
 $c_exame_coluna = $registro['exame_coluna'];
 $c_exame_neurologico = $registro['exame_neurologico'];
+// conduta e parecer Médico
+$c_hipotese_diagnostica = $registro['conduta_hipotese_diag'];
+$c_exames_complementares = $registro['conduta_exames_compl'];
+$c_conduta = $registro['conduta'];
+// parecer 
+if (isset($_POST['c_parecer_medico_apto'])) {
+        $c_parecer = 'A';
+    } 
+    if (isset($_POST['c_parecer_medico_apto_restricoes'])){
+        $c_parecer = 'R';
+    }
+    if (isset($_POST['c_parecer_medico_inapto'])) {
+        $c_parecer = 'I';
+    }
+
+
 
 
 

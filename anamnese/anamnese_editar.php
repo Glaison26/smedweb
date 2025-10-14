@@ -476,7 +476,7 @@ include('anamnese_carrega_dados.php');
                         <label class="col-sm-2 col-form-label" for="c_medicamentos_uso">Medicamentos em Uso: *</label>
                         <div class="col-sm-8">
                             <textarea class="form-control" id="c_medicamentos_uso" name="c_medicamentos_uso" rows="4" required>
-                            <?php echo $c_medicamento_uso; ?></textarea>
+                            <?php echo $c_medicamento_uso;?></textarea>
                         </div>
                     </div>
                     <h4>Hábitos de Vida</h4>
@@ -1022,21 +1022,24 @@ include('anamnese_carrega_dados.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_hipotese_diagnostica">Hipótese Diagnóstica:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_hipotese_diagnostica" name="c_hipotese_diagnostica" placeholder="Descrição da hipótese diagnóstica">
+                            <textarea class="form-control" id="c_hipotese_diagnostica" name="c_hipotese_diagnostica" 
+                            placeholder="Descrição da hipótese diagnóstica" rows="4" required><?php echo $c_hipotese_diagnostica; ?></textarea>
                         </div>
                     </div>
                     <!-- input para Exames Complementares Solicitados -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_exames_complementares">Exames Complementares Solicitados:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_exames_complementares" name="c_exames_complementares" placeholder="Descrição dos exames complementares solicitados">
+                            <textarea class="form-control" id="c_exames_complementares" name="c_exames_complementares" 
+                            placeholder="Descrição dos exames complementares solicitados" rows="4" required><?php echo $c_exames_complementares; ?></textarea>
                         </div>
                     </div>
                     <!-- input tipo text para conduta -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_conduta">Conduta:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_conduta" name="c_conduta" placeholder="Descrição da conduta">
+                            <textarea class="form-control" id="c_conduta" name="c_conduta" 
+                            placeholder="Descrição da conduta" rows="4" required><?php echo $c_conduta; ?></textarea>
                         </div>
                     </div>
                     <hr>
@@ -1052,6 +1055,12 @@ include('anamnese_carrega_dados.php');
                                             <span>Apto para a função</span>
                                         </label>
                                     </div>
+                                      <div class="row mb-2">
+                                        <label for="c_parecer_medico">
+                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
+                                            <span>Inapto para a função</span>
+                                        </label>
+                                    </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
                                             <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto_restricoes" value="0">
@@ -1060,12 +1069,7 @@ include('anamnese_carrega_dados.php');
                                         <!-- input para descrever as restrições -->
                                         <input type="text" class="form-control mt-2" disabled id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
                                     </div>
-                                    <div class="row mb-2">
-                                        <label for="c_parecer_medico">
-                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
-                                            <span>Inapto para a função</span>
-                                        </label>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

@@ -111,14 +111,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // dados de antecedentes familiares capturados nos radios butons
     // hipertensão arterial sim ou não
     $c_familiar_hipertensao = $_POST['c_hipertensao_familiar'];
+    $c_obs_familiar_hipertensao = $_POST['c_hipertensao_familiar_parentesco'];
     // diabetes sim ou não
     $c_familiar_diabetes = $_POST['c_diabetes_familiar'];
+    $c_obs_familiar_diabetes = $_POST['c_diabetes_familiar_parentesco'];
     // cardiopatia sim ou não
     $c_familiar_cardiovasculares = $_POST['c_doencas_cardiovasculares_familiar'];
+    $c_obs_familiar_cardiovasculares = $_POST['c_doencas_cardiovasculares_familiar_parentesco'];
     // cancer sim ou não
     $c_familiar_cancer = $_POST['c_cancer_familiar'];
+    $c_obs_familiar_cancer = $_POST['c_cancer_familiar_parentesco'];
     //outras doenças sim ou não
     $c_familiar_outras_doencas = $_POST['c_outras_doencas_familiar'];
+    $c_obs_familiar_outras_doencas = $_POST['c_outras_doencas_familiar_parentesco'];
     // Interrogatório Sintomatológico
     // campo com input de radio do interrogatório sintomatológico
     $c_geral = $_POST['c_geral'];
@@ -180,7 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // radio butons com parecer do médico Apto para a função, Apto com restrições ou Inapto
     $c_parecer_medico = $_POST['c_parecer_medico'];
     // antecedentes pessoais com as observações
-    $c_antecedente_hipertencao_obs = $_POST['c_hipertensao_obs'];
+    $c_antecedente_hipertensao_obs = $_POST['c_hipertensao_obs'];
     $c_antecedente_diabetes_obs = $_POST['c_diabetes_obs'];
     $c_antecedente_cardiovasculares_obs = $_POST['c_doencas_cardiovasculares_obs'];
     $c_antecedente_asma_bronquite_obs = $_POST['c_asma_bronquite_obs'];
@@ -190,6 +195,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_antecedentes_cancer_obs = $_POST['c_cancer_obs'];
     $c_antecedentes_alergias_obs = $_POST['c_alergias_obs'];
     $c_antecedentes_cirurgias_previa_obs = $_POST['c_cirurgias_previas_obs'];
+    // conduta parecer medicos
+    $c_hipotese_diagnostica = $_POST['c_hipotese_diagnostica'];
+    $c_exames_complementares = $_POST['c_exames_complementares'];
+    $c_conduta = $_POST['c_conduta'];
+    $c_restricoes = $_POST['restricoes'];
+    // apto para a função
+    // risco ergonômico
+    // parecer medico
+    if (isset($_POST['c_parecer_medico_apto'])) {
+        $c_parecer = 'A';
+    } 
+    if (isset($_POST['c_parecer_medico_apto_restricoes'])){
+        $c_parecer = 'R';
+    }
+    if (isset($_POST['c_parecer_medico_inapto'])) {
+        $c_parecer = 'I';
+    }
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
     if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada)) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";
@@ -210,31 +232,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     antecedente_hipertensao, antecedente_diabete, antecedente_cardiaco, antecedente_asma_bronquite, antecedente_renais, 
     antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicamentos_uso,
     habito_tabagismo, etilismo, atividade_fisica, atividade_fisica_qual, atividade_fisica_frequencia, tabagismo_qtd_dia, tabagismo_tempo, etilismo_frequencia, usa_epi, quais_epi,
-    familiar_hipertencao, familiar_diabetes, familiar_cardiaco, familiar_cancer, familiar_outros,
+    familiar_hipertensao, obs_familiar_hipertensao, familiar_diabetes, obs_familiar_diabetes,
+    familiar_cardiaco, obs_familiar_cardiaco, familiar_cancer, obs_familiar_cancer,  familiar_outros, obs_familiar_outros,
     stm_geral, stm_pele, stm_cabeca_pescoso, stm_olhos, stm_ouvidos, stm_respiratorio, stm_cardiovascular,
     stm_gastro, stm_geniturario, stm_musculo_esqueletico, stm_neurologico, stm_pisiquico, exame_pa, exame_fc, exame_fr, exame_peso,
     exame_altura, exame_imc, exame_ectoscopia, exame_aparelho_respiratorio, exame_aparelho_cardio, exame_abdome,
     exame_membros, exame_coluna, exame_neurologico,
     obs_hipertensao, obs_diabete, obs_cardiaco, obs_asma_bronquite, obs_renais, obs_neurologia, obs_psiquiatrico, obs_cancer,
-    obs_alergia, obs_cirurgia )
+    obs_alergia, obs_cirurgia,conduta_hipotese_diag, conduta_exames_compl, conduta, parecer, restricoes)
             VALUES ('$id_paciente', '$d_data', '$c_setor', '$c_cargo', '$d_data_admissao', '$c_atividade', '$c_jornada', '$c_descricao_atividades',
             '$c_risco_fisico', '$c_risco_quimico', '$c_risco_biologico', '$c_risco_ergonomico', '$c_risco_acidente', '$c_motivo_consulta',
             '$c_queixa_principal', '$c_historia_doenca_atual', '$c_antecedente_hipertensao', '$c_antecedente_diabetes',
             '$c_antecedente_cardiovasculares', '$c_antecedente_asma_bronquite', '$c_doencas_renais', '$c_doencas_neurologicas',
             '$c_disturbios_psiquiatricos', '$c_cancer', '$c_alergias', '$c_cirurgias_previas', '$c_uso_medicamentos',
             '$c_tabagismo', '$c_alcoolismo', '$c_atividade_fisica', '$c_quais_atividades_fisicas', '$c_frequencia_atividade_fisica',
-             '$c_qtd_cigarros_dia', '$c_tempo_tabagismo_anos', '$c_qtd_doses_semana'
-            , '$c_uso_epi', '$c_quais_epi', '$c_familiar_hipertensao', '$c_familiar_diabetes', '$c_familiar_cardiovasculares',
-            '$c_familiar_cancer', '$c_familiar_outras_doencas', '$c_geral', '$c_pele', '$c_cabeca_pescoco', '$c_olhos', '$c_ouvidos',
+            '$c_qtd_cigarros_dia', '$c_tempo_tabagismo_anos', '$c_qtd_doses_semana'
+            , '$c_uso_epi', '$c_quais_epi', '$c_familiar_hipertensao', '$c_obs_familiar_hipertensao', 
+            '$c_familiar_diabetes', '$c_obs_familiar_diabetes',
+             '$c_familiar_cardiovasculares', '$c_obs_familiar_cardiovasculares',
+            '$c_familiar_cancer','$c_obs_familiar_cancer',
+            '$c_familiar_outras_doencas', '$c_obs_familiar_outras_doencas',
+             '$c_geral', '$c_pele', '$c_cabeca_pescoco', '$c_olhos', '$c_ouvidos',
             '$c_respiratorio', '$c_cardiovascular', '$c_gastrointestinal', '$c_genitourinario', '$c_musculo_esqueletico', 
             '$c_neurologico', '$c_psiquiatrico', '$c_pressao_arterial', '$c_frequencia_cardiaca', '$c_frequencia_respiratoria', '$c_peso',
             '$c_altura', '$c_imc', '$c_ecotoscopia', '$c_aparelho_respiratorio', '$c_aparelho_cardiovascular', '$c_aparelho_abdome',
             '$c_membros', '$c_coluna_vertebral', '$c_exame_neurologico',
-            '$c_antecedente_hipertencao_obs', '$c_antecedente_diabetes_obs','$c_antecedente_cardiovasculares_obs',
+            '$c_antecedente_hipertensao_obs', '$c_antecedente_diabetes_obs','$c_antecedente_cardiovasculares_obs',
             '$c_antecedente_asma_bronquite_obs','$c_antecedente_doencas_renais_obs', '$c_antecedente_doencas_neurologicas_obs',
-            '$c_antecedente_disturbios_psiquiatricos_obs', '$c_antecedentes_cancer_obs', '$c_antecedentes_alergias_obs', 
-            '$c_antecedentes_cirurgias_previa_obs')";
-    echo $c_sql;
+            '$c_antecedente_disturbios_psiquiatricos_obs', '$c_antecedentes_cancer_obs', '$c_antecedentes_alergias_obs',
+            '$c_antecedentes_cirurgias_previa_obs', '$c_hipotese_diagnostica','$c_exames_complementares','$c_conduta',
+             '$c_parecer', '$c_restricoes')";
+    //echo $c_sql;
     // Executa a query SQL        
     $result = $conection->query($c_sql);
     // verifico se a query foi correto

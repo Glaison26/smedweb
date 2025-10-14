@@ -948,21 +948,25 @@ require_once('../conexao.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_hipotese_diagnostica">Hipótese Diagnóstica:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_hipotese_diagnostica" name="c_hipotese_diagnostica" placeholder="Descrição da hipótese diagnóstica">
+                            <textarea class="form-control" id="c_hipotese_diagnostica" name="c_hipotese_diagnostica"
+                                placeholder="Descrição da hipótese diagnóstica" rows="4" required></textarea>
                         </div>
                     </div>
                     <!-- input para Exames Complementares Solicitados -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_exames_complementares">Exames Complementares Solicitados:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_exames_complementares" name="c_exames_complementares" placeholder="Descrição dos exames complementares solicitados">
+                            <textarea class="form-control" id="c_exames_complementares" name="c_exames_complementares"
+                                placeholder="Descrição dos exames complementares solicitados" rows="4" required></textarea>
                         </div>
                     </div>
                     <!-- input tipo text para conduta -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_conduta">Conduta:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_conduta" name="c_conduta" placeholder="Descrição da conduta">
+
+                            <textarea class="form-control" id="c_conduta" name="c_conduta"
+                                placeholder="Descrição da conduta" rows="4" required></textarea>
                         </div>
                     </div>
                     <hr>
@@ -980,17 +984,18 @@ require_once('../conexao.php');
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
+                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
+                                            <span>Inapto para a função</span>
+                                        </label>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="c_parecer_medico">
                                             <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto_restricoes" value="0">
                                             <span>Apto para a função com restrições</span>
                                         </label>
                                         <!-- input para descrever as restrições -->
-                                        <input type="text" class="form-control mt-2" disabled id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
-                                    </div>
-                                    <div class="row mb-2">
-                                        <label for="c_parecer_medico">
-                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
-                                            <span>Inapto para a função</span>
-                                        </label>
+                                        <textarea class="form-control" id="c_restricoes" name="c_restricoes"
+                                            placeholder="Descreva as restriçoes" rows="3" required></textarea>
                                     </div>
                                 </div>
                             </div>
