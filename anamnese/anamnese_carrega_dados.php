@@ -131,7 +131,7 @@ if ($registro['antecedente_neurologica'] == 'Sim') {
     $c_check_antecedente_neurologicos_sim = "checked";
     $c_check_antecedente_neurologicos_nao = "";
     $c_habilita_antecedente_neurologicos_obs = "";
-    $c_neurologicos_obs = $registro['obs_neurologica'];
+    $c_neurologicos_obs = $registro['obs_neurologia'];
 } else {
     $c_check_antecedente_neurologicos_sim = "";
     $c_check_antecedente_neurologicos_nao = "checked";
@@ -187,7 +187,7 @@ if ($registro['antecedente_cirurgias'] == 'Sim') {
     $c_cirurgia_obs = "";
 }
 // medicamentos em uso (texto livre)
-$c_medicamento_uso = ltrim($registro['medicamentos_uso']);
+$c_medicamento_uso = $registro['medicamentos_uso'];
 // tabagismo sim ou não
 if ($registro['habito_tabagismo'] == 'Sim') {
     $c_check_tabagismo_sim = "checked";
@@ -397,4 +397,14 @@ $c_fr = $registro['exame_fr']; // frequencia respiratoria
 $n_peso = $registro['exame_peso']; // peso
 $n_altura = $registro['exame_altura']; // altura
 $n_imc = $registro['exame_imc']; // indice de massa coorporal
+//
+$c_ectoscopia = $registro['exame_ectoscopia'];
+$c_exame_aparelho_respiratorio = $registro['exame_aparelho_respiratorio'];
+$c_exame_aparelho_cardio = $registro['exame_aparelho_cardio'];
+$c_exame_abdome = $registro['exame_abdome'];
+$c_exame_membros = $registro['exame_membros'];
+$c_exame_coluna = $registro['exame_coluna'];
+$c_exame_neurologico = $registro['exame_neurologico'];
+
+
 

@@ -929,26 +929,31 @@ include('anamnese_carrega_dados.php');
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_frequencia_cardiaca">Frequência Cardíaca (bpm):</label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="c_frequencia_cardiaca" name="c_frequencia_cardiaca" min="0" placeholder="Ex: 70">
+                            <input type="text" class="form-control" id="c_frequencia_cardiaca" name="c_frequencia_cardiaca" min="0" placeholder="Ex: 70"
+                            value = "<?php echo $c_fc; ?>">
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_frequencia_respiratoria">Frequência Respiratória (rpm):</label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="c_frequencia_respiratoria" name="c_frequencia_respiratoria" min="0" placeholder="Ex: 16">
+                            <input type="text" class="form-control" id="c_frequencia_respiratoria" name="c_frequencia_respiratoria" min="0" placeholder="Ex: 16"
+                            value = "<?php echo $c_fr; ?>">
                         </div>
                     </div>
                     <!-- input de peso altura e IMC -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_peso">Peso (kg):</label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="c_peso" name="c_peso" step="0.1" min="0" placeholder="Ex: 70.5">
+                            <input type="text" class="form-control" id="c_peso" name="c_peso" step="0.1" min="0" placeholder="Ex: 70.5"
+                            value = "<?php echo $n_peso ?>">
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_altura">Altura (m):</label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="c_altura" name="c_altura" step="0.01" min="0" placeholder="Ex: 1.75">
+                            <input type="text" class="form-control" id="c_altura" name="c_altura" step="0.01" min="0" placeholder="Ex: 1.75"
+                            value = "<?php echo $n_altura; ?>">
                         </div>
                         <label class="col-sm-2 col-form-label" for="c_imc">IMC:</label>
                         <div class="col-sm-2">
-                            <input type="number" class="form-control" id="c_imc" name="c_imc" step="0.1" min="0" placeholder="Ex: 22.9">
+                            <input type="text" class="form-control" id="c_imc" name="c_imc" step="0.1" min="0" placeholder="Ex: 22.9"
+                            value = "<?php echo $n_imc; ?>">
                         </div>
                     </div>
                     <hr>
@@ -956,49 +961,56 @@ include('anamnese_carrega_dados.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_ectoscopia">Ectoscopia:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_ectoscopia" name="c_ectoscopia" placeholder="Descrição da ectoscopia">
+                            <input type="text" class="form-control" id="c_ectoscopia" name="c_ectoscopia" placeholder="Descrição da ectoscopia"
+                            value = "<?php echo $c_ectoscopia ?>">
                         </div>
                     </div>
                     <!-- input tipo text para aparelho respirtório -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_aparelho_respiratorio">Aparelho Respiratório:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_aparelho_respiratorio" name="c_aparelho_respiratorio" placeholder="Descrição do aparelho respiratório">
+                            <input type="text" class="form-control" id="c_aparelho_respiratorio" name="c_aparelho_respiratorio" 
+                            placeholder="Descrição do aparelho respiratório" value = "<?php echo $c_exame_aparelho_respiratorio ?>">
                         </div>
                     </div>
                     <!-- input tipo text para aparelho cardiovascular -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_aparelho_cardiovascular">Aparelho Cardiovascular:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_aparelho_cardiovascular" name="c_aparelho_cardiovascular" placeholder="Descrição do aparelho cardiovascular">
+                            <input type="text" class="form-control" id="c_aparelho_cardiovascular" name="c_aparelho_cardiovascular" 
+                            placeholder="Descrição do aparelho cardiovascular" value = "<?php echo $c_exame_aparelho_cardio ?>">
                         </div>
                     </div>
                     <!-- input tipo text para aparelho abdome -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_aparelho_abdome">Aparelho Abdome:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_aparelho_abdome" name="c_aparelho_abdome" placeholder="Descrição do aparelho abdome">
+                            <input type="text" class="form-control" id="c_aparelho_abdome" name="c_aparelho_abdome" 
+                            placeholder="Descrição do aparelho abdome" value = "<?php echo $c_exame_abdome ?>">
                         </div>
                     </div>
                     <!-- input tipo text para membros   -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_membros">Membros:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_membros" name="c_membros" placeholder="Descrição dos membros">
+                            <input type="text" class="form-control" id="c_membros" name="c_membros" 
+                            placeholder="Descrição dos membros" value = "<?php echo $c_exame_membros ?>">
                         </div>
                     </div>
                     <!-- input tipo text para coluna vertebral   -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_coluna_vertebral">Coluna Vertebral:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_coluna_vertebral" name="c_coluna_vertebral" placeholder="Descrição da coluna vertebral">
+                            <input type="text" class="form-control" id="c_coluna_vertebral" name="c_coluna_vertebral" 
+                            placeholder="Descrição da coluna vertebral" value = "<?php echo $c_exame_coluna ?>">
                         </div>
                     </div>
                     <!-- input tipo text para Exme Neurologico   -->
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_exame_neurologico">Exame Neurológico:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="c_exame_neurologico" name="c_exame_neurologico" placeholder="Descrição do exame neurológico">
+                            <input type="text" class="form-control" id="c_exame_neurologico" name="c_exame_neurologico" 
+                            placeholder="Descrição do exame neurológico" value = "<?php echo $c_exame_neurologico ?>">
                         </div>
                     </div>
                 </div> <!-- fim do menu5 -->
