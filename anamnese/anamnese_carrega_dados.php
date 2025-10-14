@@ -410,12 +410,26 @@ $c_hipotese_diagnostica = $registro['conduta_hipotese_diag'];
 $c_exames_complementares = $registro['conduta_exames_compl'];
 $c_conduta = $registro['conduta'];
 // parecer 
-if ($registro['parecer']=='A') {
-    // cria variavel para check
+if ($registro['parecer'] == 'A') {
+    $c_chk_apto = "checked";
+} else {
+    $c_chk_apto = "";
 }
-if ($registro['parecer']=='R') {
-    $c_parecer = 'R';
+if ($registro['parecer'] == 'R') {
+    $c_chk_apto_restricoes = "checked";
+} else {
+    $c_chk_apto_restricoes = "";
 }
-if ($registro['parecer']=='I') {
-    $c_parecer = 'I';
+if ($registro['parecer'] == 'I') {
+    $c_chk_inapto = "checked";
+} else {
+    $c_chk_inapto = "";
 }
+if ($registro['parecer'] == 'R') {
+    $c_habilita_restricao = "";
+} else {
+    $c_habilita_restricao = "disabled";
+}
+$c_restricoes = $registro['restricoes'];
+
+/////////////////////// fim de carregar registro /////////////////////////////////////

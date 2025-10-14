@@ -1051,23 +1051,27 @@ include('anamnese_carrega_dados.php');
                                 <div class="form-check">
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto" value="Apto para a função" checked>
+                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto"
+                                             value="A" <?php echo $c_chk_apto ?>>
                                             <span>Apto para a função</span>
                                         </label>
                                     </div>
                                       <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
+                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto"
+                                             value="I" <?php echo $c_chk_inapto ?>>
                                             <span>Inapto para a função</span>
                                         </label>
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto_restricoes" value="0">
+                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" 
+                                            id="c_parecer_medico_apto_restricoes" value="R" <?php echo $c_chk_apto_restricoes ?>>
                                             <span>Apto para a função com restrições</span>
                                         </label>
                                         <!-- input para descrever as restrições -->
-                                        <input type="text" class="form-control mt-2" disabled id="c_restricoes" name="c_restricoes" placeholder="Descreva as restrições">
+                                        <input type="text" class="form-control mt-2"  id="c_restricoes" name="c_restricoes"
+                                         placeholder="Descreva as restrições" <?php echo $c_habilita_restricao ?> value = "<?php echo $c_restricoes ?>">
                                     </div>
                                   
                                 </div>

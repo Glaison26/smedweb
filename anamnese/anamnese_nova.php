@@ -978,19 +978,19 @@ require_once('../conexao.php');
                                 <div class="form-check">
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto" value="Apto para a função" checked>
+                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto" value="A" checked>
                                             <span>Apto para a função</span>
                                         </label>
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="2">
+                                            <input type="radio" onClick="habilitacao()" name="c_parecer_medico" id="c_parecer_medico_inapto" value="I">
                                             <span>Inapto para a função</span>
                                         </label>
                                     </div>
                                     <div class="row mb-2">
                                         <label for="c_parecer_medico">
-                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto_restricoes" value="0">
+                                            <input type="radio" name="c_parecer_medico" onClick="habilitacao()" id="c_parecer_medico_apto_restricoes" value="R">
                                             <span>Apto para a função com restrições</span>
                                         </label>
                                         <!-- input para descrever as restrições -->

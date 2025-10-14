@@ -199,19 +199,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_hipotese_diagnostica = $_POST['c_hipotese_diagnostica'];
     $c_exames_complementares = $_POST['c_exames_complementares'];
     $c_conduta = $_POST['c_conduta'];
-    $c_restricoes = $_POST['restricoes'];
+
     // apto para a função
     // risco ergonômico
     // parecer medico
-    if (isset($_POST['c_parecer_medico_apto'])) {
-        $c_parecer = 'A';
-    } 
-    if (isset($_POST['c_parecer_medico_apto_restricoes'])){
-        $c_parecer = 'R';
-    }
-    if (isset($_POST['c_parecer_medico_inapto'])) {
-        $c_parecer = 'I';
-    }
+    $c_parecer = $_POST['c_parecer_medico'];
+    $c_restricoes = $_POST['c_restricoes'];
+
+
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
     if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada)) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";
