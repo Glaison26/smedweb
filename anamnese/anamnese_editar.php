@@ -42,7 +42,7 @@ include('anamnese_carrega_dados.php');
     ?>
     <div class="container-fluid">
 
-        <form method="post" action="anamnese_grava.php">
+        <form method="post" action="anamnese_altera.php">
             <!-- botões salvar e cancelar -->
             <div class="row mb-3">
                 <div class="offset-sm-0 col-sm-3">

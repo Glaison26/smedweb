@@ -1,4 +1,6 @@
 <?php
+// Sessão
+session_start();
 // carrega dados do registro selecionado para a variaveis do formulário
 // monto sql com os dados 
 $c_sql = "select * from anamnese where id ='$c_id'";
@@ -9,6 +11,8 @@ if (!$registro) {
     header('location: /smedweb/anamenese/anamnese_lista.php');
     exit;
 }
+// sessão com a id 
+$_SESSION['id_anamnese'] = $c_id;
 // pego valores e jogo nas variaveis
 $c_setor = $registro['setor'];
 $c_cargo = $registro['funcao'];
