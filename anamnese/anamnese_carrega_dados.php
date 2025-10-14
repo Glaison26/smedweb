@@ -365,7 +365,7 @@ if ($registro['stm_geniturario'] == 'Sim') {
 } else {
     $c_check_smtp_geniturario_sim = "";
     $c_check_smtp_geniturario_nao = "checked";
-} 
+}
 // Musculoesquelético (Dor nas articulações, fraqueza muscular)
 if ($registro['stm_musculo_esqueletico'] == 'Sim') {
     $c_check_smtp_musculo_esqueletico_sim = "checked";
@@ -410,17 +410,12 @@ $c_hipotese_diagnostica = $registro['conduta_hipotese_diag'];
 $c_exames_complementares = $registro['conduta_exames_compl'];
 $c_conduta = $registro['conduta'];
 // parecer 
-if (isset($_POST['c_parecer_medico_apto'])) {
-        $c_parecer = 'A';
-    } 
-    if (isset($_POST['c_parecer_medico_apto_restricoes'])){
-        $c_parecer = 'R';
-    }
-    if (isset($_POST['c_parecer_medico_inapto'])) {
-        $c_parecer = 'I';
-    }
-
-
-
-
-
+if ($registro['parecer']=='A') {
+    // cria variavel para check
+}
+if ($registro['parecer']=='R') {
+    $c_parecer = 'R';
+}
+if ($registro['parecer']=='I') {
+    $c_parecer = 'I';
+}
