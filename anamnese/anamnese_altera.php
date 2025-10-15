@@ -8,6 +8,7 @@ if (!isset($_SESSION['newsession'])) {
 // Inclui o arquivo de conexão com o banco de dados
 include_once("../conexao.php");
 $msg_erro = "";
+$_SESSION['msg_erro'] = "";
 $c_id_anamnese = $_SESSION['id_anamnese'];
 // declaro variáveis com valores padrões
 // Verifica se o formulário foi submetido
@@ -220,7 +221,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (!empty($msg_erro)) {
         // Se houver erros, exibe a mensagem e interrompe a execução
+        $_SESSION['msg_erro'] = $msg_erro;
+        header("Location: anamnese_erro.php");
         die($msg_erro);
+
     }
     // Prepara a query SQL para inserção dos dados
     $c_sql = "UPDATE  anamnese SET

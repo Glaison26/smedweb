@@ -8,6 +8,8 @@ if (!isset($_SESSION['newsession'])) {
 // Inclui o arquivo de conexão com o banco de dados
 include_once("../conexao.php");
 $msg_erro = "";
+$_SESSION['msg_erro'] = "";
+
 // declaro variáveis com valores padrões
 // Verifica se o formulário foi submetido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -206,7 +208,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_parecer = $_POST['c_parecer_medico'];
     $c_restricoes = $_POST['c_restricoes'];
 
-
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
     if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada)) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";
@@ -219,13 +220,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     if (!empty($msg_erro)) {
         // Se houver erros, exibe a mensagem e interrompe a execução
+        $_SESSION['msg_erro'] = $msg_erro;
+        header("Location: anamnese_erro.php");
         die($msg_erro);
     }
     // Prepara a query SQL para inserção dos dados
     $c_sql = "INSERT INTO anamnese (id_paciente, data, setor, funcao, admissao, atividades, jornada, descricao_atividades,
     risco_fisico, risco_quimico, risco_biologico, risco_ergonomico, risco_acidentes, motivo_consulta, queixa_principal, hda,
     antecedente_hipertensao, antecedente_diabete, antecedente_cardiaco, antecedente_asma_bronquite, antecedente_renais, 
-    antecedente_neurologica, antecedente_psquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicamentos_uso,
+    antecedente_neurologica, antecedente_psiquiatrico, antecedente_cancer, antecedente_alergia, antecedente_cirurgias, medicamentos_uso,
     habito_tabagismo, etilismo, atividade_fisica, atividade_fisica_qual, atividade_fisica_frequencia, tabagismo_qtd_dia, tabagismo_tempo, etilismo_frequencia, usa_epi, quais_epi,
     familiar_hipertensao, obs_familiar_hipertensao, familiar_diabetes, obs_familiar_diabetes,
     familiar_cardiaco, obs_familiar_cardiaco, familiar_cancer, obs_familiar_cancer,  familiar_outros, obs_familiar_outros,

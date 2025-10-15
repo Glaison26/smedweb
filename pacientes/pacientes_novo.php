@@ -41,14 +41,13 @@ $c_indicacao = "";
 $c_profissao = "";
 $c_identidade = "";
 // se a inclusão do paciente veio da agenda preencho com os dados do agendamento
-if ($_SESSION['incagenda']==true){
+if ($_SESSION['incagenda'] == true) {
     // seções para agenda
-    $c_nome=$_SESSION['nomepac'];
-    $c_convenio=$_SESSION['conveniopac'];
-    $c_telefone1=$_SESSION['telefonepac'];
-    $c_email=$_SESSION['emailpac'];
-    $c_matricula=$_SESSION['matriculapac'];
-  
+    $c_nome = $_SESSION['nomepac'];
+    $c_convenio = $_SESSION['conveniopac'];
+    $c_telefone1 = $_SESSION['telefonepac'];
+    $c_email = $_SESSION['emailpac'];
+    $c_matricula = $_SESSION['matriculapac'];
 }
 // variaveis para mensagens de erro e suscessso da gravação
 $msg_gravou = "";
@@ -80,24 +79,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_mae = $_POST['mae'];
     $c_convenio = $_POST['convenio'];
     $c_identidade = $_POST['identidade'];
-    
+
     $c_estadocivil = $_POST['estadocivil'];
     $c_indicacao = $_POST['indicacao'];
     //
     do {
-      
-        
+
+
         // consiste email
         if (!validaEmail($c_email) && !empty($c_email)) {
             $msg_erro = "E-mail informado inválido!!";
             break;
         }
 
-        if (!validaCPF($c_cpf)&& !empty($c_cpf)) {
+        if (!validaCPF($c_cpf) && !empty($c_cpf)) {
             $msg_erro = "CPF informado inválido!!";
             break;
         }
-             
+
         // rotina para pegar id da especialidade selecionada
         $c_convenio  = $_POST['convenio'];
         $c_sql_convenio = "SELECT convenios.id, convenios.nome FROM convenios where convenios.nome='$c_convenio'";
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             " Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
              '$c_obs', '$c_cpf', '$c_identidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
              , '$c_estadocivil', '$c_cor',  '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$d_dataprimeira', '$c_id_convenio')";
-         echo $c_sql;   
+        echo $c_sql;
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
@@ -121,9 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
-        if ($_SESSION['incagenda']==false){
+        if ($_SESSION['incagenda'] == false) {
             header('location: /smedweb/pacientes/pacientes_lista.php');
-        }else{
+        } else {
             header('location: /smedweb/agenda/agenda.php');
         }
     } while (false);
@@ -311,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <option>Leuco</option>
                                 <option>Faio</option>
                                 <option>Melano</option>
-                                
+
                             </select>
                         </div>
                     </div>
@@ -364,8 +363,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Convênio </label>
                             <div class="col-sm-3">
-                                <select class="form-control form-control-lg"  id="convenio" name="convenio" required>
-                                    
+                                <select class="form-control form-control-lg" id="convenio" name="convenio" required>
+
                                     <?php
                                     $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
                                     $result = $conection->query($c_sql);
@@ -390,7 +389,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Fone 1 (*) </label>
                             <div class="col-sm-2">
-                                <input type="tel" required maxlength="25" onkeyup="handlePhone(event)" class=" form-control"  id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
+                                <input type="tel" required maxlength="25" onkeyup="handlePhone(event)" class=" form-control" id="telefone1" name="telefone1" value="<?php echo $c_telefone1; ?>">
                             </div>
                             <label class="col-sm-1 col-form-label">Fone 2</label>
                             <div class="col-sm-2">
@@ -433,10 +432,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="offset-sm-0 col-sm-3">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                         <?php
-                        if ($_SESSION['incagenda']==false){
+                        if ($_SESSION['incagenda'] == false) {
                             echo "<a class='btn btn-danger' href='/smedweb/pacientes/pacientes_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
-                        }else
-                        {
+                        } else {
                             echo "<a class='btn btn-danger' href='/smedweb/agenda/agenda.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>";
                         }
                         ?>

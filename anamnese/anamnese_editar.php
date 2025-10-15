@@ -21,9 +21,7 @@ include('anamnese_carrega_dados.php');
 <body>
     <script src="habilitar.js"></script>
 
-    <script>
-        habilitacao(); // Código JS direto para habilitar ou desabilitar os imputs
-    </script>
+   
     <!-- painel com título -->
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
