@@ -244,7 +244,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     antecedente_asma_bronquite='$c_antecedente_asma_bronquite',
     antecedente_renais='$c_doencas_renais', 
     antecedente_neurologica='$c_doencas_neurologicas',
-    antecedente_psquiatrico='$c_disturbios_psiquiatricos', 
+    antecedente_psiquiatrico='$c_disturbios_psiquiatricos', 
     antecedente_cancer='$c_cancer',
     antecedente_alergia='$c_alergias', 
     antecedente_cirurgias='$c_cirurgias_previas',

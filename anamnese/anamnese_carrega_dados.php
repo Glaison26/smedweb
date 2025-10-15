@@ -143,7 +143,7 @@ if ($registro['antecedente_neurologica'] == 'Sim') {
     $c_neurologicos_obs = "";
 }
 // antecedentes psquiatricos
-if ($registro['antecedente_psquiatrico'] == 'Sim') {
+if ($registro['antecedente_psiquiatrico'] == 'Sim') {
     $c_check_antecedente_psquiatrico_sim = "checked";
     $c_check_antecedente_psquiatrico_nao = "";
     $c_habilita_antecedente_psiquiatrico_obs = "";

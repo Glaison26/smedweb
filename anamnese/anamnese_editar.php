@@ -475,8 +475,7 @@ include('anamnese_carrega_dados.php');
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="c_medicamentos_uso">Medicamentos em Uso: *</label>
                         <div class="col-sm-8">
-                            <textarea class="form-control" id="c_medicamentos_uso" name="c_medicamentos_uso" rows="4" required>
-                            <?php echo $c_medicamento_uso;?></textarea>
+                            <textarea class="form-control" id="c_medicamentos_uso" name="c_medicamentos_uso" rows="4" required><?php echo $c_medicamento_uso?></textarea>
                         </div>
                     </div>
                     <h4>Hábitos de Vida</h4>
