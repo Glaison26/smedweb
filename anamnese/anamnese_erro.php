@@ -9,9 +9,6 @@ include_once("../links.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 <body>
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
@@ -30,8 +27,6 @@ include_once("../links.php");
             </div>
         </div>
     </div>
-
-
 </body>
 
 </html>
