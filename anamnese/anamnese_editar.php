@@ -20,6 +20,7 @@ include('anamnese_carrega_dados.php');
 
 <body>
     <script src="habilitar.js"></script>
+   
 
    
     <!-- painel com título -->

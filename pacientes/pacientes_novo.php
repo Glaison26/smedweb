@@ -131,12 +131,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <style>
         /* Chrome, Safari, Edge, Opera */
@@ -152,7 +153,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </style>
 
-    <script type="text/javascript" src="js/funcoes.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cepInput = document.getElementById('cep');
+
+            // Adiciona um ouvinte de evento para quando o campo de CEP perder o foco
+            cepInput.addEventListener('blur', () => {
+                let cep = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+                // Verifica se o campo CEP possui valor informado
+                if (cep) {
+                   
+
+                    // Faz a requisição usando a Fetch API
+
+                    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.erro) {
+                                alert('CEP não encontrado.');
+                                return;
+                            }
+                            document.getElementById('endereco').textContent = data.logradouro;
+                            document.getElementById('bairro').textContent = data.bairro;
+                            document.getElementById('localidade').textContent = data.localidade;
+                            document.getElementById('uf').textContent = data.uf;
+                        })
+                        .catch(error => {
+                            alert('Erro ao buscar o CEP.');
+                            console.error('Erro:', error);
+                        });
+                }
+            });
+
+            // Função para limpar os campos do formulário
+            function limpaFormulario() {
+                document.getElementById('endereco').value = '';
+                document.getElementById('bairro').value = '';
+                document.getElementById('cidade').value = '';
+                document.getElementById('uf').value = '';
+            }
+        });
+    </script>
+
+
 
     <script>
         const handlePhone = (event) => {
@@ -224,28 +268,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Endereço </label>
-                            <div class="col-sm-5">
-                                <input type="text" maxlength="150" class="form-control" name="endereco" value="<?php echo $c_endereco; ?>">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Bairro</label>
-                            <div class="col-sm-5">
-                                <input type="text" maxlength="100" class="form-control" name="bairro" value="<?php echo $c_bairro; ?>">
-                            </div>
-
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label">Cidade</label>
-                            <div class="col-sm-5">
-                                <input type="text" maxlength="100" class="form-control" name="cidade" value="<?php echo $c_cidade; ?>">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Cep</label>
                             <div class="col-sm-2">
-                                <input type="text" placeholder="Somente números" maxlength="11" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
+                                <input type="text" placeholder="Somente números" maxlength="9" id="cep" class="form-control" name="cep" value="<?php echo $c_cep; ?>">
                             </div>
                             <label class="col-sm-1 col-form-label">Estado </label>
                             <div class="col-sm-2">
@@ -278,6 +303,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <option>SP</option>
                                     <option>TO</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Endereço </label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="150" class="form-control" name="endereco" value="<?php echo $c_endereco; ?>">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Bairro</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="bairro" value="<?php echo $c_bairro; ?>">
+                            </div>
+
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">Cidade</label>
+                            <div class="col-sm-5">
+                                <input type="text" maxlength="100" class="form-control" name="cidade" value="<?php echo $c_cidade; ?>">
                             </div>
                         </div>
                     </div>
