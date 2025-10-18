@@ -230,10 +230,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <td>$c_linha[inicio3]</td>
                             <td>$c_linha[fim3]</td>
                             <td>$c_linha[duracao3]</td>
-                            <td><button class='btn btn-info editbtn' data-toggle=modal' title='Editar Horários'><span class='glyphicon glyphicon-pencil'> Configurar
+                            <td><button type='button' class='btn btn-info editbtn' data-toggle='modal' data-target='#editmodal' title='Editar Horários'><span class='glyphicon glyphicon-pencil'> Configurar
                             </span></button></td>
                             </tr>
-                                ";
+                                ";  
                 }
                 ?>
             </tbody>
@@ -332,7 +332,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="modal-footer">
                          
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                             <button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>
+                             <!--<button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>-->
                         </div>
                     </form>
                 </div>
