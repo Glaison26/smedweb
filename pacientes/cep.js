@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('endereco').value = data.logradouro;
                         document.getElementById('bairro').value = data.bairro;
                         document.getElementById('cidade').value = data.localidade;
-                        document.getElementById('uf').value = data.uf;
+                       // document.getElementById('uf').value = data.uf;
                     } else {
                         // Se o CEP não for encontrado, exibe um alerta e limpa os campos
                         alert('CEP não encontrado. Por favor, verifique o número.');
@@ -38,6 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('endereco').value = '';
         document.getElementById('bairro').value = '';
         document.getElementById('cidade').value = '';
-        document.getElementById('uf').value = '';
+      //  document.getElementById('uf').value = '';
     }
 });

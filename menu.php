@@ -391,16 +391,7 @@ if (($c_linha['tipo'] == '1')) {
 
 </body>
 
-<div style="padding-bottom:15px;" style="padding-left :100px;">
-	<footer>
-		<div style="padding-left :15px;">
-			<p>
 
-			<h4>SMARTMED - Todos os direitos reservados</h4>
-			</p>
-		</div>
-	</footer>
-</div>
 
 
 <!-- CSS para as barras laterais -->
