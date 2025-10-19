@@ -182,17 +182,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // script para capturar endereço pelo cep
             document.addEventListener('DOMContentLoaded', () => {
                 const cepInput = document.getElementById('cep');
-
                 // Adiciona um ouvinte de evento para quando o campo de CEP perder o foco
                 cepInput.addEventListener('blur', () => {
                     let cep = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-
                     // Verifica se o campo CEP possui valor informado
                     if (cep) {
-
-
                         // Faz a requisição usando a Fetch API
-
                         fetch(`https://viacep.com.br/ws/${cep}/json/`)
                             .then(response => response.json())
                             .then(data => {
