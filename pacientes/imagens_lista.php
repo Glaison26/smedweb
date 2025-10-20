@@ -11,7 +11,8 @@ $c_id = $_GET["id"];
 $c_descricao = "";
 // sql para contar numero de refistros
 // sql para capturar as imagens
-$c_sql_conta = "SELECT Count(*) as total FROM imagens_pacientes where imagens_pacientes.id_paciente='$c_id' ORDER BY imagens_pacientes.`data` desc";
+$c_sql_conta = "SELECT Count(*) as total FROM imagens_pacientes where imagens_pacientes.id_paciente='$c_id'
+ORDER BY imagens_pacientes.`data` desc";
 $result_conta = $conection->query($c_sql_conta);
 $c_linha_conta = $result_conta->fetch_assoc();
 $c_conta = $c_linha_conta['total'];
@@ -36,7 +37,8 @@ $c_conta = $c_linha_conta['total'];
     <br>
     <div class="container -my5">
         <div class="class='mb-3 row">
-            <a class='btn btn-Light' href='/smedweb/pacientes/imagens.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
+            <a class='btn btn-Light' href='/smedweb/pacientes/imagens.php'><img src="\smedweb\images\voltar.png" 
+            alt="" width="15" height="15"> Voltar</a>
         </div><br>
         <div class="panel panel-info">
             <div class="panel-heading">

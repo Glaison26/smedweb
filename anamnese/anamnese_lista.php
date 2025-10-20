@@ -130,6 +130,9 @@ $nomepaciente = $c_linha2['nome'];
                     echo "<td>
                                 <a class='btn btn-light btn-sm' title='Editar Anamnese' href='javascript:func()'onclick='editar($c_linha[id])'>
                                 <span class='glyphicon glyphicon-pencil'> Editar</span></a>
+                                <a class='btn btn-primaty btn-sm' title='Enviar Anamnese para História Clínica' 
+                                href='javascript:func()'onclick='gera_historia($c_linha[id])'><span class='glyphicon glyphicon-share'> Gerar Histórico</span></a>
+                                
                    
                           </td>";
                     echo "</tr>";
