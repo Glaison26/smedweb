@@ -12,7 +12,7 @@ include("../links.php");
 
 $c_login = $_SESSION['c_usuario'];
 $c_sql = "SELECT usuario.id,usuario.tipo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
-          fichaclinica_eventos,fichaclinica_excluir FROM usuario
+          fichaclinica_eventos, fichaclinica_anamnese, fichaclinica_excluir FROM usuario
 	      JOIN perfil_usuarios_opcoes ON usuario.id_perfil=perfil_usuarios_opcoes.id
 		  where usuario.login='$c_login'";
 $result = $conection->query($c_sql);
@@ -42,7 +42,13 @@ if (($c_linha2['fichaclinica_imagens'] == 'S') || ($c_linha2['tipo'] == '1')) {
 } else {
     $op_imagem = "N";
 }
-// imagens
+// eventos
+if (($c_linha2['fichaclinica_anamnese'] == 'S') || ($c_linha2['tipo'] == '1')) {
+    $op_anamnese = "S";
+} else {
+    $op_anamnese = "N";
+}
+// anamnsese
 if (($c_linha2['fichaclinica_eventos'] == 'S') || ($c_linha2['tipo'] == '1')) {
     $op_eventos = "S";
 } else {
@@ -59,14 +65,14 @@ if (($c_linha2['fichaclinica_excluir'] == 'S') || ($c_linha2['tipo'] == '1')) {
 $c_sql = "";
 $_SESSION['incagenda'] = false;
 // faço a Leitura da tabela de pacientes com sql
-    $c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
+$c_sql = "SELECT pacientes.id, pacientes.nome, pacientes.sexo, pacientes.fone, pacientes.fone2, convenios.nome as convenio, pacientes.matricula 
     FROM pacientes JOIN convenios ON pacientes.id_convenio=convenios.id order by pacientes.nome";
 
-    $result = $conection->query($c_sql);
-    // verifico se a query foi correto
-    if (!$result) {
-        die("Erro ao Executar Sql!!" . $conection->connect_error);
-    }
+$result = $conection->query($c_sql);
+// verifico se a query foi correto
+if (!$result) {
+    die("Erro ao Executar Sql!!" . $conection->connect_error);
+}
 
 
 ?>
@@ -75,7 +81,7 @@ $_SESSION['incagenda'] = false;
 <html lang="en">
 
 <body>
-     <script>
+    <script>
         $(document).ready(function() {
             $('.tabpacientes').DataTable({
                 // 
@@ -177,7 +183,12 @@ $_SESSION['incagenda'] = false;
     <!-- função para chamar anamnese de paciente -->
     <script>
         function anamnese(id) {
-            window.location.href = "/smedweb/anamnese/anamnese_lista.php?idpaciente=" + id;
+            var acesso = $('#input_anamnese').val();
+            if (acesso == 'S') {
+                window.location.href = "/smedweb/anamnese/anamnese_lista.php?idpaciente=" + id;
+            } else {
+                alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
+            }
         }
     </script>
 
@@ -215,11 +226,12 @@ $_SESSION['incagenda'] = false;
             <input type="hidden" id="input_imagem" name="input_imagem" value="<?php echo $op_imagem; ?>">
             <input type="hidden" id="input_evento" name="input_evento" value="<?php echo $op_eventos; ?>">
             <input type="hidden" id="input_excluir" name="input_excluir" value="<?php echo $op_excluir; ?>">
+            <input type="hidden" id="input_anamnese" name="input_anamnese" value="<?php echo $op_anamnese; ?>">
             <!-- -->
-           
+
             <a class="btn btn-success" href="/smedweb/pacientes/pacientes_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
             <a class="btn btn-secondary" href="/smedweb/menu.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-         
+
         </form>
         <hr>
         <table class="table display table-bordered tabpacientes">
