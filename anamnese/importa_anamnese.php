@@ -445,7 +445,7 @@ $result = $conection->query($c_sql_historia);
 $registro = $result->fetch_assoc();
 $hoje = date('d/m/Y');
 $i_id_historia = $registro['id']; // pego a id da historia a fim de fazer o update
-$c_historia = $registro['historia'] . "\r\n" . "\r\n" . "        $hoje     " . "\r\n" . "Anamnese do Paciente"."\r\n".
+$c_historia = $registro['historia'] . "\r\n" . "\r\n" . "        $hoje  -   " . "Anamnese do Paciente"."\r\n".
 "Setor :".$c_setor;
 $c_cargo = $registro['funcao'];
 $c_admissao = $registro['admissao'];
