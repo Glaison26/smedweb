@@ -57,6 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     } else {
         $c_chkeventos = '';
     }
+    // anamnese
+    if ($registro['fichaclinica_anamnese'] == 'S') {
+        $c_chkanamnese = 'checked';
+    } else {
+        $c_chkanamnese = '';
+    }
     if ($registro['fichaclinica_excluir'] == 'S') {
         $c_chkexcluirpaciente = 'checked';
     } else {
@@ -252,6 +258,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $c_chkeventos = 'N';
     }
+    if (isset($_POST['chkanamnese'])) {
+        $c_chkanamnese = 'S';
+    } else {
+        $c_chkanamnese = 'N';
+    }
     if (isset($_POST['chkexcluirpaciente'])) {
         $c_chkexcluirpaciente = 'S';
     } else {
@@ -423,7 +434,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // gravo os dados com sql
         $c_sql = "Update perfil_usuarios_opcoes set descricao='$c_descricao',ativo='$c_ativo',fichaclinica='$c_chkacessofichaclinica',
               fichaclinica_editar='$c_chkeditarfichaclinica',fichaclinica_historia='$c_chkhistoriaclinica',fichaclinica_imagens='$c_chkimagens',
-              fichaclinica_eventos='$c_chkeventos',fichaclinica_excluir='$c_chkexcluirpaciente',agenda='$c_chkagenda',agenda_marcacao='$c_chkmarcacao',
+              fichaclinica_eventos='$c_chkeventos',fichaclinica_anamnese='$c_chkanamnese',fichaclinica_excluir='$c_chkexcluirpaciente',agenda='$c_chkagenda',agenda_marcacao='$c_chkmarcacao',
               agenda_incluir='$c_chkincluir',agenda_remanejar='$c_chkremanejar',agenda_desmarcar='$c_chkdesmarcar',agenda_criacao='$c_chkconfig_agenda',
               prescricao='$c_chkacessoprescricao',prescricao_atestado='$c_chkatestado',prescricao_formula='$c_chkformulas',
               prescricao_medicamento='$c_chkprescricaomedicamentos',
@@ -548,6 +559,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input class="form-check-input" type="checkbox" name="chkeventos" id="chkeventos" <?php echo $c_chkeventos ?>>
                                     </div>
                                 </div>
+                                <div class="form-check col-sm-3">
+                                    <label class="form-check-label col-form-label">Acessar Anamnese</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-check-input" type="checkbox" name="chkanamnese" id="chkanamnese" <?php echo $c_chkanamnese ?>>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row mb-3">
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Excluir Paciente</label>
                                     <div class="col-sm-3">

@@ -5,7 +5,7 @@ if (!isset($_SESSION['newsession'])) {
 }
 include("../conexao.php");  // conexão
 include("../links.php");
-include("../config_tabelas.php");
+//include("../config_tabelas.php");
 ?>
 
 <!-- HTML frontend da pagina -->
@@ -18,7 +18,7 @@ include("../config_tabelas.php");
         function confirmacao(id) {
             var resposta = confirm("Deseja remover esse registro?");
             if (resposta == true) {
-                window.location.href = "/smedweb/usuarioa/perfil_excluir.php?id=" + id;
+                window.location.href = "/smedweb/usuarios/perfil_excluir.php?id=" + id;
             }
         }
     </script>

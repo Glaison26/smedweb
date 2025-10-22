@@ -31,6 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $c_chkhistoriaclinica = 'N';
     }
+    if (isset($_POST['chkanamnese'])) {
+        $c_chkanamnese = 'S';
+    } else {
+        $c_chkanamnese = 'N';
+    }
+
     if (isset($_POST['chkimagens'])) {
         $c_chkimagens = 'S';
     } else {
@@ -211,13 +217,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // gravo os dados com sql
         $c_sql = "Insert into perfil_usuarios_opcoes (descricao,ativo,fichaclinica,fichaclinica_editar,fichaclinica_historia,fichaclinica_imagens,
-              fichaclinica_eventos,fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
+              fichaclinica_eventos, fichaclinica_anamnese, fichaclinica_excluir,agenda,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar,agenda_criacao,
               prescricao,prescricao_atestado,prescricao_formula,prescricao_medicamento,prescricao_laudos,prescricao_orientacao,prescricao_relatorio,
               prescricao_configuracao,financeiro,configuracoes,cad_profissionais,cad_convenios,cad_procedimentos,cad_itenslaudos,cad_medicamentos,
               cad_orientacoes,cad_formula,cad_atestado,cad_grupo_medicamento,cad_grupo_exame,cad_componente_formula,cad_grupo_componentes,
               cad_especialidades,cad_parametros_eventos,cad_diagnosticos)" .
             " Value ('$c_descricao','$c_ativo','$c_chkacessofichaclinica','$c_chkeditarfichaclinica','$c_chkhistoriaclinica','$c_chkimagens',
-              '$c_chkeventos','$c_chkexcluirpaciente','$c_chkagenda','$c_chkmarcacao','$c_chkincluir','$c_chkremanejar','$c_chkdesmarcar',
+              '$c_chkeventos', '$c_chkanamnese', '$c_chkexcluirpaciente','$c_chkagenda','$c_chkmarcacao','$c_chkincluir','$c_chkremanejar','$c_chkdesmarcar',
               '$c_chkconfig_agenda','$c_chkacessoprescricao','$c_chkatestado','$c_chkformulas','$c_chkprescricaomedicamentos','$c_chklaudos',
               '$c_chkorientacoes','$c_chkrelatorios','$c_chkconfigprescricao','$c_chkfinanceiro','$c_chkconfig','$c_chkprofissionais',
               '$c_chkconvenios','$c_chkprocedimentos','$c_chkitenslaudos','$c_chkmedicamentos','$c_chkorientacoespadroes','$c_chkformulaspadroes',
@@ -335,6 +341,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input class="form-check-input" type="checkbox" value="S" name="chkeventos" id="chkeventos" checked>
                                     </div>
                                 </div>
+                                <div class="form-check col-sm-3">
+                                    <label class="form-check-label col-form-label">Acessar Anamnese</label>
+                                    <div class="col-sm-3">
+                                        <input class="form-check-input" type="checkbox" value="S" name="chkanamnese" id="chkanamnese" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <div class="form-check col-sm-3">
                                     <label class="form-check-label col-form-label">Excluir Paciente</label>
                                     <div class="col-sm-3">

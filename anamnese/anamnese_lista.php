@@ -6,12 +6,12 @@ require_once '../conexao.php';
 // require com link.php
 require_once '../links.php';
 // pego o id do paciente
-   if (isset($_GET['idpaciente'])) {
-        $idpaciente = $_GET['idpaciente'];
-        $_SESSION['id_paciente'] = $idpaciente;
-    } else {
-        $idpaciente = $_SESSION['id_paciente'];
-    }
+if (isset($_GET['idpaciente'])) {
+    $idpaciente = $_GET['idpaciente'];
+    $_SESSION['id_paciente'] = $idpaciente;
+} else {
+    $idpaciente = $_SESSION['id_paciente'];
+}
 $_SESSION['msg_erro'] = "";
 // monto a query para pegar dados da anamnese
 $c_sql = "SELECT * FROM anamnese WHERE id_paciente = $idpaciente order by data desc";
@@ -41,11 +41,21 @@ $nomepaciente = $c_linha2['nome'];
 </head>
 
 <!-- função para chamar edição de registro -->
-    <script>
-        function editar(id) {
-           window.location.href = "/smedweb/anamnese/anamnese_editar.php?id=" + id;
+<script>
+    function editar(id) {
+        window.location.href = "/smedweb/anamnese/anamnese_editar.php?id=" + id;
     }
-    </script>
+</script>
+
+<!-- script para chamar rotina de inclusão de anamnese na história clinica do paciente -->
+<script> 
+function gera_anamnese(id) {
+    let confirma = confirm('Confirma importação dos dados da Anamnese para História clínica do Paciente?');
+    if (confirma) {
+      window.location.href = "/smedweb/anamnese/importa_anamnese.php?id=" + id;  
+    }
+}
+</script>
 
 <body>
     <script>
@@ -75,7 +85,7 @@ $nomepaciente = $c_linha2['nome'];
                         "sZeroRecords": "Nenhum registro encontrado",
 
                         "sLast": "Último"
-                        
+
                     },
                     "sSearch": "Pesquisar",
                     "sLengthMenu": 'Mostrar <select>' +
@@ -108,9 +118,9 @@ $nomepaciente = $c_linha2['nome'];
             </div>
         </div>
         <hr>
-         <a class="btn btn-success" href="/smedweb/anamnese/anamnese_nova.php"><span class="glyphicon glyphicon-plus"></span> Nova Anamnese</a>
-         <a class="btn btn-secondary" href="/smedweb/pacientes/pacientes_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-         <hr>
+        <a class="btn btn-success" href="/smedweb/anamnese/anamnese_nova.php"><span class="glyphicon glyphicon-plus"></span> Nova Anamnese</a>
+        <a class="btn btn-secondary" href="/smedweb/pacientes/pacientes_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+        <hr>
         <!-- tabela com as anamneses do paciente selecionado -->
         <table class="table table-striped table-bordered tabpacientes">
             <thead>
@@ -123,14 +133,16 @@ $nomepaciente = $c_linha2['nome'];
             <tbody>
                 <?php
                 while ($c_linha = $result->fetch_assoc()) {
-                    
+
                     echo "<tr>";
                     echo "<td>" . date('d/m/Y', strtotime($c_linha['data'])) . "</td>";
                     echo "<td>" . $c_linha['motivo_consulta'] . "</td>";
                     echo "<td>
                                 <a class='btn btn-light btn-sm' title='Editar Anamnese' href='javascript:func()'onclick='editar($c_linha[id])'>
                                 <span class='glyphicon glyphicon-pencil'> Editar</span></a>
-                   
+                                <a class='btn btn-primaty btn-sm' title='Importar Anamnese para História Clínica' 
+                                href='javascript:func()'onclick='gera_anamnese($c_linha[id])'><span class='glyphicon glyphicon-share'> Importar</span></a>
+               
                           </td>";
                     echo "</tr>";
                 }
