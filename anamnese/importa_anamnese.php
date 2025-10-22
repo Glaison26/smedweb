@@ -17,14 +17,6 @@ if (!$registro) {
 }
 // pego valores na tabela e jogo nas variaveis
 $i_id_paciente_anamnese = $registro['id_paciente'];
-$c_setor = $registro['setor'];
-$c_cargo = $registro['funcao'];
-$c_admissao = $registro['admissao'];
-$c_atividade = $registro['atividades'];
-$c_descricao_atividade = $registro['descricao_atividades'];
-$c_jornada = $registro['jornada'];
-
-// Antecedentes pessoais
 // hipertensão sistemica 
 if ($registro['antecedente_hipertensao'] == 'Sim') {
     $c_check_antecedente_hipertensao_sim = "checked";
@@ -399,54 +391,54 @@ $registro_historia = $result->fetch_assoc();
 $hoje = date('d/m/Y');
 $i_id_historia = $registro_historia['id']; // pego a id da historia a fim de fazer o update
 $c_historia = $registro['historia'] . "\r\n" . "\r\n" . "        $hoje  -           " . "Anamnese do Paciente" . "\r\n" . "\r\n" .
-    "Dados Ocupacionais". "\r\n" . "\r\n" .
+    "Dados Ocupacionais" . "\r\n" . "\r\n" .
     "Setor :" . $registro['setor'] . "\r\n" . // setor
     "Cargo :" . $registro['funcao'] . "\r\n" . //cargo
-    "Data de Admissão :" . $registro['admissao']. "\r\n" .
+    "Data de Admissão :" . $registro['admissao'] . "\r\n" .
     "Atividade :" . $registro['atividade'] . "\r\n" .
     "Descrição da Atividade :" . $registro['descricao_atividades'] . "\r\n" .
     "Jornada de Trabalho :" . $registro['jornada'] . "\r\n" .
     "Uso de EPI :" . $registro['usa_epi'] . "\r\n";
 if ($registro['usa_epi'] == 'Sim') {
-    $c_historia = $c_historia . "Qual EPI :" . $registro['quais_epi']."\r\n"."\r\n";
+    $c_historia = $c_historia . "Qual EPI :" . $registro['quais_epi'] . "\r\n" . "\r\n";
 }
 // riscos ocupacionais
-$c_historia = $c_historia.'Riscos Ocupacionais :'."\r\n"."\r\n";
+$c_historia = $c_historia . 'Riscos Ocupacionais :' . "\r\n" . "\r\n";
 // risco fisico
 if ($registro['risco_fisico'] == 'S') {
-    $c_historia = $c_historia . 'Físico (Ruído, calor, frio, vibração, radiação) : Sim'."\r\n";
+    $c_historia = $c_historia . 'Físico (Ruído, calor, frio, vibração, radiação) : Sim' . "\r\n";
 } else {
-    $c_historia = $c_historia . 'Físico (Ruído, calor, frio, vibração, radiação) : Não'."\r\n";
+    $c_historia = $c_historia . 'Físico (Ruído, calor, frio, vibração, radiação) : Não' . "\r\n";
 }
 // risco quimico
 if ($registro['risco_quimico'] == 'S') {
-    $c_historia = $c_historia . 'Químico (Poeira, fumos, gases,vapores, produtos químicos) : Sim'."\r\n";
+    $c_historia = $c_historia . 'Químico (Poeira, fumos, gases,vapores, produtos químicos) : Sim' . "\r\n";
 } else {
-    $c_historia = $c_historia . 'Químico (Poeira, fumos, gases,vapores, produtos químicos) : Não'."\r\n";
+    $c_historia = $c_historia . 'Químico (Poeira, fumos, gases,vapores, produtos químicos) : Não' . "\r\n";
 }
 // risco biológico
 if ($registro['risco_biologico'] == 'S') {
-    $c_historia = $c_historia . 'Biológico (Vírus, bactérias, fungos, parasitas) : Sim'."\r\n";
+    $c_historia = $c_historia . 'Biológico (Vírus, bactérias, fungos, parasitas) : Sim' . "\r\n";
 } else {
-    $c_historia = $c_historia . 'Biológico (Vírus, bactérias, fungos, parasitas) : Não'."\r\n";
+    $c_historia = $c_historia . 'Biológico (Vírus, bactérias, fungos, parasitas) : Não' . "\r\n";
 }
 // risco ergonomico
 if ($registro['risco_ergonomico'] == 'S') {
-    $c_historia = $c_historia . 'Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso) : Sim'."\r\n";
+    $c_historia = $c_historia . 'Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso) : Sim' . "\r\n";
 } else {
-    $c_historia = $c_historia . 'Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso) : Não'."\r\n";
+    $c_historia = $c_historia . 'Ergonômico (Postura inadequada, esforço repetitivo, levantamento de peso) : Não' . "\r\n";
 }
 //risco Acidentes
 if ($registro['risco_acidentes'] == 'S') {
-    $c_historia = $c_historia . 'Acidentes (Máquinas sem proteção, risco de quedas, eletricidade) : Sim'."\r\n";
+    $c_historia = $c_historia . 'Acidentes (Máquinas sem proteção, risco de quedas, eletricidade) : Sim' . "\r\n";
 } else {
-    $c_historia = $c_historia . 'Acidentes (Máquinas sem proteção, risco de quedas, eletricidade) : Não'."\r\n";
+    $c_historia = $c_historia . 'Acidentes (Máquinas sem proteção, risco de quedas, eletricidade) : Não' . "\r\n";
 }
 // Queixa Principal e História da Doença Atual (HDA)
-$c_historia = $c_historia.'Queixa Principal e História da Doença Atual (HDA)'."\r\n"."\r\n";
-$c_historia = $c_historia.'Motivo da Consulta: '.$registro['motivo_consulta']."\r\n".
-'Queixa Principal :'.$registro['queixa_principal']."\r\n".
-'História da Doença Atual (HDA):'.$registro['hda']."\r\n";
+$c_historia = $c_historia . 'Queixa Principal e História da Doença Atual (HDA)' . "\r\n" . "\r\n";
+$c_historia = $c_historia . 'Motivo da Consulta: ' . $registro['motivo_consulta'] . "\r\n" .
+    'Queixa Principal :' . $registro['queixa_principal'] . "\r\n" .
+    'História da Doença Atual (HDA):' . $registro['hda'] . "\r\n";
 // atualiza a historia
 $c_sql_up = "UPDATE historia set  historia='$c_historia' where id = '$i_id_historia'";
 
