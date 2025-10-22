@@ -21,34 +21,7 @@ $i_id_paciente_anamnese = $registro['id_paciente'];
 
 // medicamentos em uso (texto livre)
 $c_medicamento_uso = $registro['medicamentos_uso'];
-// tabagismo sim ou não
-if ($registro['habito_tabagismo'] == 'Sim') {
-    $c_check_tabagismo_sim = "checked";
-    $c_check_tabagismo_nao = "";
-    $c_Habilita_qtd_cigarros = "";
-    $c_habilita_tempo_cigarro = "";
-    $i_qtd_cigarros = $registro['tabagismo_qtd_dia'];
-    $i_tempo_cigarros = $registro['tabagismo_tempo'];
-} else {
-    $c_check_tabagismo_sim = "";
-    $c_check_tabagismo_nao = "checked";
-    $c_Habilita_qtd_cigarros = "disabled";
-    $c_habilita_tempo_cigarro = "disabled";
-    $i_qtd_cigarros = "";
-    $i_tempo_cigarros = "";
-}
-// Etilismo sim ou não
-if ($registro['etilismo']) {
-    $c_check_etilismo_sim = "checked";
-    $c_check_etilismo_nao = "";
-    $c_habilita_elitismo_freq = "";
-    $c_etilismo_freq = $registro['etilismo_frequencia'];
-} else {
-    $c_check_etilismo_sim = "";
-    $c_check_etilismo_nao = "checked";
-    $c_habilita_elitismo_freq = "disabled";
-    $c_etilismo_freq = "";
-}
+
 // atividade fisica
 if ($registro['atividade_fisica'] == 'Sim') {
     $c_check_atividade_fisica_sim = "checked";
