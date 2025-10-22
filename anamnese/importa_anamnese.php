@@ -328,8 +328,17 @@ $c_historia = $c_historia ."\r\n".'Antecedentes Pessoais'."\r\n"."\r\n".
 'Asma/Bronquite: '.$registro['antecedente_asma_bronquite']."\r\n".
 'Doenças Renais: '.$registro['antecedente_renais']."\r\n".
 'Doenças Neurológicas: '.$registro['antecedente_neurologica']."\r\n".
-'Distúrbios Psiquiátricos: '.$registro['antecedente_psiquiatrico']."\r\n";
-
+'Distúrbios Psiquiátricos: '.$registro['antecedente_psiquiatrico']."\r\n".
+'Câncer: '.$registro['antecedente_cancer']."\r\n".
+'Alergias: '.$registro['antecedente_alergia']."\r\n".
+'Cirurgias Prévias:'.$registro['antecedente_cirurgias']."\r\n"."\r\n".
+'Medicamentos em Uso:'.$registro['medicamentos_uso']."\r\n"."\r\n".
+'Hábitos de Vida :'."\r\n"."\r\n".
+'Tabagismo: '.$registro['habito_tabagismo']."\r\n";
+if ($registro['habito_tabagismo']=='Sim'){
+    $c_historia = $c_historia.'Cigarros por dia :'.$registro['tabagismo_qtd_dia']."\r\n".
+    'Há quanto tempo (anos):'.$registro['tabagismo_tempo']."\r\n"."\r\n";
+}
 
 
 
