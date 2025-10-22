@@ -339,10 +339,6 @@ if ($registro['habito_tabagismo']=='Sim'){
     $c_historia = $c_historia.'Cigarros por dia :'.$registro['tabagismo_qtd_dia']."\r\n".
     'Há quanto tempo (anos):'.$registro['tabagismo_tempo']."\r\n"."\r\n";
 }
-
-
-
-
 // atualiza a historia
 $c_sql_up = "UPDATE historia set  historia='$c_historia' where id = '$i_id_historia'";
 
