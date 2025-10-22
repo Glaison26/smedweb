@@ -201,14 +201,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $c_hipotese_diagnostica = $_POST['c_hipotese_diagnostica'];
     $c_exames_complementares = $_POST['c_exames_complementares'];
     $c_conduta = $_POST['c_conduta'];
-
     // apto para a função
     // risco ergonômico
     // parecer medico
     $c_parecer = $_POST['c_parecer_medico'];
     $c_restricoes = $_POST['c_restricoes'];
-
-
     // Valida os dados (exemplo simples, você pode adicionar mais validações)
     if (empty($c_setor) || empty($c_cargo) || empty($d_data_admissao) || empty($c_atividade) || empty($c_jornada)) {
         $msg_erro = "Por favor, preencha todos os campos obrigatórios.";
@@ -315,6 +312,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     restricoes='$c_restricoes' where id ='$c_id_anamnese'";
      
     //echo $c_sql;
+    //die();
     // Executa a query SQL        
     $result = $conection->query($c_sql);
     // verifico se a query foi correto

@@ -17,127 +17,8 @@ if (!$registro) {
 }
 // pego valores na tabela e jogo nas variaveis
 $i_id_paciente_anamnese = $registro['id_paciente'];
-// hipertensão sistemica 
-if ($registro['antecedente_hipertensao'] == 'Sim') {
-    $c_check_antecedente_hipertensao_sim = "checked";
-    $c_check_antecedente_hipertensao_nao = "";
-    $c_habilita_antecedente_hipertensao_obs = "";
-    $c_hipertensao_obs = $registro['obs_hipertensao'];
-} else {
-    $c_check_antecedente_hipertensao_sim = "";
-    $c_check_antecedente_hipertensao_nao = "checked";
-    $c_habilita_antecedente_hipertensao_obs = "disabled";
-    $c_hipertensao_obs = "";
-}
-// diabetis melinus
-if ($registro['antecedente_diabete'] == 'Sim') {
-    $c_check_antecedente_diabete_sim = "checked";
-    $c_check_antecedente_diabete_nao = "";
-    $c_habilita_antecedente_diabete_obs = "";
-    $c_diabete_obs = $registro['obs_diabete'];
-} else {
-    $c_check_antecedente_diabete_sim = "";
-    $c_check_antecedente_diabete_nao = "checked";
-    $c_habilita_antecedente_diabete_obs = "disabled";
-    $c_diabete_obs = "";
-}
-// doenças cardiovasculares
-if ($registro['antecedente_cardiaco'] == 'Sim') {
-    $c_check_antecedente_cardiaco_sim = "checked";
-    $c_check_antecedente_cardiaco_nao = "";
-    $c_habilita_antecedente_cardiaco_obs = "";
-    $c_cardiaco_obs = $registro['obs_cardiaco'];
-} else {
-    $c_check_antecedente_cardiaco_sim = "";
-    $c_check_antecedente_cardiaco_nao = "checked";
-    $c_habilita_antecedente_cardiaco_obs = "disabled";
-    $c_cardiaco_obs = "";
-}
 
-// asma / bronquite 
-if ($registro['antecedente_asma_bronquite'] == 'Sim') {
-    $c_check_antecedente_asma_bronquite_sim = "checked";
-    $c_check_antecedente_asma_bronquite_nao = "";
-    $c_habilita_antecedente_asma_bronquite_obs = "";
-    $c_asma_bronquite_obs = $registro['obs_asma_bronquite'];
-} else {
-    $c_check_antecedente_asma_bronquite_sim = "";
-    $c_check_antecedente_asma_bronquite_nao = "checked";
-    $c_habilita_antecedente_asma_bronquite_obs = "disabled";
-    $c_asma_bronquite_obs = "";
-}
-// Doenças renais
-if ($registro['antecedente_renais'] == 'Sim') {
-    $c_check_antecedente_renais_sim = "checked";
-    $c_check_antecedente_renais_nao = "";
-    $c_habilita_antecedente_renais_obs = "";
-    $c_renais_obs = $registro['obs_renais'];
-} else {
-    $c_check_antecedente_renais_sim = "";
-    $c_check_antecedente_renais_nao = "checked";
-    $c_habilita_antecedente_renais_obs = "disabled";
-    $c_renais_obs = "";
-}
-// antecedente neurologicos
-if ($registro['antecedente_neurologica'] == 'Sim') {
-    $c_check_antecedente_neurologicos_sim = "checked";
-    $c_check_antecedente_neurologicos_nao = "";
-    $c_habilita_antecedente_neurologicos_obs = "";
-    $c_neurologicos_obs = $registro['obs_neurologia'];
-} else {
-    $c_check_antecedente_neurologicos_sim = "";
-    $c_check_antecedente_neurologicos_nao = "checked";
-    $c_habilita_antecedente_neurologicos_obs = "disabled";
-    $c_neurologicos_obs = "";
-}
-// antecedentes psquiatricos
-if ($registro['antecedente_psiquiatrico'] == 'Sim') {
-    $c_check_antecedente_psquiatrico_sim = "checked";
-    $c_check_antecedente_psquiatrico_nao = "";
-    $c_habilita_antecedente_psiquiatrico_obs = "";
-    $c_psquiatrico_obs = $registro['obs_psquiatrico'];
-} else {
-    $c_check_antecedente_psquiatrico_sim = "";
-    $c_check_antecedente_psquiatrico_nao = "checked";
-    $c_habilita_antecedente_psiquiatrico_obs = "disabled";
-    $c_psquiatrico_obs = "";
-}
-// Câncer
-if ($registro['antecedente_cancer'] == 'Sim') {
-    $c_check_antecedente_cancer_sim = "checked";
-    $c_check_antecedente_cancer_nao = "";
-    $c_habilita_antecedente_cancer_obs = "";
-    $c_cancer_obs = $registro['obs_cancer'];
-} else {
-    $c_check_antecedente_cancer_sim = "";
-    $c_check_antecedente_cancer_nao = "checked";
-    $c_habilita_antecedente_cancer_obs = "disabled";
-    $c_cancer_obs = "";
-}
-// Alergias
-if ($registro['antecedente_alergia'] == 'Sim') {
-    $c_check_antecedente_alergia_sim = "checked";
-    $c_check_antecedente_alergia_nao = "";
-    $c_habilita_antecedente_alergia_obs = "";
-    $c_alergia_obs = $registro['obs_alergia'];
-} else {
-    $c_check_antecedente_alergia_sim = "";
-    $c_check_antecedente_alergia_nao = "checked";
-    $c_habilita_antecedente_alergia_obs = "disabled";
-    $c_alergia_obs = "";
-}
-// cirurgias prévia
-if ($registro['antecedente_cirurgias'] == 'Sim') {
-    $c_check_antecedente_cirurgias_sim = "checked";
-    $c_check_antecedente_cirurgias_nao = "";
-    $c_habilita_antecedente_cirurgias_obs = "";
-    $c_cirurgia_obs = $registro['obs_cirurgia'];
-} else {
-    $c_check_antecedente_cirurgias_sim = "";
-    $c_check_antecedente_cirurgias_nao = "checked";
-    $c_habilita_antecedente_cirurgias_obs = "disabled";
-    $c_cirurgia_obs = "";
-}
+
 // medicamentos em uso (texto livre)
 $c_medicamento_uso = $registro['medicamentos_uso'];
 // tabagismo sim ou não
@@ -439,6 +320,20 @@ $c_historia = $c_historia . 'Queixa Principal e História da Doença Atual (HDA)
 $c_historia = $c_historia . 'Motivo da Consulta: ' . $registro['motivo_consulta'] . "\r\n" .
     'Queixa Principal :' . $registro['queixa_principal'] . "\r\n" .
     'História da Doença Atual (HDA):' . $registro['hda'] . "\r\n";
+// Antecedentes Pessoais
+$c_historia = $c_historia ."\r\n".'Antecedentes Pessoais'."\r\n"."\r\n". 
+'Hipertensão Arterial Sistêmica: '.$registro['antecedente_hipertensao']."\r\n".
+'Diabetes Mellitus: '.$registro['antecedente_diabete']."\r\n".
+'Doenças Cardiovasculares: '.$registro['antecedente_cardiaco']."\r\n".
+'Asma/Bronquite: '.$registro['antecedente_asma_bronquite']."\r\n".
+'Doenças Renais: '.$registro['antecedente_renais']."\r\n".
+'Doenças Neurológicas: '.$registro['antecedente_neurologica']."\r\n".
+'Distúrbios Psiquiátricos: '.$registro['antecedente_psiquiatrico']."\r\n";
+
+
+
+
+
 // atualiza a historia
 $c_sql_up = "UPDATE historia set  historia='$c_historia' where id = '$i_id_historia'";
 
