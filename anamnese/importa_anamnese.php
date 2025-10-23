@@ -23,12 +23,13 @@ $c_sql_historia = "select * from historia where id_paciente='$i_id_paciente_anam
 $result = $conection->query($c_sql_historia);
 $registro_historia = $result->fetch_assoc();
 $hoje = date('d/m/Y');
+$c_admissao = date("d-m-y", strtotime(str_replace('-', '/', $registro['admissao'])));
 $i_id_historia = $registro_historia['id']; // pego a id da historia a fim de fazer o update
-$c_historia = $registro['historia'] . "\r\n" . "\r\n" . "        $hoje  -           " . "Anamnese do Paciente" . "\r\n" . "\r\n" .
+$c_historia = $registro['historia'] . "\r\n" . "\r\n" . "$hoje  -           " . "Anamnese do Paciente" . "\r\n" . "\r\n" .
     "Dados Ocupacionais" . "\r\n" . "\r\n" .
     "Setor :" . $registro['setor'] . "\r\n" . // setor
     "Cargo :" . $registro['funcao'] . "\r\n" . //cargo
-    "Data de Admissão :" . $registro['admissao'] . "\r\n" .
+    "Data de Admissão :" . $c_admissao . "\r\n" .
     "Atividade :" . $registro['atividade'] . "\r\n" .
     "Descrição da Atividade :" . $registro['descricao_atividades'] . "\r\n" .
     "Jornada de Trabalho :" . $registro['jornada'] . "\r\n" .
