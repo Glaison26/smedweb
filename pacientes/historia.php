@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h5>História Clinica do Paciente<h5>
         </div>
     </div>
-    <div class="container -my5">
+    <div class="container-fluid">
         <form method="post" class="form-horizontal">
            
             <div class="panel panel-success">

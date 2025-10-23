@@ -144,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // rotina de validação dos dados recebidos
     $c_pressao_arterial = $_POST['c_pressao_arterial'];
     // verifico se o valor da frequencia cardiaca é numerico
-    if ((is_numeric($_POST['c_pressao_arterial']))) {
+    if ((is_numeric($_POST['c_frequencia_cardiaca']))) {
         $c_frequencia_cardiaca = $_POST['c_frequencia_cardiaca'];
     } else {
         $c_frequencia_cardiaca  = 0;

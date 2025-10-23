@@ -18,226 +18,6 @@ if (!$registro) {
 // pego valores na tabela e jogo nas variaveis
 $i_id_paciente_anamnese = $registro['id_paciente'];
 
-
-// medicamentos em uso (texto livre)
-$c_medicamento_uso = $registro['medicamentos_uso'];
-
-// atividade fisica
-if ($registro['atividade_fisica'] == 'Sim') {
-    $c_check_atividade_fisica_sim = "checked";
-    $c_check_atividade_fisica_nao = "";
-    $c_Habilita_atividade_fisica_qual = "";
-    $c_habilita_atividade_fisica_freq = "";
-    $c_atividade_fisica_qual = $registro['atividade_fisica_qual'];
-    $c_atividade_fisica_freq = $registro['atividade_fisica_frequencia'];
-} else {
-    $c_check_atividade_fisica_sim = "";
-    $c_check_atividade_fisica_nao = "checked";
-    $c_Habilita_atividade_fisica_qual = "enabled";
-    $c_habilita_atividade_fisica_freq = "enabled";
-    $c_atividade_fisica_qual = "";
-    $c_atividade_fisica_freq = "";
-}
-// antecedentes familiares
-// hipertensão
-if ($registro['familiar_hipertensao'] == 'Sim') {
-    $c_check_famimilar_hipertencao_sim = "checked";
-    $c_check_famimilar_hipertencao_nao = "";
-    $c_habilita_parentesco_hipertensao = "";
-    $c_parentesco_hipertensao = $registro['obs_familiar_hipertensao'];
-} else {
-    $c_check_famimilar_hipertencao_sim = "";
-    $c_check_famimilar_hipertencao_nao = "checked";
-    $c_habilita_parentesco_hipertensao = "disabled";
-    $c_parentesco_hipertensao = "";
-}
-// Diabetes
-if ($registro['familiar_diabetes'] == 'Sim') {
-    $c_check_famimilar_diabetes_sim = "checked";
-    $c_check_famimilar_diabetes_nao = "";
-    $c_habilita_parentesco_diabetes = "";
-    $c_parentesco_diabetes = $registro['obs_familiar_diabetes'];
-} else {
-    $c_check_famimilar_diabetes_sim = "";
-    $c_check_famimilar_diabetes_nao = "checked";
-    $c_habilita_parentesco_diabetes = "disabled";
-    $c_parentesco_diabetes = "";
-}
-// Doenças cardiovasculares
-if ($registro['familiar_cardiaco'] == 'Sim') {
-    $c_check_famimilar_cardiaco_sim = "checked";
-    $c_check_famimilar_cardiaco_nao = "";
-    $c_habilita_parentesco_cardiaco = "";
-    $c_parentesco_cardiaco = $registro['obs_familiar_cardiaco'];
-} else {
-    $c_check_famimilar_cardiaco_sim = "";
-    $c_check_famimilar_cardiaco_nao = "checked";
-    $c_habilita_parentesco_cardiaco = "disabled";
-    $c_parentesco_cardiaco = "";
-}
-// familiar cancer
-if ($registro['familiar_cancer'] == 'Sim') {
-    $c_check_famimilar_cancer_sim = "checked";
-    $c_check_famimilar_cancer_nao = "";
-    $c_habilita_parentesco_cancer = "";
-    $c_parentesco_cancer = $registro['obs_familiar_cancer'];
-} else {
-    $c_check_famimilar_cancer_sim = "";
-    $c_check_famimilar_cancer_nao = "checked";
-    $c_habilita_parentesco_cancer = "disabled";
-    $c_parentesco_cancer = "";
-}
-// paretescos outras donças
-if ($registro['familiar_outros'] == 'Sim') {
-    $c_check_famimilar_outros_sim = "checked";
-    $c_check_famimilar_outros_nao = "";
-    $c_habilita_parentesco_outros = "";
-    $c_parentesco_outros = $registro['obs_familiar_outros'];
-} else {
-    $c_check_famimilar_outros_sim = "";
-    $c_check_famimilar_outros_nao = "checked";
-    $c_habilita_parentesco_outros = "disabled";
-    $c_parentesco_outros = "";
-}
-// Interrogatório Sintomatológico (Revisão por Sistemas)
-// Geral (Febre, perda de peso, fadiga)
-if ($registro['stm_geral'] == 'Sim') {
-    $c_check_smtp_geral_sim = "checked";
-    $c_check_smtp_geral_nao = "";
-} else {
-    $c_check_smtp_geral_sim = "";
-    $c_check_smtp_geral_nao = "checked";
-}
-// Cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço)
-if ($registro['stm_cabeca_pescoso'] == 'Sim') {
-    $c_check_smtp_cabeca_pescoco_sim = "checked";
-    $c_check_smtp_cabeca_pescoco_nao = "";
-} else {
-    $c_check_smtp_cabeca_pescoco_sim = "";
-    $c_check_smtp_cabeca_pescoco_nao = "checked";
-}
-// pele
-if ($registro['stm_pele'] == 'Sim') {
-    $c_check_smtp_pele_sim = "checked";
-    $c_check_smtp_pele_nao = "";
-} else {
-    $c_check_smtp_pele_sim = "";
-    $c_check_smtp_pele_nao = "checked";
-}
-// olhos
-if ($registro['stm_olhos'] == 'Sim') {
-    $c_check_smtp_olhos_sim = "checked";
-    $c_check_smtp_olhos_nao = "";
-} else {
-    $c_check_smtp_olhos_sim = "";
-    $c_check_smtp_olhos_nao = "checked";
-}
-// ouvidos
-if ($registro['stm_ouvidos'] == 'Sim') {
-    $c_check_smtp_ouvidos_sim = "checked";
-    $c_check_smtp_ouvidos_nao = "";
-} else {
-    $c_check_smtp_ouvidos_sim = "";
-    $c_check_smtp_ouvidos_nao = "checked";
-}
-// Respiratório (Tosse, falta de ar, dor no peito)
-if ($registro['stm_respiratorio'] == 'Sim') {
-    $c_check_smtp_respiratorio_sim = "checked";
-    $c_check_smtp_respiratorio_nao = "";
-} else {
-    $c_check_smtp_respiratorio_sim = "";
-    $c_check_smtp_respiratorio_nao = "checked";
-}
-// Cardiovascular (Palpitações, dor no peito, inchaço)
-if ($registro['stm_cardiovascular'] == 'Sim') {
-    $c_check_smtp_cardiovascular_sim = "checked";
-    $c_check_smtp_cardiovascular_nao = "";
-} else {
-    $c_check_smtp_cardiovascular_sim = "";
-    $c_check_smtp_cardiovascular_nao = "checked";
-}
-// Gastrointestinal (Dor abdominal, náusea, vômito)
-if ($registro['stm_gastro'] == 'Sim') {
-    $c_check_smtp_gastro_sim = "checked";
-    $c_check_smtp_gastro_nao = "";
-} else {
-    $c_check_smtp_gastro_sim = "";
-    $c_check_smtp_gastro_nao = "checked";
-}
-// Geniturario
-if ($registro['stm_geniturario'] == 'Sim') {
-    $c_check_smtp_geniturario_sim = "checked";
-    $c_check_smtp_geniturario_nao = "";
-} else {
-    $c_check_smtp_geniturario_sim = "";
-    $c_check_smtp_geniturario_nao = "checked";
-}
-// Musculoesquelético (Dor nas articulações, fraqueza muscular)
-if ($registro['stm_musculo_esqueletico'] == 'Sim') {
-    $c_check_smtp_musculo_esqueletico_sim = "checked";
-    $c_check_smtp_musculo_esqueletico_nao = "";
-} else {
-    $c_check_smtp_musculo_esqueletico_sim = "";
-    $c_check_smtp_musculo_esqueletico_nao = "checked";
-}
-// Neurológico (Tontura, fraqueza, convulsões)
-if ($registro['stm_neurologico'] == 'Sim') {
-    $c_check_smtp_musculo_neurologico_sim = "checked";
-    $c_check_smtp_musculo_neurologico_nao = "";
-} else {
-    $c_check_smtp_musculo_neurologico_sim = "";
-    $c_check_smtp_musculo_neurologico_nao = "checked";
-}
-// Psiquiátrico (Ansiedade, depressão, insônia)
-if ($registro['stm_pisiquico'] == 'Sim') {
-    $c_check_smtp_musculo_psiquiatrico_sim = "checked";
-    $c_check_smtp_musculo_psiquiatrico_nao = "";
-} else {
-    $c_check_smtp_musculo_psiquiatrico_sim = "";
-    $c_check_smtp_musculo_psiquiatrico_nao = "checked";
-}
-
-$c_pa = $registro['exame_pa']; // Pressão Arterial
-$c_fc = $registro['exame_fc']; // frequencia cardiaca
-$c_fr = $registro['exame_fr']; // frequencia respiratoria
-$n_peso = $registro['exame_peso']; // peso
-$n_altura = $registro['exame_altura']; // altura
-$n_imc = $registro['exame_imc']; // indice de massa coorporal
-//
-$c_ectoscopia = $registro['exame_ectoscopia'];
-$c_exame_aparelho_respiratorio = $registro['exame_aparelho_respiratorio'];
-$c_exame_aparelho_cardio = $registro['exame_aparelho_cardio'];
-$c_exame_abdome = $registro['exame_abdome'];
-$c_exame_membros = $registro['exame_membros'];
-$c_exame_coluna = $registro['exame_coluna'];
-$c_exame_neurologico = $registro['exame_neurologico'];
-// conduta e parecer Médico
-$c_hipotese_diagnostica = $registro['conduta_hipotese_diag'];
-$c_exames_complementares = $registro['conduta_exames_compl'];
-$c_conduta = $registro['conduta'];
-// parecer 
-if ($registro['parecer'] == 'A') {
-    $c_chk_apto = "checked";
-} else {
-    $c_chk_apto = "";
-}
-if ($registro['parecer'] == 'R') {
-    $c_chk_apto_restricoes = "checked";
-} else {
-    $c_chk_apto_restricoes = "";
-}
-if ($registro['parecer'] == 'I') {
-    $c_chk_inapto = "checked";
-} else {
-    $c_chk_inapto = "";
-}
-if ($registro['parecer'] == 'R') {
-    $c_habilita_restricao = "";
-} else {
-    $c_habilita_restricao = "disabled";
-}
-$c_restricoes = $registro['restricoes'];
-
 // insiro dados das variaveis no histórico
 $c_sql_historia = "select * from historia where id_paciente='$i_id_paciente_anamnese'";
 $result = $conection->query($c_sql_historia);
@@ -294,26 +74,100 @@ $c_historia = $c_historia . 'Motivo da Consulta: ' . $registro['motivo_consulta'
     'Queixa Principal :' . $registro['queixa_principal'] . "\r\n" .
     'História da Doença Atual (HDA):' . $registro['hda'] . "\r\n";
 // Antecedentes Pessoais
-$c_historia = $c_historia ."\r\n".'Antecedentes Pessoais'."\r\n"."\r\n". 
-'Hipertensão Arterial Sistêmica: '.$registro['antecedente_hipertensao']."\r\n".
-'Diabetes Mellitus: '.$registro['antecedente_diabete']."\r\n".
-'Doenças Cardiovasculares: '.$registro['antecedente_cardiaco']."\r\n".
-'Asma/Bronquite: '.$registro['antecedente_asma_bronquite']."\r\n".
-'Doenças Renais: '.$registro['antecedente_renais']."\r\n".
-'Doenças Neurológicas: '.$registro['antecedente_neurologica']."\r\n".
-'Distúrbios Psiquiátricos: '.$registro['antecedente_psiquiatrico']."\r\n".
-'Câncer: '.$registro['antecedente_cancer']."\r\n".
-'Alergias: '.$registro['antecedente_alergia']."\r\n".
-'Cirurgias Prévias:'.$registro['antecedente_cirurgias']."\r\n"."\r\n".
-'Medicamentos em Uso:'.$registro['medicamentos_uso']."\r\n"."\r\n".
-'Hábitos de Vida :'."\r\n"."\r\n".
-'Tabagismo: '.$registro['habito_tabagismo']."\r\n";
-if ($registro['habito_tabagismo']=='Sim'){
-    $c_historia = $c_historia.'Cigarros por dia :'.$registro['tabagismo_qtd_dia']."\r\n".
-    'Há quanto tempo (anos):'.$registro['tabagismo_tempo']."\r\n"."\r\n";
+$c_historia = $c_historia . "\r\n" . 'Antecedentes Pessoais' . "\r\n" . "\r\n" .
+    'Hipertensão Arterial Sistêmica: ' . $registro['antecedente_hipertensao'].' - '.$registro['obs_hipertensao'] . "\r\n" .
+    'Diabetes Mellitus: ' . $registro['antecedente_diabete'] . ' - '.$registro['obs_diabete']. "\r\n" .
+    'Doenças Cardiovasculares: ' . $registro['antecedente_cardiaco'] . ' - '.$registro['obs_cardiaco'] ."\r\n" .
+    'Asma/Bronquite: ' . $registro['antecedente_asma_bronquite'] . ' - '.$registro['obs_asma_bronquite']. "\r\n" .
+    'Doenças Renais: ' . $registro['antecedente_renais'] . ' - '.$registro['obs_renais'] ."\r\n" .
+    'Doenças Neurológicas: ' . $registro['antecedente_neurologica'] . ' - '.$registro['obs_neurologia']. "\r\n" .
+    'Distúrbios Psiquiátricos: ' . $registro['antecedente_psiquiatrico'] . ' - '.$registro['obs_psiquiatrico']. "\r\n" .
+    'Câncer: ' . $registro['antecedente_cancer'] . ' - '.$registro['obs_cancer']. "\r\n" .
+    'Alergias: ' . $registro['antecedente_alergia'] . ' - '.$registro['obs_alergia'] ."\r\n" .
+    'Cirurgias Prévias:' . $registro['antecedente_cirurgias'] . ' - '.$registro['obs_cirurgia'] ."\r\n" . "\r\n" .
+    'Medicamentos em Uso:' . $registro['medicamentos_uso'] . "\r\n" . "\r\n" .
+    'Hábitos de Vida :' . "\r\n" . "\r\n" .
+    'Tabagismo: ' . $registro['habito_tabagismo'] . "\r\n";
+if ($registro['habito_tabagismo'] == 'Sim') {
+    $c_historia = $c_historia . 'Cigarros por dia :' . $registro['tabagismo_qtd_dia'] . "\r\n" .
+        'Há quanto tempo (anos):' . $registro['tabagismo_tempo'] . "\r\n" . "\r\n";
 }
+// etilismo
+$c_historia = $c_historia . 'Etilismo :' . $registro['etilismo'] . "\r\n";
+if ($registro['etilismo'] == 'Sim') {
+    $c_historia = $c_historia . 'Doses Semanais: ' . $registro['etilismo_frequencia'] . "\r\n" . "\r\n";
+}
+// atividade fisica
+$c_historia = $c_historia . 'Atividade Física :' . $registro['atividade_fisica'] . "\r\n";
+if ($registro['atividade_fisica'] == 'Sim') {
+    $c_historia = $c_historia . 'Quais atividades Físicas :' . $registro['atividade_fisica_qual'] . "\r\n" .
+        'Frequência :' . $registro['atividade_fisica_frequencia'] . "\r\n". "\r\n";
+}
+// Antecedentes Familiares
+$c_historia = $c_historia . "Antecedentes Familiares"."\r\n"."\r\n".
+'Hipertensão Arterial Sistêmica: '.$registro['familiar_hipertensao'].' - '.$registro['obs_familiar_hipertensao']."\r\n".
+'Diabetes Mellitus: '.$registro['familiar_diabetes'].' - '.$registro['obs_familiar_diabetes']."\r\n".
+'Doenças Cardiovasculares: '.$registro['familiar_cardiaco'].' - '.$registro['obs_familiar_cardiaco']."\r\n".
+'Câncer: '.$registro['familiar_cancer'].' - '.$registro['obs_familiar_cancer']."\r\n".
+'Outras Doenças: '.$registro['familiar_outros'].' - '.$registro['obs_familiar_outros']."\r\n". "\r\n";
+// Interrogatório Sintomatológico (Revisão por Sistemas)
+$c_historia = $c_historia . "Interrogatório Sintomatológico (Revisão por Sistemas)". "\r\n". "\r\n".
+'Geral (Febre, perda de peso, fadiga): '.$registro['stm_geral']. "\r\n".
+'Cabeça/Pescoço (Dor de cabeça, tontura, dor no pescoço): '.$registro['stm_cabeca_pescoso']. "\r\n".
+'Ouvidos (Dor, zumbido, perda auditiva): '.$registro['stm_ouvidos']. "\r\n".
+'Cardiovascular (Palpitações, dor no peito, inchaço):  '.$registro['stm_cardiovascular']. "\r\n".
+'Genitourinário (Dor ao urinar, sangue na urina, incontinência): '.$registro['stm_geniturario']. "\r\n".
+'Neurológico (Tontura, fraqueza, convulsões):'.$registro['stm_neurologico']. "\r\n".
+'Pele (Lesões, coceira, manchas):  '.$registro['stm_pele']. "\r\n".
+'Olhos (Alteração visual, dor, vermelhidão):'.$registro['stm_olhos']. "\r\n".
+'Respiratório (Tosse, falta de ar, dor no peito): '.$registro['stm_respiratorio']. "\r\n".
+'Gastrointestinal (Dor abdominal, náusea, vômito):  '.$registro['stm_gastro']. "\r\n".
+'Musculoesquelético (Dor nas articulações, fraqueza muscular): '.$registro['stm_musculo_esqueletico']. "\r\n".
+'Psiquiátrico (Ansiedade, depressão, insônia): '.$registro['stm_pisiquico']. "\r\n"."\r\n";
+// Exame Físico
+$c_historia = $c_historia . 'Exame Físico' ."\r\n". "\r\n".
+'Pressão Arterial (mmHg): '.$registro['exame_pa']."\r\n".
+'Frequência Cardíaca (bpm): '.$registro['exame_fc']."\r\n".
+'Frequência Respiratória (rpm): '.$registro['exame_fr']."\r\n".
+'Peso (kg): '.$registro['exame_peso']."\r\n".
+'Altura (m):'.$registro['exame_altura']."\r\n".
+'IMC: '.$registro['exame_imc']."\r\n".
+'Ectoscopia: '.$registro['exame_ectoscopia']."\r\n".
+'Aparelho Respiratório: '.$registro['exame_aparelho_respiratorio']."\r\n".
+'Aparelho Cardiovascular: '.$registro['exame_aparelho_cardio']."\r\n".
+'Aparelho Abdome: '.$registro['exame_abdome']."\r\n".
+'Membros: '.$registro['exame_membros']."\r\n".
+'Coluna Vertebral: '.$registro['exame_coluna']."\r\n".
+'Exame Neurológico: '.$registro['exame_neurologico']."\r\n"."\r\n";
+// Conduta e Parecer Médico
+$c_historico = $c_historico . 'Conduta e Parecer Médico'."\r\n"."\r\n".
+'Hipótese Diagnóstica: '.$registro['conduta_hipotese_diag']. "\r\n".
+'Exames Complementares Solicitados: '.$registro['conduta_exames_compl']."\r\n".
+'Conduta: '.$registro['conduta']."\r\n";
+// 
+$c_parecer = '';
+$c_restricoes = '';
+if ($registro['parecer']=='A'){
+    $c_parecer = 'Apto para a funçao';
+}
+if ($registro['parecer']=='I'){
+    $c_parecer = 'Inapto para a função';
+}
+if ($registro['parecer']=='R'){
+    $c_parecer = 'Apto para a função com restrições';
+    $c_restricoes = $registro['restricoes'];
+}
+$c_historia = $c_historia . 'Parecer Médico: '. $c_parecer."\r\n";
+if ($c_restricoes!='R'){
+   $c_historia = $c_historia . 'Restrições: '. $c_restricoes."\r\n"; 
+}
+
+
+
+
+
 // atualiza a historia
-$c_sql_up = "UPDATE historia set  historia='$c_historia' where id = '$i_id_historia'";
+$c_sql_up = "UPDATE historia set historia='$c_historia' where id = '$i_id_historia'";
 
 $result = $conection->query($c_sql_up);
 // verifico se a query foi correto

@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `agenda` (
   KEY `FK_agenda_convenios` (`id_convenio`),
   CONSTRAINT `FK_agenda_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_agenda_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.agenda: ~182 rows (aproximadamente)
+-- Copiando dados para a tabela smed.agenda: ~204 rows (aproximadamente)
 INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `horario`, `Nome`, `telefone`, `email`, `observacao`, `matricula`, `paciente_novo`, `paciente_compareceu`, `paciente_atendido`) VALUES
 	(4, 4, 3, '2025-09-24', '3', '08:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(5, 4, 3, '2025-09-24', '3', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -225,7 +225,30 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(182, 4, 3, '2025-10-17', '5', '10:15:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(183, 4, 3, '2025-10-17', '5', '10:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(184, 4, 3, '2025-10-17', '5', '10:45:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(185, 4, 3, '2025-10-17', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	(185, 4, 3, '2025-10-17', '5', '11:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(186, 4, 3, '2025-10-20', '1', '07:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(187, 4, 2, '2025-10-20', '1', '07:30:00', 'Glaison Queiroz', '(31) 9854-5555', 'teste@gmail.com', '', '747474', 'Sim', 'Não', 'Não'),
+	(188, 4, 3, '2025-10-20', '1', '08:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(189, 4, 3, '2025-10-20', '1', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(190, 4, 3, '2025-10-20', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(191, 4, 3, '2025-10-20', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(192, 4, 3, '2025-10-20', '1', '10:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(193, 4, 3, '2025-10-20', '1', '10:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(194, 4, 3, '2025-10-20', '1', '11:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(195, 4, 3, '2025-10-20', '1', '11:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(196, 4, 3, '2025-10-20', '1', '12:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(197, 4, 3, '2025-10-20', '1', '12:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(198, 4, 3, '2025-10-20', '1', '13:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(199, 4, 3, '2025-10-20', '1', '13:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(200, 4, 3, '2025-10-20', '1', '14:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(201, 4, 3, '2025-10-20', '1', '14:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(202, 4, 3, '2025-10-20', '1', '15:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(203, 4, 3, '2025-10-20', '1', '15:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(204, 4, 3, '2025-10-20', '1', '16:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(205, 4, 3, '2025-10-20', '1', '16:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(206, 4, 3, '2025-10-20', '1', '17:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(207, 4, 3, '2025-10-20', '1', '17:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(208, 4, 3, '2025-10-20', '1', '18:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- Copiando estrutura para tabela smed.agendaconfig
 CREATE TABLE IF NOT EXISTS `agendaconfig` (
@@ -304,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `anamnese` (
   `obs_renais` varchar(150) DEFAULT NULL,
   `antecedente_neurologica` char(3) DEFAULT NULL,
   `obs_neurologia` varchar(150) DEFAULT NULL,
-  `antecedente_psquiatrico` char(3) DEFAULT NULL,
+  `antecedente_psiquiatrico` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `obs_psiquiatrico` varchar(150) DEFAULT NULL,
   `antecedente_cancer` char(3) DEFAULT NULL,
   `obs_cancer` varchar(150) DEFAULT NULL,
@@ -321,8 +344,8 @@ CREATE TABLE IF NOT EXISTS `anamnese` (
   `atividade_fisica` char(3) DEFAULT NULL,
   `atividade_fisica_qual` varchar(150) DEFAULT NULL,
   `atividade_fisica_frequencia` varchar(80) DEFAULT NULL,
-  `familiar_hipertencao` char(3) DEFAULT NULL,
-  `obs_familiar_hipertencao` varchar(150) DEFAULT NULL,
+  `familiar_hipertensao` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `obs_familiar_hipertensao` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `familiar_cancer` char(3) DEFAULT NULL,
   `obs_familiar_cancer` varchar(150) DEFAULT NULL,
   `familiar_cardiaco` char(3) DEFAULT NULL,
@@ -364,10 +387,10 @@ CREATE TABLE IF NOT EXISTS `anamnese` (
   PRIMARY KEY (`id`),
   KEY `FK_anamnese_pacientes` (`id_paciente`),
   CONSTRAINT `FK_anamnese_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.anamnese: ~15 rows (aproximadamente)
-INSERT INTO `anamnese` (`id`, `id_paciente`, `data`, `setor`, `funcao`, `admissao`, `jornada`, `atividades`, `descricao_atividades`, `risco_fisico`, `risco_quimico`, `risco_biologico`, `risco_ergonomico`, `risco_acidentes`, `usa_epi`, `quais_epi`, `motivo_consulta`, `queixa_principal`, `hda`, `antecedente_hipertensao`, `obs_hipertensao`, `antecedente_diabete`, `obs_diabete`, `antecedente_cardiaco`, `obs_cardiaco`, `antecedente_asma_bronquite`, `obs_asma_bronquite`, `antecedente_renais`, `obs_renais`, `antecedente_neurologica`, `obs_neurologia`, `antecedente_psquiatrico`, `obs_psiquiatrico`, `antecedente_cancer`, `obs_cancer`, `antecedente_alergia`, `obs_alergia`, `antecedente_cirurgias`, `obs_cirurgia`, `medicamentos_uso`, `habito_tabagismo`, `tabagismo_tempo`, `tabagismo_qtd_dia`, `etilismo`, `etilismo_frequencia`, `atividade_fisica`, `atividade_fisica_qual`, `atividade_fisica_frequencia`, `familiar_hipertencao`, `obs_familiar_hipertencao`, `familiar_cancer`, `obs_familiar_cancer`, `familiar_cardiaco`, `obs_familiar_cardiaco`, `familiar_diabetes`, `obs_familiar_diabetes`, `familiar_outros`, `obs_familiar_outros`, `stm_geral`, `stm_pele`, `stm_cabeca_pescoso`, `stm_olhos`, `stm_ouvidos`, `stm_respiratorio`, `stm_cardiovascular`, `stm_gastro`, `stm_geniturario`, `stm_musculo_esqueletico`, `stm_neurologico`, `stm_pisiquico`, `exame_pa`, `exame_fc`, `exame_fr`, `exame_peso`, `exame_altura`, `exame_imc`, `exame_ectoscopia`, `exame_aparelho_respiratorio`, `exame_aparelho_cardio`, `exame_abdome`, `exame_membros`, `exame_coluna`, `exame_neurologico`, `conduta_hipotese_diag`, `conduta_exames_compl`, `conduta`, `parecer`, `restricoes`) VALUES
+-- Copiando dados para a tabela smed.anamnese: ~26 rows (aproximadamente)
+INSERT INTO `anamnese` (`id`, `id_paciente`, `data`, `setor`, `funcao`, `admissao`, `jornada`, `atividades`, `descricao_atividades`, `risco_fisico`, `risco_quimico`, `risco_biologico`, `risco_ergonomico`, `risco_acidentes`, `usa_epi`, `quais_epi`, `motivo_consulta`, `queixa_principal`, `hda`, `antecedente_hipertensao`, `obs_hipertensao`, `antecedente_diabete`, `obs_diabete`, `antecedente_cardiaco`, `obs_cardiaco`, `antecedente_asma_bronquite`, `obs_asma_bronquite`, `antecedente_renais`, `obs_renais`, `antecedente_neurologica`, `obs_neurologia`, `antecedente_psiquiatrico`, `obs_psiquiatrico`, `antecedente_cancer`, `obs_cancer`, `antecedente_alergia`, `obs_alergia`, `antecedente_cirurgias`, `obs_cirurgia`, `medicamentos_uso`, `habito_tabagismo`, `tabagismo_tempo`, `tabagismo_qtd_dia`, `etilismo`, `etilismo_frequencia`, `atividade_fisica`, `atividade_fisica_qual`, `atividade_fisica_frequencia`, `familiar_hipertensao`, `obs_familiar_hipertensao`, `familiar_cancer`, `obs_familiar_cancer`, `familiar_cardiaco`, `obs_familiar_cardiaco`, `familiar_diabetes`, `obs_familiar_diabetes`, `familiar_outros`, `obs_familiar_outros`, `stm_geral`, `stm_pele`, `stm_cabeca_pescoso`, `stm_olhos`, `stm_ouvidos`, `stm_respiratorio`, `stm_cardiovascular`, `stm_gastro`, `stm_geniturario`, `stm_musculo_esqueletico`, `stm_neurologico`, `stm_pisiquico`, `exame_pa`, `exame_fc`, `exame_fr`, `exame_peso`, `exame_altura`, `exame_imc`, `exame_ectoscopia`, `exame_aparelho_respiratorio`, `exame_aparelho_cardio`, `exame_abdome`, `exame_membros`, `exame_coluna`, `exame_neurologico`, `conduta_hipotese_diag`, `conduta_exames_compl`, `conduta`, `parecer`, `restricoes`) VALUES
 	(8, 4, '2025-10-06', 'teste', 'teste', '2025-10-06', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', NULL, NULL, 'Admissional', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(9, 4, '2025-10-06', 'teste', 'teste', '2025-10-01', 'teste', 'teste', 'teste', 'S', 'S', 'N', 'N', 'N', NULL, NULL, 'Admissional', _binary 0x517565697861, _binary 0x68697374c3b372696120646f656ec3a761, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(10, 4, '2025-10-06', 'teste', 'teste', '2025-10-06', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', NULL, NULL, 'Admissional', _binary 0x7465737465, _binary 0x686668666768, 'Sim', NULL, 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -377,12 +400,23 @@ INSERT INTO `anamnese` (`id`, `id_paciente`, `data`, `setor`, `funcao`, `admissa
 	(14, 4, '2025-10-07', 'teste', 'teste', '2025-10-07', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', 'Sim', 'Cinto de segurança', 'Periódico', _binary 0x7465737465, _binary 0x7465737465, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, _binary 0x7465737465, 'Sim', 4, 3, 'Sim', '2', 'Sim', NULL, NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(15, 4, '2025-10-07', 'teste', 'teste', '2025-10-07', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', '', '', 'Retorno ao Trabalho', _binary 0x7465737465, _binary 0x68666768686667, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Sim', NULL, 'Não', NULL, '', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, _binary 0x676866686667, 'Sim', 3, 3, 'Sim', '2', 'Sim', NULL, NULL, 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Sim', NULL, 'Não', NULL, 'Sim', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(16, 4, '2025-10-07', 'teste', 'teste', '2025-10-07', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', '', '', 'Retorno ao Trabalho', _binary 0x7465737465, _binary 0x6766686766, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, _binary 0x7364617364, 'Sim', 1, 1, 'Sim', '1', 'Não', NULL, NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '120/90', 90, 12, 84, 1.8, 23, 'fsdf', 'sdfsd', 'sdfs', 'sdf', 'sdf', 'sdf', 'sdf', NULL, NULL, NULL, NULL, NULL),
-	(17, 4, '2025-10-07', 'teste', 'teste', '2025-10-07', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', 'Sim', 'Cinto de segurança', 'Outros', _binary 0x7465737465, _binary 0x6a676a6768, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, _binary 0x676767, 'Não', 0, 0, 'Não', '0', 'Não', NULL, NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '12/80', 70, 16, 70, 1.75, 22.8, 'fsdf', 'sdfsd', 'sdfs', 'sdf', 'sdf', 'sdf', 'sdf', NULL, NULL, NULL, NULL, NULL),
+	(17, 4, '2025-10-07', 'teste', 'teste', '2025-10-07', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', 'Sim', 'Cinto de segurança', 'Outros', _binary 0x7465737465, _binary 0x6a676a6768, 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x676767, 'Não', 0, 0, 'Sim', '0', 'Não', '', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '12/80', 0, 16, 70, 1.75, 22.8, 'fsdf', 'sdfsd', 'sdfs', 'sdf', 'sdf', 'sdf', 'sdf', _binary 0x657765, _binary 0x72656577, _binary 0x657772, 'A', _binary ''),
 	(18, 4, '2025-10-09', 'teste', 'teste', '2025-10-09', 'teste', 'teste', 'teste', 'S', 'S', 'S', 'N', 'N', 'Sim', 'Cinto de segurança', 'Mudança de Função', _binary 0x7465737465, _binary 0x68697374c3b3726961, 'Sim', 'hipertencao', 'Não', '', 'Sim', 'cardiaco', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Cancer', 'Não', '$', 'Não', '', _binary 0x736466736664, 'Sim', 1, 1, 'Não', '', 'Não', NULL, NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '12/7', 5, 5, 5, 5, 5, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL),
 	(19, 4, '2025-10-09', 'teste', 'teste', '2025-10-09', 'teste', 'teste', 'teste', 'N', 'N', 'S', 'S', 'S', 'Não', '', 'Mudança de Função', _binary 0x7465737465, _binary 0x736467736466, 'Sim', 'teste de hipertaenção', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'teste', 'Sim', 'teste', 'Sim', 'teste', 'Não', '', 'Não', '$', 'Não', '', _binary 0x7465737465, 'Sim', 1, 1, 'Sim', '1', 'Não', NULL, NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '120/90', 8, 8, 0.2, 8, 8, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL),
 	(20, 4, '2025-10-09', 'teste', 'teste', '2025-10-09', 'teste', 'teste', 'teste', 'S', 'N', 'N', 'N', 'N', 'Não', '', 'Retorno ao Trabalho', _binary 0x7465737465, _binary 0x6567676572677765, 'Sim', 'teste', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '$', 'Não', '', _binary 0x467364667366, 'Não', 0, 0, 'Não', '', 'Não', NULL, NULL, 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL),
-	(21, 5, '2025-10-10', 'Meio Ambiente', 'Fiscal', '2009-08-01', '8 horas dia', 'Fiscalização Ambiental', 'Fiscalização Ambiental no Municipio', 'S', 'N', 'S', 'N', 'N', 'Não', '', 'Periódico', _binary 0x4665627265, _binary 0x5669726f736520616471756972696461, 'Sim', 'descoberta a 2 anos', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', '$Alergia de pele', 'Não', '', _binary 0x414153, 'Não', 0, 0, 'Sim', '2', 'Sim', NULL, NULL, 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Sim', 'Sim', 'Sim', 'Sim', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', '13/8', 0, 19, 75, 1.8, 22, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', NULL, NULL, NULL, NULL, NULL),
-	(22, 5, '2025-10-10', 'Informáticá', 'operador', '2025-10-02', '8 horas dia', 'Operador de computador', 'operação e digitação em computadores', 'N', 'N', 'N', 'S', 'N', 'Não', '', 'Periódico', _binary 0x4665627265, _binary 0x5669726f7365, 'Sim', 'descoberta a 2 anos', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'pedra', 'Não', '', 'Não', '', 'Não', '', 'Não', '$', 'Não', '', _binary 0x414153, 'Não', 0, 0, 'Sim', '4', 'Sim', 'corrida de 5 a 10 km e ciclismo no fim de semana', '4 veze semanais', 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Sim', NULL, 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '12/80', 0, 20, 70, 1.74, 22, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', NULL, NULL, NULL, NULL, NULL);
+	(39, 3, '2025-10-14', 'teste', 'teste', '2025-10-14', '8 horas dia', 'Fiscalização Ambiental', 'teste', 'S', 'N', 'N', 'N', 'N', 'Não', '', 'Periódico', _binary 0x4665627265, _binary 0x77717765, 'Sim', 'we', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x776577, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Sim', 'we', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL),
+	(40, 3, '2025-10-14', 'teste', 'teste', '2025-10-14', '8 horas dia', 'Fiscalização Ambiental', 'teste', 'S', 'N', 'N', 'N', 'N', 'Não', '', 'Periódico', _binary 0x4665627265, _binary 0x77717765, 'Sim', 'we', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x776577, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Sim', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Não', NULL, 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL),
+	(41, 7, '2025-10-14', 'Meio Ambiente', 'Fiscal', '2025-10-02', '8 horas dia', 'Fiscalização Ambiental', 'Fiscalização Ambiental no Municipio', 'S', 'N', 'N', 'N', 'N', 'Não', '', 'Admissional', _binary 0x4665627265, _binary 0x6664736864, 'Sim', '', 'Sim', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x747265746572, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Não', 'Sim', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '12', 12, 12, 12, 12, 12, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', NULL, NULL, NULL, NULL, NULL),
+	(42, 1, '2025-10-14', 'teste', 'teste', '2025-10-14', 'teste', 'teste', 'teste', 'S', 'N', 'N', 'N', 'N', 'Não', '', 'Admissional', _binary 0x4665627265, _binary 0x353436, 'Sim', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x363536, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Sim', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '120/90', 0, 0, 0, 0, 0, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', NULL, NULL, NULL, NULL, NULL),
+	(43, 1, '2025-10-14', 'Meio Ambiente', 'Gestor', '2025-09-10', '8 horas dia', 'Fiscalização Ambiental', 'Fiscalização Ambiental no Municipio', 'N', 'S', 'S', 'N', 'N', 'Não', '', 'Admissional', _binary 0x4665627265, _binary 0x4665627265, 'Sim', 'hipertencao', 'Sim', 'Uso de Insulina', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x736466, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Sim', 'Pai e irmãos', 'Não', '', 'Sim', 'Mãe', 'Sim', 'Pai', 'Não', '', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Sim', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', '120/90', 0, 70, 70, 1.7, 22, '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL),
+	(44, 5, '2025-10-14', 'Meio Ambiente', 'Fiscal', '2008-10-26', '8 horas dia', 'Fiscalização Ambiental', 'Fiscalização Ambiental no Municipio', 'N', 'S', 'S', 'N', 'N', 'Não', '', 'Outros', _binary 0x5175656461206465205072657373c3a36f, _binary 0x5175656461206465205072657373c3a36f2053697374656d696361, 'Sim', 'descoberta a 2 anos Sistemica', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x41415320652044697069726f6e61, 'Sim', 10, 5, 'Sim', '12', 'Sim', 'Caminhada', '2 x por semana', 'Sim', 'Pai e irmãos', 'Não', '', 'Sim', 'Mãe', 'Sim', 'Pai', 'Não', '', 'Não', 'Não', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Sim', 'Não', 'Sim', 'Não', '15/9', 0, 19, 90, 1.75, 22, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', _binary 0x50726f626c656d61206465205072657373c3a36f20636f6e74726f6c61646120706f72204d65646963616d656e746f73, _binary 0x5072657373c3a36f20, _binary 0x5265636f6d656e646f2070726f637572617220636c696e69636f20676572616c20706172612074726174616d656e746f, 'A', NULL),
+	(45, 5, '2025-10-14', 'Recursos Humanos', 'Gestor', '2009-02-20', '8 horas dia', 'Gestão de Processos de Rh', 'Gestão de Cadastros de RH', 'N', 'N', 'N', 'N', 'N', 'Não', '', 'Outros', _binary 0x5175656461206465205072657373c3a36f, _binary 0x5175656461206465205072657373c3a36f, 'Sim', 'Ssistemica a 5 anos', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x414153, 'Sim', 10, 12, 'Sim', '2', 'Sim', 'Caminhada', '4 veze semanais', 'Sim', 'Pai e irmãos', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '120/90', 0, 16, 60, 1.75, 22, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', _binary 0x4261697861205072657373c3a36f20636f6d206261697861206566696361636961206465206d65646963616d656e746f73, _binary 0x53616e677565, _binary 0x4f627365727661c3a7c3a36f2065207265746f726e6f20616f20636c696e69636f, 'A', _binary ''),
+	(46, 5, '2025-10-14', 'Meio Ambiente', 'Gestor', '2025-10-14', '8 horas dia', 'teste', 'teste', 'S', 'N', 'N', 'N', 'N', 'Não', '', 'Admissional', _binary 0x4665627265, _binary 0x7364667364, 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x73647364, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', _binary 0x66736466, _binary 0x64667364, _binary 0x736466, 'A', _binary ''),
+	(48, 5, '2025-10-14', 'Meio Ambiente', 'Gestor', '2025-10-02', 'teste', 'teste', 'Fiscalização Ambiental no Municipio', 'N', 'N', 'N', 'N', 'N', 'Não', '', 'Admissional', _binary 0x4665627265, _binary 0x353436353436, 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x353436, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', _binary 0x353436, _binary 0x35343635, _binary 0x3436343536, 'A', _binary ''),
+	(49, 5, '2025-10-14', 'Meio Ambiente', 'Gestor', '2025-10-01', 'teste', 'teste', 'teste', 'N', 'N', 'N', 'N', 'N', 'Não', '', 'Periódico', _binary 0x4665627265, _binary 0x3435363534, 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x68686b6c6a686b, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', _binary 0x736466736466, _binary 0x6473667364, _binary 0x666473736466, 'I', _binary ''),
+	(50, 5, '2025-10-14', 'Meio Ambiente', 'Gestor ', '2025-10-09', '8 horas por dia', 'Biologo', 'Atividade Técnica', 'N', 'S', 'S', 'N', 'N', 'Não', '', 'Periódico', _binary 0x4665627265, _binary 0x46656272652061204e6f697465, 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x414153, 'Não', 0, 0, 'Sim', '', 'Não', '', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 0, 0, 0, 0, 0, '', '', '', '', '', '', '', _binary 0x7364666166, _binary 0x647366736466, _binary 0x736466736466, 'R', _binary 0x746573746532),
+	(51, 8, '2025-10-15', 'Meio Ambiente', 'Gestor', '2009-07-01', '8 horas dia', 'Fiscalização Ambiental', 'Fiscalização Ambiental no Municipio', 'N', 'S', 'S', 'N', 'N', 'Sim', 'Capacete', 'Outros', _binary 0x4665627265, _binary 0x466562726520706f7220696e666563c3a7c3a36f, 'Sim', 'hipertencao sistemica a 2 anos', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Pedra nos rins ', 'Não', '', 'Sim', 'Bipolaridade', 'Não', '', 'Não', '', 'Sim', 'Cirurgia de apendicite', _binary 0x414153, 'Sim', 10, 12, 'Sim', '15', 'Sim', 'corrida de 5 a 10 km e ciclismo no fim de semana', '4 veze semanais', 'Não', '', 'Sim', 'Casos com primos de primeiro e segundo grau', 'Sim', 'Mãe', 'Sim', 'Pai e Irmão', 'Não', '', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Sim', 'Sim', 'Não', 'Não', 'Sim', 'Não', 'Sim', '12/8', 69, 68, 100, 1.74, 22, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', _binary 0x4665627265, _binary 0x53616e677565, _binary 0x436c696e69636f20676572616c, 'R', _binary 0x54726162616c686172206d656e6f73),
+	(52, 5, '2025-10-15', 'Alto Forno', 'Operador de Cabine', '2025-10-01', '8 horas', 'Operador de Cabine de Alto Forno', 'Operação de Cabine Eletrônica', 'S', 'S', 'N', 'N', 'N', 'Não', '', 'Outros', _binary 0x446f722064652043616265c3a761, _binary 0x446f722064652043616265c3a76120446975726e61, 'Sim', 'Em tratamento', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Não', '', _binary 0x414153, 'Não', 0, 0, 'Não', '', 'Não', '', '', 'Sim', 'Pai e irmãos', 'Não', '', 'Não', '', 'Não', '', 'Não', '', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '12/8', 0, 18, 90, 1.76, 23, 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok', _binary 0x486970657274656ec3a7c3a36f, _binary 0x53616e677565, _binary 0x4d617263617220636f6d20636c696e69636f20706172612074726174616d656e746f, 'I', _binary '');
 
 -- Copiando estrutura para tabela smed.atestados
 CREATE TABLE IF NOT EXISTS `atestados` (
@@ -642,14 +676,15 @@ CREATE TABLE IF NOT EXISTS `historia` (
   PRIMARY KEY (`id`),
   KEY `FK_historia_pacientes` (`id_paciente`),
   CONSTRAINT `FK_historia_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.historia: ~4 rows (aproximadamente)
 INSERT INTO `historia` (`id`, `id_paciente`, `historia`, `data`) VALUES
 	(1, 1, _binary 0x0d0a0d0a30382f30382f323032340d0a4f7269656e7461c3a7c3a36f204dc3a96469636120456d697469646f0d0a436f72726572203130206b6d0d0a50756c617220436f7264610d0a436f7274617220616c696d656e746f7320476f726475726f736f73, NULL),
 	(2, 3, _binary 0x0d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746578746f204152454f4c41520d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746578746f204152454f4c41520d0a0d0a30332f30382f323032340d0a417465737461646f204dc3a96469636f20456d697469646f0d0a436f6d6572206d656e6f732061c3a775636172, NULL),
 	(6, 4, _binary 0x436f6d6572206d656e6f732061c3a7756361720d0a0d0a0d0a30352f30382f323032340d0a50726573637269c3a7c3a36f206465204d65646963616d656e746f20456d697469646f0d0a504f564944494e452e2e2e2e0d0a50534f5245582e2e2e2e0d0a54594c454e4f4c2e2e2e2e0d0a564954414e4f4c2d412e2e2e2e0d0a0d0a0d0a0d0a, NULL),
-	(7, 5, _binary 0x417465737461646f204dc3a96469636f20456d697469646f0d0a0d0a74657374650d0a0d0a0d0a33312f30372f323032350d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746573746520646520746573746f207061726120524450500d0a, NULL);
+	(7, 5, _binary 0x417465737461646f204dc3a96469636f20456d697469646f0d0a0d0a74657374650d0a0d0a0d0a33312f30372f323032350d0a417465737461646f204dc3a96469636f20456d697469646f0d0a746573746520646520746573746f207061726120524450500d0a, NULL),
+	(8, 8, _binary 0x0d0a0d0a202020202020202032332f31302f3230323520202d2020202020202020202020416e616d6e65736520646f2050616369656e74650d0a0d0a4461646f73204f6375706163696f6e6169730d0a0d0a5365746f72203a4d65696f20416d6269656e74650d0a436172676f203a476573746f720d0a446174612064652041646d697373c3a36f203a323030392d30372d30310d0a417469766964616465203a0d0a446573637269c3a7c3a36f20646120417469766964616465203a46697363616c697a61c3a7c3a36f20416d6269656e74616c206e6f204d756e69636970696f0d0a4a6f726e6164612064652054726162616c686f203a3820686f726173206469610d0a55736f20646520455049203a53696d0d0a5175616c20455049203a43617061636574650d0a0d0a526973636f73204f6375706163696f6e616973203a0d0a0d0a46c3ad7369636f20285275c3ad646f2c2063616c6f722c206672696f2c207669627261c3a7c3a36f2c207261646961c3a7c3a36f29203a204ec3a36f0d0a5175c3ad6d69636f2028506f656972612c2066756d6f732c2067617365732c7661706f7265732c2070726f6475746f73207175c3ad6d69636f7329203a2053696d0d0a42696f6cc3b36769636f202856c3ad7275732c2062616374c3a9726961732c2066756e676f732c2070617261736974617329203a2053696d0d0a4572676f6ec3b46d69636f2028506f737475726120696e61646571756164612c206573666f72c3a76f207265706574697469766f2c206c6576616e74616d656e746f206465207065736f29203a204ec3a36f0d0a41636964656e74657320284dc3a17175696e61732073656d2070726f7465c3a7c3a36f2c20726973636f206465207175656461732c20656c6574726963696461646529203a204ec3a36f0d0a517565697861205072696e636970616c20652048697374c3b372696120646120446f656ec3a76120417475616c2028484441290d0a0d0a4d6f7469766f20646120436f6e73756c74613a204f7574726f730d0a517565697861205072696e636970616c203a46656272650d0a48697374c3b372696120646120446f656ec3a76120417475616c2028484441293a466562726520706f7220696e666563c3a7c3a36f0d0a0d0a416e7465636564656e74657320506573736f6169730d0a0d0a486970657274656e73c3a36f20417274657269616c2053697374c3aa6d6963613a2053696d202d20686970657274656e63616f2073697374656d6963612061203220616e6f730d0a4469616265746573204d656c6c697475733a204ec3a36f202d200d0a446f656ec3a761732043617264696f76617363756c617265733a204ec3a36f202d200d0a41736d612f42726f6e71756974653a204ec3a36f202d200d0a446f656ec3a761732052656e6169733a2053696d202d205065647261206e6f732072696e73200d0a446f656ec3a76173204e6575726f6cc3b367696361733a204ec3a36f202d200d0a44697374c3ba7262696f7320507369717569c3a1747269636f733a2053696d202d204269706f6c617269646164650d0a43c3a26e6365723a204ec3a36f202d200d0a416c6572676961733a204ec3a36f202d200d0a436972757267696173205072c3a9766961733a53696d202d204369727572676961206465206170656e6469636974650d0a0d0a4d65646963616d656e746f7320656d2055736f3a4141530d0a0d0a48c3a16269746f732064652056696461203a0d0a0d0a546162616769736d6f3a2053696d0d0a4369676172726f7320706f7220646961203a31320d0a48c3a1207175616e746f2074656d706f2028616e6f73293a31300d0a0d0a4574696c69736d6f203a53696d0d0a446f7365732053656d616e6169733a2031350d0a0d0a4174697669646164652046c3ad73696361203a53696d0d0a517561697320617469766964616465732046c3ad7369636173203a636f727269646120646520352061203130206b6d2065206369636c69736d6f206e6f2066696d2064652073656d616e610d0a4672657175c3aa6e636961203a342076657a652073656d616e6169730d0a0d0a416e7465636564656e7465732046616d696c69617265730d0a0d0a486970657274656e73c3a36f20417274657269616c2053697374c3aa6d6963613a204ec3a36f202d200d0a4469616265746573204d656c6c697475733a2053696d202d2050616920652049726dc3a36f0d0a446f656ec3a761732043617264696f76617363756c617265733a2053696d202d204dc3a3650d0a43c3a26e6365723a2053696d202d204361736f7320636f6d207072696d6f73206465207072696d6569726f206520736567756e646f20677261750d0a4f757472617320446f656ec3a761733a204ec3a36f202d200d0a0d0a496e746572726f676174c3b372696f2053696e746f6d61746f6cc3b36769636f20285265766973c3a36f20706f722053697374656d6173290d0a0d0a476572616c202846656272652c207065726461206465207065736f2c20666164696761293a204ec3a36f0d0a43616265c3a7612f506573636fc3a76f2028446f722064652063616265c3a7612c20746f6e747572612c20646f72206e6f20706573636fc3a76f293a2053696d0d0a4f757669646f732028446f722c207a756d6269646f2c207065726461206175646974697661293a204ec3a36f0d0a43617264696f76617363756c6172202850616c70697461c3a7c3b565732c20646f72206e6f20706569746f2c20696e636861c3a76f293a202053696d0d0a47656e69746f7572696ec3a172696f2028446f7220616f207572696e61722c2073616e677565206e61207572696e612c20696e636f6e74696ec3aa6e636961293a204ec3a36f0d0a4e6575726f6cc3b36769636f2028546f6e747572612c206672617175657a612c20636f6e76756c73c3b56573293a4ec3a36f0d0a50656c6520284c6573c3b565732c20636f63656972612c206d616e63686173293a20204ec3a36f0d0a4f6c686f732028416c74657261c3a7c3a36f2076697375616c2c20646f722c207665726d656c686964c3a36f293a4ec3a36f0d0a5265737069726174c3b372696f2028546f7373652c2066616c74612064652061722c20646f72206e6f20706569746f293a2053696d0d0a47617374726f696e74657374696e616c2028446f72206162646f6d696e616c2c206ec3a1757365612c2076c3b46d69746f293a20204ec3a36f0d0a4d757363756c6f65737175656cc3a97469636f2028446f72206e6173206172746963756c61c3a7c3b565732c206672617175657a61206d757363756c6172293a2053696d0d0a507369717569c3a1747269636f2028416e736965646164652c2064657072657373c3a36f2c20696e73c3b46e6961293a2053696d0d0a0d0a4578616d652046c3ad7369636f0d0a0d0a5072657373c3a36f20417274657269616c20286d6d4867293a2031322f380d0a4672657175c3aa6e6369612043617264c3ad616361202862706d293a2036390d0a4672657175c3aa6e636961205265737069726174c3b3726961202872706d293a2036380d0a5065736f20286b67293a203130300d0a416c7475726120286d293a312e37340d0a494d433a2032320d0a4563746f73636f7069613a206f6b0d0a41706172656c686f205265737069726174c3b372696f3a206f6b0d0a41706172656c686f2043617264696f76617363756c61723a206f6b0d0a41706172656c686f204162646f6d653a206f6b0d0a4d656d62726f733a206f6b0d0a436f6c756e612056657274656272616c3a206f6b0d0a4578616d65204e6575726f6cc3b36769636f3a206f6b0d0a0d0a50617265636572204dc3a96469636f3a204170746f207061726120612066756ec3a7c3a36f20636f6d20726573747269c3a7c3b565730d0a526573747269c3a7c3b565733a2054726162616c686172206d656e6f730d0a, NULL);
 
 -- Copiando estrutura para tabela smed.imagens_pacientes
 CREATE TABLE IF NOT EXISTS `imagens_pacientes` (
@@ -661,7 +696,7 @@ CREATE TABLE IF NOT EXISTS `imagens_pacientes` (
   PRIMARY KEY (`id`),
   KEY `FK_imagens_pacientes_pacientes` (`id_paciente`),
   CONSTRAINT `FK_imagens_pacientes_pacientes` FOREIGN KEY (`id_paciente`) REFERENCES `pacientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.imagens_pacientes: ~6 rows (aproximadamente)
 INSERT INTO `imagens_pacientes` (`id`, `id_paciente`, `pasta_imagem`, `data`, `descricao`) VALUES
@@ -670,7 +705,8 @@ INSERT INTO `imagens_pacientes` (`id`, `id_paciente`, `pasta_imagem`, `data`, `d
 	(4, 1, 'img/WhatsApp Image 2023-06-19 at 14.10.15.jpeg6260.png', '2024-07-09', NULL),
 	(5, 3, 'img/imagem1.jpeg', '2024-07-01', 'Procedimento inicial'),
 	(6, 3, 'img/imagem2.jpeg', '2024-07-07', 'Procedimento com lazer'),
-	(7, 3, 'img/imagem3.jpeg', '2024-07-09', 'Resultado Final Ultima consulta');
+	(7, 3, 'img/imagem3.jpeg', '2024-07-09', 'Resultado Final Ultima consulta'),
+	(9, 4, 'img/Captura de tela 2025-10-16 144949.png', '2025-10-17', NULL);
 
 -- Copiando estrutura para tabela smed.indices
 CREATE TABLE IF NOT EXISTS `indices` (
@@ -698,14 +734,15 @@ CREATE TABLE IF NOT EXISTS `medicamentos` (
   PRIMARY KEY (`id`),
   KEY `FK_medicamentos_grupos_medicamentos` (`id_grupo`),
   CONSTRAINT `FK_medicamentos_grupos_medicamentos` FOREIGN KEY (`id_grupo`) REFERENCES `grupos_medicamentos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.medicamentos: ~4 rows (aproximadamente)
 INSERT INTO `medicamentos` (`id`, `id_grupo`, `descricao`) VALUES
 	(1, 2, 'VITANOL-A'),
 	(2, 1, 'TYLENOL'),
 	(3, 1, 'PSOREX'),
-	(4, 2, 'POVIDINE');
+	(4, 2, 'POVIDINE'),
+	(6, 1, 'Medic');
 
 -- Copiando estrutura para tabela smed.medicamento_apresentacao
 CREATE TABLE IF NOT EXISTS `medicamento_apresentacao` (
@@ -779,7 +816,7 @@ CREATE TABLE IF NOT EXISTS `pacientes` (
   KEY `FK_pacientes_profissionais` (`id_profissional`),
   CONSTRAINT `FK_pacientes_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`),
   CONSTRAINT `FK_pacientes_profissionais` FOREIGN KEY (`id_profissional`) REFERENCES `profissionais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.pacientes: ~4 rows (aproximadamente)
 INSERT INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`, `cor`, `datanasc`, `estadocivil`, `mae`, `pai`, `endereco`, `bairro`, `cidade`, `cep`, `uf`, `email`, `fone`, `fone2`, `profissao`, `indicacao`, `dataprimeira`, `obs`, `classificacao`, `naturalidade`, `procedencia`, `matricula`, `cpf`, `identidade`) VALUES
@@ -787,7 +824,8 @@ INSERT INTO `pacientes` (`id`, `id_convenio`, `id_profissional`, `nome`, `sexo`,
 	(3, 2, NULL, 'Maria da Graça', 'F', 'Leuco', '1985-11-26', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 6995-5666', '', '', '', '2024-07-03', _binary '', '', '', '', '45646546', '', ''),
 	(4, 2, NULL, 'Florentina de Jesus', 'M', 'Leuco', '1940-10-08', 'Solteiro', '', '', '', '', '', '', 'MG', 'flore@gmail.com', '', '', '', '', '2024-07-26', _binary '', '', '', '', '8032566', '69551022653', ''),
 	(5, 2, NULL, 'Glaison Queiroz', 'M', 'Leuco', '2025-07-02', 'Solteiro', '', '', '', '', '', '', 'MG', '', '(31) 5687-7777', '', '', '', '2025-07-09', _binary '', '', '', '', '', '69551022653', ''),
-	(7, 4, NULL, 'paciente de teste', 'M', 'Leuco', '2025-08-06', 'Solteiro', '', '', '', '', '', '', 'MG', 'teste@gmail.com', '(31) 9854-5555', '', '', '', '2025-08-27', _binary '', '', '', '', '', '69551022653', '');
+	(7, 4, NULL, 'paciente de teste', 'M', 'Leuco', '2025-08-06', 'Solteiro', '', '', '', '', '', '', 'MG', 'teste@gmail.com', '(31) 9854-5555', '', '', '', '2025-08-27', _binary '', '', '', '', '', '69551022653', ''),
+	(8, 2, NULL, 'mario', 'M', 'Leuco', '2025-06-12', 'Solteiro', '', '', 'Rua da Intendencia 316', 'Centro', 'Sabará', '34505480', 'MG', 'teste@gmail.com', '(31) 9854-5555', '', '', '', '2025-10-14', _binary '', '', '', '', '46546546', '69551022653', '');
 
 -- Copiando estrutura para tabela smed.parametros_eventos
 CREATE TABLE IF NOT EXISTS `parametros_eventos` (
@@ -812,6 +850,7 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
   `fichaclinica_imagens` char(1) DEFAULT NULL,
   `fichaclinica_eventos` char(1) DEFAULT NULL,
   `fichaclinica_excluir` char(1) DEFAULT NULL,
+  `fichaclinica_anamnese` char(1) DEFAULT NULL,
   `agenda` char(1) DEFAULT NULL,
   `agenda_marcacao` char(1) DEFAULT NULL,
   `agenda_incluir` char(1) DEFAULT NULL,
@@ -844,13 +883,14 @@ CREATE TABLE IF NOT EXISTS `perfil_usuarios_opcoes` (
   `cad_diagnosticos` char(1) DEFAULT NULL,
   `configuracoes` char(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.perfil_usuarios_opcoes: ~2 rows (aproximadamente)
-INSERT INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_especialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
-	(1, 'Gestor Total', 'S', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'),
-	(2, 'Médico', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'N'),
-	(3, 'Secretária', 'S', 'N', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', '', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S');
+-- Copiando dados para a tabela smed.perfil_usuarios_opcoes: ~3 rows (aproximadamente)
+INSERT INTO `perfil_usuarios_opcoes` (`id`, `descricao`, `ativo`, `fichaclinica`, `fichaclinica_editar`, `fichaclinica_historia`, `fichaclinica_imagens`, `fichaclinica_eventos`, `fichaclinica_excluir`, `fichaclinica_anamnese`, `agenda`, `agenda_marcacao`, `agenda_incluir`, `agenda_remanejar`, `agenda_desmarcar`, `agenda_criacao`, `prescricao_atestado`, `prescricao`, `prescricao_formula`, `prescricao_medicamento`, `prescricao_laudos`, `prescricao_orientacao`, `prescricao_relatorio`, `prescricao_configuracao`, `financeiro`, `cad_profissionais`, `cad_convenios`, `cad_procedimentos`, `cad_itenslaudos`, `cad_medicamentos`, `cad_orientacoes`, `cad_formula`, `cad_atestado`, `cad_grupo_medicamento`, `cad_grupo_exame`, `cad_componente_formula`, `cad_grupo_componentes`, `cad_especialidades`, `cad_parametros_eventos`, `cad_diagnosticos`, `configuracoes`) VALUES
+	(1, 'Gestor Total', 'S', 'N', 'N', 'N', 'N', 'N', 'N', NULL, 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N', 'N'),
+	(2, 'Médico', 'S', 'S', 'S', 'S', 'S', 'S', 'S', NULL, 'S', 'N', 'N', 'N', 'N', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'N'),
+	(3, 'Secretária', 'S', 'S', 'S', 'N', 'S', 'S', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S'),
+	(4, 'teste', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'N', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S', 'S');
 
 -- Copiando estrutura para tabela smed.procedimentos
 CREATE TABLE IF NOT EXISTS `procedimentos` (
@@ -956,14 +996,15 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`id`),
   KEY `FK_usuario_perfil_usuarios_opcoes` (`id_perfil`),
   CONSTRAINT `FK_usuario_perfil_usuarios_opcoes` FOREIGN KEY (`id_perfil`) REFERENCES `perfil_usuarios_opcoes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.usuario: ~3 rows (aproximadamente)
+-- Copiando dados para a tabela smed.usuario: ~5 rows (aproximadamente)
 INSERT INTO `usuario` (`id`, `id_perfil`, `nome`, `login`, `senha`, `ativo`, `prescricoes`, `pacientesdados`, `pacienteshistoria`, `agendamarcacao`, `agendageracao`, `cadastros`, `tipo`, `email`, `telefone`) VALUES
 	(1, 1, 'Glaison Queiroz', 'Glaison', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'glaison26.queiroz@gmail.com', '3136712550'),
 	(3, 2, 'Dr. José da Silva', 'dasilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'dasilva@gmail.com', '3678985412'),
 	(4, 2, 'Dr. Manoel da Costa e Silva', 'ManoelSilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'glaison26.queiroz@gmail.com', '36712550'),
-	(5, 1, 'teste da silva', 'teste', 'c2FiYXJhQDIwMjU=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'teste@gmail.com', '3198545555');
+	(5, 1, 'teste da silva', 'teste', 'c2FiYXJhQDIwMjU=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'teste@gmail.com', '3198545555'),
+	(6, 3, 'Secretaria', 'Secretaria', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'teste@gmail.com', '3198545555');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
