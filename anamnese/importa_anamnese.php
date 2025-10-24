@@ -121,7 +121,7 @@ $c_historia .= "Interrogatório Sintomatológico (Revisão por Sistemas)". "\r\n
 'Pele (Lesões, coceira, manchas):  '.$registro['stm_pele']. "\r\n".
 'Olhos (Alteração visual, dor, vermelhidão):'.$registro['stm_olhos']. "\r\n".
 'Respiratório (Tosse, falta de ar, dor no peito): '.$registro['stm_respiratorio']. "\r\n".
-'Gastrointestinal (Dor abdominal, náusea, vômito):  '.$registro['stm_gastro']. "\r\n".
+'Gastrointestinal (Dor abdominal, náusea, vômito): '.$registro['stm_gastro']. "\r\n".
 'Musculoesquelético (Dor nas articulações, fraqueza muscular): '.$registro['stm_musculo_esqueletico']. "\r\n".
 'Psiquiátrico (Ansiedade, depressão, insônia): '.$registro['stm_pisiquico']. "\r\n"."\r\n";
 // Exame Físico
