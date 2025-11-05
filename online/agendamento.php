@@ -26,7 +26,7 @@ $userId = $_SESSION['userId'];
     <!-- formulario de agendamento online -->
     <!-- solicito combobox com medicos da tabela profissionais medico e data para agendamento -->
     <div class="agendamento-container">
-        <h2>Pesquisa de Horários Disponíveis</h2>
+        <h2>Horários Disponíveis</h2>
         <form action="processa_agendamento.php" method="POST" id="agendamentoForm">
             <div class="form-group">
                 <label for="medico">Médico:</label>
