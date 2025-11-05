@@ -10,7 +10,7 @@ if (isset($_POST['userId']) && isset($_POST['cpf'])) {
     $cpf = $_POST['cpf'];
 
     // preparo sql para consulta
-    $c_sql = "SELECT * FROM clientes WHERE id='$userId' AND cpf='$cpf'";
+    $c_sql = "SELECT * FROM clientes WHERE identificacao='$userId' AND cpf='$cpf'";
     $result = $conection->query($c_sql);
     $registro = $result->fetch_assoc();
 

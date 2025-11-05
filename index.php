@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['conveniopac'] = "";
     $_SESSION['telefonepac'] = "";
     $_SESSION['emailpac'] = "";
-    $_SESSION['matriculapac']="";
+    $_SESSION['matriculapac'] = "";
     $_SESSION['incagenda'] = false;
     //
     $c_login = $_POST['login'];
@@ -67,56 +67,81 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <div class="clearfix" style="display:none"></div>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed</h4>
-            <h4>Acesso ao Sistema </h4>
-        </div>
-    </div>
 
 
-    <br>
-    <?php
-    if (!empty($l_erro)) {
-        echo "
+    <div class="login-container">
+        <h2>Login do Sistema Smed</h2>
+
+
+        <?php
+        if (!empty($l_erro)) {
+            echo "
               <div class='alert alert-warning' role='alert'>
               <h4>$l_erro</h4>
               </div>
             ";
-    }
-    ?>
-    <div class="container" style="width: 400px">
+        }
+        ?>
 
-        <form method="post" class="row g-3">
-            </br></br></br></br></br></br>
-            <div class="panel panel-primary class">
-                <div class="panel-heading text-center">
-                    <h5>Dados para acesso</h5>
+        <form method="post">
+
+            <div class="form-group row" class="form-control">
+                <label class="col-sm-3 col-form-label">Login</label>
+                <div class="col-xs-12">
+                    <input type="text" maxlength="40" class="form-control" name="login" placeholder="Digite o login">
                 </div>
             </div>
 
-            <div class="well" style="width:400px">
-                <div class="form-group row" class="form-control">
-                    <label class="col-sm-3 col-form-label">Login</label>
-                    <div class="col-xs-12">
-                          <input type="text" maxlength="40" class="form-control" name="login" placeholder="Digite o login" > 
-                    </div>
-                </div>
-
-                <div class="form-group row" class="form-control">
-                    <label class="col-sm-3 col-form-label">Senha</label>
-                    <div class="col-xs-12">
+            <div class="form-group row" class="form-control">
+                <label class="col-sm-3 col-form-label">Senha</label>
+                <div class="col-xs-12">
                     <input type="password" name="senha" class="form-control" placeholder="Entre com sua senha">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="offset-sm-3 col-sm-3">
-                        <button name="btnentra" type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-log-in'></span> Login</button>
-                    </div>
                 </div>
             </div>
+            <div class="row mb-3">
+                <div class="offset-sm-3 col-sm-3">
+                    <button name="btnentra" type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-log-in'></span>Login</button>
+                </div>
+            </div>
+
         </form>
     </div>
 </body>
 
 </html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .login-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container h2 {
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }

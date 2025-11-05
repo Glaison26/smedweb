@@ -13,9 +13,6 @@ include("../links.php");
 </head>
 
 <body>
-
-
-
     <div class="login-container">
         <!-- mensagem de erro no topo do navegador se login incorreto -->
         <?php
