@@ -165,6 +165,7 @@ if ($c_restricoes!='R'){
 $c_sql_up = "UPDATE historia set historia='$c_historia' where id = '$i_id_historia'";
 $result = $conection->query($c_sql_up);
 // verifico se a query foi correto
+
 if ($result === TRUE) {
     // Redireciona para a página de sucesso
     header("Location: anamnese_lista.php");
