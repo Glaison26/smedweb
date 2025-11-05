@@ -17,7 +17,7 @@ if (isset($_POST['userId']) && isset($_POST['cpf'])) {
     // verifico se encontrou o registro
     if ($registro) {
         // dados corretos, inicio sessão e redireciono para área de agendamento
-        $_SESSION['userId'] = $registro['id'];
+        $_SESSION['userId'] = $registro['identificacao'];
         $_SESSION['nome'] = $registro['nome'];
         header('Location: agendamento.php');
         exit;

@@ -88,23 +88,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="form-group row" class="form-control">
                 <label class="col-sm-3 col-form-label">Login</label>
                 <div class="col-xs-12">
-                    <input type="text" maxlength="40" class="form-control" name="login" placeholder="Digite o login">
+                    <input type="text" maxlength="40" class="form-control" required name="login" placeholder="Digite o login">
                 </div>
             </div>
 
             <div class="form-group row" class="form-control">
                 <label class="col-sm-3 col-form-label">Senha</label>
                 <div class="col-xs-12">
-                    <input type="password" name="senha" class="form-control" placeholder="Entre com sua senha">
+                    <input type="password" name="senha" class="form-control" required placeholder="Entre com sua senha">
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="offset-sm-3 col-sm-3">
-                    <button name="btnentra" type="submit" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-log-in'></span>Login</button>
-                </div>
-            </div>
-
+            <button class="btn btn-primary btn-block" name="btnentra" type="submit">Entrar</button>
         </form>
+    </div>
+
+
     </div>
 </body>
 
