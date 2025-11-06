@@ -3,18 +3,26 @@
 include("..\links.php");
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agendamento on Line</title>
 </head>
 
 <body>
+    <!-- script para agendar horário -->
+    <script>
+        function agendar(horario_id) {
+            // recebo os dados do formulário
+            var medico_id = <?php echo $_POST['medico']; ?>;
+            var data_agendamento = "<?php echo $_POST['data_agendamento']; ?>";
+            // redireciono para a página de agendamento com os parâmetros necessários
+            window.location.href = "agendar.php?medico=" + medico_id + "&data_agendamento=" + data_agendamento + "&horario_id=" + horario_id;
+        }
+    </script>
     <div class="container -my5">
         <!-- monto tabela de horários disponíveis para o médico selecionado na data escolhida -->
         <div class="panel panel-primary class">
@@ -55,7 +63,7 @@ include("..\links.php");
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>" . $row['horario'] . "</td>";
-                    echo "<td><a class='btn btn-success ' href='confirma_agendamento.php?horario_id=" . $row['id'] . "'>Agendar</a></td>";
+                    echo "<td><a class='btn btn-success' href='javascript:func()'onclick='agendar($row[id])'>Agendar</a></td>";
                     echo "</tr>";
                 }
             } else {
