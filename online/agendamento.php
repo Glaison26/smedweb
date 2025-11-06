@@ -23,6 +23,8 @@ $userId = $_SESSION['userId'];
 </head>
 
 <body>
+
+
     <!-- formulario de agendamento online -->
     <!-- solicito combobox com medicos da tabela profissionais medico e data para agendamento -->
     <div class="agendamento-container">
@@ -30,7 +32,7 @@ $userId = $_SESSION['userId'];
         <form action="processa_agendamento.php" method="POST" id="agendamentoForm">
             <div class="form-group">
                 <label for="medico">Médico:</label>
-                <select id="medico"  class="form-control form-control-lg" name="medico" required>
+                <select id="medico" class="form-control form-control-lg" name="medico" required>
                     <option value="">Selecione um médico</option>
                     <?php
                     // preparo sql para buscar medicos na tabela profissionais_medico
@@ -44,11 +46,12 @@ $userId = $_SESSION['userId'];
             </div>
             <div class="form-group">
                 <label for="data_agendamento">Data do Agendamento:</label>
-                <input type="date"  class="form-control" id="data_agendamento" name="data_agendamento" required>
+                <input type="date" class="form-control" id="data_agendamento" name="data_agendamento" required>
             </div>
             <button class="btn btn-primary btn-block" type="submit">Pesquisar Horários disponíveis</button>
         </form>
     </div>
+
 
 </body>
 
