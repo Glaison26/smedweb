@@ -1,17 +1,10 @@
-smedweb - alterações
+1 - não aceitar agendamento se tiver algum em aberto (agenda feita superior ou igual a data atual)
+2 - formatar grid de data disponíveis
+3 - enviar email para o paciente depos do agendamento
+4 - 
 
-pagina de orientações e atestados 
 
-tirar pagina modal para inclusão e edição
 
-agenda 
 
-checar tabulações
-
-terminar emissão das outras prescrições
-
-terminar parte fianceira 
-
-Gerar estatísticas
-
-colocar status de atendimento na agenda (atendido ou não)
+https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css
+https://code.jquery.com/jquery-3.3.1.js
