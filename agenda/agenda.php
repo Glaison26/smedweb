@@ -720,10 +720,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         </form>
     </div>
 
-
-
-
-
     <!-- janela Modal para marcação de consulta -->
 
     <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="editmodal" aria-hidden="true">
