@@ -27,8 +27,6 @@ require '../vendor/autoload.php';
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
-
-
 if (!isset($_GET["id"])) {
     header('location: /smedweb/agenda/agenda.php');
     exit;
