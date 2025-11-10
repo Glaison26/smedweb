@@ -8,10 +8,16 @@ if (!isset($_SESSION['newsession'])) {
 // grava dados editados do conveniado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include("..\..\conexao.php");
+    include("..\..\lib_gop.php");
     // recebo os dados via post
     $c_id = $_POST['up_id'];
     $c_nome = $_POST['up_nome'];
     $c_cpf = $_POST['up_cpf'];
+    if (validaCPF($c_cpf) == false) {
+        $response = array("status" => "invalid_cpf");
+        echo json_encode($response);
+        exit;
+    }
     $c_numero = $_POST['up_numero'];
     
     // preparo sql para atualização

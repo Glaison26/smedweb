@@ -30,7 +30,7 @@ if (!$result) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Convêniados</title>
+    <title>Lista de conveniados</title>
 </head>
 
 <body>
@@ -64,7 +64,7 @@ if (!$result) {
                             $('#novomodal').modal('hide');
                             location.reload();
                         } else {
-                            alert('falha ao incluir dados');
+                            alert('falha ao incluir dados, verifique o CPF');
                         }
                     }
                 });
@@ -128,7 +128,7 @@ if (!$result) {
                             $('#editmodal').modal('hide');
                             location.reload();
                         } else {
-                            alert('falha ao atualizar dados');
+                            alert('falha ao atualizar dados, verifique o CPF');
                         }
                     }
                 });
@@ -231,7 +231,7 @@ if (!$result) {
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Convêniado</h4>
+                    <h4 class="modal-title" id="exampleModalLabel">Editar dados do Conveniado</h4>
                 </div>
                 <div class="modal-body">
                     <div class='alert alert-warning' role='alert'>
