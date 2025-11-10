@@ -130,6 +130,7 @@ include("..\..\links.php");
                     <td>$c_linha[contato]</td>
                     
                     <td>
+                    <a class='btn btn-success btn-sm' title='Lista de Convêniados' href='/smedweb/cadastros/convenios/conveniados_lista.php?id=$c_linha[id]'><span class='glyphicon glyphicon-user'></span></a>
                     <a class='btn btn-info btn-sm' title='Editar Convenios' href='/smedweb/cadastros/convenios/convenio_editar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-pencil'></span></a>
                     <a class='btn btn-danger btn-sm' title='Excluir Convenios' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>

@@ -25,6 +25,7 @@ if ($conection->query($c_sql_atualiza) === TRUE) {
     // erro ao realizar agendamento
     echo "<script>alert('Erro ao realizar agendamento: " . $conection->error . "'); window.location.href='agendamento.php';</script>";
 }
-
-
+// rotina para enviar email de confirmação
+// incluo o arquivo de envio de email
+//include 'envia_email_confirmacao.php';
 ?>
