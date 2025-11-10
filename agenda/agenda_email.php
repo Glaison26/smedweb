@@ -91,6 +91,7 @@ $c_body .= "Telefone: <b>$c_telefone</b><br><br>";
 $c_body .= "Por favor, se não puder comparecer, entre em contato conosco.<br><br>";
 $c_body .= "Atenciosamente,<br>";
 try {
+    // senha do app qypq xjmy xmmu uoso
     //Server settings
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
     $c_email_envio = $c_email_remetente;
