@@ -23,7 +23,6 @@ if (!$result) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -33,11 +32,23 @@ if (!$result) {
     <title>Lista de Convêniados</title>
     </head>
 <body>
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Lista de Conveniados<h5>
+        </div>
+    </div>
+    <br>
+    <div class="container -my5">
+         <a class="btn btn-success btn-sm" href="/smedweb/cadastros/convenios/convenio_novo.php"><span class="glyphicon glyphicon-plus"></span> Incluir</a>
+        <a class="btn btn-secondary btn-sm" href="/smedweb/cadastros/convenios/convenios_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
+    </div>
+    <br>
     <div class="container">
-        <h2>Lista de Convêniados</h2>
-        <table class="table table-striped table-bordered table-hover table-condensed tabconvenios">
+        
+        <table class="table display table-bordered tabconvenios">
             <thead>
-                <tr>
+                <tr class="info">
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Identificação</th>
@@ -59,9 +70,7 @@ if (!$result) {
             </tbody>
         </table>
     </div>
-    <div class="container -my5">
-        <a class="btn btn-secondary btn-sm" href="/smedweb/cadastros/convenios/convenios_lista.php"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a>
-    </div>
+    
 </body>
 </html>
 
