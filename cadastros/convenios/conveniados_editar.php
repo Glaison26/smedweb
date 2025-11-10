@@ -5,10 +5,11 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
+include("..\..\conexao.php");
+include("..\..\lib_gop.php");
 // grava dados editados do conveniado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include("..\..\conexao.php");
-    include("..\..\lib_gop.php");
+
     // recebo os dados via post
     $c_id = $_POST['up_id'];
     $c_nome = $_POST['up_nome'];
@@ -19,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     $c_numero = $_POST['up_numero'];
-    
+
     // preparo sql para atualização
     $c_sql = "UPDATE clientes 
               SET nome = '$c_nome', cpf = '$c_cpf', identificacao = '$c_numero' 
@@ -34,4 +35,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo json_encode($response);
     exit;
 }
-?>
