@@ -27,5 +27,5 @@ if ($conection->query($c_sql_atualiza) === TRUE) {
 }
 // rotina para enviar email de confirmação
 // incluo o arquivo de envio de email
-//include 'envia_email_confirmacao.php';
+include 'envia_email_confirmacao.php';
 ?>
