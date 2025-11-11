@@ -34,6 +34,51 @@ if (!$result) {
 </head>
 
 <body>
+    <script>
+        $(document).ready(function() {
+            $('.tabcoveniados').DataTable({
+                // 
+                "iDisplayLength": -1,
+                "order": [1, 'asc'],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': [4]
+                }, {
+                    'aTargets': [0],
+                    "visible": true
+                }],
+                "oLanguage": {
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sInfoFiltered": " - filtrado de _MAX_ registros",
+                    "oPaginate": {
+                        "spagingType": "full_number",
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+
+                        "sLast": "Último"
+                    },
+                    "sSearch": "Pesquisar",
+                    "sLengthMenu": 'Mostrar <select>' +
+                        '<option value="5">5</option>' +
+                        '<option value="10">10</option>' +
+                        '<option value="20">20</option>' +
+                        '<option value="30">30</option>' +
+                        '<option value="40">40</option>' +
+                        '<option value="50">50</option>' +
+                        '<option value="-1">Todos</option>' +
+                        '</select> Registros'
+
+                }
+
+            });
+
+        });
+    </script>
 
     <script type="text/javascript">
         // Função javascript e ajax para inclusão dos dados

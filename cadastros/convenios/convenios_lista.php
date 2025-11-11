@@ -80,6 +80,7 @@ include("..\..\links.php");
 
         });
     </script>
+    
     <div class="panel panel-primary class">
         <div class="panel-heading text-center">
             <h4>SmartMed - Sistema Médico</h4>

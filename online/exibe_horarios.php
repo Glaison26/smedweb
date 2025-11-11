@@ -1,4 +1,6 @@
 <?php
+// session start
+//session_start();
 // monto tabela de horários disponíveis para o médico selecionado na data escolhida
 include("..\links.php");
 ?>
@@ -44,7 +46,7 @@ include("..\links.php");
                 $result_medico = $conection->query($c_sql_medico);
                 $registro_medico = $result_medico->fetch_assoc();
                 $medico_nome = $registro_medico['nome'];
-                echo "<h4>Médico: " . $medico_nome . " - Data: " . date('d/m/Y', strtotime($data_agendamento)) . "</h4>";
+                echo "<h4>Paciente :".$_SESSION['nome']." - Médico: " . $medico_nome . " - Data: " . date('d/m/Y', strtotime($data_agendamento)) . "</h4>";
                 ?>
             </div>
         </div>
