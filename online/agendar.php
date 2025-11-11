@@ -49,28 +49,13 @@
                         </label>
                     </div>
                 </div>
-
-                <!-- select com os convênios disponíveis na tabela de convênios -->
-                <div class="form-group">
-                    <label for="convenio">Convênio:</label>
-                    <select id="convenio" class="form-control form-control-lg" name="convenio" required>
-                        <option value="">Selecione um convênio</option>
-                        <?php
-                        // preparo sql para buscar convênios na tabela convenios
-                        $c_sql_convenio = "SELECT id, nome FROM convenios ORDER BY nome";
-                        $resultado = $conection->query($c_sql_convenio);
-                        while ($registro_convenio = $resultado->fetch_assoc()) {
-                            echo "<option value='" . $registro_convenio['id'] . "'>" . $registro_convenio['nome'] . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+            
                 <div class="form-group">
                     <label for="telefone">Telefone:</label>
                     <input type="text" class="form-control" id="telefone" name="telefone" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Email de Confirmação:</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <button class="btn btn-primary btn-block" type="submit">Confirmar Agendamento

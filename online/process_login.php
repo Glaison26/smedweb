@@ -19,6 +19,7 @@ if (isset($_POST['userId']) && isset($_POST['cpf'])) {
         // dados corretos, inicio sessão e redireciono para área de agendamento
         $_SESSION['userId'] = $registro['identificacao'];
         $_SESSION['nome'] = $registro['nome'];
+        $_SESSION['id_convenio'] = $registro['id_convenio'];
         header('Location: agendamento.php');
         exit;
     } else {

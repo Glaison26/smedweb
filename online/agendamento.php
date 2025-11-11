@@ -23,8 +23,6 @@ $userId = $_SESSION['userId'];
 </head>
 
 <body>
-
-
     <!-- formulario de agendamento online -->
     <!-- solicito combobox com medicos da tabela profissionais medico e data para agendamento -->
     <div class="agendamento-container">
@@ -51,8 +49,6 @@ $userId = $_SESSION['userId'];
             <button class="btn btn-primary btn-block" type="submit">Pesquisar Horários disponíveis</button>
         </form>
     </div>
-
-
 </body>
 
 </html>

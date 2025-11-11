@@ -12,7 +12,7 @@ include("..\conexao.php");
 //rotina para garvar o agendamento na tabela agenda
 // preparo sql para atualizar o registro na tabela agenda com nome, telefone, email e convenio
 $c_sql_atualiza = "UPDATE agenda SET nome='" .  $_SESSION['nome'] . "', telefone='" . $_POST['telefone'] . "',
- email='" . $_POST['email'] . "', id_convenio='" . $_POST['convenio']  . "', matricula='" . $_SESSION['userId'] .
+ email='" . $_POST['email'] . "', id_convenio='" . $_SESSION['id_convenio']  . "', matricula='" . $_SESSION['userId'] .
   "', paciente_novo='" . $_POST['primeira'] . "', paciente_compareceu='Não'".",paciente_atendido='Não'".
   " WHERE id='$horario_id'";
  //echo $c_sql_atualiza;
