@@ -45,7 +45,4 @@ if ($conection->query($c_sql_update) === TRUE) {
 } else {
     echo 'Erro ao alterar a senha: ' . $conection->error . '. <a href="alterarsenha.php">Tente novamente</a>.';
 }
-
-
-
 ?>
