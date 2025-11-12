@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         header('location: /smedweb/menu.php');
     }
     if ($c_linha['achou'] == 0) {  // não achou usuário
-        $l_erro = 'Falha no Login. Nome ou senha inválido. Verifique os dados e tente novamente !!!';
+        $l_erro = 'Usuário ou senha inválido!!!';
     } else {
         // procuro senha
         $c_sql = "SELECT usuario.senha, usuario.tipo, usuario.nome FROM usuario where usuario.login='$c_login'";
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $registro = $result->fetch_assoc();
         $c_senha = base64_decode($registro['senha']); // descriptografa senha
         if ($c_senha != $_POST['senha']) {  // não achou senha
-            $l_erro = 'Falha no Login. Nome ou senha inválido. Verifique os dados e tente novamente !!!';
+            $l_erro = 'Usuário ou senha inválido!!!';
         } else {
             $l_erro = ' ';
             $_SESSION["newsession"] = "smed"; // passagem da segurança

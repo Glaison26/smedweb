@@ -68,7 +68,9 @@ if ($c_result_parametro->num_rows > 0) {
     $c_email_remetente = $c_row_parametro['email_clinica'];
     $c_senha_email = $c_row_parametro['senha_email'];
     $c_smtp = $c_row_parametro['host_email'];
+    $c_porta = $c_row_parametro['porta_smtp'];
     $c_nome_remetente = $c_row_parametro['nome_clinica'];
+
 } else {
     echo "<script>alert('Parâmetros de e-mail não cadastrados.'); window.close();</script>";
     exit;
@@ -97,8 +99,9 @@ try {
     $mail->Username   = $c_email_remetente;                     //SMTP username
     $mail->Password   = $c_senha_email;                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    //$mail->Port       = 587; 
+    $mail->Port       = trim($c_porta);                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    //$mail->Port       = 587; - porta outlook
+    // $mail->Port       = 465; - porta gmail
     //Recipients
     $mail->setFrom($c_email_envio, 'pms');
     //echo $c_email;
