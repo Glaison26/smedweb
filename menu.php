@@ -214,11 +214,11 @@ if (($c_linha['tipo'] == '1')) {
 	<div class="container -my5">
 		<div class="sidebar">
 			<a href="#"></a>
-			<a title='Ficha clinica de Paciente' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="30" height="30"></a>
-			<a title='Marcação de Consultas' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="30" height="30"></a>
-			<a title='Prescrições Médicas' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="30" height="30"></a>
-			<a title='Alterar Senha' href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="30" height="30"></a>
-			<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="30" height="30"></a>
+			<a title='Ficha clinica de Paciente' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="25" height="25"></a>
+			<a title='Marcação de Consultas' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="25" height="25"></a>
+			<a title='Prescrições Médicas' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="25" height="25"></a>
+			<a title='Alterar Senha' href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="25" height="25"></a>
+			<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="25" height="25"></a>
 		</div>
 	</div>
 
@@ -232,7 +232,7 @@ if (($c_linha['tipo'] == '1')) {
 		</script>
 		<!-- fim da função -->
 		<main>
-
+			
 			<div style="padding-top:10px;">
 				<div class="panel">
 					<div class="panel-heading text-center text-info">
@@ -362,14 +362,14 @@ if (($c_linha['tipo'] == '1')) {
 							<div class="container" class="text-primary">
 
 								<p>
-								<h3 class="text-black-50" Align="justify">
+								<h4 class="text-black-50" Align="justify">
 
 									Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
 									Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
 									tornando a administração do seu negócio mais simples e eficiente.<br><br> Explore conosco as principais funcionalidades deste sistema e descubra como
 									ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
 
-								</h3>
+								</h4>
 								</p>
 							</div>
 						</div>
@@ -404,7 +404,7 @@ if (($c_linha['tipo'] == '1')) {
 		z-index: 1;
 		top: 0;
 		left: 0;
-		background-color: #4682B4;
+		background-color: #37474F;
 		overflow-x: hidden;
 		padding-top: 16px;
 	}
