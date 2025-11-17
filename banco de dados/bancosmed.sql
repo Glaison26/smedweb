@@ -269,15 +269,15 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(226, 4, 3, '2025-11-05', '3', '10:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(227, 4, 3, '2025-11-05', '3', '10:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(228, 4, 3, '2025-11-05', '3', '11:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(229, 4, 3, '2025-11-06', '4', '07:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(230, 4, 3, '2025-11-06', '4', '07:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(229, 4, 4, '2025-11-06', '4', '07:00:00', 'Fernando Pessoa', '(31) 9854-5555', 'teste@gmail.com', NULL, '22004', NULL, NULL, NULL),
+	(230, 4, 4, '2025-11-06', '4', '07:30:00', 'Fernando Pessoa', '(31) 9999-9999', 'teste@gmail.com', NULL, '22004', NULL, NULL, NULL),
 	(231, 4, 3, '2025-11-06', '4', '08:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(232, 4, 3, '2025-11-06', '4', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(233, 4, 3, '2025-11-06', '4', '09:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(234, 4, 3, '2025-11-06', '4', '09:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(235, 4, 3, '2025-11-06', '4', '10:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(235, 4, 4, '2025-11-06', '4', '10:00:00', 'Fernando Pessoa', '(31) 9854-5556', 'teste@gmail.com', NULL, '22004', 'Sim', 'Não', 'Não'),
 	(236, 4, 3, '2025-11-06', '4', '14:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(237, 4, 3, '2025-11-06', '4', '14:15:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(237, 4, 1, '2025-11-06', '4', '14:15:00', 'Fernando Pessoa', '(31) 9999-9999', 'teste@gmail.com', NULL, NULL, NULL, NULL, NULL),
 	(238, 4, 3, '2025-11-06', '4', '14:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(239, 4, 3, '2025-11-06', '4', '14:45:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(240, 4, 3, '2025-11-06', '4', '15:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -331,9 +331,9 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(288, 4, 3, '2025-11-09', '7', '10:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(289, 4, 3, '2025-11-09', '7', '10:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(290, 4, 3, '2025-11-09', '7', '11:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(291, 4, 3, '2025-11-10', '1', '07:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(291, 4, 1, '2025-11-10', '1', '07:00:00', 'Fernando Pessoa', '(31) 9854-5555', 'glaison26.queiroz@gmail.com', NULL, '22004', 'Sim', 'Não', 'Não'),
 	(292, 4, 3, '2025-11-10', '1', '07:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(293, 4, 3, '2025-11-10', '1', '08:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(293, 4, 2, '2025-11-10', '1', '08:00:00', 'Maria Augusta da Silva', '(31) 98426-2508', 'maria.augusta@gmail.com', NULL, '23004', 'Não', 'Não', 'Não'),
 	(294, 4, 3, '2025-11-10', '1', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(295, 4, 3, '2025-11-10', '1', '09:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(296, 4, 3, '2025-11-10', '1', '09:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -376,7 +376,7 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(333, 4, 3, '2025-11-11', '2', '16:20:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(334, 4, 3, '2025-11-11', '2', '16:40:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(335, 4, 3, '2025-11-11', '2', '17:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(336, 4, 3, '2025-11-12', '3', '08:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(336, 4, 3, '2025-11-12', '3', '08:00:00', '', '', '', '', '', '', '', ''),
 	(337, 4, 3, '2025-11-12', '3', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(338, 4, 3, '2025-11-12', '3', '09:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(339, 4, 3, '2025-11-12', '3', '09:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -387,7 +387,7 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(344, 4, 3, '2025-11-13', '4', '07:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(345, 4, 3, '2025-11-13', '4', '08:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(346, 4, 3, '2025-11-13', '4', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(347, 4, 3, '2025-11-13', '4', '09:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(347, 4, 1, '2025-11-13', '4', '09:00:00', 'Ronaldo Gaúcho', '(31) 9999-9999', 'glaison26.queiroz@gmail.com', NULL, '22005', 'Sim', 'Não', 'Não'),
 	(348, 4, 3, '2025-11-13', '4', '09:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(349, 4, 3, '2025-11-13', '4', '10:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(350, 4, 3, '2025-11-13', '4', '14:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -411,9 +411,9 @@ INSERT INTO `agenda` (`id`, `id_profissional`, `id_convenio`, `data`, `dia`, `ho
 	(368, 4, 3, '2025-11-14', '5', '08:15:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(369, 4, 3, '2025-11-14', '5', '08:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(370, 4, 3, '2025-11-14', '5', '08:45:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(371, 4, 3, '2025-11-14', '5', '09:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(372, 4, 3, '2025-11-14', '5', '09:15:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(373, 4, 3, '2025-11-14', '5', '09:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(371, 4, 1, '2025-11-14', '5', '09:00:00', 'Fernando Pessoa', '(31) 98426-2508', 'glaison26.queiroz@gmail.com', NULL, '22004', 'Não', 'Não', 'Não'),
+	(372, 4, 4, '2025-11-14', '5', '09:15:00', 'Maria Augusta da Silva', '(31) 9854-5555', 'glaison26.queiroz@gmail.com', NULL, '23004', 'Sim', 'Não', 'Não'),
+	(373, 4, 3, '2025-11-14', '5', '09:30:00', '', '', '', '', '', '', '', ''),
 	(374, 4, 3, '2025-11-14', '5', '09:45:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(375, 4, 3, '2025-11-14', '5', '10:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(376, 4, 3, '2025-11-14', '5', '10:15:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -891,15 +891,22 @@ INSERT INTO `bateria` (`id`, `descricao`, `exames`) VALUES
 -- Copiando estrutura para tabela smed.clientes
 CREATE TABLE IF NOT EXISTS `clientes` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `id_convenio` int DEFAULT NULL,
   `identificacao` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `cpf` varchar(11) DEFAULT NULL,
   `data_admissao` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nome` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_clientes_convenios` (`id_convenio`),
+  CONSTRAINT `FK_clientes_convenios` FOREIGN KEY (`id_convenio`) REFERENCES `convenios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.clientes: ~0 rows (aproximadamente)
-INSERT INTO `clientes` (`id`, `identificacao`, `cpf`, `data_admissao`) VALUES
-	(1, '22004', '69551022653', '2013-09-05');
+-- Copiando dados para a tabela smed.clientes: ~4 rows (aproximadamente)
+INSERT INTO `clientes` (`id`, `id_convenio`, `identificacao`, `cpf`, `data_admissao`, `nome`) VALUES
+	(1, 1, '22004', '69551022653', '2013-09-05', 'Fernando Pessoa'),
+	(2, 4, '23004', '33455445554', '2025-11-06', 'Maria Augusta da Silva'),
+	(3, 1, '22005', '95858483701', NULL, 'Ronaldo Gaúcho'),
+	(4, 1, '22006', '26862763040', NULL, 'José da Silva');
 
 -- Copiando estrutura para tabela smed.componentes
 CREATE TABLE IF NOT EXISTS `componentes` (
@@ -928,12 +935,13 @@ CREATE TABLE IF NOT EXISTS `config` (
   `cnpj_clinica` varchar(18) DEFAULT NULL,
   `host_email` varchar(200) DEFAULT NULL,
   `senha_email` varchar(20) DEFAULT NULL,
+  `porta_smtp` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Copiando dados para a tabela smed.config: ~1 rows (aproximadamente)
-INSERT INTO `config` (`id`, `nome_clinica`, `endereco_clinica`, `telefone_clinica`, `email_clinica`, `cidade_clinica`, `cnpj_clinica`, `host_email`, `senha_email`) VALUES
-	(1, 'Clinica Belo Horizonte', 'Rua Comendador viana 148', '32323', 'teste@gmail.com', 'Belo Horizonte', '102842912342', 'smtp.gmail.com', 'uuyi');
+INSERT INTO `config` (`id`, `nome_clinica`, `endereco_clinica`, `telefone_clinica`, `email_clinica`, `cidade_clinica`, `cnpj_clinica`, `host_email`, `senha_email`, `porta_smtp`) VALUES
+	(1, 'Clinica Belo Horizonte', 'Rua Comendador viana 148', '32323', 'glaison26.queiroz@gmail.com', 'Belo Horizonte', '102842912342', 'smtp.gmail.com', 'qypq xjmy xmmu uoso', '465');
 
 -- Copiando estrutura para tabela smed.convenios
 CREATE TABLE IF NOT EXISTS `convenios` (
@@ -1439,11 +1447,11 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 -- Copiando dados para a tabela smed.usuario: ~5 rows (aproximadamente)
 INSERT INTO `usuario` (`id`, `id_perfil`, `nome`, `login`, `senha`, `ativo`, `prescricoes`, `pacientesdados`, `pacienteshistoria`, `agendamarcacao`, `agendageracao`, `cadastros`, `tipo`, `email`, `telefone`) VALUES
-	(1, 1, 'Glaison Queiroz', 'Glaison', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'glaison26.queiroz@gmail.com', '3136712550'),
+	(1, 1, 'Glaison Queiroz', 'Glaison', 'dGFpb2JhQDMxNjMxOA==', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'glaison26.queiroz@gmail.com', '3136712550'),
 	(3, 2, 'Dr. José da Silva', 'dasilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'dasilva@gmail.com', '3678985412'),
 	(4, 2, 'Dr. Manoel da Costa e Silva', 'ManoelSilva', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'glaison26.queiroz@gmail.com', '36712550'),
 	(5, 1, 'teste da silva', 'teste', 'c2FiYXJhQDIwMjU=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '1', 'teste@gmail.com', '3198545555'),
-	(6, 3, 'Secretaria', 'Secretaria', 'MTIzNDU2Nzg=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'teste@gmail.com', '3198545555');
+	(6, 3, 'Secretaria', 'Secretaria', 'ODc2NTQzMjE=', 'S', NULL, NULL, NULL, NULL, NULL, NULL, '2', 'teste@gmail.com', '3198545555');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
