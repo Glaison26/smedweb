@@ -1,10 +1,12 @@
 <?php
+include("links.php");
 include("conexao.php");
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $l_erro = '';
 } else {
     session_start();
     unset($_SESSION['newsession']);
+
     // seções para agenda
     $_SESSION['nomepac'] = "";
     $_SESSION['conveniopac'] = "";
@@ -70,8 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
     <div class="login-container">
-        <h2>Login do Sistema Smed</h2>
-
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h5><strong>Login do Sistema</strong></h5>
+            </div>
+        </div>
 
         <?php
         if (!empty($l_erro)) {
@@ -82,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ";
         }
         ?>
-
         <form method="post">
 
             <div class="form-group row" class="form-control">
@@ -98,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     <input type="password" name="senha" class="form-control" required placeholder="Entre com sua senha">
                 </div>
             </div>
-            <button class="btn btn-primary btn-block" name="btnentra" type="submit">Entrar</button>
+            <button class="btn btn-success btn-block" name="btnentra" type="submit">Entrar</button>
         </form>
     </div>
 

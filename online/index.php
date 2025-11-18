@@ -23,7 +23,11 @@ include("../links.php");
         }
         ?>
 
-        <h2>Agendamento OnLine SmedWeb</h2>
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h5><strong>Login para Agendamento OnLine</strong></h5>
+            </div>
+        </div>
         <form action="process_login.php" method="POST" id="loginForm">
             <div class="form-group">
                 <label for="userId">Número de Identificação:</label>
