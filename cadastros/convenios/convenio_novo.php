@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $msg_gravou = "Dados Gravados com Sucesso!!";
 
-        header('location: /smedweb/convenios_lista.php');
+        header('location:  /smedweb/cadastros/convenios/convenios_lista.php');
     } while (false);
 }
 

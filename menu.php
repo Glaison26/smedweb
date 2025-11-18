@@ -211,15 +211,20 @@ if (($c_linha['tipo'] == '1')) {
 <!-- The sidebar -->
 
 <!-- barra lateral com opções mais utilizadas -->
-<div class="container-fluid">
-	
+<div class="container -my-3">
+
 	<div class="navbar-nav sidebar">
 		<a href="#"></a>
-		<a title='Ficha clinica de Paciente' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="25" height="25"></a>
-		<a title='Marcação de Consultas' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="25" height="25"></a>
-		<a title='Prescrições Médicas' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="25" height="25"></a>
-		<a title='Alterar Senha' href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="25" height="25"></a>
-		<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="25" height="25"></a>
+		<a href="#"></a>
+		<a href="#"></a>
+		<a href="#"></a>
+		<a href="#"></a>
+		<a href="#"></a>
+		<a title='Ficha clinica de Paciente' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="30" height="25"></a>
+		<a title='Marcação de Consultas' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="30" height="25"></a>
+		<a title='Prescrições Médicas' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="30" height="25"></a>
+		<a title='Alterar Senha' href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="30" height="25"></a>
+		<a title='Sair do Sistema' href="\smedweb\index.php"><img src="\smedweb\images\saida.png" alt="" width="30" height="25"></a>
 	</div>
 </div>
 
@@ -233,154 +238,150 @@ if (($c_linha['tipo'] == '1')) {
 		}
 	</script>
 	<!-- fim da função -->
-	<main>
+	<div class="container -my5">
+		<main>
 
-		<div style="padding-top:10px;">
+			<div style="padding-top:10px;">
 
-			<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+				<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-primary ftco-navbar-light" id="ftco-navbar">
 
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="fa fa-bars">Menu</span>
-				</button>
+					<!-- Logo do sistema -->
+					<a class="navbar-brand" href="menu.php"><img src="\smedweb\images\smed_icon.ico" alt="" width="40" height="40"></a>
 
-				<div class="collapse navbar-collapse" id="ftco-nav">
+					<div class="collapse navbar-collapse" id="ftco-nav">
 
-					<div class="navbar-header">
-						<br>
-						<a class="navbar-brand" href="#">
-							<h5><span class="glyphicon glyphicon-home" aria-hidden="true"></span><strong> Menu Inicial</strong></h5>
-						</a>
+					
+						<ul class="navbar-nav ml-auto">
+
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown01">
+									<a class="dropdown-item" href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="20" height="20"> Ficha Clinica...</a>
+									<a class="dropdown-item" href="#"><img src="\smedweb\images\estatisticas.png" alt="" width="20" height="20"> Estatíscas...</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agenda</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
+									<a class="dropdown-item" href="#">____________________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_agenda_criacao; ?>><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prescrições</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="20" height="20">Emitir Prescrição...</a>
+									<a class="dropdown-item" href="#"><img src="\smedweb\images\config.png" alt="" width="20" height="20">Configurações...</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Finaceiro</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href="#"><img src="\smedweb\images\financeiro.png" alt="" width="20" height="20"> Lançamento...</a>
+									<a class="dropdown-item" href="#"><img src="\smedweb\images\movimentacao.png" alt="" width="20" height="20"> Movimentação...</a>
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_financeiro1; ?>><img src="\smedweb\images\indices.png" alt="" width="20" height="20"> Indices Financeiros...</a>
+									<a class="dropdown-item" href=<?php echo $op_financeiro2; ?>><img src="\smedweb\images\tabela.png" alt="" width="20" height="20"> Tabelas...</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href=<?php echo $op_cad_profissionais; ?>><img src="\smedweb\images\equipemedica.png" alt="" width="20" height="20"> Profissionais...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_convenios; ?>><img src="\smedweb\images\populacao.png" alt="" width="20" height="20"> Convênios...</a>
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_procedimentos; ?>><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_itenslaudos; ?>><img src="\smedweb\images\laudo2.png" alt="" width="20" height="20"> Itens para Laudos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_medicamentos; ?>><img src="\smedweb\images\medicamento.png" alt="" width="20" height="20"> Medicamentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_orientacoes; ?>><img src="\smedweb\images\orientacao2.png" alt="" width="20" height="20"> Orientações...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_formulas; ?>><img src="\smedweb\images\ff1.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_atestado; ?>><img src="\smedweb\images\atestado2.png" alt="" width="20" height="20"> Atestados Padrões...</a>
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupo_medicamento; ?>><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupo_exame; ?>><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_componentes; ?>><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_grupos_componentes; ?>><img src="\smedweb\images\grupocomponentes.png" alt="20" height="20"> Grupos de Componentes...</a>
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_especialidades; ?>><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_parametros; ?>><img src="\smedweb\images\parametros.png" alt="" width="20" height="20"> Parâmetros para Eventos...</a>
+									<a class="dropdown-item" href=<?php echo $op_cad_diagnosticos; ?>><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>
+									<a class="dropdown-item" href="#">__________________________________</a>
+									<a class="dropdown-item" href=<?php echo $op_configuracoes; ?>><img src="\smedweb\images\config.png" alt="" with=20 height="20"> Configurações Gerais...</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href=<?php echo $op_usuarios; ?>><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
+									<a class="dropdown-item" href=<?php echo $op_usuarios_perfil; ?>><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
+									<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
+
+								</div>
+							</li>
+
+
+						</ul>
 					</div>
-					<ul class="navbar-nav ml-auto">
 
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pacientes</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown01">
-								<a class="dropdown-item" href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="" width="20" height="20"> Ficha Clinica...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\estatisticas.png" alt="" width="20" height="20"> Estatíscas...</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agenda</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="" width="20" height="20"> Marcação de Consultas...</a>
-								<a class="dropdown-item" href="#">____________________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_agenda_criacao; ?>><img src="\smedweb\images\configdatas.png" alt="" width="20" height="20"> Configuração e Criação da Agenda...</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Prescrições</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="" width="20" height="20">Emitir Prescrição...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\config.png" alt="" width="20" height="20">Configurações...</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Finaceiro</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\financeiro.png" alt="" width="20" height="20"> Lançamento...</a>
-								<a class="dropdown-item" href="#"><img src="\smedweb\images\movimentacao.png" alt="" width="20" height="20"> Movimentação...</a>
-								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_financeiro1; ?>><img src="\smedweb\images\indices.png" alt="" width="20" height="20"> Indices Financeiros...</a>
-								<a class="dropdown-item" href=<?php echo $op_financeiro2; ?>><img src="\smedweb\images\tabela.png" alt="" width="20" height="20"> Tabelas...</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href=<?php echo $op_cad_profissionais; ?>><img src="\smedweb\images\equipemedica.png" alt="" width="20" height="20"> Profissionais...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_convenios; ?>><img src="\smedweb\images\populacao.png" alt="" width="20" height="20"> Convênios...</a>
-								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_procedimentos; ?>><img src="\smedweb\images\procedimentos.png" alt="" width="20" height="20"> Procedimentos...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_itenslaudos; ?>><img src="\smedweb\images\laudo2.png" alt="" width="20" height="20"> Itens para Laudos...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_medicamentos; ?>><img src="\smedweb\images\medicamento.png" alt="" width="20" height="20"> Medicamentos...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_orientacoes; ?>><img src="\smedweb\images\orientacao2.png" alt="" width="20" height="20"> Orientações...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_formulas; ?>><img src="\smedweb\images\ff1.png" alt="" width="20" height="20"> Fórmulas padrões...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_atestado; ?>><img src="\smedweb\images\atestado2.png" alt="" width="20" height="20"> Atestados Padrões...</a>
-								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_grupo_medicamento; ?>><img src="\smedweb\images\grupomedicamento.png" alt="20" height="20"> Grupos de Medicamentos...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_grupo_exame; ?>><img src="\smedweb\images\grupolaudos.png" alt="20" height="20"> Grupos de Exames...</a>
-								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_componentes; ?>><img src="\smedweb\images\componentes.png" alt="20" height="20"> Componentes de Fórmulas...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_grupos_componentes; ?>><img src="\smedweb\images\grupocomponentes.png" alt="20" height="20"> Grupos de Componentes...</a>
-								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_especialidades; ?>><img src="\smedweb\images\especialidades.png" alt="" with=20 height="20"> Especialidades...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_parametros; ?>><img src="\smedweb\images\parametros.png" alt="" width="20" height="20"> Parâmetros para Eventos...</a>
-								<a class="dropdown-item" href=<?php echo $op_cad_diagnosticos; ?>><img src="\smedweb\images\diagnostico.png" alt="" width="20" height="20"> Diagnósticos...</a>
-								<a class="dropdown-item" href="#">__________________________________</a>
-								<a class="dropdown-item" href=<?php echo $op_configuracoes; ?>><img src="\smedweb\images\config.png" alt="" with=20 height="20"> Configurações Gerais...</a>
-							</div>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href=<?php echo $op_usuarios; ?>><img src="\smedweb\images\usuario.png" alt="" width="20" height="20"> Cadastro de Usuários...</a>
-								<a class="dropdown-item" href=<?php echo $op_usuarios_perfil; ?>><img src="\smedweb\images\acessos2.png" alt="" width="20" height="20"> Perfis dos acessos de Usuários</a>
-								<a class="dropdown-item" href="\smedweb\alterarsenha.php"><img src="\smedweb\images\trocasenha.png" alt="" width="20" height="20"> Trocar de Senha</a>
+				</nav>
 
-							</div>
-						</li>
+				<div class="container-fluid">
+				
+					<?php
+					date_default_timezone_set('America/Sao_Paulo');
+					$agora = date('d/m/Y H:i');
+					if ($_SESSION['c_tipo'] == '1') {
+						$c_nivel = 'Administrador ';
+					} else {
+						$c_nivel = 'Operador';
+					}
+					?>
+					<div class="container" class="text-primary">
+						<div class="panel-body text-left">
+							<h4>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h4>
+						</div>
 
-
-					</ul>
-				</div>
-
-			</nav>
-
-			<div class="container-fluid">
-				<?php
-				date_default_timezone_set('America/Sao_Paulo');
-				$agora = date('d/m/Y H:i');
-				if ($_SESSION['c_tipo'] == '1') {
-					$c_nivel = 'Administrador ';
-				} else {
-					$c_nivel = 'Operador';
-				}
-				?>
-				<div class="container" class="text-primary">
-					<div class="panel-body text-left">
-						<h4>Usuário logado: <?php echo ' ' . $_SESSION['c_nome'] . ' - ' . $agora . ' ' ?>- Nivel de acesso:<?php echo ' ' . $c_nivel ?></h4>
 					</div>
 
 				</div>
-
-			</div>
-			<hr>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm">
-						<div class="container" Align="left">
-							<img class="img-thumbnail" class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
+				<hr>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm">
+							<div class="container fluid" Align="left">
+								<img class="img-thumbnail" class="img-fluid" alt="Responsive image" src="\smedweb\images\medico.jpeg" alt="" width="500" height="400">
+							</div>
 						</div>
-					</div>
-					<div class="col-sm-7">
-						<div class="container" class="text-primary">
+						<div class="col-sm-7">
+							<div class="container-fluid" class="text-primary">
 
-							<p>
-							<h4 class="text-black-50" Align="justify">
+								<p>
+								<h4 class="text-black-50" Align="justify">
 
-								Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
-								Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
-								tornando a administração do seu negócio mais simples e eficiente.<br><br> Explore conosco as principais funcionalidades deste sistema e descubra como
-								ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
+									Bem-vindo ao nosso sistema inovador, projetado especificamente para atender às necessidades de gestão de clínicas e consultórios médicos.
+									Esta plataforma abrangente oferece uma ampla gama de recursos, desde o gerenciamento eficiente de pacientes até o faturamento e análises detalhadas,
+									tornando a administração do seu negócio mais simples e eficiente.<br><br> Explore conosco as principais funcionalidades deste sistema e descubra como
+									ele pode transformar a maneira como você gerencia sua clínica ou consultório.<h4>
 
-								</h4>
-								</p>
+									</h4>
+									</p>
+							</div>
 						</div>
-					</div>
 
-					<div class="col-sm-0">
+						<div class="col-sm-0">
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</main>
+
+	</div>
 
 
-		</div>
 
-
-
-		<!-- END nav -->
+	<!-- END nav -->
 
 	</main>
 
@@ -390,11 +391,11 @@ if (($c_linha['tipo'] == '1')) {
 <style>
 	/* Style the sidebar - fixed full height */
 	.sidebar {
-		height: 80%;
-		width: 60px;
+		height: 100%;
+		width: 70px;
 		position: fixed;
 		z-index: 1;
-		top: 88px;
+		top: 2px;
 		left: 0;
 		background-color: #37474F;
 		overflow-x: hidden;
