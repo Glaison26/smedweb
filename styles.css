@@ -1,7 +1,7 @@
 body {
     /* 1. Define o caminho para a imagem de fundo.
        ATENÇÃO: Substitua 'caminho/para/sua/imagem.png' pelo caminho real onde você salvou a imagem. */
-    background-image: url('smedweb/images/fundo.png');
+    background-image: url('smedweb/images/medico3.jpeg');
 
     /* 2. Garante que a imagem cubra todo o elemento, mantendo a proporção. */
     background-size: cover;
