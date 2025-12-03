@@ -331,10 +331,14 @@ if (($c_linha['tipo'] == '1')) {
 								</li>
 							</ul>
 						</div>
-						<div class="container">
+						<div class="container ml-auto">
 							<div class="user-actions">
-								<a class='btn btn-primary'  href='\smedweb\alterarsenha.php'><span class='glyphicon glyphicon-user'></span> Alterar Senha</a>
-								<a class='btn btn-danger' href='/smedweb/index.php'><span class='glyphicon glyphicon-off'></span> Sair do Sistema</a>
+								<!-- Botões de ação do usuário -->
+								
+								<div class="ml-2">
+
+									<a class='btn btn-danger' href='/smedweb/index.php'><span class='glyphicon glyphicon-off'></span> Sair do Sistema</a>
+								</div>
 							</div>
 						</div>
 					</nav>
@@ -352,6 +356,18 @@ if (($c_linha['tipo'] == '1')) {
 				?>
 				<h5 Align="right" class="text-black-50">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
 			</div>
+			<div class="container-fluid px-2">
+				<hr>
+				<div class="user-actions">
+					<!-- Botões de ação do usuário -->
+					<a class='btn btn-success' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica</a>
+					<a class='btn btn-primary' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" height="15"></span> Prescrições</a>
+					<a class='btn btn-info' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Agenda Médica</a>
+
+				</div>
+
+			</div>
+
 			<hr>
 			<div class="container content-box">
 
@@ -386,13 +402,7 @@ if (($c_linha['tipo'] == '1')) {
 		</main>
 	</div>
 
-
-
-
-
 	<!-- END nav -->
-
-
 
 </body>
 
@@ -450,7 +460,7 @@ if (($c_linha['tipo'] == '1')) {
 
 	.logo-icon {
 		margin-right: 8px;
-		font-size: 2.2em;
+		font-size: 2.0em;
 	}
 
 	.logo-text {
