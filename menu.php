@@ -334,9 +334,7 @@ if (($c_linha['tipo'] == '1')) {
 						<div class="container ml-auto">
 							<div class="user-actions">
 								<!-- Botões de ação do usuário -->
-								
 								<div class="ml-2">
-
 									<a class='btn btn-danger' href='/smedweb/index.php'><span class='glyphicon glyphicon-off'></span> Sair do Sistema</a>
 								</div>
 							</div>
