@@ -364,9 +364,7 @@ if (($c_linha['tipo'] == '1')) {
 					<a class='btn btn-info' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Agenda Médica</a>
 
 				</div>
-
 			</div>
-
 			<hr>
 			<div class="container content-box">
 
