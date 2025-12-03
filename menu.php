@@ -333,13 +333,14 @@ if (($c_linha['tipo'] == '1')) {
 						</div>
 						<div class="container">
 							<div class="user-actions">
+								<a class='btn btn-primary'  href='\smedweb\alterarsenha.php'><span class='glyphicon glyphicon-user'></span> Alterar Senha</a>
 								<a class='btn btn-danger' href='/smedweb/index.php'><span class='glyphicon glyphicon-off'></span> Sair do Sistema</a>
 							</div>
 						</div>
 					</nav>
 				</div>
 			</div>
-			<div class="container">
+			<div class="container-fluid">
 				<?php
 				date_default_timezone_set('America/Sao_Paulo');
 				$agora = date('d/m/Y H:i');
