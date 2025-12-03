@@ -336,7 +336,7 @@ if (($c_linha['tipo'] == '1')) {
 								<!-- Botões de ação do usuário -->
 								<div class="ml-2">
 
-									<a class='btn btn-danger' href='/smedweb/index.php'><span class='glyphicon glyphicon-off'></span> Sair do Sistema</a>
+									<a class='btn btn-danger btn-lg' href='/smedweb/index.php'><span class='glyphicon glyphicon-off'></span> Sair do Sistema</a>
 								</div>
 							</div>
 						</div>
@@ -353,7 +353,7 @@ if (($c_linha['tipo'] == '1')) {
 					$c_nivel = 'Operador';
 				}
 				?>
-				<h5 Align="right" class="text-black-50">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
+				<h5 Align="right" class="text-black-60">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
 			</div>
 			<div class="container-fluid px-2">
 				<hr>
