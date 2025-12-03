@@ -245,7 +245,7 @@ if (($c_linha['tipo'] == '1')) {
 		<div class="container">
 			<div class="logo">
 				<span class="logo-icon">⚕️</span>
-				<span class="logo-text">SmartMed - Sistema Clínico</span>
+				<span class="logo-text">SmartMed</span>
 			</div>
 		</div>
 	</header>
@@ -254,8 +254,8 @@ if (($c_linha['tipo'] == '1')) {
 		<main>
 			<!-- barra lateral com opções mais utilizadas -->
 			<div class="menu">
-				<div class="container">
-					<nav class="navbar navbar-expand-lg" id="ftco-navbar">
+				<div class="container-fluid px-0">
+					<nav class="navbar navbar-default navbar-expand-lg" id="ftco-navbar">
 						<div class="collapse navbar-collapse" id="ftco-nav">
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item dropdown">
@@ -329,8 +329,6 @@ if (($c_linha['tipo'] == '1')) {
 
 									</div>
 								</li>
-
-
 							</ul>
 						</div>
 						<div class="container">
@@ -342,7 +340,6 @@ if (($c_linha['tipo'] == '1')) {
 				</div>
 			</div>
 			<div class="container">
-
 				<?php
 				date_default_timezone_set('America/Sao_Paulo');
 				$agora = date('d/m/Y H:i');
@@ -372,18 +369,25 @@ if (($c_linha['tipo'] == '1')) {
 							</p>
 
 						</div>
-						<!-- incluir foto de médicos na página inicial -->
-
 					</div>
 
 				</div>
+				<!-- incluir aqui imagem ilustrativa -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="container-fluid" class="text-primary">
+							<br><br>
+							<img src="\smedweb\images\smed_banner.png" alt="SmartMed Banner" class="img-fluid">
+						</div>
+					</div>
+				</div>
 			</div>
-			
+		</main>
 	</div>
 
-	</main>
 
-	</div>
+
+
 
 	<!-- END nav -->
 
@@ -438,8 +442,8 @@ if (($c_linha['tipo'] == '1')) {
 	.logo {
 		display: flex;
 		align-items: center;
-		font-size: 2.3em;
-		font-weight: 700;
+		font-size: 3.3em;
+		font-weight: 800;
 		color: var(--primary-color);
 	}
 
@@ -466,7 +470,7 @@ if (($c_linha['tipo'] == '1')) {
 		text-decoration: none;
 		color: var(--text-color);
 		font-weight: 500;
-		padding: 5px 0;
+		padding: 10px 0;
 		transition: color 0.3s ease;
 		position: relative;
 	}

@@ -1,0 +1,40 @@
+Artigo de suporte
+Problemas de autenticação SMTP para Caixa de Correio do Microsoft 365
+
+Se você estiver recebendo o erro "Cliente não autenticado", "Autenticação malsucedida" OU "SmtpClientAuthentication" com o código 5.7.57 ou 5.7.3 ou 5.7.139 ao tentar enviar email autenticando um dispositivo ou aplicativo com o Microsoft 365, há três coisas a seguir que você deve executar para que funcione:
+
+1. Habilite o envio SMTP do cliente na caixa de correio licenciada que está sendo usada-
+
+Execute o seguinte comando do Powershell-
+Set-CASMailbox -Identity sean@contoso.com -SmtpClientAuthenticationDisabled $false
+
+Ou
+
+No Centro de Administração do Microsoft 365, acesse Usuários Ativos e selecione o usuário
+
+    Vá para a guia Mail
+    Na seção "Aplicativos de e-mail", clique em "Gerenciar aplicativos de e-mail"
+    Verifique se a configuração "SMTP autenticado" está marcada (habilitada)
+    Clique em Salvar alterações.
+
+
+
+2. Desative os padrões de segurança do  Azure alternando "Ativar padrões de segurança" para "Não". 
+
+    Entre no portal do Azure como administrador de segurança, administrador de Acesso Condicional ou administrador global.
+    Navegue até Propriedades do Azure Active Directory >.
+    Selecione Gerenciar padrões de segurança.
+    Defina a opção Habilitar padrões de segurança como Não.
+    Selecione Salvar.
+
+
+3. Desative a autenticação multifator (MFA) na caixa de correio licenciada que está sendo usada -
+
+    No Centro de Administração do Microsoft 365, no menu de navegação à esquerda, escolha Usuários > Usuários ativos.
+    Na página Usuários ativos, escolha Autenticação multifator.
+    Na página de autenticação multifator, selecione o usuário e desative o status de autenticação multifator.
+
+Isso é útil? SimNão
+Legal
+ | 
+Privacidade

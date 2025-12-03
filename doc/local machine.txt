@@ -1,0 +1,12 @@
+local machine
+system
+currentcontrolset
+services
+netlogon
+parameters
+
+click direira<novo->valorqword(32bits)
+nome ->AllowSingleLabelDnsDomain - clickdireita valor =1
+
+
+
