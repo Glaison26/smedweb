@@ -223,7 +223,7 @@ if ((isset($_POST["btnmedicamento"]))) {
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
-            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_formula ?>">
+            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_laudo ?>">
             <a class="btn btn-light" href="/smedweb/prescricoes/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>
