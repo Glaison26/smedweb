@@ -345,16 +345,15 @@ if (($c_linha['tipo'] == '1')) {
 			</div>
 
 			<div class="container-fluid px-2">
-
 				<div class="user-actions">
 					<!-- Botões de ação do usuário -->
 					<a class='btn btn-success' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica</a>
 					<a class='btn btn-primary' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" height="15"></span> Prescrições</a>
 					<a class='btn btn-info' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Agenda Médica</a>
-
 				</div>
 			</div>
 			<hr>
+			<!-- informações do usuário logado no sistema-->
 			<div class="container-fluid">
 				<?php
 				date_default_timezone_set('America/Sao_Paulo');
@@ -368,8 +367,8 @@ if (($c_linha['tipo'] == '1')) {
 				<h5 Align="right" class="text-black-60">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
 			</div>
 			<hr>
+			<!--Texto de boas vindas ao sistema-->
 			<div class="container content-box">
-
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="container-fluid" class="text-primary">
@@ -407,7 +406,7 @@ if (($c_linha['tipo'] == '1')) {
 		</div>
 	</footer>
 
-	<!-- END nav -->
+	<!-- END nav bar -->
 
 </body>
 
@@ -580,5 +579,19 @@ if (($c_linha['tipo'] == '1')) {
 			width: 100%;
 			justify-content: center;
 		}
+	}
+</style>
+
+<style>
+	/* Estilo para o rodapé */
+	.footer {
+		background-color: var(--light-bg);
+		border-top: 1px solid #e0e0e0;
+		padding: 15px 0;
+		margin-top: 30px;
+	}
+
+	.footer .text-muted {
+		color: #777;
 	}
 </style>
