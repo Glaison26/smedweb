@@ -343,6 +343,18 @@ if (($c_linha['tipo'] == '1')) {
 					</nav>
 				</div>
 			</div>
+			
+			<div class="container-fluid px-2">
+				
+				<div class="user-actions">
+					<!-- Botões de ação do usuário -->
+					<a class='btn btn-success' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica</a>
+					<a class='btn btn-primary' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" height="15"></span> Prescrições</a>
+					<a class='btn btn-info' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Agenda Médica</a>
+
+				</div>
+			</div>
+			<hr>
 			<div class="container-fluid">
 				<?php
 				date_default_timezone_set('America/Sao_Paulo');
@@ -354,16 +366,6 @@ if (($c_linha['tipo'] == '1')) {
 				}
 				?>
 				<h5 Align="right" class="text-black-60">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
-			</div>
-			<div class="container-fluid px-2">
-				<hr>
-				<div class="user-actions">
-					<!-- Botões de ação do usuário -->
-					<a class='btn btn-success' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica</a>
-					<a class='btn btn-primary' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" height="15"></span> Prescrições</a>
-					<a class='btn btn-info' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Agenda Médica</a>
-
-				</div>
 			</div>
 			<hr>
 			<div class="container content-box">
