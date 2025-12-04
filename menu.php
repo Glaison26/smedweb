@@ -347,9 +347,9 @@ if (($c_linha['tipo'] == '1')) {
 			<div class="container-fluid px-2">
 				<div class="user-actions">
 					<!-- Botões de ação do usuário -->
-					<a class='btn btn-success' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica</a>
-					<a class='btn btn-primary' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" height="15"></span> Prescrições</a>
-					<a class='btn btn-info' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Agenda Médica</a>
+					<a class='btn btn-success  btn-lg' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica do Paciente</a>
+					<a class='btn btn-primary  btn-lg' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" height="15"></span> Emitir Prescrições</a>
+					<a class='btn btn-info  btn-lg' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" height="15"></span> Marcação de Consultas</a>
 				</div>
 			</div>
 			<hr>
@@ -367,6 +367,7 @@ if (($c_linha['tipo'] == '1')) {
 				<h5 Align="right" class="text-black-60">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
 			</div>
 			<hr>
+			<!-- fim das informações do usuário-->			
 			<!--Texto de boas vindas ao sistema-->
 			<div class="container content-box">
 				<div class="row">
