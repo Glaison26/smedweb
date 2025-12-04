@@ -343,9 +343,9 @@ if (($c_linha['tipo'] == '1')) {
 					</nav>
 				</div>
 			</div>
-			
+
 			<div class="container-fluid px-2">
-				
+
 				<div class="user-actions">
 					<!-- Botões de ação do usuário -->
 					<a class='btn btn-success' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" height="15"></span> Ficha Clinica</a>
@@ -400,6 +400,12 @@ if (($c_linha['tipo'] == '1')) {
 			</div>
 		</main>
 	</div>
+	<!--rodapé da página-->
+	<footer class="footer mt-auto py-3 bg-light">
+		<div class="container text-center">
+			<span class="text-muted">SmartMed &copy; 2025. Todos os direitos reservados.</span>
+		</div>
+	</footer>
 
 	<!-- END nav -->
 
