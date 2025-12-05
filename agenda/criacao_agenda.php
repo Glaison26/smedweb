@@ -84,7 +84,7 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                         value ('$c_id', '$d_datainicio', '$inicio_manha','$dia_semana', 3)";
                         $result = $conection->query($c_sql);
                         $inicio_manha = gmdate('H:i:s', strtotime($inicio_manha) + strtotime($minuto_soma));
-                       }
+                    }
                 }
                 // geração do turno da tarde
                 $minuto_soma = "00:" . $duracao_tarde;
@@ -111,6 +111,13 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             $d_datainicio = date('y-m-d', strtotime("+1 days", strtotime($d_datainicio))); // incremento 1 dia a data do loop
 
         }
+        // monto sql para excluir horários suprimidos da agenda conforme tabela de datas suprimidas entre
+        // data_inicio e data_fim e id_profissional igual ao da agenda
+        $c_sql_excluir_suprimidos = "DELETE FROM agenda WHERE id_profissional='$c_id' AND data IN
+         (SELECT data_inicio FROM datas_suprimidas WHERE data_inicio BETWEEN '$d_datainicio' AND '$d_datafim'
+          UNION SELECT data_fim FROM datas_suprimidas WHERE data_fim BETWEEN '$d_datainicio' AND '$d_datafim')";    
+        $result_excluir = $conection->query($c_sql_excluir_suprimidos);
+       // final do loop de data
         $msg_gerou = 'Agenda Médica foi Gerada com sucesso!!!';
     } else {
         $msg_gerou = 'Erro!!! Data informada já foi gerada anteriormente!!!';
