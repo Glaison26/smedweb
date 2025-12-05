@@ -39,7 +39,7 @@ include("../links.php");
         // Função javascript e ajax para inclusão dos dados
         $(document).on('submit', '#frmadd', function(e) {
             e.preventDefault();
-            var c_data1 = $('#add_data1Field').val();
+            var c_data1 = $('#add_data1Field').val(); 
             var c_data2 = $('#add_data2Field').val();
             var c_motivo = $('#add_motivoField').val();
 
