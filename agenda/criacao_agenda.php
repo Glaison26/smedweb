@@ -113,10 +113,18 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         }
         // monto sql para excluir horários suprimidos da agenda conforme tabela de datas suprimidas entre
         // data_inicio e data_fim e id_profissional igual ao da agenda
-        $c_sql_excluir_suprimidos = "DELETE FROM agenda WHERE id_profissional='$c_id' AND data IN
-         (SELECT data_inicio FROM datas_suprimidas WHERE data_inicio BETWEEN '$d_datainicio' AND '$d_datafim'
-          UNION SELECT data_fim FROM datas_suprimidas WHERE data_fim BETWEEN '$d_datainicio' AND '$d_datafim')";    
-        $result_excluir = $conection->query($c_sql_excluir_suprimidos);
+        // sql com dados da tabela de datas suprimidas
+        $c_sql_suprimidos = 'select * from datas_suprimidas';
+        $result_suprimidos = $conection->query($c_sql_suprimidos);
+        // percorro a tabela de datas suprimidas
+        while ($linha_suprimidos = $result_suprimidos->fetch_assoc()) {
+            $d_data_inicio_suprimida = $linha_suprimidos['data_inicio'];
+            $d_data_fim_suprimida = $linha_suprimidos['data_fim'];
+            // monto sql para excluir os horários suprimidos da agenda
+            $c_sql_excluir_suprimidos = "DELETE FROM agenda WHERE id_profissional='$c_id' AND data BETWEEN '$d_data_inicio_suprimida' AND '$d_data_fim_suprimida'";
+            $result_excluir = $conection->query($c_sql_excluir_suprimidos);
+        }
+        
        // final do loop de data
         $msg_gerou = 'Agenda Médica foi Gerada com sucesso!!!';
     } else {
