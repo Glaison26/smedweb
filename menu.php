@@ -161,10 +161,12 @@ if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_financeiro1 = "\smedweb/financeiro/indices/indices_lista.php";
 	$op_financeiro2 = '\smedweb/financeiro/tabelas\tabelas_lista.php';
 	$op_financeiro3 = '\smedweb/financeiro/contas\lancamentos.php';
+	$op_financeiro4 = '\smedweb/financeiro/contas\movimento__opcoes.php';
 } else {
 	$op_financeiro1 = "javascript:negar()";
 	$op_financeiro2 = "javascript:negar()";
 	$op_financeiro3 = "javascript:negar()";
+	$op_financeiro4 = "javascript:negar()";
 }
 
 // acesso as configurações somente para o administrador
@@ -285,7 +287,7 @@ if (($c_linha['tipo'] == '1')) {
 										<i class="fa fa-usd fa-2x"></i> Financeiro</a>
 									<div class="dropdown-menu" aria-labelledby="dropdown04">
 										<a class="dropdown-item" href=<?php echo $op_financeiro3; ?>><img src="\smedweb\images\financeiro.png" alt="" width="20" height="20"> Lançamento...</a>
-										<a class="dropdown-item" href="#"><img src="\smedweb\images\movimentacao.png" alt="" width="20" height="20"> Movimentação...</a>
+										<a class="dropdown-item" href=<?php echo $op_financeiro4; ?>><img src="\smedweb\images\movimentacao.png" alt="" width="20" height="20"> Movimentação...</a>
 										<a class="dropdown-item" href="#">__________________________________</a>
 										<a class="dropdown-item" href=<?php echo $op_financeiro1; ?>><img src="\smedweb\images\indices.png" alt="" width="20" height="20"> Indices Financeiros...</a>
 										<a class="dropdown-item" href=<?php echo $op_financeiro2; ?>><img src="\smedweb\images\tabela.png" alt="" width="20" height="20"> Tabelas...</a>

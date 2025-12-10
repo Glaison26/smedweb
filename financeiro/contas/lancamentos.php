@@ -3,6 +3,16 @@ include_once('../../links.php');
 // arquivo de conexao com o banco de dados
 include_once('../../conexao.php');
 $msg_erro = "";
+$msg_gravou = "";
+session_start();
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
+// mensagem se gravação realizada com sucesso
+if (isset($_GET['msg']) && $_GET['msg'] == 'sucesso') {
+    $msg_gravou = "Lançamento realizado com sucesso!";
+}
+
 
 ?>
 <!-- html para lançamento de contas de pacientes -->
@@ -30,9 +40,16 @@ $msg_erro = "";
             <?php
             if (!empty($msg_erro)) {
                 echo "
-            <div class='alert alert-warning' role='alert'>
-                <h4>$msg_erro</h4>
-            </div>
+                    <div class='alert alert-warning' role='alert'>
+                        <h4>$msg_erro</h4>
+                    </div>
+                ";
+            }
+            if (!empty($msg_gravou)) {
+                echo "
+                    <div class='alert alert-success' role='alert'>
+                        <h4>$msg_gravou</h4>
+                    </div>
                 ";
             }
             ?>
@@ -41,7 +58,7 @@ $msg_erro = "";
             </div>
         </header>
         <main>
-            <form action="processar_lancamento.php" class="form-horizontal" method="POST">
+            <form action="processar_lancamento.php" onsubmit="return confirm('Confirma Lançamento da conta?');" class="form-horizontal" method="POST">
                 <div class="row mb-3">
                     <!-- Campo para selecionar o paciente -->
                     <label for="paciente_id" class="col-sm-2 col-form-label">*Paciente:</label>
@@ -80,7 +97,7 @@ $msg_erro = "";
                 <div class="row mb-6">
                     <label for="data" class="col-sm-2 col-form-label">*Data do Lançamento:</label>
                     <div class="col-sm-3">
-                        <input type="date" class="form-control" id="data" name="data" required>
+                        <input type="date" class="form-control" id="data_lancamento" name="data_lancamento" required>
                     </div>
                 </div>
                 <br>
@@ -91,9 +108,9 @@ $msg_erro = "";
                     </div>
                 </div>
                 <div class="row mb-3">
-                     <label for="descricao" class="col-sm-2 col-form-label">Descrição:</label>
+                    <label for="descricao" class="col-sm-2 col-form-label">Descrição:</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+                        <textarea class="form-control" rows="10" id="descricao" name="descricao"></textarea>
                     </div>
                 </div>
                 <hr>

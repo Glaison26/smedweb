@@ -412,14 +412,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Dia de pagamento 1</label>
                             <div class="col-sm-1">
-                                <input type="number" maxlength="2" class="form-control" name="diapag1" value="<?php echo $c_diapag1; ?>">
+                                <input type="number" maxlength="2" class="form-control" name="diapag1" value="<?php echo $c_dia_pagamento; ?>">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Dia de envio</label>
                             <div class="col-sm-1">
-                                <input type="number" maxlength="2" class="form-control" name="dia_envio" value="<?php echo $c_diapag2; ?>">
+                                <input type="number" maxlength="2" class="form-control" name="dia_envio" value="<?php echo $c_dia_envio; ?>">
                             </div>
                         </div>
                     </div>
@@ -430,7 +430,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         <div class="form-group">
                             <label class="col-sm-1 col-form-label">Observação</label>
                             <div class="col-sm-7">
-                                <textarea class="form-control" id="obs" name="obs" rows="5"><?php echo $c_obs; ?></textarea>
+                                <textarea class="form-control" id="obs" name="obs" rows="6"><?php echo $c_obs; ?></textarea>
                             </div>
                         </div>
                     </div>
