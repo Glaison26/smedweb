@@ -430,7 +430,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </div>
     <?php
     if (isset($d_data)) {
-        $c_mostradata = date("d-m-y", strtotime(str_replace('/', '-', $d_data)));
+        $c_mostradata = date("d-m-Y", strtotime(str_replace('/', '-', $d_data)));
     }
     ?>
 
