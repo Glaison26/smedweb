@@ -156,18 +156,17 @@ if (($c_linha['cad_diagnosticos'] == 'S') || ($c_linha['tipo'] == '1')) {
 } else {
 	$op_cad_diagnosticos = "javascript:negar()";
 }
-// acesso financeiro indices
+// acesso ao financeiro
 if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_financeiro1 = "\smedweb/financeiro/indices/indices_lista.php";
+	$op_financeiro2 = '\smedweb/financeiro/tabelas\tabelas_lista.php';
+	$op_financeiro3 = '\smedweb/financeiro/contas\lancamentos.php';
 } else {
 	$op_financeiro1 = "javascript:negar()";
-}
-// acesso tabelas
-if (($c_linha['financeiro'] == 'S') || ($c_linha['tipo'] == '1')) {
-	$op_financeiro2 = '\smedweb/financeiro/tabelas\tabelas_lista.php';
-} else {
 	$op_financeiro2 = "javascript:negar()";
+	$op_financeiro3 = "javascript:negar()";
 }
+
 // acesso as configurações somente para o administrador
 if (($c_linha['tipo'] == '1')) {
 	$op_configuracoes = "\smedweb\configuracoes.php";
@@ -285,7 +284,7 @@ if (($c_linha['tipo'] == '1')) {
 									<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										<i class="fa fa-usd fa-2x"></i> Financeiro</a>
 									<div class="dropdown-menu" aria-labelledby="dropdown04">
-										<a class="dropdown-item" href="#"><img src="\smedweb\images\financeiro.png" alt="" width="20" height="20"> Lançamento...</a>
+										<a class="dropdown-item" href=<?php echo $op_financeiro3; ?>><img src="\smedweb\images\financeiro.png" alt="" width="20" height="20"> Lançamento...</a>
 										<a class="dropdown-item" href="#"><img src="\smedweb\images\movimentacao.png" alt="" width="20" height="20"> Movimentação...</a>
 										<a class="dropdown-item" href="#">__________________________________</a>
 										<a class="dropdown-item" href=<?php echo $op_financeiro1; ?>><img src="\smedweb\images\indices.png" alt="" width="20" height="20"> Indices Financeiros...</a>
@@ -347,9 +346,9 @@ if (($c_linha['tipo'] == '1')) {
 			<div class="container-fluid px-2">
 				<div class="user-actions">
 					<!-- Botões de ação do usuário -->
-					<a class='btn btn-success  btn-lg' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20"  width="20" height="20"></span> Ficha Clinica do Paciente</a>
-					<a class='btn btn-primary  btn-lg' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20"  width="20" height="20"></span> Emitir Prescrições</a>
-					<a class='btn btn-info  btn-lg' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20"  width="20" height="20"></span> Marcação de Consultas</a>
+					<a class='btn btn-success  btn-lg' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" width="20" height="20"></span> Ficha Clinica do Paciente</a>
+					<a class='btn btn-primary  btn-lg' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado.png" alt="20" width="20" height="20"></span> Emitir Prescrições</a>
+					<a class='btn btn-info  btn-lg' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" width="20" height="20"></span> Marcação de Consultas</a>
 				</div>
 			</div>
 			<hr>
@@ -367,7 +366,7 @@ if (($c_linha['tipo'] == '1')) {
 				<h5 Align="right" class="text-black-60">Usuário: <strong><?php echo $_SESSION['c_usuario']; ?></strong> | Nível: <strong><?php echo $c_nivel; ?></strong> | Data/Hora: <strong><?php echo $agora; ?></strong></h5>
 			</div>
 			<hr>
-			<!-- fim das informações do usuário-->			
+			<!-- fim das informações do usuário-->
 			<!--Texto de boas vindas ao sistema-->
 			<div class="container content-box">
 				<div class="row">
