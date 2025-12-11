@@ -43,10 +43,10 @@ include("../../links.php");
                 "order": [1, 'asc'],
                 "aoColumnDefs": [{
                     'bSortable': false,
-                    'aTargets': [4]
+                    'aTargets': [6]
                 }, {
                     'aTargets': [0],
-                    "visible": true
+                    "visible":true 
                 }],
                 "oLanguage": {
                     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
@@ -234,7 +234,7 @@ include("../../links.php");
         <table class="table display table-bordered tabmovimento">
             <thead class="thead">
                 <tr class="info">
-                    <th scope="col">#.</th>
+                    <th scope="col">#</th>
                     <th scope="col">Data</th>
                     <th scope="col">Paciente</th>
                     <th scope="col">Convênio</th>
@@ -257,18 +257,18 @@ include("../../links.php");
                 while ($c_linha = $result->fetch_assoc()) {
                     $n_valor = 'R$ ' . $fmt->formatCurrency($c_linha['valor'], "   ") . "\n";
                     $d_data = date("d/m/Y", strtotime(str_replace('-', '/', $c_linha['data'])));
-                    //$n_valor=$c_linha['valor'];
+                    
                     echo "
                     <tr>
-                    <td>$c_linha[id]</td>
+                    <td>$c_linha[id_lancamento]</td>
                     <td>$d_data</td>
                     <td>$c_linha[nome]</td>
                     <td>$c_linha[convenio]</td>
                     <td>$c_linha[procedimento_descricao]</td>
                     <td>$n_valor</td>
                     <td>
-                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Indice'><span class='glyphicon glyphicon-pencil'></span></button>
-                    <a class='btn btn-danger btn-sm' title='Excluir Indice' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span></a>
+                    <button class='btn btn-info btn-sm editbtn' data-toggle=modal' title='Editar Lançamento'><span class='glyphicon glyphicon-pencil'></span></button>
+                    <a class='btn btn-danger btn-sm' title='Excluir Lançamento' href='javascript:func()'onclick='confirmacao($c_linha[id_lancamento])'><span class='glyphicon glyphicon-trash'></span></a>
                     </td>
 
                     </tr>

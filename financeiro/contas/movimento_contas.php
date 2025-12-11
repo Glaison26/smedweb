@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $filtro = $_POST['filtro'];
 
     // construção do sql de acordo com o filtro selecionado sendo que o id do convenio está ná tavbela de convennios vinculados ao paciente sendo necessario fazer join
-    $sql_base = "SELECT lancamento.id, lancamento.id_paciente, lancamento.id_procedimento, lancamento.`data`,
-                lancamento.valor, lancamento.`status`, lancamento.descricao, pacientes.nome, convenios.nome as convenio, convenios.id,
+    $sql_base = "SELECT lancamento.id as id_lancamento, lancamento.id_paciente, lancamento.id_procedimento, lancamento.`data`,
+                lancamento.valor, lancamento.`status`, lancamento.descricao, pacientes.nome, convenios.nome as convenio, 
                 procedimentos.descricao AS procedimento_descricao
                 FROM lancamento
                 JOIN pacientes ON lancamento.id_paciente=pacientes.id
