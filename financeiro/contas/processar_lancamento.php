@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // inserção do lançamento no banco de dados
-    $sql_insert = "INSERT INTO lancamento (id_paciente, id_procedimento, valor, data, descricao) 
-                   VALUES ('$paciente_id', '$procedimento_id', '$valor', '$data_lancamento', '$descricao')";
+    $sql_insert = "INSERT INTO lancamento (id_paciente, id_procedimento, valor, data, descricao, status) 
+                   VALUES ('$paciente_id', '$procedimento_id', '$valor', '$data_lancamento', '$descricao', 'Pendente')";
     if ($conection->query($sql_insert) === TRUE) {
         header("Location: lancamentos.php?msg=sucesso");
         exit;

@@ -202,16 +202,29 @@ include("../../links.php");
             } else {
                 echo "<h5>Sem Filtro - Todas as Contas</h5>";
             }
+            echo "<hr>";
             // coloco valor total da movimentação no período
             $c_sql_total = $_SESSION['sql_movimento_contas'];
             $result_total = $conection->query($c_sql_total);
             $total_movimentacao = 0;
+            $total_pendente = 0;
+            $total_recebido = 0;
             while ($c_linha_total = $result_total->fetch_assoc()) {
                 $total_movimentacao += $c_linha_total['valor'];
+                if ($c_linha_total['status'] == 'Pendente') {
+                    $total_pendente += $c_linha_total['valor'];
+                }
+                if ($c_linha_total['status'] == 'Recebido') {
+                    $total_recebido += $c_linha_total['valor'];
+                }   
             }
             $fmt = new NumberFormatter('de_DE', NumberFormatter::CURRENCY);
             $n_total_movimentacao = 'R$ ' . $fmt->formatCurrency($total_movimentacao, "   ") . "\n";
             echo "<h5>Valor Total da Movimentação: " . $n_total_movimentacao . "</h5>";
+            $n_total_pendente = 'R$ ' . $fmt->formatCurrency($total_pendente, "   ") . "\n";
+            echo "<h5>Valor Total Pendente: " . $n_total_pendente . "</h5>";
+            $n_total_recebido = 'R$ ' . $fmt->formatCurrency($total_recebido, "   ") . "\n";
+            echo "<h5>Valor Total Recebido: " . $n_total_recebido . "</h5>";
             ?>
         </div>
 
