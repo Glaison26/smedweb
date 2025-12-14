@@ -19,7 +19,7 @@ $data_agendamento = $_POST['data_agendamento'];
 $data_hoje = date('Y-m-d');
 // preparo sql para buscar horários disponíveis para o medico com data e medicos escolhidos e data superior a data do dia e nome vazio
 $c_sql = "SELECT * FROM agenda WHERE id_profissional='$medico_id' AND data='$data_agendamento'
- AND (nome IS null or nome = '') ORDER BY horario";
+ AND (nome IS null or nome = '') AND STATUS='SIM' ORDER BY horario";
  // executo a query
 $result = $conection->query($c_sql);
 // verifico se executou o sql

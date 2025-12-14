@@ -125,7 +125,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             break;
     }
     // sql para montar a agenda
-    $c_sql2 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
+    $c_sql2 = "SELECT agenda.id_profissional, agenda.status, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
     agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula,
     agenda.paciente_compareceu, agenda.paciente_atendido, agenda.paciente_novo FROM agenda 
@@ -142,18 +142,17 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     // se não existir registro na agenda exibir mensagem de alerta em javascript que não existe agenda gerada
     if ($total_reg == 0) {
         echo "<script language='javascript'> window.alert('Não existe agendamento para esse profissional nessa data!!!');</script>";
-    }else{
-     // mudo a aba para agenda
-    $_SESSION['aba_agenda'] = 1;
+    } else {
+        // mudo a aba para agenda
+        $_SESSION['aba_agenda'] = 1;
     }
-
 }
 
 // pesquisa de histórico de agenda 
 if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa de agenda
 
     $c_pesquisa_historico = $_POST['pesquisa_historico'];
-    $c_sql3 = "SELECT agenda.id_profissional, agenda.id, agenda.id_convenio,
+    $c_sql3 = "SELECT agenda.id_profissional, agenda.status, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
     agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula, profissionais.nome as medico FROM agenda 
     JOIN convenios ON agenda.id_convenio=convenios.id
@@ -203,7 +202,17 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             var c_valor_compareceu;
             var c_valor_novo;
             var c_valor_atendido;
+            var status;
+
+
             $('.editbtn').on('click', function() {
+                // se status for não não chamo o modal de edição
+                status = $(this).closest('tr').find('td:eq(2)').text();
+
+                if (status == 'NÃO') {
+                    alert('Horário desativado, não é possível editar a marcação!!!');
+                    return false;
+                }
 
                 $('#editmodal').modal('show');
 
@@ -217,15 +226,15 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
                 $('#up_idField').val(data[0]);
                 $('#up_horarioField').val(data[1]);
-                $('#up_nomeField').val(data[2]);
-                $('#up_matriculaField').val(data[3]);
-                $('#up_convenioField').val(data[4]);
-                $('#up_telefoneField').val(data[5]);
-                $('#up_emailField').val(data[6]);
-                $('#up_obsField').val(data[7]);
-                $('#up_novo').val(data[8]);
-                $('#up_compareceu').val(data[9]);
-                $('#up_atendido').val(data[10]);
+                $('#up_nomeField').val(data[3]);
+                $('#up_matriculaField').val(data[4]);
+                $('#up_convenioField').val(data[5]);
+                $('#up_telefoneField').val(data[6]);
+                $('#up_emailField').val(data[7]);
+                $('#up_obsField').val(data[8]);
+                $('#up_novo').val(data[9]);
+                $('#up_compareceu').val(data[10]);
+                $('#up_atendido').val(data[11]);
                 c_valor_novo = document.getElementById('up_novo').value;
                 console.log(c_valor_novo);
                 if (c_valor_novo == 'Sim') {
@@ -274,6 +283,22 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 } else {
                     alert('Acesso não autorizado para o usuário, consulte o administrador do Sistema!!!');
                 }
+            }
+        }
+    </script>
+    <!-- funcao para chamar rotina para ativar/desativar horario da agenda -->
+    <script language="Javascript">
+        function status(id,nome) {
+           // verifico se nome está preenchido
+            if (nome != '') {
+                alert('Horário com marcação, não é possível alterar o status!!!');
+                return false;
+            }
+            var resposta = confirm("Confirma alteração do status do horário?");
+            if (resposta == true) {
+                 // verifico se o nome está preenchido
+           
+                window.location.href = "/smedweb/agenda/agenda_status.php?id=" + id;
             }
         }
     </script>
@@ -503,6 +528,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                 <tr class="info">
                                     <th scope="col" style="width: 3px;"></th>
                                     <th scope="col">Horário</th>
+                                    <th scope="col">Ativo</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Matricula</th>
                                     <th scope="col">Convênio</th>
@@ -556,10 +582,16 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                         if ($c_linha2['paciente_atendido'] == '') {
                                             $c_cor_atendido = "";
                                         }
+                                        // Colocar cor danger para ativo = não e success para ativo = sim
+                                        if ($c_linha2['status'] == 'SIM')
+                                            $c_cor_ativo = "class='text-success'";
+                                        else
+                                            $c_cor_ativo = "class='text-danger'";
                                         echo "
                                     <tr>
                                     <td  style='width: 3px;' class='some'>$c_linha2[id]</td>
                                     <td>$c_linha2[horario]</td>
+                                    <td $c_cor_ativo style='text-align: center;' class='h4'>$c_linha2[status]</td>
                                     <td>$c_linha2[nome]</td>
                                     <td>$c_linha2[matricula]</td>
                                     <td>$c_linha2[convenio]</td>
@@ -577,6 +609,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    <button type='button' name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
                                    <a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
+                                   <a class='btn btn-light btn-sm' title='Desativar / Ativar Horário' href='javascript:func()'onclick='status($c_linha2[id],\"$c_linha2[nome]\")'>
+                                   <img src='\smedweb\images\certo.png' alt='' width='15' height='15'> Ativar/Desativar</a>
                                    <button type='button' name='btnemail' onclick='email($c_linha2[id])' id='btnemail' class='btn btn-light'><img src='\smedweb\images\o-email.png' alt='' width='15' height='15'> e-mail</button>
                                    </td>
                                    
