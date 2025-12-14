@@ -174,6 +174,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>Smartmed -Agenda Médica</title>
     <!-- script para mascara de telefone -->
     <script>
         const handlePhone = (event) => {
@@ -288,16 +290,16 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para ativar/desativar horario da agenda -->
     <script language="Javascript">
-        function status(id,nome) {
-           // verifico se nome está preenchido
+        function status(id, nome) {
+            // verifico se nome está preenchido
             if (nome != '') {
                 alert('Horário com marcação, não é possível alterar o status!!!');
                 return false;
             }
             var resposta = confirm("Confirma alteração do status do horário?");
             if (resposta == true) {
-                 // verifico se o nome está preenchido
-           
+                // verifico se o nome está preenchido
+
                 window.location.href = "/smedweb/agenda/agenda_status.php?id=" + id;
             }
         }
@@ -447,12 +449,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         });
     </script>
 
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Agenda Médica do Sistema<h5>
-        </div>
-    </div>
+
     <?php
     if (isset($d_data)) {
         $c_mostradata = date("d-m-Y", strtotime(str_replace('/', '-', $d_data)));
@@ -460,8 +457,15 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     ?>
 
     <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Agenda Médica do Sistema<h5>
+            </div>
+        </div>
 
         <!-- Formulário com as datas -->
+
         <form method="post">
             <input type="hidden" id="input_marcacao" name="input_marcacao" value="<?php echo $op_marcacao; ?>">
             <input type="hidden" id="input_incluir" name="input_incluir" value="<?php echo $op_incluir; ?>">
@@ -749,8 +753,11 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         </table>
                     </div>
                 </div>
-            </div>
+
+
+
         </form>
+    </div>
     </div>
 
     <!-- janela Modal para marcação de consulta -->
