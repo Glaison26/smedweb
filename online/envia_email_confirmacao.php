@@ -112,6 +112,9 @@ try {
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = $c_assunto;
     $mail->Body    = $c_body;
+    // mostro ampuleta de envio
+    "<script>alert('Enviando e-mail de confirmação para $c_email');</script>";
+    
     $mail->send();
     //header('location: /smedweb/agenda/agenda.php');
     //echo 'Message has been sent';

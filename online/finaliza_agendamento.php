@@ -10,6 +10,14 @@ $horario_id = $_SESSION['horario_id'];
 include("..\links.php");
 include("..\conexao.php");
 //rotina para garvar o agendamento na tabela agenda
+// verifico de data já estão agendado para outro paciente
+$c_sql_vago = "SELECT * FROM agenda WHERE id='$horario_id' AND (nome IS null or nome = '')";
+$result_vago = $conection->query($c_sql_vago);
+if ($result_vago->num_rows == 0) {
+    // horário já está agendado
+    echo "<script>alert('Erro: Horário já está agendado para outro paciente!'); window.location.href='agendamento.php';</script>";
+    exit;
+}
 // preparo sql para atualizar o registro na tabela agenda com nome, telefone, email e convenio
 $c_sql_atualiza = "UPDATE agenda SET nome='" .  $_SESSION['nome'] . "', telefone='" . $_POST['telefone'] . "',
  email='" . $_POST['email'] . "', id_convenio='" . $_SESSION['id_convenio']  . "', matricula='" . $_SESSION['userId'] .
