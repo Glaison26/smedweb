@@ -43,20 +43,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
 </head>
 
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>História Clinica do Paciente<h5>
-        </div>
-    </div>
     <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>História Clinica do Paciente<h5>
+            </div>
+        </div>
+
         <form method="post" class="form-horizontal">
-           
+
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>

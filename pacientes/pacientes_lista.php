@@ -217,15 +217,15 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
             alert(msg);
         }
     </script>
-
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Paciêntes do Sistema<h5>
-        </div>
-    </div>
-    <br>
     <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Lista de Paciêntes do Sistema<h5>
+            </div>
+        </div>
+        <br>
+
         <form id="frmpaciente" method="POST" action="">
             <!-- inputs desabilitados para controle de acesso de usuários -->
             <input type="hidden" id="acesso" name="acesso" value="<?php echo $op_editar; ?>">

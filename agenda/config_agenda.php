@@ -17,11 +17,11 @@ include("../links.php");
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Smed - Sistema Médico</title>
-    
+
 </head>
 
 <body>
-    
+
     <script language="Javascript">
         function mensagem(msg) {
             alert(msg);
@@ -74,14 +74,15 @@ include("../links.php");
 
         });
     </script>
-
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Lista de Profissionais para Configuração<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Lista de Profissionais para Configuração<h5>
+            </div>
         </div>
+        <br>
     </div>
-    <br>
     <div class="container -my5">
         <div class="container">
             <div class="col-lg-12" style="text-align: right;">

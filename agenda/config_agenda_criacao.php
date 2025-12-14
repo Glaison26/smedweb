@@ -54,12 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+
 </head>
 
 <body>
     <!-- funções e chamadas em javascript -->
-     <!-- Coleta dados da tabela para edição do registro -->
+    <!-- Coleta dados da tabela para edição do registro -->
     <script>
         $(document).ready(function() {
 
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             var c_duracao3 = $('#up_duracao3').val();
             //
             if (c_dia != '') {
-                
+
                 $.ajax({
                     url: "config_agenda_editar.php",
                     type: "post",
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         c_duracao3: c_duracao3
 
                     },
-                    
+
                     success: function(data) {
                         var json = JSON.parse(data);
                         var status = json.status;
@@ -153,11 +153,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         });
     </script>
 
-
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Configuração da Agenda Médica<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Configuração da Agenda Médica<h5>
+            </div>
         </div>
     </div>
 
@@ -233,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <td><button type='button' class='btn btn-info editbtn' data-toggle='modal' data-target='#editmodal' title='Editar Horários'><span class='glyphicon glyphicon-pencil'> Configurar
                             </span></button></td>
                             </tr>
-                                ";  
+                                ";
                 }
                 ?>
             </tbody>
@@ -256,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 
                     <form id="frmhorario" method="POST" action="">
                         <input type="hidden" id="up_idField" name="up_idField">
-                        
+
                         <div class="row mb-3">
                             <label class="col-sm-4 col-form-label">Dia da Semana</label>
                             <div class="col-sm-7">
@@ -330,9 +331,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         </div>
 
                         <div class="modal-footer">
-                         
+
                             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
-                             <!--<button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>-->
+                            <!--<button class="btn btn-secondary" data-dismiss="modal"><span class='glyphicon glyphicon-remove'></span> Fechar</button>-->
                         </div>
                     </form>
                 </div>

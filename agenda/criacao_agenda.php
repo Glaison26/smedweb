@@ -126,8 +126,8 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
             $c_sql_excluir_suprimidos = "DELETE FROM agenda WHERE id_profissional='$c_id' AND data BETWEEN '$d_data_inicio_suprimida' AND '$d_data_fim_suprimida'";
             $result_excluir = $conection->query($c_sql_excluir_suprimidos);
         }
-        
-       // final do loop de data
+
+        // final do loop de data
         $msg_gerou = 'Agenda Médica foi Gerada com sucesso!!!';
     } else {
         $msg_gerou = 'Erro!!! Data informada já foi gerada anteriormente!!!';
@@ -224,11 +224,12 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     </script>
 
 
-
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Criação da Agenda do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Criação da Agenda do Sistema<h5>
+            </div>
         </div>
     </div>
 
