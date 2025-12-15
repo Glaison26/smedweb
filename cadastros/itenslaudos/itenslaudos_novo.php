@@ -65,15 +65,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Novo Exame para Laudo</title>
+</head>
 
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Cadastro de Novo Exame para Laudo do Sistema<h5>
+<div class="container-fluid">
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Cadastro de Novo Exame para Laudo do Sistema<h5>
+        </div>
     </div>
 </div>
 <br>
-<div class="container -my5">
+<div class="container content-box">
 
     <body>
 

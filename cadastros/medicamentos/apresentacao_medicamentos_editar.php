@@ -26,12 +26,12 @@ $msg_erro = "";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no formulário
-   
+
     if (!isset($_GET["id"])) {
         header('location: /smedweb/cadastros/medicamentos/apresentacao_medicamentos_lista.php');
         exit;
     }
-    
+
     $c_sql = "SELECT medicamento_apresentacao.id, medicamentos.descricao as medicamento, medicamento_apresentacao.apresentacao,
              medicamento_apresentacao.volume, medicamento_apresentacao.quantidade, medicamento_apresentacao.embalagem,
              medicamento_apresentacao.uso, medicamento_apresentacao.termo, medicamento_apresentacao.observacao,
@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_termo = $registro['termo'];
     $c_veiculo = $registro['veiculo'];
     $c_observacao = $registro['observacao'];
-    
 } else {
     // metodo post para atualizar dados
     //$c_id = $_POST["id"];
@@ -69,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 
     do {
         if (
-            empty($c_apresentacao)) {
+            empty($c_apresentacao)
+        ) {
             $msg_erro = "Todos os Campos com (*) devem ser preenchidos, favor verificar!!";
             break;
         }
@@ -97,20 +97,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Nova Apresentação de Medicamento</title>
+
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Novo Usuário do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Novo Usuário do Sistema<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -189,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 ";
             }
             ?>
-            <br>
+            <hr>
             <footer>
                 <div class="row mb-3">
                     <div class="offset-sm-3 col-sm-3 d-grid">

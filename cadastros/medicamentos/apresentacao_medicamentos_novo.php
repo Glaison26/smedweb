@@ -68,19 +68,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SmartMed - Sistema Médico</title>
+        <link rel="stylesheet" href="/smedweb/css/basico.css">
+        <title>SmedWeb - Nova Apresentação de Medicamento</title>
 
     </head>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Nova Apresentação de Medicamento<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Nova Apresentação de Medicamento<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -144,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <textarea class="form-control" id="obs" name="addobsField" rows="5"></textarea>
                 </div>
             </div>
+            <hr>
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>

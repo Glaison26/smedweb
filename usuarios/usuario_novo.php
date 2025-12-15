@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $i_id_perfil = $c_linha['id'];
 
         // grava dados no banco
-      
+
         $c_sql = "Insert into usuario (nome, login, senha, ativo, tipo, email, telefone, id_perfil )" .
             "Value ('$c_nome', '$c_login', '$c_senha', '$c_ativo', '$c_tipo', '$c_email', '$c_telefone', '$i_id_perfil' )";
 
@@ -124,24 +124,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#cpf").mask("999.999.999-99");
-        });
-    </script>
-
+    <title>Novo Usuário do Sistema</title>
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
 </head>
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Novo Usuário do Sistema<h5>
-    </div>
-</div>
-<br>
-<div class="container -my5">
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#cpf").mask("999.999.999-99");
+    });
+</script>
 
-    <body>
+<body>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Novo Usuário do Sistema<h5>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -250,16 +252,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ";
             }
             ?>
-            <br>
-            <div class="row mb-3">
-                <div class="offset-sm-3 col-sm-3">
+            <hr>
+           <div class="row mb-3">
+                <div class="col-sm-3">
                     <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                     <a class='btn btn-danger' href='/smedweb/usuarios/usuarios_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                 </div>
 
             </div>
         </form>
-</div>
+    </div>
 
 </body>
 

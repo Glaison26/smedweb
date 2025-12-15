@@ -61,22 +61,24 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Nova Bateria de Exames</title>
+
 </head>
 
 
-
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Nova Bateria de Exames do Sistema<h5>
+<div class="container-fluid">
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Nova Bateria de Exames do Sistema<h5>
+        </div>
     </div>
 </div>
 <br>
-<div class="container -my5">
+<div class="container content-box">
 
     <body>
-
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -117,7 +119,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 </div>
 
             </div>
-            
+
             <div class="mb-3 row">
                 <label for="add_bateriaField" class="col-md-3 form-label">Texto da Bateria</label>
                 <div class="col-sm-6">

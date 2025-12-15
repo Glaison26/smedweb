@@ -67,19 +67,23 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Nova Fórmula Padrão do Sistema</title>
 
 </head>
 
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Nova Fórmula Padrão do Sistema<h5>
+<body>
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Nova Fórmula Padrão do Sistema<h5>
+        </div>
     </div>
-</div>
-<br>
-<div class="container -my5">
 
-    <body>
+    <br>
+    <div class="container content-box">
+
+
 
         <?php
         if (!empty($msg_erro)) {
@@ -127,6 +131,7 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                     <textarea class="form-control" id="add_formulaField" name="add_formulaField" rows="15"><?php echo $c_formula ?></textarea>
                 </div>
             </div>
+            <hr>
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
@@ -134,28 +139,8 @@ if ((isset($_POST["btn_grava"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
                 </div>
 
             </div>
-            <?php
-            if (!empty($msg_gravou)) {
-                echo "
-                    <div class='row mb-3'>
-                        <div class='offset-sm-3 col-sm-6'>
-                             <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                <strong>$msg_gravou</strong>
-
-                             </div>
-                        </div>     
-                    </div>    
-                ";
-            }
-            ?>
-            <br>
-
-
-</div>
-
-</form>
-
-
+        </form>
+    </div>
 </body>
 
 </html>

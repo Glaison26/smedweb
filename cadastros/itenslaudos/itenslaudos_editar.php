@@ -91,21 +91,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SmartWeb - Sistema Médico</title>
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Editar Exame para Laudo</title>
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Editar Exame de Laudo do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Editar Exame de Laudo do Sistema<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "

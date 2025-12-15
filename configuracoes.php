@@ -73,16 +73,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Edição de Configurações Gerais do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Edição de Configurações Gerais do Sistema<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" required class="form-control" id="email_senha" name="email_senha" value="<?php echo $c_email_senha; ?>">
                 </div>
             </div>
-             <div class="mb-3 row">
+            <div class="mb-3 row">
                 <label class="col-md-3 form-label">Porta SMTP*</label>
                 <div class="col-md-2">
                     <input type="text" required class="form-control" id="porta" name="porta" value="<?php echo $c_porta; ?>">

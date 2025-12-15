@@ -117,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $c_id_tabela = $c_linha['id'];
         // grava dados no banco
         // faço a Leitura da tabela com sql
-        if ($c_percent_ch='') {
-            $c_percent_ch='0';
+        if ($c_percent_ch = '') {
+            $c_percent_ch = '0';
         }
         $c_sql = "Insert into convenios (nome, razaosocial, endereco, bairro, cidade, cep, uf, cnpj, email, url, fone1, fone2, contato, inscestad, obs, 
             diapagamento, diaenvio, percentch, inscmunicipal, id_tabela )" .
@@ -146,7 +146,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Novo Convênio</title>
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
@@ -163,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script type="text/javascript" src="js/funcoes.js"></script>
 
-    <title>Smed - Sistema Médico </title>
+
 
     <script>
         const handlePhone = (event) => {
@@ -181,17 +182,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
 </head>
-<div class="panel panel-primary class">
-    <div class="panel-heading text-center">
-        <h4>SmartMed - Sistema Médico</h4>
-        <h5>Novo Convênio<h5>
+<div class="container-fluid">
+    <div class="panel panel-primary class">
+        <div class="panel-heading text-center">
+            <h4>SmartMed - Sistema Médico</h4>
+            <h5>Novo Convênio<h5>
+        </div>
     </div>
 </div>
 <br>
-<div class="container -my5">
 
-    <body>
+
+<body>
+    <div class="container content-box">
         <?php
+
         if (!empty($msg_erro)) {
             echo "
             <div class='alert alert-warning' role='alert'>
@@ -218,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Nome (*)</label>
                             <div class="col-sm-5">
-                                <input type="text"  required maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
+                                <input type="text" required maxlength="200" class="form-control" name="nome" value="<?php echo $c_nome; ?>">
                             </div>
                         </div>
 
@@ -377,14 +382,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Dia de pagamento 1</label>
                             <div class="col-sm-1">
-                                <input type="number" maxlength="2" class="form-control" name="diapag1" value="<?php echo $c_diapag1; ?>">
+                                <input type="number" maxlength="2" class="form-control" name="diapag1" value="<?php echo $c_dia_pagamento; ?>">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">Dia de envio</label>
                             <div class="col-sm-1">
-                                <input type="number" maxlength="2" class="form-control" name="dia_envio" value="<?php echo $c_diapag2; ?>">
+                                <input type="number" maxlength="2" class="form-control" name="dia_envio" value="<?php echo $c_dia_envio; ?>">
                             </div>
                         </div>
                     </div>
@@ -409,7 +414,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
         </form>
-    </body>
+    </div>
+
+</body>
 </div>
 
 </html>

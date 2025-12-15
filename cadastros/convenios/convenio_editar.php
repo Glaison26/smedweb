@@ -102,8 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_obs = $registro['obs'];
     // tabela
     $i_tabela = $registro['id_tabela'];
-
-
 } else {
     // metodo post para atualizar dados
     $c_id = $_POST["id"];
@@ -129,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_contato = $_POST['contato'];
     $c_obs = $_POST['obs'];
     $c_tabela = $_POST['tabela'];
-    
+
 
     do {
         if (
@@ -163,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
             " ,percentch='$c_percent_ch', id_tabela='$i_tabela' where id=$c_id";
 
         $result = $conection->query($c_sql);
-        
+
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
@@ -181,6 +179,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Editar Convênio</title>
     <style>
         /* Chrome, Safari, Edge, Opera */
         input::-webkit-outer-spin-button,
@@ -195,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         }
     </style>
 
-     <script>
+    <script>
         const handlePhone = (event) => {
             let input = event.target
             input.value = phoneMask(input.value)
@@ -212,14 +212,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Editar Convênio<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Editar Convênio<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
+     <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -385,7 +387,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             <div class="col-sm-3">
                                 <select class="form-control form-control-lg" id="tabela" name="tabela">
                                     <?php
-                                   
+
                                     $c_sql = "SELECT tabela.id, tabela.descricao FROM tabela ORDER BY tabela.descricao";
                                     $result = $conection->query($c_sql);
                                     while ($c_linha = $result->fetch_assoc()) {
@@ -398,7 +400,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                                       <option $op>$c_linha[descricao]</option>
                                     ";
                                     }
-                                    
+
                                     ?>
                                 </select>
                             </div>
@@ -435,7 +437,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         </div>
                     </div>
                 </div>
-  
+
                 <hr>
                 <div class="row mb-3">
                     <div class="offset-sm-0 col-sm-3">

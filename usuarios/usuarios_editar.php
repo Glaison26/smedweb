@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_tipo = $_POST['tipo'];
     $c_email = $_POST['email'];
     $c_telefone = $_POST['telefone'];
-    
+
     if (!isset($_POST['chkativo'])) {
         $c_ativo = 'N';
     } else {
@@ -171,20 +171,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+    <title>Novo Usuário do Sistema</title>
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Novo Usuário do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Novo Usuário do Sistema<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -245,12 +247,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                         $result = $conection->query($c_sql);
                         // insiro os registro do banco de dados na tabela 
                         while ($c_linha = $result->fetch_assoc()) {
-                            if ($c_linha['id']==$c_id_perfil){
+                            if ($c_linha['id'] == $c_id_perfil) {
                                 $c_op = 'selected';
+                            } else {
+                                $c_op = '';
                             }
-                            else {
-                                $c_op='';
-                                }
                             echo "<option $c_op>$c_linha[descricao]</option>";
                         }
                         ?>
@@ -306,10 +307,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 ";
             }
             ?>
-            <br>
+            <hr>
             <footer>
-                <div class="row mb-3">
-                    <div class="offset-sm-3 col-sm-3 d-grid">
+               <div class="row mb-3">
+                <div class="col-sm-3">
                         <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                         <a class='btn btn-danger' href='/smedweb/usuarios/usuarios_lista.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
                     </div>

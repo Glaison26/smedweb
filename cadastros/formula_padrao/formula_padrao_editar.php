@@ -84,22 +84,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmedWeb - Editar Fórmula Padrão do Sistema</title>
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
 
-    <title>SmartWeb - Sistema Médico</title>
-   
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Editar Fórmula Padrão do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Editar Fórmula Padrão do Sistema<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
@@ -140,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 </div>
 
             </div>
-           
+
 
             <div class="mb-3 row">
                 <label for="up_formulaField" class="col-md-3 form-label">Texto da Fórmula</label>
@@ -148,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                     <textarea class="form-control" id="up_formulaField" name="up_formulaField" rows="15"><?php echo $c_formula ?></textarea>
                 </div>
             </div>
-
+            <hr>
             <div class="row mb-3">
                 <div class="col-sm-3">
                     <button type="submit" id='btn_grava' name='btn_grava' class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
@@ -156,22 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 </div>
 
             </div>
-            <?php
-            if (!empty($msg_gravou)) {
-                echo "
-                    <div class='row mb-3'>
-                        <div class='offset-sm-3 col-sm-6'>
-                             <div class='alert alert-success alert-dismissible fade show' role='alert'>
-                                <strong>$msg_gravou</strong>
-
-                             </div>
-                        </div>     
-                    </div>    
-                ";
-            }
-            ?>
-            <br>
-
+              
 
         </form>
     </div>

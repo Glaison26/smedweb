@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
              JOIN procedimentos ON procedimentos_tabelas.id_procedimento=procedimentos.id
              JOIN tabela ON procedimentos_tabelas.id_tabela=tabela.id
              JOIN indices ON tabela.id_indice=indices.id  where procedimentos_tabelas.id=$c_id";
-             
+
     $result = $conection->query($c_sql);
     $registro = $result->fetch_assoc();
 
@@ -116,20 +116,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/smedweb/css/basico.css">
+    <title>SmedWeb - Editar Tabela do Procedimento</title>
 
 </head>
 
 <body>
-    <div class="panel panel-primary class">
-        <div class="panel-heading text-center">
-            <h4>SmartMed - Sistema Médico</h4>
-            <h5>Novo Usuário do Sistema<h5>
+    <div class="container-fluid">
+        <div class="panel panel-primary class">
+            <div class="panel-heading text-center">
+                <h4>SmartMed - Sistema Médico</h4>
+                <h5>Novo Usuário do Sistema<h5>
+            </div>
         </div>
     </div>
     <br>
-    <div class="container -my5">
-
-
+    <div class="container content-box">
         <?php
         if (!empty($msg_erro)) {
             echo "
