@@ -130,7 +130,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
     agenda.nome, agenda.telefone, agenda.email, convenios.nome as convenio, agenda.observacao, agenda.matricula,
     agenda.paciente_compareceu, agenda.paciente_atendido, agenda.paciente_novo FROM agenda 
     JOIN convenios ON agenda.id_convenio=convenios.id
-    WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data' ORDER BY horario";
+    WHERE id_profissional='$i_id_profissional' AND DATA = '$d_data'  ORDER BY horario";
     $result2 = $conection->query($c_sql2);
     $_SESSION['sql'] = $c_sql2;
     // verifico se a query foi correto
@@ -428,7 +428,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         c_compareceu: c_compareceu,
                         c_novopaciente: c_novopaciente,
                         c_atendido: c_atendido
-
                     },
                     success: function(data) {
                         var json = JSON.parse(data);
@@ -481,7 +480,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     <select class="form-control form-control-lg" id="profissional" name="profissional">
                         <?php
                         $c_sql = "SELECT profissionais.id, profissionais.nome FROM profissionais
-                                        ORDER BY profissionais.nome";
+                                        where gera_agenda='S' ORDER BY profissionais.nome";
                         $result = $conection->query($c_sql);
                         // insiro os registro do banco de dados na tabela 
                         while ($c_linha = $result->fetch_assoc()) {

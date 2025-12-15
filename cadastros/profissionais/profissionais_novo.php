@@ -201,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="col-sm-3">
                                         <input class="form-check-input" type="checkbox" value="S" name="chkagenda" id="chkagenda" checked>
                                     </div>
-                                    <label class="form-check-label col-form-label">Gerar Agenda</label>
+                                    <label class="form-check-label col-form-label">Incluir na Agenda</label>
                                 </div>
                             </div>
                             <div class="form-group">

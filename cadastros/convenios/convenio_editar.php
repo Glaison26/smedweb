@@ -242,7 +242,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
         </ul>
         <form method="post" class="form-horizontal">
             <div class="tab-content">
-
                 <div role="tabpanel" class="tab-pane active" id="dados_convenios">
                     <div style="padding-top:20px;">
                         <input type="hidden" name="id" value="<?php echo $c_id; ?>">
