@@ -335,8 +335,13 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
     <script>
-        function cortar(id) {
+        function cortar(id,nome) {
             var acesso = $('#input_remanejar').val();
+            // verifico se nome está preenchido, se não estiver não deixo cortar
+            if (nome == '') {
+                alert('Horário não tem marcação, não é possível cortar!!!');
+                return false;
+            }
             var resposta = confirm("Confirma Operação?");
             if (resposta == true) {
                 if (acesso == "S") {
@@ -629,7 +634,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    
                                    <button type='button'  class='btn btn-light btn-sm editbtn' data-toggle='modal' data-target='#editmodal'  title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
                                    <button type='button' name='btnincluir' onclick='incluir($c_linha2[id],\"$c_linha2[nome]\")' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
-                                   <button type='button' name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
+                                   <button type='button' name='btncorta' onclick='cortar($c_linha2[id],\"$c_linha2[nome]\")' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
                                    <button type='button' name='btncola' onclick='colar($c_linha2[id],\"$c_linha2[nome]\")' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
                                    <button type='button' name='btnemail' onclick='email($c_linha2[id],\"$c_linha2[nome]\")' id='btnemail' class='btn btn-light'><img src='\smedweb\images\o-email.png' alt='' width='15' height='15'> e-mail</button>
                                    <a class='btn btn-light btn-sm' title='Desativar / Ativar Horário' href='javascript:func()'onclick='status($c_linha2[id],\"$c_linha2[nome]\")'>
