@@ -261,7 +261,13 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
-        function incluir(id) {
+        function incluir(id,nome) {
+            // verifico se nome está preenchido, se não estiver não deixo incluir
+            if (nome == '') {
+                alert('Horário não tem marcação, não é possível incluir paciente!!!');
+                return false;
+            }
+            
             var resposta = confirm("Deseja confirmar essa inclusão?");
             var acesso = $('#input_incluir').val();
             if (resposta == true) {
@@ -276,7 +282,12 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
     <!-- funcao para chamar rotina para desmacar marcação de agenda -->
     <script language="Javascript">
-        function desmarca(id) {
+        function desmarca(id,nome) {
+            // verifico se nome está preenchido, se não estiver não deixo desmarcar
+            if (nome == '') {
+                alert('Horário não tem marcação, não é possível desmarcar!!!');
+                return false;
+            }
             var resposta = confirm("Deseja desmarcar essa agenda?");
             var acesso = $('#input_desmarcar').val();
             if (resposta == true) {
@@ -308,7 +319,12 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     <script>
         var acesso = $('#input_remanejar').val();
 
-        function colar(id) {
+        function colar(id, nome) {
+            // verifico se nome está preenchido, se estiver não deixo colar
+            if (nome != '') {
+                alert('Horário com marcação, não é possível colar aqui!!!');
+                return false;
+            }
             var acesso = $('#input_remanejar').val();
             if (acesso == "S") {
                 window.location.href = "/smedweb/agenda/agenda_colar.php?id=" + id;
@@ -334,8 +350,13 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para enviar email -->
     <script>
-        function email(id) {
+        function email(id,nome) {
             var acesso = $('#input_marcacao').val();
+            // verifico se nome está preenchido, se não estiver não deixo enviar email
+            if (nome == '') {
+                alert('Horário não tem marcação, não é possível enviar e-mail!!!');
+                return false;
+            }
             //confirmação de envio
             var resposta = confirm("Confirma o envio do e-mail?");
             if (resposta == false) {
@@ -607,12 +628,12 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>
                                    
                                    <button type='button'  class='btn btn-light btn-sm editbtn' data-toggle='modal' data-target='#editmodal'  title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
-                                   <button type='button' name='btnincluir' onclick='incluir($c_linha2[id])' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
+                                   <button type='button' name='btnincluir' onclick='incluir($c_linha2[id],\"$c_linha2[nome]\")' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button type='button' name='btncorta' onclick='cortar($c_linha2[id])' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
-                                   <button type='button' name='btncola' onclick='colar($c_linha2[id])' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
-                                   <button type='button' name='btnemail' onclick='email($c_linha2[id])' id='btnemail' class='btn btn-light'><img src='\smedweb\images\o-email.png' alt='' width='15' height='15'> e-mail</button>
+                                   <button type='button' name='btncola' onclick='colar($c_linha2[id],\"$c_linha2[nome]\")' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
+                                   <button type='button' name='btnemail' onclick='email($c_linha2[id],\"$c_linha2[nome]\")' id='btnemail' class='btn btn-light'><img src='\smedweb\images\o-email.png' alt='' width='15' height='15'> e-mail</button>
                                    <a class='btn btn-light btn-sm' title='Desativar / Ativar Horário' href='javascript:func()'onclick='status($c_linha2[id],\"$c_linha2[nome]\")'>
-                                   <img src='\smedweb\images\certo.png' alt='' width='15' height='15'> Ativar/Desativar</a><a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id])'>
+                                   <img src='\smedweb\images\certo.png' alt='' width='15' height='15'> Ativar/Desativar</a><a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id], \"$c_linha2[nome]\")'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
                                    </td>
                                    

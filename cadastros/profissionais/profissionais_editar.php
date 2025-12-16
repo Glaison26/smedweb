@@ -265,7 +265,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                             }
                             ?>
                             <div class="form-check">
-
                                 <label for="masculino">
                                     <input type="radio" name="genero" id="masculino" value="M" <?php echo $opMasculino; ?>>
                                     <span>Masculino</span>
