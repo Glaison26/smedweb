@@ -321,7 +321,10 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
         function colar(id, nome, status) {
             // verifico se status está como "N" não ativo
-            if ()
+            if (status == 'NÃO') {
+                alert('Horário desativado, não é possível colar aqui!!!');
+                return false;
+            }
             // verifico se nome está preenchido, se estiver não deixo colar
             if (nome != '') {
                 alert('Horário com marcação, não é possível colar aqui!!!');
