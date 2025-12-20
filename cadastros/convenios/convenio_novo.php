@@ -1,9 +1,9 @@
 <?php
 // controle de acesso ao formulário
-//session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
+session_start();
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
 
 // funções 
 include("../../conexao.php"); // conexão de banco de dados

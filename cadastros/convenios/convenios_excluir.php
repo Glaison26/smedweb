@@ -6,12 +6,12 @@ if (!isset($_SESSION['newsession'])) {
 
 
 if (!isset($_GET["id"])) {
-    header('location: /smedweb/convenios_lista.php');
+    header('location: /smedweb/cadastros/convenios/convenios_lista.php');
     exit;
 }
 include("../../conexao.php");
 include("..\..\links.php");
-$c_id = "";
+
 $c_id = $_GET["id"];
 
 // Exclusão do registro
@@ -36,4 +36,4 @@ try {
 } catch (Exception $e) {
     echo 'Erro ao exluir registro: ',  $e->getMessage(), "\n";
 }
-header('location: /smedweb/convenios_lista.php');
+header('location: /smedweb/cadastros/convenios/convenios_lista.php');
