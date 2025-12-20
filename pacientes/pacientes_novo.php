@@ -429,7 +429,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <select class="form-control form-control-lg" id="convenio" name="convenio" required>
 
                                         <?php
-                                        $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
+                                        $c_sql = "SELECT convenios.id, convenios.nome FROM convenios where id <>3  ORDER BY convenios.nome";
                                         $result = $conection->query($c_sql);
                                         if ($_SESSION['incagenda'] == true) {
                                             echo "<option>$c_convenio</option>";

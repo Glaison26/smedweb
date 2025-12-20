@@ -261,10 +261,15 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
-        function incluir(id,nome) {
+        function incluir(id,nome,novo) {
             // verifico se nome está preenchido, se não estiver não deixo incluir
             if (nome == '') {
                 alert('Horário não tem marcação, não é possível incluir paciente!!!');
+                return false;
+            }
+            // verifico se paciente é novo
+            if (novo == 'Não') {
+                alert('informado como paciente já cadastrado, não é possível incluir pela agenda!!!');
                 return false;
             }
             
@@ -638,7 +643,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>
                                    
                                    <button type='button'  class='btn btn-light btn-sm editbtn' data-toggle='modal' data-target='#editmodal'  title='Marcação de consulta' onclick='marcacao($c_linha2[id])'><img src='\smedweb\images\calendario.png' alt='' width='15' height='15'> Marcação</button>
-                                   <button type='button' name='btnincluir' onclick='incluir($c_linha2[id],\"$c_linha2[nome]\")' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
+                                   <button type='button' name='btnincluir' onclick='incluir($c_linha2[id],\"$c_linha2[nome]\",\"$c_linha2[paciente_novo]\")' id='btnincluir' class='btn btn-light'><span class='glyphicon glyphicon-save-file'></span> Incluir</button>
                                    <button type='button' name='btncorta' onclick='cortar($c_linha2[id],\"$c_linha2[nome]\")' id='btncorta' class='btn btn-light'><img src='\smedweb\images\corta.png' alt='' width='15' height='15'> Cortar</button>
                                    <button type='button' name='btncola' onclick='colar($c_linha2[id],\"$c_linha2[nome]\", \"$c_linha2[status]\")' id='btncola' class='btn btn-light'><img src='\smedweb\images\copiar.png' alt='' width='15' height='15'> Colar</button>
                                    <button type='button' name='btnemail' onclick='email($c_linha2[id],\"$c_linha2[nome]\")' id='btnemail' class='btn btn-light'><img src='\smedweb\images\o-email.png' alt='' width='15' height='15'> e-mail</button>
@@ -830,7 +835,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                             <div class="col-sm-6">
                                 <select required class="form-control form-control-lg" id="up_convenioField" name="up_convenioField">
                                     <?php
-                                    $c_sql3 = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
+                                    $c_sql3 = "SELECT convenios.id, convenios.nome FROM convenios where id <>3 ORDER BY convenios.nome";
                                     $result3 = $conection->query($c_sql3);
                                     // insiro os registro do banco de dados na tabela 
                                     while ($c_linha3 = $result3->fetch_assoc()) {

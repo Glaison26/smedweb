@@ -460,7 +460,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                                     <div class="col-sm-3">
                                         <select class="form-control form-control-lg" id="convenio" required name="convenio">
                                             <?php
-                                            $c_sql = "SELECT convenios.id, convenios.nome FROM convenios ORDER BY convenios.nome";
+                                            $c_sql = "SELECT convenios.id, convenios.nome FROM convenios where id <>3  ORDER BY convenios.nome";
                                             $result = $conection->query($c_sql);
                                             // insiro os registro do banco de dados na tabela 
                                             while ($c_linha = $result->fetch_assoc()) {
