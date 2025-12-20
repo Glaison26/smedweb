@@ -12,8 +12,19 @@ include("../conexao.php");
 // rotina de edição
 $c_id = $_GET["id"];
 
-$c_convenio= $_SESSION['conveniopac'];
+// verifica se a sessão com nome do paciente está preenchida
+if (!isset($_SESSION['nomepac'])|| $_SESSION['nomepac'] == '') {
+    echo "
+    <script>
+    alert('Nenhum dado copiado para colar!!!');
+    window.location.href = '/smedweb/agenda/agenda.php';
+    </script>
+    ";
+    exit;
+}
+ 
 $c_nome= $_SESSION['nomepac'];
+$c_convenio= $_SESSION['conveniopac'];
 $c_matricula = $_SESSION['matriculapac'];
 $c_telefone= $_SESSION['telefonepac'];
 $c_email= $_SESSION['emailpac'];
