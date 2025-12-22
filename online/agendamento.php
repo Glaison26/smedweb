@@ -34,7 +34,7 @@ $userId = $_SESSION['userId'];
                     <option value="">Selecione um médico</option>
                     <?php
                     // preparo sql para buscar medicos na tabela profissionais_medico
-                    $c_sql = "SELECT id, nome FROM profissionais ORDER BY nome";
+                    $c_sql = "SELECT id, nome FROM profissionais where gera_agenda='S' ORDER BY nome";
                     $result = $conection->query($c_sql);
                     while ($registro = $result->fetch_assoc()) {
                         echo "<option value='" . $registro['id'] . "'>" . $registro['nome'] . "</option>";
