@@ -50,6 +50,7 @@ if($result ==true)
     $c_sql_log = "INSERT INTO log_agenda (id_usuario, id_agenda, data, hora, descricao)" .
     " VALUES (" . $_SESSION['c_userId'] . ", $c_id, '$d_data_acao', '$d_hora_acao', '$c_descricao')";
     $result_log = $conection->query($c_sql_log);
+    // fim do log
     echo json_encode($data);
     
 }
