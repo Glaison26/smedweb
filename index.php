@@ -99,7 +99,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="form-group row" class="form-control">
                 <label class="col-sm-3 col-form-label">Senha</label>
                 <div class="col-xs-12">
-                    <input type="password" name="senha" class="form-control" required placeholder="Entre com sua senha">
+                    <!-- input de senha com olho para ver ou esconder senha -->
+                    <input type="password" maxlength="20" class="form-control" required name="senha" id="senha" placeholder="Digite a senha">
+                    <br>
+                    <input type="checkbox" class="form-check-input" onclick="mostrarSenha()"> Mostrar Senha
+                    <script>
+                        function mostrarSenha() {
+                            var x = document.getElementById("senha");
+                            if (x.type === "password") {
+                                x.type = "text";
+                            } else {
+                                x.type = "password";
+                            }
+                        }
+                    </script>
                 </div>
             </div>
             <button class="btn btn-success btn-block" name="btnentra" type="submit">Entrar</button>
