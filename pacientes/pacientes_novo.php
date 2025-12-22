@@ -131,7 +131,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_SESSION['incagenda'] == false) {
             header('location: /smedweb/pacientes/pacientes_lista.php');
         } else {
-            header('location: /smedweb/agenda/agenda.php');
+            // mostro mensagem de sucesso em javascript com botao de ok para continuar
+            echo "<script>alert('Dados Gravados com Sucesso!!');</script>";
+            echo "<script>window.location.href='/smedweb/agenda/agenda.php';</script>";
+
+
+            // redireciono para a agenda
+            //header('location: /smedweb/agenda/agenda.php');
         }
     } while (false);
 }
