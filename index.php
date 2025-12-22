@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $l_erro = 'Usuário ou senha inválido!!!';
     } else {
         // procuro senha
-        $c_sql = "SELECT usuario.senha, usuario.tipo, usuario.nome FROM usuario where usuario.login='$c_login'";
+        $c_sql = "SELECT usuario.id, usuario.senha, usuario.tipo, usuario.nome FROM usuario where usuario.login='$c_login'";
         $result = $conection->query($c_sql);
         $registro = $result->fetch_assoc();
         $c_senha = base64_decode($registro['senha']); // descriptografa senha
@@ -45,8 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $l_erro = ' ';
             $_SESSION["newsession"] = "smed"; // passagem da segurança
             $_SESSION['c_usuario'] = $c_login; // login digitado
+            $_SESSION['c_userId'] = $registro['id']; // id do usuário
             $_SESSION['c_tipo'] = $registro['tipo']; // tipo do usuário
             $_SESSION['c_nome'] = $registro['nome']; // nome do usuário
+            // insiro na tabela logusuario o login efetuado
+            $d_data_acesso = date('Y-m-d H:i:s');
+            $d_hora_acesso = date('H:i:s');
+            $c_descricao = "Login no sistema";
+            $c_sql = "INSERT INTO usuarioslog (id_usuario, data, hora, descricao) VALUES (" . $_SESSION['c_userId'] . ", '$d_data_acesso', '$d_hora_acesso', '$c_descricao')";
+            $result = $conection->query($c_sql);
+
             header('location: /smedweb/menu.php');
         }
     }
@@ -69,8 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <div class="clearfix" style="display:none"></div>
 
 <body>
-
-
     <div class="login-container">
         <div class="panel panel-primary class">
             <div class="panel-heading text-center">
@@ -99,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             <div class="form-group row" class="form-control">
                 <label class="col-sm-3 col-form-label">Senha</label>
                 <div class="col-xs-12">
-                    <!-- input de senha com olho para ver ou esconder senha -->
+                    <!-- input de senha com check para ver ou esconder senha -->
                     <input type="password" maxlength="20" class="form-control" required name="senha" id="senha" placeholder="Digite a senha">
                     <br>
                     <input type="checkbox" class="form-check-input" onclick="mostrarSenha()"> Mostrar Senha
@@ -119,8 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </form>
     </div>
 
-
-    </div>
 </body>
 
 </html>

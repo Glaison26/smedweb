@@ -650,6 +650,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    <a class='btn btn-light btn-sm' title='Desativar / Ativar Horário' href='javascript:func()'onclick='status($c_linha2[id],\"$c_linha2[nome]\")'>
                                    <img src='\smedweb\images\certo.png' alt='' width='15' height='15'> Ativar/Desativar</a><a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id], \"$c_linha2[nome]\")'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
+                                   <button type='button' name='log da agenda' class='btn btn-light btn-sm' title='Log da Agenda'
+                                   href='/smedweb/agenda/agenda_log.php?id=$c_linha2[id]'><img src='\smedweb\images\log.png'alt='' width='15' height='15'> Log</button>
                                    </td>
                                    
                                     </tr>

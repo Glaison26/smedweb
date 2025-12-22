@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `usuarioslog` (
   CONSTRAINT `FK__usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela smed.usuarioslog: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela smed.usuarioslog: ~7 rows (aproximadamente)
 INSERT INTO `usuarioslog` (`id`, `id_usuario`, `data`, `hora`, `descricao`) VALUES
 	(1, 1, '2025-12-22', '13:55:50', _binary 0x4c6f67696e206e6f2073697374656d61),
 	(2, 1, '2025-12-22', '14:01:56', _binary 0x416c74657261c3a7c3a36f206465206167656e64616d656e746f2069643a203132342c20686f72c3a172696f3a2030393a30303a30302c2070616369656e74653a2052656e6520526f636861),

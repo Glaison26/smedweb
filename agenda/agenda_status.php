@@ -30,6 +30,7 @@ if ($result == true) {
     window.location.href = '/smedweb/agenda/agenda.php';
     </script>
     ";
+    
 } else {
     echo "
     <script>
