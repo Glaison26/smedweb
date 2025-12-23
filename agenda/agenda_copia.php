@@ -27,6 +27,13 @@ $_SESSION['paciente_novo'] = 'Não';
 $_SESSION['paciente_atendido'] = 'Não';
 $_SESSION['paciente_compareceu'] = 'Não';
 // mensagem de dados copiados
+// gero log da cópia dos dados
+$d_data_acao = date('Y-m-d');
+$d_hora_acao = date('H:i:s');
+$c_descricao = "Cópia dos dados do paciente " . $c_linha['nome'] . " para marcação de consulta.";
+$c_sql_log = "INSERT INTO log_agenda (id_usuario, id_agenda, data, hora, descricao)" .
+" VALUES (" . $_SESSION['c_userId'] . ", 1, '$d_data_acao', '$d_hora_acao', '$c_descricao')";
+$result_log = $conection->query($c_sql_log);
 
 echo "
 <script>

@@ -261,7 +261,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
     <script>
-        function incluir(id,nome,novo) {
+        function incluir(id, nome, novo) {
             // verifico se nome está preenchido, se não estiver não deixo incluir
             if (nome == '') {
                 alert('Horário não tem marcação, não é possível incluir paciente!!!');
@@ -272,7 +272,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 alert('informado como paciente já cadastrado, não é possível incluir pela agenda!!!');
                 return false;
             }
-            
+
             var resposta = confirm("Deseja confirmar essa inclusão?");
             var acesso = $('#input_incluir').val();
             if (resposta == true) {
@@ -287,7 +287,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
     <!-- funcao para chamar rotina para desmacar marcação de agenda -->
     <script language="Javascript">
-        function desmarca(id,nome) {
+        function desmarca(id, nome) {
             // verifico se nome está preenchido, se não estiver não deixo desmarcar
             if (nome == '') {
                 alert('Horário não tem marcação, não é possível desmarcar!!!');
@@ -345,7 +345,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para cortar registro marcação de agenda -->
     <script>
-        function cortar(id,nome) {
+        function cortar(id, nome) {
             var acesso = $('#input_remanejar').val();
             // verifico se nome está preenchido, se não estiver não deixo cortar
             if (nome == '') {
@@ -365,7 +365,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
     </script>
     <!-- funcao para chamar rotina para enviar email -->
     <script>
-        function email(id,nome) {
+        function email(id, nome) {
             var acesso = $('#input_marcacao').val();
             // verifico se nome está preenchido, se não estiver não deixo enviar email
             if (nome == '') {
@@ -498,9 +498,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <h5>Agenda Médica do Sistema<h5>
             </div>
         </div>
-
         <!-- Formulário com as datas -->
-
         <form method="post">
             <input type="hidden" id="input_marcacao" name="input_marcacao" value="<?php echo $op_marcacao; ?>">
             <input type="hidden" id="input_incluir" name="input_incluir" value="<?php echo $op_incluir; ?>">
@@ -650,8 +648,8 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                    <a class='btn btn-light btn-sm' title='Desativar / Ativar Horário' href='javascript:func()'onclick='status($c_linha2[id],\"$c_linha2[nome]\")'>
                                    <img src='\smedweb\images\certo.png' alt='' width='15' height='15'> Ativar/Desativar</a><a class='btn btn-light btn-sm' title='Desmarcar consulta' href='javascript:func()'onclick='desmarca($c_linha2[id], \"$c_linha2[nome]\")'>
                                    <img src='\smedweb\images\borracha.png' alt='' width='15' height='15'> Desmarcar</a>
-                                   <button type='button' name='log da agenda' class='btn btn-light btn-sm' title='Log da Agenda'
-                                   href='/smedweb/agenda/agenda_log.php?id=$c_linha2[id]'><img src='\smedweb\images\log.png'alt='' width='15' height='15'> Log</button>
+                                   <a class='btn btn-light btn-sm' name='btnlog' class='btn btn-light btn-sm' title='Log da Agenda'
+                                   href='/smedweb/agenda/log_agenda.php?id=$c_linha2[id]'><img src='\smedweb\images\log.png'alt='' width='15' height='15'> Log</button>
                                    </td>
                                    
                                     </tr>

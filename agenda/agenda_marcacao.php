@@ -44,8 +44,10 @@ if($result ==true)
     );
     // gero o log da marcação ou edição de consulta
     $d_data_acao = date('Y-m-d');
+    // formato da data para o log
     $d_hora_acao = date('H:i:s');
-    $c_descricao = "Marcação/edição de consulta para " . $c_nome . " no dia " . $d_data_acao . 
+    $c_data_formatada = date("d/m/Y", strtotime($d_hora_acao));
+    $c_descricao = "Marcação/edição de consulta para " . $c_nome . " no dia " . $c_data_formatada . 
     " às " . $c_horario;     
     $c_sql_log = "INSERT INTO log_agenda (id_usuario, id_agenda, data, hora, descricao)" .
     " VALUES (" . $_SESSION['c_userId'] . ", $c_id, '$d_data_acao', '$d_hora_acao', '$c_descricao')";
