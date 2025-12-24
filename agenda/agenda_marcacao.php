@@ -6,6 +6,7 @@ if (!isset($_SESSION['newsession'])) {
 
 // conexão dom o banco de dados
 include("../conexao.php");
+date_default_timezone_set('America/Sao_Paulo');
 
 // rotina de edição
 $c_id = $_POST['c_id'];
@@ -46,11 +47,15 @@ if($result ==true)
     $d_data_acao = date('Y-m-d');
     // formato da data para o log
     $d_hora_acao = date('H:i:s');
-    $c_data_formatada = date("d/m/Y", strtotime($d_hora_acao));
-    $c_descricao = "Marcação/edição de consulta para " . $c_nome . " no dia " . $c_data_formatada . 
+    $c_data_formatada = date("d/m/Y", strtotime($d_data_acao));
+    $c_data_formatada_agenda = date("d/m/Y", strtotime($_SESSION['data_selecionada']));
+    $c_informacao = $c_nome. '<br>'. 'Convenio: '. $c_convenio. '<br>'. 'Matricula: '. $c_matricula. '<br>'. 'Telefone: '. $c_telefone.
+     '<br>'. 'E-mail: '. $c_email. '<br>'. 'Observação: '. nl2br($c_obs). '<br>'. 'Paciente Novo: '. $c_novopaciente. '<br>'. 
+     'Paciente Compareceu: '. $c_compareceu. '<br>'. 'Paciente Atendido: '. $c_atendido;
+    $c_descricao = "Marcação/edição de consulta para " . $c_nome . " no dia " . $c_data_formatada_agenda . 
     " às " . $c_horario;     
-    $c_sql_log = "INSERT INTO log_agenda (id_usuario, id_agenda, data, hora, descricao)" .
-    " VALUES (" . $_SESSION['c_userId'] . ", $c_id, '$d_data_acao', '$d_hora_acao', '$c_descricao')";
+    $c_sql_log = "INSERT INTO log_agenda (id_usuario, id_agenda, data, hora, descricao, registro)" .
+    " VALUES (" . $_SESSION['c_userId'] . ", $c_id, '$d_data_acao', '$d_hora_acao', '$c_descricao', '$c_informacao')";
     $result_log = $conection->query($c_sql_log);
     // fim do log
     echo json_encode($data);

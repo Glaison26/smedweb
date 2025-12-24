@@ -40,12 +40,13 @@ include("../links.php");
                             <th>Hora</th>
                             <th>Usuário</th>
                             <th>Descrição</th>
+                            <th>Informações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $c_idagenda = $_GET['id'];
-                        $c_sql = "SELECT log_agenda.data, log_agenda.hora, usuario.nome AS nome_usuario, log_agenda.descricao 
+                        $c_sql = "SELECT log_agenda.data, log_agenda.hora, usuario.nome AS nome_usuario, log_agenda.descricao, log_agenda.registro 
                                   FROM log_agenda 
                                   JOIN usuario ON log_agenda.id_usuario = usuario.id 
                                   WHERE log_agenda.id_agenda = $c_idagenda 
@@ -60,6 +61,7 @@ include("../links.php");
                             echo "<td>" . $c_linha['hora'] . "</td>";
                             echo "<td>" . $c_linha['nome_usuario'] . "</td>";
                             echo "<td>" . $c_linha['descricao'] . "</td>";
+                            echo "<td>" . nl2br($c_linha['registro']) . "</td>";
                             echo "</tr>";
                         }
                         ?>

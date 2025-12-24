@@ -17,6 +17,18 @@ $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
+// verifico se $_SESSION['data_selecionada'] está criada, se não estiver crio com a data atual
+if (isset($_SESSION['data_selecionada'])) {
+    $d_data = $_SESSION['data_selecionada'];
+}
+// verifico se $_SESSION['profissional_selecionado'] está criada, se sim atribuo em $c_profissional
+if (isset($_SESSION['profissional_selecionado'])) {
+    $c_profissional = $_SESSION['profissional_selecionado'];
+}
+// verifico se $_session['dia_semana'] está criada, se sim atribuo em $c_dia_semana
+if (isset($_SESSION['dia_semana'])) {
+    $c_dia_semana = $_SESSION['dia_semana'];
+}
 // controle de acesso para o usuário
 $c_login = $_SESSION['c_usuario'];
 $c_sql_usuario = "SELECT usuario.id,usuario.tipo,agenda_marcacao,agenda_incluir,agenda_remanejar,agenda_desmarcar
@@ -84,12 +96,14 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
 }
 //$c_sql2 = "";
 //$c_sql3 = "";
-$c_dia_semana = "-";
+//$c_dia_semana = "-";
 $c_mostradata = date("Y-m-d");
 
 if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // botão para executar sql de pesquisa na agenda
     // pego a id do profissional selecionado
     $c_mostradata = date("Y-m-d");
+    $_SESSION['data_selecionada'] = $_POST['data1'];
+    $_SESSION['profissional_selecionado'] = $_POST['profissional'];
     $c_profissional = $_POST['profissional'];
     $c_sql_prof = "select profissionais.id from profissionais where nome = '$c_profissional'";
     $result = $conection->query($c_sql_prof);
@@ -124,6 +138,7 @@ if ((isset($_POST["btnagenda"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  /
             $c_dia_semana = 'Domingo';
             break;
     }
+    $_SESSION['dia_semana'] = $c_dia_semana;
     // sql para montar a agenda
     $c_sql2 = "SELECT agenda.id_profissional, agenda.status, agenda.id, agenda.id_convenio,
     agenda.`data`, agenda.dia, agenda.horario,
@@ -505,7 +520,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             <input type="hidden" id="input_desmarcar" name="input_desmarcar" value="<?php echo $op_desmarcar; ?>">
             <input type="hidden" id="input_remanejar" name="input_remanejar" value="<?php echo $op_remanejar; ?>">
             <div class="row mb-3">
-                <label class="col-md-1 form-label">Data da agenda</label>
+                <label class="col-md-1 form-label">Pesquisa Data</label>
                 <div class="col-sm-2">
                     <input type="Date" maxlength="10" class="form-control" name="data1" id="data1" value=<?php echo $c_mostradata; ?> onkeypress="mascaraData(this)">
                 </div>
