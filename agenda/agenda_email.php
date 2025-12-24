@@ -4,7 +4,8 @@ session_start();
 if (!isset($_SESSION['newsession'])) {
     die('Acesso não autorizado!!!');
 }
-
+//configuro fusos horário
+date_default_timezone_set('America/Sao_Paulo');
 // função para arrumar data
 function arruma_data($data) // função para arrumar data
 {
@@ -116,6 +117,18 @@ try {
     $mail->Subject = $c_assunto;
     $mail->Body    = $c_body;
     $mail->send();
+    // gero log de envio de e-mail
+    $d_data_acao = date('Y-m-d');
+    // formato da data para o log
+    $d_hora_acao = date('H:i:s');
+    $c_data_formatada = date("d/m/Y", strtotime($d_data_acao));
+    $c_data_formatada_agenda = date("d/m/Y", strtotime($_SESSION['data_selecionada']));
+    $c_descricao = "Envio de e-mail ao paciente";
+    $c_informacao = $c_body;
+    $c_sql_log = "INSERT INTO log_agenda (id_usuario, id_agenda, data, hora, descricao, registro)" .
+    " VALUES (" . $_SESSION['c_userId'] . ", $c_id, '$d_data_acao', '$d_hora_acao', '$c_descricao', '$c_informacao')";
+    $result_log = $conection->query($c_sql_log); 
+
     header('location: /smedweb/agenda/agenda.php');
     //echo 'Message has been sent';
 } catch (Exception $e) {

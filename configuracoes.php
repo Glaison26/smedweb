@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
     $c_email_host = $registro['host_email'];
     $c_email_senha = $registro['senha_email'];
     $c_porta = $registro['porta_smtp'];
+    $c_prazo = $registro['prazo_online'];
 }
 // metodo post para salvar os dados do formulário
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $c_email_host = $_POST['email_host'];
     $c_email_senha = $_POST['email_senha'];
     $c_porta = $_POST['porta'];
+    $c_prazo = $_POST['prazo'];
 
     // validação dos campos obrigatórios
     if (empty($c_nome_clinica) || empty($c_endereco_clinica) || empty($c_telefone_clinica) || empty($c_email_clinica) || empty($c_cidade_clinica) || empty($c_cnpj_clinica)) {
@@ -49,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_update = "UPDATE config SET nome_clinica='$c_nome_clinica', endereco_clinica='$c_endereco_clinica', 
         telefone_clinica='$c_telefone_clinica', email_clinica='$c_email_clinica',
         cidade_clinica='$c_cidade_clinica', cnpj_clinica='$c_cnpj_clinica', host_email='$c_email_host', 
-        senha_email='$c_email_senha', porta_smtp='$c_porta' WHERE id=1";
+        senha_email='$c_email_senha', porta_smtp='$c_porta', prazo_online='$c_prazo' WHERE id=1";
         if ($conection->query($sql_update) === TRUE) {
             $msg_gravou = "Configurações atualizadas com sucesso!";
         } else {
@@ -151,6 +153,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="col-md-3 form-label">Porta SMTP*</label>
                 <div class="col-md-2">
                     <input type="text" required class="form-control" id="porta" name="porta" value="<?php echo $c_porta; ?>">
+                </div>
+            </div>
+            <hr>
+            <div class="mb-3 row">
+                <label class="col-md-3 form-label">Prazo para agenda online (em dias)*</label>
+                <div class="col-md-2">
+                    <input type="number" required class="form-control" id="prazo" placeholder="em dias" name="prazo" value="<?php echo $c_prazo; ?>">
                 </div>
             </div>
 

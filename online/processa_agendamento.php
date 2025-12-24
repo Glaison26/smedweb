@@ -2,6 +2,11 @@
 // pego data e medico do formulário
 session_start();
 require_once '../conexao.php';
+// pego prazo de agendamento na tabela de configurações
+$c_sql_config = 'select prazo_online from config';
+$result_config = $conection->query($c_sql_config);
+$registro = $result_config->fetch_assoc();
+$i_dias = $registro['prazo_online'];
 // verifico através de sql se existem agendamento com a id do paciente e data igual ou superior a data atual
 $c_sql_verifica = "SELECT * FROM agenda WHERE matricula='{$_SESSION['userId']}' AND data >= CURDATE() AND (nome IS NOT null and nome <> '')";
 $result_verifica = $conection->query($c_sql_verifica);
@@ -17,8 +22,13 @@ $c_sql_medico = "SELECT id FROM profissionais WHERE id='$medico_id'";
 $data_agendamento = $_POST['data_agendamento'];
 // pego a data atual
 $data_hoje = date('Y-m-d');
+if ($i_dias >0){
+  $c_incremento = '+'.strval($i_dias).' days';
+  $data_hoje = date('y-m-d', strtotime($c_incremento, strtotime($data_hoje))); // incremento 1 dia a data do loop 
+}
+    
 // preparo sql para buscar horários disponíveis para o medico com data e medicos escolhidos e data superior a data do dia e nome vazio
-$c_sql = "SELECT * FROM agenda WHERE id_profissional='$medico_id' AND data='$data_agendamento'
+$c_sql = "SELECT * FROM agenda WHERE id_profissional='$medico_id' AND data='$data_agendamento' and data >= '$data_hoje'
  AND (nome IS null or nome = '') AND STATUS='SIM' ORDER BY horario";
  // executo a query
 $result = $conection->query($c_sql);

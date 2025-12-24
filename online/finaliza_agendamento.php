@@ -20,7 +20,7 @@ if ($result_vago->num_rows == 0) {
 }
 // preparo sql para atualizar o registro na tabela agenda com nome, telefone, email e convenio
 $c_sql_atualiza = "UPDATE agenda SET nome='" .  $_SESSION['nome'] . "', telefone='" . $_POST['telefone'] . "',
- email='" . $_POST['email'] . "', id_convenio='" . $_SESSION['id_convenio']  . "', matricula='" . $_SESSION['userId'] .
+ email='" . $_POST['email'] . "', id_convenio='" . $_SESSION['id_convenio']  . "',observacao='"."Agendamento feito online". "', matricula='" . $_SESSION['userId'] .
   "', paciente_novo='" . $_POST['primeira'] . "', paciente_compareceu='Não'".",paciente_atendido='Não'".
   " WHERE id='$horario_id'";
  //echo $c_sql_atualiza;
@@ -28,6 +28,7 @@ $c_sql_atualiza = "UPDATE agenda SET nome='" .  $_SESSION['nome'] . "', telefone
 // executo a query
 if ($conection->query($c_sql_atualiza) === TRUE) {
     // agendamento realizado com sucesso
+    
     echo "<script>alert('Agendamento realizado com sucesso!'); window.location.href='agendamento.php';</script>";
 } else {
     // erro ao realizar agendamento

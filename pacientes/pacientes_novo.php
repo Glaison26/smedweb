@@ -1,14 +1,16 @@
 <?php
 // controle de acesso ao formulário
 session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
 
 // funções 
 include("../conexao.php"); // conexão de banco de dados
 include_once "../lib_gop.php";
 include("../links.php");
+// configuro fuso horário
+date_default_timezone_set('America/Sao_Paulo');
 
 
 $c_nome = "";
@@ -93,7 +95,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //
     do {
 
-
+        // verifico por sql se já existe paciente através da matricula
+        $c_sql_verifica = "SELECT id FROM pacientes where matricula='$c_matricula'";
+        $result_verifica = $conection->query($c_sql_verifica);
+        if ($result_verifica->num_rows > 0 && $c_matricula != '') {
+            $msg_erro = "Matrícula já cadastrada para outro paciente!!";
+            break;
+        }
+        // verifico se já existe paciente através do cpf
+        $c_sql_verifica = "SELECT id FROM pacientes where cpf='$c_cpf'";
+        $result_verifica = $conection->query($c_sql_verifica);
+        if ($result_verifica->num_rows > 0 && $c_cpf != '') {
+            $msg_erro = "CPF já cadastrado para outro paciente!!";
+            break;
+        }
         // consiste email
         if (!validaEmail($c_email) && !empty($c_email)) {
             $msg_erro = "E-mail informado inválido!!";
@@ -111,26 +126,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $conection->query($c_sql_convenio);
         $c_linha = $result->fetch_assoc();
         $c_id_convenio = $c_linha['id'];
+        
         // grava dados no banco
         // faço a Leitura da tabela com sql
-
         $c_sql = "Insert into pacientes (nome, endereco, bairro, cidade, cep, uf, email,
          fone, fone2, obs, cpf, identidade, sexo, datanasc, indicacao, profissao, 
          pai, mae, estadocivil, cor, naturalidade, procedencia, matricula, classificacao, dataprimeira, id_convenio)" .
             " Value ('$c_nome', '$c_endereco', '$c_bairro', '$c_cidade', '$c_cep', '$c_uf','$c_email', '$c_telefone1', '$c_telefone2', 
              '$c_obs', '$c_cpf', '$c_identidade', '$c_sexo', '$d_datanasc', '$c_indicacao', '$c_profissao', '$c_pai', '$c_mae'
              , '$c_estadocivil', '$c_cor',  '$c_naturalidade', '$c_procedencia', '$c_matricula', '$c_classificacao', '$d_dataprimeira', '$c_id_convenio')";
-        echo $c_sql;
+        //echo $c_sql;
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
         if (!$result) {
             die("Erro ao Executar Sql!!" . $conection->connect_error);
         }
-
         $msg_gravou = "Dados Gravados com Sucesso!!";
         if ($_SESSION['incagenda'] == false) {
             header('location: /smedweb/pacientes/pacientes_lista.php');
         } else {
+            // gero log de inclusão de paciente vindo da agenda
+            
+            $d_data_acao = date('Y-m-d');
+            // formato da data para o log
+            $d_hora_acao = date('H:i:s');
+            $c_descricao = "Inclusão de paciente " . $c_nome . " vindo da agenda";
+            $c_informacao = 'Nome: '. $c_nome. '<br>'. 'Convenio: '. $c_convenio. '<br>'. 'Matricula: '. $c_matricula. '<br>'.
+            'Telefone: '. $c_telefone1. '<br>'. 'E-mail: '. $c_email. '<br>'. 'Observação: '. nl2br($c_obs). '<br>'. 'Paciente Novo: Sim'. '<br>'.
+            'Paciente Compareceu: Não'. '<br>'. 'Paciente Atendido: Não';
+            $c_sql_log = "INSERT INTO log_agenda (id_agenda, id_usuario, data, hora, descricao, registro)" .
+            " VALUES (" . $_SESSION['id_agenda_incluir'] . ", " . $_SESSION['c_userId'] . ", '$d_data_acao', '$d_hora_acao', '$c_descricao', '$c_informacao')";
+            //echo $c_sql_log;
+            //die();
+            $result_log = $conection->query($c_sql_log);
+            // fim do log
             // mostro mensagem de sucesso em javascript com botao de ok para continuar
             echo "<script>alert('Dados Gravados com Sucesso!!');</script>";
             echo "<script>window.location.href='/smedweb/agenda/agenda.php';</script>";

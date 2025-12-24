@@ -21,6 +21,7 @@ $_SESSION['conveniopac'] = $c_linha['id_convenio'];
 $_SESSION['telefonepac'] = $c_linha['telefone'];
 $_SESSION['emailpac'] = $c_linha['email'];
 $_SESSION['matriculapac'] = $c_linha['matricula'];
+$_SESSION['id_agenda_incluir'] = $c_id;
 
 header('location: /smedweb/pacientes/pacientes_novo.php');
         
