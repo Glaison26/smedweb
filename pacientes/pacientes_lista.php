@@ -75,9 +75,15 @@ if ((isset($_POST["btnpesquisa"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) { 
     $c_sql = $c_sql . " ORDER BY pacientes.nome";
     //echo $c_sql;
     $result = $conection->query($c_sql);
+    $_SESSION['sql_paciente'] = $c_sql;
     // verifico se a query foi correto
     if (!$result) {
         die("Erro ao Executar Sql!!" . $conection->connect_error);
+    }
+}else{
+    if (isset($_SESSION['sql_paciente'])) {
+        $c_sql = $_SESSION['sql_paciente'];
+        $result = $conection->query($c_sql);
     }
 }
 

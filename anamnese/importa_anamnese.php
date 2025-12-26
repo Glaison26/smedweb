@@ -29,7 +29,7 @@ $c_historia = $registro['historia'] . "\r\n" . "\r\n" . "$hoje  -  " . "Anamnese
     "Setor :" . $registro['setor'] . "\r\n" . // setor
     "Cargo :" . $registro['funcao'] . "\r\n" . //cargo
     "Data de Admissão :" . $c_admissao . "\r\n" .
-    "Atividade :" . $registro['atividade'] . "\r\n" .
+    "Atividade :" . $registro['atividades'] . "\r\n" .
     "Descrição da Atividade :" . $registro['descricao_atividades'] . "\r\n" .
     "Jornada de Trabalho :" . $registro['jornada'] . "\r\n" .
     "Uso de EPI :" . $registro['usa_epi'] . "\r\n";
