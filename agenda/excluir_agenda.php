@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Monta SQL exemplo com filtro por médico — NÃO executa.
         $whereMed = "id_profissional = '" . ($medico_id) . "'";
-        echo 'codigo where'. $whereMed;
+        //echo 'codigo where'. $whereMed;
         switch ($mode) {
             case 'between':
                 $from = $_POST['from_date'] ?? '';
