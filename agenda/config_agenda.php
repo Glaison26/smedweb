@@ -1,11 +1,9 @@
 <?php // controle de acesso ao formulário
-//session_start();
-//if (!isset($_SESSION['newsession'])) {
-//    die('Acesso não autorizado!!!');
-//}
-//if ($_SESSION['c_tipo'] != '1') {
-//    header('location: /raxx/voltamenunegado.php');
-//}
+session_start();
+if (!isset($_SESSION['newsession'])) {
+    die('Acesso não autorizado!!!');
+}
+
 include("../conexao.php");
 include("../links.php");
 ?>
@@ -129,7 +127,8 @@ include("../links.php");
                     <span class='glyphicon glyphicon-calendar'></span> Configurar Agenda</a>
                     <a class='btn btn-success' title='Gerar Agenda do Profissional' href='/smedweb/agenda/criacao_agenda.php?id=$c_linha[id]'>
                     <img src='\smedweb\images\gerar_agenda2.png' alt='' width='20' height='20'> Gerar Agenda</a>
-                    
+                    <a class='btn btn-danger' title='Excluir Agenda' href='/smedweb/agenda/excluir_agenda.php?id=$c_linha[id]&nome=$c_linha[nome]'>
+                    <img src='\smedweb\images\lixeira.png' alt='' width='20' height='20'> Excluir Agenda</a>
                     </td>
 
                     </td>

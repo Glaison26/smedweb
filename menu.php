@@ -54,7 +54,7 @@ if (($c_linha['agenda'] == 'S') || ($c_linha['tipo'] == '1')) {
 	$op_agenda = "javascript:negar()";
 }
 // agenda Criação
-if (($c_linha['agenda_criacao'] == 'S') || ($c_linha['tipo'] == '1')) {
+if (($c_linha['tipo'] == '1')) {
 	$op_agenda_criacao = "\smedweb/agenda\config_agenda.php";
 } else {
 	$op_agenda_criacao = "javascript:negar()";
