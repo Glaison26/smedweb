@@ -17,6 +17,7 @@ $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
+$c_profissional = '';
 // verifico se $_SESSION['data_selecionada'] está criada, se não estiver crio com a data atual
 if (isset($_SESSION['data_selecionada'])) {
     $d_data = $_SESSION['data_selecionada'];
@@ -820,15 +821,24 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <th scope="col">Telefone</th>
                                     <th scope="col">e-mail</th>
                                     <th scope="col">Observação</th>
+                                    <th scope="col">Novo</th>
+                                    <th scope="col">Compareceu</th>
+                                    <th scope="col">Atendido</th>
+                                    <th scope="col">Ação</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 // sql para dados da agenda lixeira
-                                $c_sql4 = "SELECT *, convenios.nome as convenio FROM lixeira_agenda join profissionais on lixeira_agenda.id_profissional=profissionais.id
-                                join convenios on lixeira_agenda.id_convenio=convenios.id
-                                where  profissionais.nome='$c_profissional' ";
+                                $c_sql4 = "SELECT lixeira_agenda.id_profissional, lixeira_agenda.status, lixeira_agenda.id, lixeira_agenda.id_convenio,
+                                           lixeira_agenda.`data`, lixeira_agenda.dia, lixeira_agenda.horario,
+                                           lixeira_agenda.nome, lixeira_agenda.telefone, lixeira_agenda.email, convenios.nome as convenio,
+                                           lixeira_agenda.observacao, lixeira_agenda.matricula,
+                                           lixeira_agenda.paciente_compareceu, lixeira_agenda.paciente_atendido, lixeira_agenda.paciente_novo
+                                           FROM lixeira_agenda join profissionais on lixeira_agenda.id_profissional=profissionais.id
+                                           join convenios on lixeira_agenda.id_convenio=convenios.id
+                                           where  profissionais.nome='$c_profissional' order by lixeira_agenda.`data` desc, lixeira_agenda.horario";
                                 $result4 = $conection->query($c_sql4);
                                 // loop para dados da agenda lixeira
                                 if (!empty($c_sql4)) {
@@ -844,15 +854,21 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                                     <td>$c_linha4[telefone]</td>
                                     <td>$c_linha4[email]</td>
                                     <td>$c_linha4[observacao]</td>
-                                    </tr>
-                                    ";
+                                    <td>$c_linha4[paciente_novo]</td>
+                                    <td>$c_linha4[paciente_compareceu]</td>
+                                    <td>$c_linha4[paciente_atendido]</td>
+                                    <td><a class='btn btn-light' title='Copiar Dados'
+                                    href='/smedweb/agenda/recorta_lixeira.php?id=$c_linha4[id]'>
+                                    <img src='\smedweb\images\copiar.png'alt='' width='15' height='15'>
+                                     Copiar</a></td>
+                                    </tr>";
                                     }
                                 }
                                 ?>
                             </tbody>
                         </table>
                     </div>
-            </div>
+                </div>
         </form>
     </div>
     </div>
