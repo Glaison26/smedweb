@@ -554,6 +554,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
                 <li role="presentation"><a href="#cadastro" aria-controls="cadastro" role="tab" data-toggle="tab">Cadastro de Pacientes</a></li>
                 <li role="presentation"><a href="#historico" aria-controls="historico" role="tab" data-toggle="tab">Histórico Agendamento</a></li>
+                <li role="presentation"><a href="#lixeira" aria-controls="lixeira" role="tab" data-toggle="tab">Lixeira da Agenda</a></li>
             </ul>
             <!-- aba da agenda-->
             <div class="tab-content">
@@ -802,10 +803,56 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> <!--fim da aba historico-->
+                <!-- aba com a lixeira da agenda -->
+                <div role="tabpanel" class="tab-pane" id="lixeira">
+                    <div style="padding-top:20px;">
 
+                        <!-- montagem da tabela de lixeira da agenda -->
+                        <table class="table display tabagendalixeira">
+                            <thead class="thead">
+                                <tr class="info">
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Horário</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Matricula</th>
+                                    <th scope="col">Convênio</th>
+                                    <th scope="col">Telefone</th>
+                                    <th scope="col">e-mail</th>
+                                    <th scope="col">Observação</th>
 
-
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                // sql para dados da agenda lixeira
+                                $c_sql4 = "SELECT *, convenios.nome as convenio FROM lixeira_agenda join profissionais on lixeira_agenda.id_profissional=profissionais.id
+                                join convenios on lixeira_agenda.id_convenio=convenios.id
+                                where  profissionais.nome='$c_profissional' ";
+                                $result4 = $conection->query($c_sql4);
+                                // loop para dados da agenda lixeira
+                                if (!empty($c_sql4)) {
+                                    while ($c_linha4 = $result4->fetch_assoc()) {
+                                        $c_data = date("d-m-y", strtotime(str_replace('/', '-', $c_linha4['data'])));
+                                        echo "
+                                    <tr>
+                                    <td>$c_data</td>
+                                    <td>$c_linha4[horario]</td>
+                                    <td>$c_linha4[nome]</td>
+                                    <td>$c_linha4[matricula]</td>
+                                    <td>$c_linha4[convenio]</td>
+                                    <td>$c_linha4[telefone]</td>
+                                    <td>$c_linha4[email]</td>
+                                    <td>$c_linha4[observacao]</td>
+                                    </tr>
+                                    ";
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
         </form>
     </div>
     </div>
