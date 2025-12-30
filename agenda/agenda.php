@@ -400,7 +400,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             }
         }
     </script>
-
+<!-- script jquery para tabela da agenda -->
     <script>
         $(document).ready(function() {
             $('.tabagenda').DataTable({
@@ -489,7 +489,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 }
 
             });
-
         });
     </script>
 
