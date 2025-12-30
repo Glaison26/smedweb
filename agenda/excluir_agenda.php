@@ -85,6 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
      }
     // executo rotina para apagar os dados da agenda
     $result_delete = $conection->query($sql);
+    if ($result_delete) {
+        // sucesso
+        $sql = htmlspecialchars($sql);
+    } else {
+        $error = 'Erro ao executar exclusão: ' . $conection->error;
+    }
 
 
 }

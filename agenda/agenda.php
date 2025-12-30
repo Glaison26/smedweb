@@ -446,6 +446,52 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
         });
     </script>
+    <!-- script jquery para tabela da lixeira -->
+    <script>
+        $(document).ready(function() {
+            $('.tablixeira').DataTable({
+                // 
+                "iDisplayLength": 5,
+                "order": [1, 'asc'],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                }, {
+                    'aTargets': [0],
+                    "visible": true
+                }],
+                "oLanguage": {
+                    "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                    "sLengthMenu": "_MENU_ resultados por página",
+                    "sInfoFiltered": " - filtrado de _MAX_ registros",
+                    "oPaginate": {
+                        "spagingType": "full_number",
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLoadingRecords": "Carregando...",
+                        "sProcessing": "Processando...",
+                        "sZeroRecords": "Nenhum registro encontrado",
+
+                        "sLast": "Último"
+                    },
+                    "sSearch": "Pesquisar",
+                    "sLengthMenu": 'Mostrar <select>' +
+                        '<option value="5">5</option>' +
+                        '<option value="10">10</option>' +
+                        '<option value="20">20</option>' +
+                        '<option value="30">30</option>' +
+                        '<option value="40">40</option>' +
+                        '<option value="50">50</option>' +
+                        '<option value="-1">Todos</option>' +
+                        '</select> Registros'
+
+                }
+
+            });
+
+        });
+    </script>
 
     <script type="text/javascript">
         // Função javascript e ajax para ageda marcação
