@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $i_contador = 0;
      while ($c_linha = $result->fetch_assoc()){
         // inserção dos registros
+        $i_id_agenda = $c_linha['id'];
         $c_id_profissional = $c_linha['id_profissional'];
         $c_id_convenio = $c_linha['id_convenio'];
         $d_data = $c_linha['data'];
@@ -81,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         '$c_paciente_atendido', '$c_status')";
         $result_insere = $conection->query($c_sql_insere);
         $i_contador++;
+       // monto sql para apagar registros da agenda na tabela de logs
+       $c_sql_excluir_log = "DELETE FROM log_agenda WHERE id_agenda = $i_id_agenda";
+       $result_log = $conection->query($c_sql_excluir_log);
 
      }
     // executo rotina para apagar os dados da agenda
