@@ -855,7 +855,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     <div style="padding-top:20px;">
 
                         <!-- montagem da tabela de lixeira da agenda -->
-                        <table class="table display tabagendalixeira">
+                        <table class="table display tablixeira">
                             <thead class="thead">
                                 <tr class="info">
                                     <th scope="col">Data</th>
