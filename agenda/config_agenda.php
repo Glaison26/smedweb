@@ -87,6 +87,8 @@ include("../links.php");
                 <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
             </div>
             <a class='btn btn-warning' title="Suprimir datas para não serem geradas" href='datas_suprimidas_lista.php'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
+            <!-- botão para chamar página de limpza da lixeira na agenda -->
+            <a class='btn btn-danger' title="Limpar Lixeira da Agenda" href='limpa_lixeira.php'> <img src="\smedweb\images\lixeira.png" alt="" width="15" height="15"> Limpar Lixeira</a>
         </div>
         <hr>
         <table class="table display table-bordered tabprofissionais">
