@@ -17,6 +17,7 @@ $c_sql_pac = "";
 $_SESSION['dataextra'] = "";
 $_SESSION['id_profextra'] = "";
 $_SESSION['incagenda'] = true;
+$_SESSION['horario_vazio'] = 'nao';
 $c_profissional = '';
 // verifico se $_SESSION['data_selecionada'] está criada, se não estiver crio com a data atual
 if (isset($_SESSION['data_selecionada'])) {
@@ -212,6 +213,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
 
 <body>
     <!-- função para chamar marcação -->
+
     <script>
         $(document).ready(function() {
             const c_chk_compareceu = document.getElementById('chk_compareceu');
@@ -221,10 +223,11 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             var c_valor_novo;
             var c_valor_atendido;
             var status;
+            var c_vazio;
 
 
             $('.editbtn').on('click', function() {
-                // se status for não não chamo o modal de edição
+                // se status for não, não chamo o modal de edição
                 status = $(this).closest('tr').find('td:eq(2)').text();
 
                 if (status == 'NÃO') {
@@ -245,6 +248,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 $('#up_idField').val(data[0]);
                 $('#up_horarioField').val(data[1]);
                 $('#up_nomeField').val(data[3]);
+                $('#up_vazio').val(data[3]);
                 $('#up_matriculaField').val(data[4]);
                 $('#up_convenioField').val(data[5]);
                 $('#up_telefoneField').val(data[6]);
@@ -253,6 +257,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 $('#up_novo').val(data[9]);
                 $('#up_compareceu').val(data[10]);
                 $('#up_atendido').val(data[11]);
+
                 c_valor_novo = document.getElementById('up_novo').value;
                 console.log(c_valor_novo);
                 if (c_valor_novo == 'Sim') {
@@ -273,6 +278,63 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                     c_chk_atendido.checked = false;
                 }
             });
+        });
+    </script>
+
+    <!-- função para submissão do formulário de marcação -->
+
+    <script type="text/javascript">
+        // Função javascript e ajax para ageda marcação
+        $(document).on('submit', '#frmadd', function(e) {
+            e.preventDefault();
+            var c_id = $('#up_idField').val();
+            var c_horario = $('#up_horarioField').val();
+            var c_nome = $('#up_nomeField').val();
+            var c_matricula = $('#up_matriculaField').val();
+            var c_convenio = $('#up_convenioField').val();
+            var c_telefone = $('#up_telefoneField').val()
+            var c_email = $('#up_emailField').val();
+            var c_obs = $('#up_obsField').val();
+            var c_compareceu = $('#chk_compareceu').is(':checked') ? 'Sim' : 'Não';
+            var c_novopaciente = $('#chk_novopaciente').is(':checked') ? 'Sim' : 'Não';
+            var c_atendido = $('#chk_atendido').is(':checked') ? 'Sim' : 'Não';
+
+
+            if (c_nome != '') {
+
+                $.ajax({
+                    url: "agenda_marcacao.php",
+                    type: "post",
+                    data: {
+                        c_id: c_id,
+                        c_horario: c_horario,
+                        c_nome: c_nome,
+                        c_matricula: c_matricula,
+                        c_convenio: c_convenio,
+                        c_telefone: c_telefone,
+                        c_email: c_email,
+                        c_obs: c_obs,
+                        c_compareceu: c_compareceu,
+                        c_novopaciente: c_novopaciente,
+                        c_atendido: c_atendido
+
+                    },
+                    success: function(data) {
+                        var json = JSON.parse(data);
+                        var status = json.status;
+                        if (status == 'true') {
+                            $('#editmodal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('Falha ao Incluir / Alterar dados, ou Horário já foi preenchido por outro usuário, por favor escolha outro horário!!!');
+                        }
+                    }
+                });
+
+            } else {
+                alert('Todos os campos com (*) devem ser preenchidos!!');
+            }
+
         });
     </script>
     <!-- funcao para chamar rotina para incluir paciente através da marcação de agenda -->
@@ -400,7 +462,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
             }
         }
     </script>
-<!-- script jquery para tabela da agenda -->
+    <!-- script jquery para tabela da agenda -->
     <script>
         $(document).ready(function() {
             $('.tabagenda').DataTable({
@@ -492,58 +554,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
         });
     </script>
 
-    <script type="text/javascript">
-        // Função javascript e ajax para ageda marcação
-        $(document).on('submit', '#frmadd', function(e) {
-            e.preventDefault();
-            var c_id = $('#up_idField').val();
-            var c_horario = $('#up_horarioField').val();
-            var c_nome = $('#up_nomeField').val();
-            var c_matricula = $('#up_matriculaField').val();
-            var c_convenio = $('#up_convenioField').val();
-            var c_telefone = $('#up_telefoneField').val()
-            var c_email = $('#up_emailField').val();
-            var c_obs = $('#up_obsField').val();
-            var c_compareceu = $('#chk_compareceu').is(':checked') ? 'Sim' : 'Não';
-            var c_novopaciente = $('#chk_novopaciente').is(':checked') ? 'Sim' : 'Não';
-            var c_atendido = $('#chk_atendido').is(':checked') ? 'Sim' : 'Não';
 
-            if (c_nome != '') {
-
-                $.ajax({
-                    url: "agenda_marcacao.php",
-                    type: "post",
-                    data: {
-                        c_id: c_id,
-                        c_horario: c_horario,
-                        c_nome: c_nome,
-                        c_matricula: c_matricula,
-                        c_convenio: c_convenio,
-                        c_telefone: c_telefone,
-                        c_email: c_email,
-                        c_obs: c_obs,
-                        c_compareceu: c_compareceu,
-                        c_novopaciente: c_novopaciente,
-                        c_atendido: c_atendido
-                    },
-                    success: function(data) {
-                        var json = JSON.parse(data);
-                        var status = json.status;
-                        if (status == 'true') {
-                            $('#editmodal').modal('hide');
-                            location.reload();
-                        } else {
-                            alert('falha ao alterar dados');
-                        }
-                    }
-                });
-
-            } else {
-                alert('Todos os campos com (*) devem ser preenchidos!!');
-            }
-
-        });
-    </script>
 
 
     <?php
@@ -914,6 +925,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         </table>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
     </div>
@@ -935,6 +947,7 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                         <input type="hidden" id="up_novo" name="up_novo">
                         <input type="hidden" id="up_atendido" name="up_atendido">
                         <input type="hidden" id="up_compareceu" name="up_compareceu">
+                        <input type="hidden" id="up_vazio" name="up_vazio">
                         <div class="mb-3 row">
                             <label for="up_horarioField" class="col-md-3 form-label">Horário</label>
                             <div class="col-md-4">

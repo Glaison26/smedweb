@@ -6,6 +6,8 @@ if (!isset($_SESSION['newsession'])) {
 
 include("../conexao.php");
 include("../links.php");
+// configuração de timezone
+date_default_timezone_set('America/Sao_Paulo');
 ?>
 
 <!doctype html>

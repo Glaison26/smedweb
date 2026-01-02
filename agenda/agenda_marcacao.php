@@ -20,6 +20,17 @@ $c_obs= $_POST['c_obs'];
 $c_compareceu= $_POST['c_compareceu'];
 $c_novopaciente= $_POST['c_novopaciente'];   
 $c_atendido= $_POST['c_atendido'];
+// sql para verifica se o horario já está marcado
+$c_sql_verifica = "select * from agenda where id='$c_id' and nome<>'' and matricula<> '$c_matricula' and nome<> '$c_nome'";
+$result_verifica = $conection->query($c_sql_verifica);
+if ($result_verifica->num_rows > 0) {
+    $data = array(
+        'status' => 'jaexiste',
+    );
+    echo json_encode($data);
+    exit;
+}
+
 
 
 // localizo na query codigo do convenio através do nome
