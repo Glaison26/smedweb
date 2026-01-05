@@ -7,6 +7,7 @@ if (!isset($_SESSION['newsession'])) {
 include("../conexao.php");
 // link bootstrap
 include("../links.php");
+date_default_timezone_set('America/Sao_Paulo');
 ?>
 
 <!DOCTYPE html>

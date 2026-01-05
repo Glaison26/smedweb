@@ -84,10 +84,11 @@ date_default_timezone_set('America/Sao_Paulo');
         <br>
     </div>
     <div class="container -my5">
-        <div class="container">
+        <div class="btn-group" role="group" aria-label="Opções">
             <a class='btn btn-light' title="Suprimir datas para não serem geradas" href='datas_suprimidas_lista.php'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
             <!-- botão para chamar página de limpza da lixeira na agenda -->
             <a class='btn btn-light' title="Limpar Lixeira da Agenda" href='limpa_lixeira.php'> <img src="\smedweb\images\lixeira.png" alt="" width="15" height="15"> Limpar Lixeira</a>
+            <a class='btn btn-ligth' title="Log de Ações na agenda" href='log_acoes.php'> <img src="\smedweb\images\log.png" alt="" width="15" height="15"> Log de Ações</a>
             <a class='btn btn-light' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
         </div>
         <hr>
@@ -123,7 +124,7 @@ date_default_timezone_set('America/Sao_Paulo');
                     <td>$c_linha[id]</td>
                     <td>$c_linha[nome]</td>
                     <td>$c_linha[especialidade]</td>
-                            
+                           
                     <td>
                     <a class='btn btn-light' title='Configuração da agenda do profissional' href='/smedweb/agenda/config_agenda_criacao.php?id=$c_linha[id]'>
                     <span class='glyphicon glyphicon-calendar'></span> Configurar Agenda</a>

@@ -604,8 +604,6 @@ if ((isset($_POST["btnpesquisa_historico"])) && ($_SERVER['REQUEST_METHOD'] == '
                 <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="20" height="20"> Voltar</a>
             </div>
             <hr>
-
-
             <!-- abas de agenda e cadstro de pacientes -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#agenda" aria-controls="home" role="tab" data-toggle="tab">Horários da Agenda</a></li>
