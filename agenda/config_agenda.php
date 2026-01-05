@@ -85,12 +85,10 @@ date_default_timezone_set('America/Sao_Paulo');
     </div>
     <div class="container -my5">
         <div class="container">
-            <div class="col-lg-12" style="text-align: right;">
-                <a class='btn btn-info' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
-            </div>
             <a class='btn btn-light' title="Suprimir datas para não serem geradas" href='datas_suprimidas_lista.php'> <img src="\smedweb\images\removerdata.png" alt="" width="15" height="15"> Suprimir Datas</a>
             <!-- botão para chamar página de limpza da lixeira na agenda -->
             <a class='btn btn-light' title="Limpar Lixeira da Agenda" href='limpa_lixeira.php'> <img src="\smedweb\images\lixeira.png" alt="" width="15" height="15"> Limpar Lixeira</a>
+            <a class='btn btn-light' title="Voltar ao menu" href='/smedweb/menu.php'> <img src="\smedweb\images\voltar.png" alt="" width="15" height="15"> Voltar</a>
         </div>
         <hr>
         <table class="table display table-bordered tabprofissionais">
@@ -131,7 +129,7 @@ date_default_timezone_set('America/Sao_Paulo');
                     <span class='glyphicon glyphicon-calendar'></span> Configurar Agenda</a>
                     <a class='btn btn-light' title='Gerar Agenda do Profissional' href='/smedweb/agenda/criacao_agenda.php?id=$c_linha[id]'>
                     <img src='\smedweb\images\gerar_agenda2.png' alt='' width='20' height='20'> Gerar Agenda</a>
-                    <a class='btn btn-danger' title='Excluir Agenda' href='/smedweb/agenda/excluir_agenda.php?id=$c_linha[id]&nome=$c_linha[nome]'>
+                    <a class='btn btn-light' title='Excluir Agenda' href='/smedweb/agenda/excluir_agenda.php?id=$c_linha[id]&nome=$c_linha[nome]'>
                     <img src='\smedweb\images\lixeira.png' alt='' width='20' height='20'> Excluir Agenda</a>
                     </td>
 
