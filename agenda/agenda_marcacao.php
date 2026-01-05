@@ -30,9 +30,6 @@ if ($result_verifica->num_rows > 0) {
     echo json_encode($data);
     exit;
 }
-
-
-
 // localizo na query codigo do convenio através do nome
 $c_sql1 = "select convenios.id from convenios where convenios.nome='$c_convenio'";
 $result = $conection->query($c_sql1);

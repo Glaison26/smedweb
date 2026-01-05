@@ -128,6 +128,19 @@ if ((isset($_POST["btncriacao"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {
         }
 
         // final do loop de data
+        // gero log da criação da agenda
+        $d_data_acao = date('Y-m-d');
+        // formato da data para o log
+        $d_hora_acao = date('H:i:s');
+        $c_descricao = "Criação da agenda do profissional " . $c_linha_medico['nome'] . " no período de " .
+            date("d/m/Y", strtotime($_POST['data1'])) . " até " . date("d/m/Y", strtotime($_POST['data2']));
+        $c_informacao = 'Data Início: ' . date("d/m/Y", strtotime($_POST['data1'])) . '<br>' . 'Data Fim: ' . date("d/m/Y", strtotime($_POST['data2']));
+        $c_sql_log = "INSERT INTO log_criacao_agenda (id_usuario, data, hora, descricao, registro)" .
+            " VALUES (" . $_SESSION['c_userId'] . ", '$d_data_acao', '$d_hora_acao', '$c_descricao',
+             '$c_informacao')";
+        $result_log = $conection->query($c_sql_log);
+        // fim do log
+
         $msg_gerou = 'Agenda Médica foi Gerada com sucesso!!!';
     } else {
         $msg_gerou = 'Erro!!! Data informada já foi gerada anteriormente!!!';
