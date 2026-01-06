@@ -54,6 +54,16 @@ if ((isset($_POST["btnregistro"]))) {
             "\r\n" . $c_atestado;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
         $result_historia = $conection->query($c_sql_historia);
+        // log de registro do atestado na história clinica do paciente
+        $d_data_acao = date('Y-m-d');
+        $d_hora_acao = date('H:i:s');
+        $usuario = $_SESSION['c_userId'];
+        $c_informacao = "Atestado Médico registrado na história clinica do paciente id: " . $c_nome_paciente . '<br>' . "Data: " . date("d/m/Y", strtotime($d_data_acao)) . '<br>' . "Profissional: " . $_POST['profissional'];
+        $c_sql_log = "INSERT INTO log_clinica (data,hora,id_usuario,descricao,registro)
+        VALUES ('$d_data_acao','$d_hora_acao','$usuario','Registro de atestado médico na história clinica do paciente','$c_informacao')";
+        $result_log = $conection->query($c_sql_log);
+        // fim do log
+
         echo "
           <script>
           alert('Atestado registrado na história clinica do paciente!!!');
@@ -178,6 +188,7 @@ if ((isset($_POST["btnprint"]))) {
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+                    <?php $c_nome_paciente = $c_linha['nome']; ?>
                 </div>
             </div>
             <!-- Formulário com os profissionais para seleção -->
