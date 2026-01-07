@@ -14,9 +14,14 @@ if (isset($_GET["id"])) {
 } else {
     $c_id = $_SESSION['refid'];
 }
+if ($_SESSION['atestado'] == "") {
+    $c_prescricao = "Inserir texto da prescrição aqui";
+} else {
+    $c_prescricao = $_SESSION['laudo'];
+}
 // sql para pegar dados do paciente selecionado
-$c_laudo = "";
-$c_prescricao = "";
+//$c_laudo = "";
+//$c_prescricao = "";
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -63,7 +68,7 @@ if ((isset($_POST["btnbateria"]))) {
     $result_texto = $conection->query($c_sql_texto);
     // procuro o texto no cadastro de baterias para colocar no texto
     $c_linha_bateria = $result_texto->fetch_assoc();
-    $c_laudo = $c_linha_bateria['exames'];
+    $c_prescricao = $c_linha_bateria['exames'];
 }
 
 // botão para incluir texto de item de laudo selecionado
@@ -74,7 +79,7 @@ if ((isset($_POST["btnitem"]))) {
     $result_item = $conection->query($c_sql_item);
     // procuro o texto no cadastro de itens para colocar no texto
     $c_linha_item = $result_item->fetch_assoc();
-    $c_laudo = $_POST['prescricao'] . "\r\n" . $c_linha_item['valref'] . "\r\n";
+    $c_prescricao = $_POST['prescricao'] . "\r\n" . $c_linha_item['valref'] . "\r\n";
 }
 
 // botão para incluir texto de medicamento selecionado
@@ -84,7 +89,7 @@ if ((isset($_POST["btnmedicamento"]))) {
     $result_medicamento = $conection->query($c_sql_medicamento);
     // procuro o texto no cadastro de medicamentos para colocar no texto
     $c_linha_medicamento = $result_medicamento->fetch_assoc();
-    $c_laudo = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "... " . "\r\n";
+    $c_prescricao = $_POST['prescricao'] . $c_linha_medicamento['descricao'] . "... " . "\r\n";
 }
 ?>
 
@@ -223,7 +228,7 @@ if ((isset($_POST["btnmedicamento"]))) {
             <a class="btn btn-light" href="#"><img src='\smedweb\images\printer.png' alt='' width='20' height='20'> Emitir Prescrição</a>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
-            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_laudo ?>">
+            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
             <a class="btn btn-light" href="/smedweb/prescricoes/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>
@@ -275,7 +280,7 @@ if ((isset($_POST["btnmedicamento"]))) {
                             <div class="form-group">
                                 <label class="col-sm-2 col-form-label">Texto da Prescrição</label>
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_laudo; ?></textarea>
+                                    <textarea class="form-control" id="prescricao" name="prescricao" rows="15"><?php echo $c_prescricao; ?></textarea>
                                 </div>
                             </div>
                         </div>

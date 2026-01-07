@@ -14,7 +14,12 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
-$c_formula = $_SESSION['medicamento'] ?? '';
+if ($_SESSION['formula'] == "") {
+    $c_formula = "Inserir texto da fórmula aqui";
+} else {
+    $c_formula = $_SESSION['formula'];
+}
+
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -25,7 +30,7 @@ $c_linha = $result->fetch_assoc();
 // rotina de registro de prescrição medicamento na história clinica do paciente
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
-    $c_prescricao = $_POST['id_texto'];
+    $c_formula = $_POST['id_texto'];
     $c_sql_contador = "select count(*) as contador from historia where id_paciente='$c_id'";
     $result_contador = $conection->query($c_sql_contador);
     $c_linha_contador = $result_contador->fetch_assoc();
@@ -43,15 +48,25 @@ if ((isset($_POST["btnregistro"]))) {
         $c_linha_historia = $c_result_historia->fetch_assoc();
 
         $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Prescrição de Fórmula Emitido" .
-            "\r\n" . $c_prescricao;
+            "\r\n" . $c_formula;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
         $result_historia = $conection->query($c_sql_historia);
-        echo "
+    }
+    // log de registro do atestado na história clinica do paciente
+    $d_data_acao = date('Y-m-d');
+    $d_hora_acao = date('H:i:s');
+    $usuario = $_SESSION['c_userId'];
+    $c_nome_paciente = $c_linha['nome'];
+    $c_informacao = "Emissão de Fórmula registrada na história clinica do paciente id: " . $c_nome_paciente . '<br>' . "Data: " . date("d/m/Y", strtotime($d_data_acao)) . '<br>' . "Profissional: " . $_POST['profissional'];
+    $c_sql_log = "INSERT INTO log_clinica (data,hora,id_usuario,descricao,registro)
+        VALUES ('$d_data_acao','$d_hora_acao','$usuario','Registro de atestado médico na história clinica do paciente','$c_informacao')";
+    $result_log = $conection->query($c_sql_log);
+    // fim do log
+    echo "
           <script>
           alert('Prescrição de Fórmula registrado na história clinica do paciente!!!');
           </script>
         ";
-    }
 }
 
 // botão para incluir texto de formula padrão selecionado
@@ -73,7 +88,7 @@ if ((isset($_POST["btncomponente"]))) {
     // procuro o texto no cadastro de medicamentos para colocar no texto
     $c_linha_componente = $result_componente->fetch_assoc();
     $c_formula = $_POST['prescricao'] . $c_linha_componente['descricao'] . "    " .
-        $c_linha_componente['unidade'] . "\r\n";
+    $c_linha_componente['unidade'] . "\r\n";
 }
 // botão para emissão de prescrição de medicamentos
 // verifico se o botão foi pressionado
@@ -92,11 +107,11 @@ if ((isset($_POST["btnprint"]))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+
 </head>
 
 <body>
-  
+
     <!-- funcao para chamar rotina para cortar registro de medicamento -->
     <script>
         function pegaid(id) {
@@ -179,6 +194,7 @@ if ((isset($_POST["btnprint"]))) {
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <h4>Identificação do Paciente:<?php echo ' ' . $c_linha['nome']; ?></h4>
+                    
                 </div>
             </div>
             <!-- Formulário com os profissionais para seleção -->

@@ -15,8 +15,13 @@ if (isset($_GET["id"])) {
     $c_id = $_SESSION['refid'];
 }
 // sql para pegar dados do paciente selecionado
+// sql para pegar dados do paciente selecionado
+if ($_SESSION['relatorio'] == "") {
+    $c_relatorio = "Inserir texto do relatório aqui";
+} else {
+    $c_relatorio = $_SESSION['relatorio'];
+}
 
-$c_relatorio = $_SESSION['relatorio'] ?? '';
 $c_sql = "select pacientes.id, pacientes.nome from pacientes where pacientes.id='$c_id'";
 $result = $conection->query($c_sql);
 // verifico se a query foi correto
@@ -27,7 +32,7 @@ $c_linha = $result->fetch_assoc();
 // rotina de registro de prescrição medicamento na história clinica do paciente
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
-    $c_prescricao = $_POST['id_texto'];
+    $c_relatorio = $_POST['id_texto'];
     $c_sql_contador = "select count(*) as contador from historia where id_paciente='$c_id'";
     $result_contador = $conection->query($c_sql_contador);
     $c_linha_contador = $result_contador->fetch_assoc();
@@ -45,7 +50,7 @@ if ((isset($_POST["btnregistro"]))) {
         $c_linha_historia = $c_result_historia->fetch_assoc();
 
         $c_historia = $c_linha_historia['historia'] . "\r\n" . "\r\n" . "$hoje" . "\r\n" . "Relatório Médico Emitido" .
-            "\r\n" . $c_prescricao;
+            "\r\n" . $c_relatorio;
         $c_sql_historia = "update historia set historia = '$c_historia' where id_paciente='$c_id'";
         $result_historia = $conection->query($c_sql_historia);
         echo "
@@ -91,7 +96,7 @@ if ((isset($_POST["btnprint"]))) {
             </button>
             <button type='submit' id='btnregistro' name='btnregistro' class='btn btn-light' data-toggle='modal' title='Registra prescrição no histórico do paciente'>
                 <img src='\smedweb\images\registro.png' alt='' width='20' height='20'> Registrar Prescrição</button>
-            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_prescricao ?>">
+            <input type='hidden' name='id_texto' id='id_texto' value="<?php echo $c_relatorio ?>">
             <a class="btn btn-light" href="/smedweb/prescricoes/prescricao.php"><img src='\smedweb\images\voltar.png' alt='' width='20' height='20'> Voltar</a>
 
             <hr>
