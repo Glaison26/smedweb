@@ -33,6 +33,8 @@ $c_linha = $result->fetch_assoc();
 if ((isset($_POST["btnregistro"]))) {
     // verifico se paciente tem registro de historia
     $c_relatorio = $_POST['id_texto'];
+    $_SESSION['relatorio'] = $c_relatorio;
+    //$c_prescricao = $_POST['id_texto'];
     $c_sql_contador = "select count(*) as contador from historia where id_paciente='$c_id'";
     $result_contador = $conection->query($c_sql_contador);
     $c_linha_contador = $result_contador->fetch_assoc();
