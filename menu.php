@@ -351,9 +351,9 @@ if (($c_linha['tipo'] == '1')) {
 			<div class="container-fluid px-2">
 				<div class="user-actions">
 					<!-- Botões de ação do usuário -->
-					<a class='btn btn-primary  btn-lg' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\paciente.png" alt="20" width="20" height="20"></span> Ficha Clinica do Paciente</a>
+					<a class='btn btn-primary  btn-lg' href=<?php echo $op_paciente; ?>><img src="\smedweb\images\anamnese.png" alt="20" width="20" height="20"></span> Ficha Clinica do Paciente</a>
 					<a class='btn btn-primary  btn-lg' href=<?php echo $op_prescricao; ?>><img src="\smedweb\images\atestado2.png" alt="20" width="20" height="20"></span> Emitir Prescrições</a>
-					<a class='btn btn-primary  btn-lg' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\agenda.png" alt="20" width="20" height="20"></span> Marcação de Consultas</a>
+					<a class='btn btn-primary  btn-lg' href=<?php echo $op_agenda; ?>><img src="\smedweb\images\calendario.png" alt="20" width="20" height="20"></span> Marcação de Consultas</a>
 				</div>
 			</div>
 			<hr>
