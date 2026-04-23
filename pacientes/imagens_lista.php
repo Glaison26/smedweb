@@ -7,7 +7,12 @@ if (!isset($_SESSION['newsession'])) {
 include("../conexao.php");
 include_once "../lib_gop.php";
 include("../links.php");
-$c_id = $_GET["id"];
+if (isset($_GET['id'])) {
+    $c_id = $_GET['id'];
+    $_SESSION['id_paciente'] = $c_id;
+} else {
+    $c_id = $_SESSION['id_paciente'];
+}
 $c_descricao = "";
 // sql para contar numero de refistros
 // sql para capturar as imagens

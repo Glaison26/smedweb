@@ -18,6 +18,7 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
 
     $c_nomefoto = $arquivo["name"];
     move_uploaded_file($arquivo["tmp_name"], "$dir/" . $arquivo["name"]);
+    
     //echo $c_nomefoto;
     // incluir registro da imagem no banco de dados
     $c_pasta = $dir . $c_nomefoto;
@@ -165,7 +166,7 @@ $c_caminho = '/smedweb/pacientes/imagens_lista.php?id=' . $c_id;
                                             <td>$c_linha[descricao]</td>
                                             <td>$c_linha[pasta_imagem]</td>
                                             <td>
-                                            <a class='btn btn-info btn-sm' title='Visualizar ' href='/smedweb/pacientes/imagens_visualizar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-eye-open'> Visualizar</span></a>
+                                            <a class='btn btn-info btn-sm' title='Visualizar' href='/smedweb/pacientes/imagens_visualizar.php?id=$c_linha[id]'><span class='glyphicon glyphicon-eye-open'></span> Visualizar</a>
                                             <a class='btn btn-danger btn-sm' title='Excluir' href='javascript:func()'onclick='confirmacao($c_linha[id])'><span class='glyphicon glyphicon-trash'></span> Excluir</a>
                                             
                                             </td>

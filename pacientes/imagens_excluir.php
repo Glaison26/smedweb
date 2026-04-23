@@ -11,7 +11,7 @@ if (!isset($_GET["id"])) {
 }
 // pego id da imagem
 $c_id = $_GET["id"];
-include("conexao.php");
+include("../conexao.php"); // conexão de banco de dados
 // sql para pegar o arquivo a ser excluido
 $c_sql = "select pasta_imagem from imagens_pacientes where id='$c_id'";
 $result = $conection->query($c_sql);
@@ -51,4 +51,4 @@ if (file_exists($c_pasta)) {
    ";
 }
 
-header('location: /smedweb/imagens.php');
+header('location: /smedweb/pacientes/imagens.php');
