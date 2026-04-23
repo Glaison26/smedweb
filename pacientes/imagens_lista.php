@@ -62,7 +62,7 @@ $c_conta = $c_linha_conta['total'];
             $c_descricao = $c_linha['descricao'];
             $c_pasta = $c_linha['pasta_imagem'];
             $c_pasta = substr($c_pasta, 4);
-            $c_caminho = "\smedweb\img\ ";
+            $c_caminho = "\smedweb\pacientes\img\ ";
             $c_caminho = rtrim($c_caminho) . $c_pasta;
 
             // string para montagem do html

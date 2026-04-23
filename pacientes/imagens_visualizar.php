@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {  // metodo get para carregar dados no
                 <label class="col-md-3 form-label">Imagem</label>
                 <div class="panel panel-success">
                     <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\smedweb\img\<?php echo $c_pasta; ?>" class="img-fluid" style="height :500px" style="width:500px">
+                        <img class="rounded mx-auto d-block" class="img-responsive" src="\smedweb\pacientes\img\<?php echo $c_pasta; ?>" class="img-fluid" style="height :500px" style="width:500px">
                     </div>
                 </div>
             </div>
